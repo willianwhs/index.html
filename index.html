@@ -1,72 +1,134 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>AjudaAi - Serviços Domésticos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f4f4f4;
-        }
-        header {
-            background: #2f80ed;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        section {
-            padding: 20px;
-        }
-        .card {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-        }
-        button {
-            background: #2f80ed;
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-    </style>
+  <meta charset="UTF-8">
+
+  <title>AjudaAi – Serviços domésticos perto de você</title>
+
+  <meta name="description" content="AjudaAi conecta você a profissionais de serviços domésticos confiáveis perto de você. Diaristas, faxineiras, eletricistas, encanadores e muito mais.">
+
+  <meta name="keywords" content="serviços domésticos, diarista perto de mim, faxineira, eletricista, encanador, serviços locais">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #2c7be5;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 22px;
+      color: #2c7be5;
+    }
+
+    .card p {
+      font-size: 15px;
+      margin: 15px 0;
+    }
+
+    .card button {
+      background-color: #2c7be5;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #1a5dcc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #666;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 700px) {
+      section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
+  <header>
     <h1>AjudaAi</h1>
-    <p>Encontre serviços domésticos perto de você</p>
-</header>
+    <p>
+      Encontre profissionais confiáveis para serviços domésticos
+      perto de você: diaristas, faxineiras, eletricistas,
+      encanadores e muito mais.
+    </p>
+  </header>
 
-<section>
+  <section>
     <div class="card">
-        <h2>🔧 Precisa de ajuda?</h2>
-        <p>Encontre profissionais de confiança para serviços domésticos.</p>
-        <button>Buscar Profissionais</button>
+      <h2>Precisa de ajuda em casa?</h2>
+      <p>
+        Encontre profissionais avaliados para serviços domésticos
+        na sua região, de forma rápida e segura.
+      </p>
+      <button>Buscar Profissionais</button>
     </div>
 
     <div class="card">
-        <h2>👷‍♂️ É prestador de serviço?</h2>
-        <p>Cadastre-se e consiga clientes na sua região.</p>
-        <button>Quero Trabalhar</button>
+      <h2>É prestador de serviço?</h2>
+      <p>
+        Divulgue seu trabalho, encontre clientes próximos
+        e aumente sua renda.
+      </p>
+      <button>Quero Trabalhar</button>
     </div>
-</section>
+  </section>
 
-<footer>
-    © 2026 AjudaAi • Plataforma de serviços locais
-</footer>
+  <footer>
+    © 2026 AjudaAi · Plataforma de serviços domésticos locais
+  </footer>
 
 </body>
-  </html>
-  
+</html>
