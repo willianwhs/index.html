@@ -1,80 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AJUDAAI - Serviços perto de você</title>
 
-  <title>AJUDAAI – Profissionais certos, perto de você</title>
-
-  <meta name="description" content="AJUDAAI conecta você a profissionais confiáveis de serviços domésticos perto de você. Diaristas, faxineiras, eletricistas, encanadores e muito mais.">
-
-  <meta name="keywords" content="serviços domésticos, diarista perto de mim, faxineira, eletricista, encanador, serviços locais">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Fonte Google -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Poppins', Arial, Helvetica, sans-serif;
-      background-color: #f9f9f9;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fb;
       color: #333;
     }
 
-    /* TOPO / MARCA */
     header {
-      background-color: #2c7be5;
-      padding: 45px 20px;
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      color: white;
+      padding: 40px 20px;
       text-align: center;
     }
 
-    .logo {
-      font-size: 38px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: white;
+    header h1 {
+      font-size: 3rem;
       margin: 0;
+      letter-spacing: 2px;
     }
 
-    .logo span {
-      color: #FFD43B;
-      font-weight: 800;
+    header h1 span {
+      color: #ffca28;
     }
 
-    .slogan {
-      margin-top: 10px;
-      font-size: 15px;
-      color: #eaf1ff;
+    header p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      opacity: 0.95;
     }
 
-    .divider {
-      width: 60px;
-      height: 3px;
-      background-color: #FFD43B;
-      margin: 22px auto 0;
-      border-radius: 2px;
-    }
-
-    /* CONTEÚDO */
-    section {
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 0 20px;
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 25px;
     }
 
     .card {
-      background-color: white;
-      border-radius: 10px;
+      background: white;
+      border-radius: 14px;
       padding: 30px 25px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
     }
 
     .card h2 {
-      margin-top
-    
+      margin-top: 0;
+      color: #0d47a1;
+    }
+
+    .card p {
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      background: #ffca28;
+      color: #333;
+      padding: 12px 22px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #e3e7f0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>AJUDA<span>AI</span></h1>
+  <p>Profissionais certos, perto de você</p>
+</header>
+
+<section class="container">
+  <div class="card">
+    <h2>🔎 Procurar serviços</h2>
+    <p>Encontre eletricistas, diaristas, encanadores e muito mais na sua região.</p>
+    <a href="#" class="btn">Buscar profissionais</a>
+  </div>
+
+  <div class="card">
+    <h2>🧰 Oferecer serviços</h2>
+    <p>Cadastre seu serviço e comece a receber pedidos de clientes próximos.</p>
+    <a href="#" class="btn">Cadastrar serviço</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 AJUDAAI · Todos os direitos reservados
+</footer>
+
+</body>
+</html>
