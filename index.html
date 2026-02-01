@@ -2,74 +2,120 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>AJUDAAI – Serviços perto de você</title>
+  <title>AJUDAAI – Encontre ajuda perto de você</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- SEO básico -->
-  <meta name="description" content="AJUDAAI conecta você a prestadores de serviços perto de você. Rápido, fácil e seguro.">
-  <meta name="keywords" content="serviços locais, ajuda, eletricista, diarista, encanador">
+  <!-- SEO -->
+  <meta name="description" content="AJUDAAI conecta você a prestadores de serviços locais de forma simples e rápida.">
+  <meta name="keywords" content="serviços locais, diarista, eletricista, encanador, ajuda">
   <meta name="author" content="AJUDAAI">
 
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background-color: #f5f7fa;
+      background: #f5f7fa;
       color: #0A2540;
     }
 
     header {
-      background: white;
-      padding: 20px;
+      background: #fff;
+      padding: 16px;
       display: flex;
-      align-items: center;
       justify-content: center;
       border-bottom: 1px solid #ddd;
     }
 
     main {
-      padding: 40px 20px;
-      max-width: 900px;
+      max-width: 960px;
       margin: auto;
+      padding: 32px 20px;
       text-align: center;
     }
 
     h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+      font-size: 28px;
+      margin-bottom: 12px;
     }
 
     p {
       font-size: 18px;
       line-height: 1.6;
+      margin-bottom: 14px;
     }
 
     .cta {
-      margin-top: 30px;
+      margin: 30px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
     }
 
     .cta button {
-      background: #FFC107;
-      color: #0A2540;
-      border: none;
-      padding: 15px 25px;
+      width: 100%;
+      max-width: 320px;
+      padding: 16px;
       font-size: 18px;
       font-weight: bold;
-      border-radius: 8px;
+      border-radius: 10px;
+      border: none;
       cursor: pointer;
     }
 
-    .cta button:hover {
-      background: #e6ae06;
+    .primary {
+      background: #FFC107;
+      color: #0A2540;
+    }
+
+    .secondary {
+      background: #0A2540;
+      color: #fff;
+    }
+
+    section {
+      margin-top: 50px;
+      text-align: left;
+    }
+
+    section h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 10px 0;
+      font-size: 17px;
     }
 
     footer {
-      margin-top: 50px;
-      padding: 20px;
+      margin-top: 60px;
       background: #0A2540;
-      color: white;
+      color: #fff;
+      padding: 20px;
       text-align: center;
       font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+      h1 { font-size: 36px; }
+      p { font-size: 20px; }
+
+      .cta {
+        flex-direction: row;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -77,47 +123,46 @@
 <body>
 
 <header>
-  <!-- LOGO AJUDAAI (SVG CORRIGIDO) -->
+  <!-- LOGO AJUDAAI -->
   <svg width="280" height="80" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
-    <!-- PIN -->
     <path d="M40 10C28 10 18 20 18 32c0 16 22 38 22 38s22-22 22-38c0-12-10-22-22-22z" fill="#FFC107"/>
     <circle cx="40" cy="32" r="8" fill="#0A2540"/>
-
-    <!-- Detalhe de ajuda -->
     <path d="M32 36c3 2 5 2 8 0" stroke="#0A2540" stroke-width="2" fill="none"/>
-
-    <!-- Texto AJUDAAI -->
-    <text x="90" y="45" font-size="30" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#0A2540">
-      AJUDA
-    </text>
-    <text x="185" y="45" font-size="30" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#FFC107">
-      AI
-    </text>
-
-    <!-- Slogan -->
-    <text x="90" y="65" font-size="12" font-family="Arial, Helvetica, sans-serif" fill="#555">
-      serviços perto de você
-    </text>
+    <text x="90" y="45" font-size="30" font-weight="700" fill="#0A2540">AJUDA</text>
+    <text x="185" y="45" font-size="30" font-weight="700" fill="#FFC107">AI</text>
+    <text x="90" y="65" font-size="12" fill="#555">serviços perto de você</text>
   </svg>
 </header>
 
 <main>
-  <h1>Conectando você a quem resolve</h1>
+  <h1>Ajuda confiável, perto de você</h1>
 
   <p>
-    O <strong>AJUDAAI</strong> é uma plataforma simples e rápida para encontrar
-    prestadores de serviços perto de você.
-    Sem complicação, sem burocracia.
-  </p>
-
-  <p>
-    Encontre diaristas, eletricistas, encanadores, montadores,
-    pequenos reparos e muito mais — tudo em um só lugar.
+    O <strong>AJUDAAI</strong> conecta você a pessoas que resolvem problemas do dia a dia:
+    serviços domésticos, pequenos reparos e apoio local.
   </p>
 
   <div class="cta">
-    <button>Em breve disponível</button>
+    <button class="primary">Encontrar ajuda</button>
+    <button class="secondary">Sou prestador de serviço</button>
   </div>
+
+  <section>
+    <h2>Como funciona</h2>
+    <ul>
+      <li>📍 Você busca ajuda perto de você</li>
+      <li>🤝 Encontra pessoas reais da sua região</li>
+      <li>⚡ Combina direto, sem burocracia</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Para quem presta serviços</h2>
+    <p>
+      Quer divulgar seu trabalho e encontrar clientes na sua região?
+      Em breve você poderá se cadastrar no AJUDAAI.
+    </p>
+  </section>
 </main>
 
 <footer>
@@ -125,4 +170,4 @@
 </footer>
 
 </body>
-    </html>
+</html>
