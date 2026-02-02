@@ -26,7 +26,7 @@
 
     header {
       background: #fff;
-      padding: 24px 16px;
+      padding: 26px 16px;
       text-align: center;
       border-bottom: 3px solid var(--amarelo);
     }
@@ -61,15 +61,38 @@
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
+      gap: 22px;
     }
 
     .card {
       background: #fff;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 22px 18px;
       text-align: center;
       box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    /* SELO */
+    .selo {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--azul);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .selo svg {
+      width: 14px;
+      height: 14px;
+      fill: #fff;
     }
 
     .avatar {
@@ -117,10 +140,6 @@
       font-weight: bold;
     }
 
-    .botao:hover {
-      opacity: 0.9;
-    }
-
     footer {
       margin-top: 40px;
       padding: 20px;
@@ -134,7 +153,4 @@
 <body>
 
   <header>
-    <h1>
-      <span class="logo-ajuda">AJUDA</span><span class="logo-ai">AI</span>
-    </h1>
-    <p>Conect
+    <h1
