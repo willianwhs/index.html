@@ -153,4 +153,92 @@
 <body>
 
   <header>
-    <h1
+    <h1>
+      <span class="logo-ajuda">AJUDA</span><span class="logo-ai">AI</span>
+    </h1>
+    <p>Conectando você a profissionais de confiança perto de você</p>
+  </header>
+
+  <main>
+    <section class="cards" id="listaPrestadores"></section>
+  </main>
+
+  <footer>
+    © 2026 AJUDAAI — Todos os direitos reservados
+  </footer>
+
+  <!-- AVATAR PADRÃO -->
+  <template id="avatarPadrao">
+    <svg viewBox="0 0 200 200" width="110" height="110">
+      <circle cx="100" cy="100" r="100" fill="#E8EDFF"/>
+      <circle cx="100" cy="80" r="28" fill="#1E3A8A"/>
+      <path d="M45 160c6-40 104-40 110 0" fill="#1E3A8A"/>
+    </svg>
+  </template>
+
+  <!-- ÍCONE DO SELO -->
+  <template id="iconeCheck">
+    <svg viewBox="0 0 24 24">
+      <path d="M9 16.2l-3.5-3.5L4 14.2l5 5L20 8.2l-1.5-1.5z"/>
+    </svg>
+  </template>
+
+  <script>
+    const prestadores = [
+      {
+        nome: "Carlos Silva",
+        profissao: "Eletricista",
+        cidade: "São Paulo - SP",
+        whatsapp: "11999999999",
+        foto: "",
+        verificado: true
+      },
+      {
+        nome: "Ana Souza",
+        profissao: "Diarista",
+        cidade: "Campinas - SP",
+        whatsapp: "11988888888",
+        foto: "",
+        verificado: false
+      }
+    ];
+
+    const container = document.getElementById("listaPrestadores");
+    const avatarTemplate = document.getElementById("avatarPadrao").innerHTML;
+    const iconeCheck = document.getElementById("iconeCheck").innerHTML;
+
+    prestadores.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      if (p.verificado) {
+        const selo = document.createElement("div");
+        selo.className = "selo";
+        selo.innerHTML = `${iconeCheck} Verificado`;
+        card.appendChild(selo);
+      }
+
+      const avatar = document.createElement("div");
+      avatar.className = "avatar";
+
+      avatar.innerHTML = p.foto
+        ? `<img src="${p.foto}" alt="Foto de ${p.nome}">`
+        : avatarTemplate;
+
+      card.appendChild(avatar);
+
+      card.innerHTML += `
+        <div class="nome">${p.nome}</div>
+        <div class="profissao">${p.profissao}</div>
+        <div class="cidade">${p.cidade}</div>
+        <a class="botao" href="https://wa.me/55${p.whatsapp}" target="_blank">
+          Falar no WhatsApp
+        </a>
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
