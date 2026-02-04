@@ -73,7 +73,6 @@
       position: relative;
     }
 
-    /* SELO */
     .selo {
       position: absolute;
       top: 14px;
@@ -130,7 +129,7 @@
     }
 
     .botao {
-      margin-top: 16px;
+      margin-top: 10px;
       display: inline-block;
       background: var(--amarelo);
       color: #000;
@@ -138,6 +137,7 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
+      font-size: 14px;
     }
 
     footer {
@@ -167,7 +167,6 @@
     © 2026 AJUDAAI — Todos os direitos reservados
   </footer>
 
-  <!-- AVATAR PADRÃO -->
   <template id="avatarPadrao">
     <svg viewBox="0 0 200 200" width="110" height="110">
       <circle cx="100" cy="100" r="100" fill="#E8EDFF"/>
@@ -176,7 +175,6 @@
     </svg>
   </template>
 
-  <!-- ÍCONE DO SELO -->
   <template id="iconeCheck">
     <svg viewBox="0 0 24 24">
       <path d="M9 16.2l-3.5-3.5L4 14.2l5 5L20 8.2l-1.5-1.5z"/>
@@ -184,60 +182,65 @@
   </template>
 
   <script>
-    const prestadores = [
-      {
-        nome: "Carlos Silva",
-        profissao: "Eletricista",
-        cidade: "São Paulo - SP",
-        whatsapp: "11999999999",
-        foto: "",
-        verificado: true
-      },
-      {
-        nome: "Ana Souza",
-        profissao: "Diarista",
-        cidade: "Campinas - SP",
-        whatsapp: "11988888888",
-        foto: "",
-        verificado: false
-      }
-    ];
-
     const container = document.getElementById("listaPrestadores");
     const avatarTemplate = document.getElementById("avatarPadrao").innerHTML;
     const iconeCheck = document.getElementById("iconeCheck").innerHTML;
 
-    prestadores.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "card";
+    // 🔴 TROQUE SE PRECISAR
+    const URL_JSON = "https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
 
-      if (p.verificado) {
-        const selo = document.createElement("div");
-        selo.className = "selo";
-        selo.innerHTML = `${iconeCheck} Verificado`;
-        card.appendChild(selo);
-      }
+    // 🔴 TROQUE PELO SEU FORM DE AVALIAÇÃO
+    const FORM_AVALIACAO = "https://docs.google.com/forms/d/e/SEU_FORM_AVALIACAO/viewform?usp=pp_url&entry.NOME=";
 
-      const avatar = document.createElement("div");
-      avatar.className = "avatar";
+    fetch(URL_JSON)
+      .then(res => res.json())
+      .then(prestadores => {
+        container.innerHTML = "";
 
-      avatar.innerHTML = p.foto
-        ? `<img src="${p.foto}" alt="Foto de ${p.nome}">`
-        : avatarTemplate;
+        prestadores.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "card";
 
-      card.appendChild(avatar);
+          if (p.verificado) {
+            const selo = document.createElement("div");
+            selo.className = "selo";
+            selo.innerHTML = `${iconeCheck} Verificado`;
+            card.appendChild(selo);
+          }
 
-      card.innerHTML += `
-        <div class="nome">${p.nome}</div>
-        <div class="profissao">${p.profissao}</div>
-        <div class="cidade">${p.cidade}</div>
-        <a class="botao" href="https://wa.me/55${p.whatsapp}" target="_blank">
-          Falar no WhatsApp
-        </a>
-      `;
+          const avatar = document.createElement("div");
+          avatar.className = "avatar";
 
-      container.appendChild(card);
-    });
+          avatar.innerHTML = p.foto
+            ? `<img src="${p.foto}" alt="Foto de ${p.nome}">`
+            : avatarTemplate;
+
+          card.appendChild(avatar);
+
+          const estrelas = p.media
+            ? "⭐".repeat(Math.round(p.media))
+            : "Sem avaliações";
+
+          card.innerHTML += `
+            <div class="nome">${p.nome}</div>
+            <div class="profissao">${p.servico || p.profissao}</div>
+            <div class="cidade">${p.cidade}</div>
+            <div>${estrelas}</div>
+
+            <a class="botao" href="https://wa.me/55${p.whatsapp}" target="_blank">
+              WhatsApp
+            </a>
+
+            <a class="botao" style="background:#1E3A8A;color:#fff"
+               href="${FORM_AVALIACAO}${encodeURIComponent(p.nome)}"
+               target="_blank">
+              Avaliar
+            </a>
+          `;
+
+          container.appendChild(card);
+        });
+      });
   </script>
 
 </body>
