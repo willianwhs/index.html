@@ -4,107 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AJUDAAI</title>
-
 <style>
 :root{
 --amarelo:#FFC107;
 --azul:#1E3A8A;
 --cinza:#f4f6f8;
+--escuro:#222;
+--whatsapp:#25D366;
 }
-
-body{
-margin:0;
-font-family:Arial;
-background:var(--cinza);
-}
-
-header{
-background:#fff;
-padding:25px;
-text-align:center;
-border-bottom:3px solid var(--amarelo);
-}
-
-h1{
-margin:0;
-font-size:32px;
-font-weight:800;
-}
-
+body{margin:0;font-family:Arial;background:var(--cinza)}
+header{text-align:center;padding:26px;background:#fff;border-bottom:3px solid var(--amarelo)}
+h1{margin:0;font-size:32px;font-weight:800}
 .logo1{color:var(--azul)}
 .logo2{color:var(--amarelo)}
-
-.botaoTopo{
-margin-top:10px;
-padding:10px 16px;
-border:none;
-border-radius:8px;
-background:var(--azul);
-color:#fff;
-font-weight:bold;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.card{
-background:#fff;
-padding:20px;
-border-radius:14px;
-text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,0.08);
-position:relative;
-}
-
-.selo{
-position:absolute;
-top:10px;
-right:10px;
-background:var(--azul);
-color:#fff;
-padding:4px 10px;
-border-radius:20px;
-font-size:12px;
-}
-
-.botao{
-display:block;
-margin-top:8px;
-padding:10px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-}
-
-.whatsapp{
-background:#25D366;
-color:#fff;
-}
-
-.avaliar{
-background:var(--azul);
-color:#fff;
-}
+.barra{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px}
+input{padding:12px;border-radius:10px;border:1px solid #ddd;min-width:240px}
+button{border:none;padding:12px 16px;border-radius:10px;cursor:pointer;font-weight:bold;transition:.2s}
+.btn-azul{background:var(--azul);color:#fff}
+.btn-amarelo{background:var(--amarelo);color:#000}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;padding:20px;max-width:1100px;margin:auto}
+.card{background:#fff;padding:20px;border-radius:14px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.08);position:relative;transition:.2s}
+.card:hover{transform:translateY(-5px)}
+.selo{position:absolute;top:10px;right:10px;background:var(--azul);color:#fff;padding:4px 10px;border-radius:20px;font-size:12px}
+.botao{display:block;margin-top:8px;padding:10px;border-radius:8px;text-decoration:none;font-weight:bold}
+.botao-whatsapp{background:var(--whatsapp);color:#fff}
+.botao-avaliar{background:var(--azul);color:#fff}
+.distancia{margin-top:6px;font-weight:bold;color:#1E3A8A}
 </style>
 </head>
-
 <body>
 
 <header>
 <h1><span class="logo1">AJUDA</span><span class="logo2">AI</span></h1>
-<button class="botaoTopo" onclick="ativarLocalizacao()">📍 Perto de mim</button>
+<button class="btn-azul" onclick="ativarLocalizacao()">📍 Perto de mim</button>
 </header>
+
+<div class="barra">
+<input id="busca" placeholder="Buscar serviço ou cidade...">
+<button class="btn-amarelo" onclick="filtrar()">Buscar</button>
+<button class="btn-azul" onclick="verificados()">✔ Verificados</button>
+<button onclick="resetar()">Limpar</button>
+</div>
 
 <div class="cards" id="lista"></div>
 
 <script>
-
 const URL_JSON="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
-
 let prestadores=[];
 
 fetch(URL_JSON)
@@ -126,59 +71,54 @@ return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
 
 function ativarLocalizacao(){
 navigator.geolocation.getCurrentPosition(pos=>{
-
 const userLat=pos.coords.latitude;
 const userLng=pos.coords.longitude;
 
 prestadores.forEach(p=>{
 if(p.lat && p.lng){
 p.distancia=calcularDistancia(userLat,userLng,p.lat,p.lng);
+} else {
+p.distancia=null;
 }
 });
 
+// ordena do mais próximo para o mais distante
 prestadores.sort((a,b)=>(a.distancia||999)-(b.distancia||999));
 
 renderPrestadores(prestadores);
-
 });
 }
 
 function renderPrestadores(lista){
-
-const container=document.getElementById("lista");
-container.innerHTML="";
-
+const c=document.getElementById("lista");
+c.innerHTML="";
 lista.forEach(p=>{
-
-const estrelas=p.media ? "⭐".repeat(Math.round(p.media)) : "Sem avaliações";
-const distancia=p.distancia ? `📍 ${p.distancia.toFixed(1)} km` : "";
-
-container.innerHTML+=`
+const estrelas=p.media?"⭐".repeat(Math.round(p.media)): "Sem avaliações";
+const dist=p.distancia!=null ? `📍 ${p.distancia.toFixed(1)} km` : "";
+c.innerHTML+=`
 <div class="card">
-
-${p.verificado ? '<div class="selo">✔ Verificado</div>' : ''}
-
+${p.verificado?'<div class="selo">✔ Verificado</div>':''}
 <h3>${p.nome}</h3>
 <div>${p.servico}</div>
 <div>${p.cidade}</div>
+<div class="distancia">${dist}</div>
 <div>${estrelas}</div>
-<div>${distancia}</div>
-
-<a class="botao whatsapp" href="https://wa.me/55${p.whatsapp}" target="_blank">
-WhatsApp
-</a>
-
-<a class="botao avaliar" href="#" target="_blank">
-Avaliar
-</a>
-
+<a class="botao botao-whatsapp" href="https://wa.me/55${p.whatsapp}" target="_blank">WhatsApp</a>
+<a class="botao botao-avaliar" href="#" target="_blank">Avaliar</a>
 </div>
 `;
-
 });
-
 }
 
+function filtrar(){
+const t=document.getElementById("busca").value.toLowerCase();
+renderPrestadores(prestadores.filter(p=>p.nome.toLowerCase().includes(t)||
+p.servico.toLowerCase().includes(t)||
+p.cidade.toLowerCase().includes(t)));
+}
+
+function verificados(){renderPrestadores(prestadores.filter(p=>p.verificado))}
+function resetar(){renderPrestadores(prestadores)}
 </script>
 
 </body>
