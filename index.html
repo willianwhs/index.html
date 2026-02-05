@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AJUDAAI — Profissionais perto de você</title>
 
-<!-- Leaflet (mapa gratuito) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <style>
@@ -23,7 +22,7 @@ body{margin:0;background:var(--cinza);color:var(--escuro)}
 
 header{
   background:#fff;
-  padding:26px 16px 18px;
+  padding:26px 16px 20px;
   text-align:center;
   border-bottom:3px solid var(--amarelo);
 }
@@ -33,15 +32,19 @@ h1{margin:0;font-size:34px;font-weight:800;letter-spacing:2px}
 .logo-ai{color:var(--amarelo)}
 
 .descricao-premium{
-  max-width:720px;
+  max-width:760px;
   margin:14px auto 0;
   font-size:16px;
   color:#555;
-  line-height:1.5;
+  line-height:1.6;
 }
 
 .acoes-topo{
-  margin-top:16px;
+  margin-top:18px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
 .btn-azul{
@@ -54,9 +57,43 @@ h1{margin:0;font-size:34px;font-weight:800;letter-spacing:2px}
   cursor:pointer;
 }
 
+.btn-outline{
+  background:#fff;
+  border:2px solid var(--azul);
+  color:var(--azul);
+  padding:10px 16px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.como-funciona{
+  background:#fff;
+  max-width:1100px;
+  margin:20px auto 0;
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  text-align:center;
+}
+
+.como-item{
+  font-size:15px;
+  color:#444;
+}
+
+.como-item strong{
+  display:block;
+  margin-bottom:6px;
+  color:var(--azul);
+}
+
 #map{
-  height:360px;
-  margin:20px auto;
+  height:220px;
+  margin:18px auto;
   max-width:1100px;
   border-radius:14px;
   box-shadow:0 6px 18px rgba(0,0,0,.1);
@@ -137,8 +174,24 @@ footer{
 
   <div class="acoes-topo">
     <button class="btn-azul" onclick="ativarLocalizacao()">📍 Perto de mim</button>
+    <button class="btn-outline" onclick="expandirMapa()">🗺️ Ver mapa</button>
   </div>
 </header>
+
+<section class="como-funciona">
+  <div class="como-item">
+    <strong>📍 Encontre perto de você</strong>
+    Profissionais locais com base na sua localização
+  </div>
+  <div class="como-item">
+    <strong>⭐ Avaliações reais</strong>
+    Veja notas e experiência de outros clientes
+  </div>
+  <div class="como-item">
+    <strong>💬 Contato direto</strong>
+    Fale com o prestador pelo WhatsApp
+  </div>
+</section>
 
 <div id="map"></div>
 
@@ -212,6 +265,10 @@ function ativarLocalizacao(){
     renderPrestadores(prestadores);
     atualizarMapa(prestadores);
   });
+}
+
+function expandirMapa(){
+  window.open("https://www.openstreetmap.org","#","_blank");
 }
 
 function renderPrestadores(lista){
