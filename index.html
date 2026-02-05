@@ -3,148 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AJUDAAI Plataforma Suprema</title>
+<title>AJUDAAI — Profissionais de confiança perto de você</title>
 
 <style>
-body{font-family:Arial;margin:0;background:#f4f6f8}
-header{background:#fff;padding:20px;text-align:center;border-bottom:4px solid #FFC107}
-h1{margin:0;font-size:34px}
-.filtros{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px}
-input{padding:10px;border-radius:8px;border:1px solid #ccc}
-.botao{padding:10px 14px;background:#FFC107;border:none;border-radius:8px;font-weight:bold;cursor:pointer;text-decoration:none;color:#000}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;padding:20px}
-.card{background:#fff;border-radius:12px;padding:20px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
-.loading{text-align:center;padding:40px;font-size:18px}
-.vazio{text-align:center;padding:40px;font-size:18px}
-.selo{background:#4CAF50;color:#fff;padding:4px 8px;border-radius:6px;font-size:12px;margin-bottom:6px}
-.top{background:#ff5722;color:#fff;padding:4px 8px;border-radius:6px;font-size:12px;margin-bottom:6px}
-.acoes{display:flex;gap:10px;justify-content:center;margin-top:15px;flex-wrap:wrap}
+:root{
+--amarelo:#FFC107;
+--azul:#1E3A8A;
+--cinza:#f4f6f8;
+--escuro:#222;
+}
+
+body{
+margin:0;
+background:var(--cinza);
+font-family:Arial;
+}
+
+header{
+background:#fff;
+padding:26px;
+text-align:center;
+border-bottom:3px solid var(--amarelo);
+}
+
+.logo-ajuda{color:var(--azul);}
+.logo-ai{color:var(--amarelo);}
+
+.barra{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+margin:20px;
+}
+
+input{
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+min-width:240px;
+}
+
+button{
+border:none;
+padding:12px 16px;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.btn-azul{
+background:var(--azul);
+color:#fff;
+}
+
+.btn-amarelo{
+background:var(--amarelo);
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:20px;
+padding:20px;
+max-width:1100px;
+margin:auto;
+}
+
+.card{
+background:#fff;
+padding:20px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+.botao{
+display:inline-block;
+margin-top:10px;
+padding:10px 14px;
+border-radius:8px;
+font-weight:bold;
+text-decoration:none;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>AJUDAAI SUPREMO</h1>
-<p>Profissionais perto de você — rápido, seguro e inteligente</p>
-
-<div class="filtros">
-<input type="text" id="busca" placeholder="Buscar serviço ou cidade">
-<button class="botao" onclick="filtrar()">Buscar</button>
-<button class="botao" onclick="buscarProximos()">Perto de mim</button>
-<button class="botao" onclick="somenteVerificados()">Verificados</button>
-<button class="botao" onclick="ordenarRanking()">Melhores</button>
-<button class="botao" onclick="render(prestadores)">Resetar</button>
-</div>
-
-<div class="filtros">
-<a class="botao" href="SEU_FORM_CADASTRO" target="_blank">Cadastrar Prestador</a>
-<a class="botao" href="SEU_FORM_ORCAMENTO" target="_blank">Pedir Orçamento</a>
-<a class="botao" href="SEU_FORM_VERIFICADO" target="_blank">Quero Selo Verificado</a>
-</div>
-
+<h1><span class="logo-ajuda">AJUDA</span><span class="logo-ai">AI</span></h1>
+<p>Conectando você a profissionais de confiança perto de você</p>
 </header>
 
-<div id="listaPrestadores" class="cards">
-<div class="loading">Carregando plataforma AJUDAAI...</div>
+<div class="barra">
+<input id="busca" placeholder="Buscar serviço ou cidade...">
+<button class="btn-amarelo" onclick="filtrar()">Buscar</button>
+<button class="btn-azul" onclick="perto()">📍 Perto de mim</button>
+<button class="btn-azul" onclick="verificados()">✔ Verificados</button>
+<button onclick="resetar()">Limpar</button>
 </div>
 
+<div class="cards" id="lista"></div>
+
 <script>
+const URL_JSON="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
+let dados=[];
 
-let prestadores=[];
-const FORM_AVALIACAO="SEU_FORM_AVALIACAO";
-
-async function carregar(){
-const res=await fetch("https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json");
-prestadores=await res.json();
-ranking();
-render(prestadores);
-}
-
-function ranking(){
-prestadores.sort((a,b)=>(b.media||0)-(a.media||0));
-if(prestadores[0])prestadores[0].top=true;
-}
+fetch(URL_JSON).then(r=>r.json()).then(d=>{
+dados=d;
+render(dados);
+});
 
 function render(lista){
-const container=document.getElementById("listaPrestadores");
+const container=document.getElementById("lista");
 container.innerHTML="";
-
-if(lista.length===0){
-container.innerHTML="<div class='vazio'>Nenhum profissional encontrado</div>";
-return;
-}
-
 lista.forEach(p=>{
-
-const estrelas=p.media?"⭐".repeat(Math.round(p.media)):"Sem avaliações";
-const selo=p.verificado?"<div class='selo'>VERIFICADO</div>":"";
-const top=p.top?"<div class='top'>TOP AJUDAAI</div>":"";
-
 container.innerHTML+=`
 <div class="card">
-${top}
-${selo}
 <h3>${p.nome}</h3>
 <div>${p.servico}</div>
 <div>${p.cidade}</div>
-<div>${estrelas}</div>
-
-<div class="acoes">
-<a class="botao" href="https://wa.me/55${p.whatsapp}" target="_blank">Contratar</a>
-<a class="botao" style="background:#1E3A8A;color:#fff" href="${FORM_AVALIACAO}?nome=${encodeURIComponent(p.nome)}" target="_blank">Avaliar</a>
-</div>
-
-</div>
-`;
+<div>${"⭐".repeat(Math.round(p.media||0))}</div>
+<a class="botao btn-amarelo" href="https://wa.me/55${p.whatsapp}" target="_blank">WhatsApp</a>
+</div>`;
 });
 }
 
 function filtrar(){
-const termo=document.getElementById("busca").value.toLowerCase();
-render(prestadores.filter(p=>
-p.servico.toLowerCase().includes(termo)||
-p.cidade.toLowerCase().includes(termo)
-));
+const t=document.getElementById("busca").value.toLowerCase();
+render(dados.filter(p=>p.nome.toLowerCase().includes(t)||p.servico.toLowerCase().includes(t)||p.cidade.toLowerCase().includes(t)));
 }
 
-function somenteVerificados(){
-render(prestadores.filter(p=>p.verificado));
+function verificados(){
+render(dados.filter(p=>p.verificado));
 }
 
-function ordenarRanking(){
-render([...prestadores].sort((a,b)=>(b.media||0)-(a.media||0)));
+function resetar(){
+render(dados);
 }
 
-function distancia(lat1,lon1,lat2,lon2){
-const R=6371;
-const dLat=(lat2-lat1)*Math.PI/180;
-const dLon=(lon2-lon1)*Math.PI/180;
-const a=Math.sin(dLat/2)**2+
-Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
-Math.sin(dLon/2)**2;
-return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
-}
-
-function buscarProximos(){
+function perto(){
 navigator.geolocation.getCurrentPosition(pos=>{
-const lat=pos.coords.latitude;
-const lng=pos.coords.longitude;
-
-const proximos=prestadores
-.map(p=>{
-if(!p.lat||!p.lng)return null;
-return {...p,dist:distancia(lat,lng,p.lat,p.lng)};
-})
-.filter(p=>p&&p.dist<=20)
-.sort((a,b)=>a.dist-b.dist);
-
-render(proximos);
+alert("Função perto de mim ativada — adicione lat/lng no JSON para ativar distância real.");
 });
 }
-
-carregar();
-
 </script>
 
 </body>
