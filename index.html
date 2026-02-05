@@ -1,247 +1,151 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AJUDAAI — Profissionais de confiança perto de você</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AJUDAAI Plataforma Suprema</title>
 
-  <style>
-    :root {
-      --amarelo: #FFC107;
-      --azul: #1E3A8A;
-      --cinza: #f4f6f8;
-      --escuro: #222;
-    }
-
-    * {
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      margin: 0;
-      background: var(--cinza);
-      color: var(--escuro);
-    }
-
-    header {
-      background: #fff;
-      padding: 26px 16px;
-      text-align: center;
-      border-bottom: 3px solid var(--amarelo);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 34px;
-      letter-spacing: 2px;
-      font-weight: 800;
-    }
-
-    .logo-ajuda {
-      color: var(--azul);
-    }
-
-    .logo-ai {
-      color: var(--amarelo);
-    }
-
-    header p {
-      margin-top: 10px;
-      font-size: 16px;
-      color: #555;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 24px 16px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 22px;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 22px 18px;
-      text-align: center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      position: relative;
-    }
-
-    .selo {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: var(--azul);
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .selo svg {
-      width: 14px;
-      height: 14px;
-      fill: #fff;
-    }
-
-    .avatar {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      margin: auto;
-      overflow: hidden;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .nome {
-      margin-top: 16px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .profissao {
-      color: #666;
-      margin: 6px 0;
-    }
-
-    .cidade {
-      font-size: 14px;
-      color: #888;
-    }
-
-    .botao {
-      margin-top: 10px;
-      display: inline-block;
-      background: var(--amarelo);
-      color: #000;
-      padding: 10px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    footer {
-      margin-top: 40px;
-      padding: 20px;
-      text-align: center;
-      font-size: 14px;
-      color: #666;
-    }
-  </style>
+<style>
+body{font-family:Arial;margin:0;background:#f4f6f8}
+header{background:#fff;padding:20px;text-align:center;border-bottom:4px solid #FFC107}
+h1{margin:0;font-size:34px}
+.filtros{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px}
+input{padding:10px;border-radius:8px;border:1px solid #ccc}
+.botao{padding:10px 14px;background:#FFC107;border:none;border-radius:8px;font-weight:bold;cursor:pointer;text-decoration:none;color:#000}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;padding:20px}
+.card{background:#fff;border-radius:12px;padding:20px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+.loading{text-align:center;padding:40px;font-size:18px}
+.vazio{text-align:center;padding:40px;font-size:18px}
+.selo{background:#4CAF50;color:#fff;padding:4px 8px;border-radius:6px;font-size:12px;margin-bottom:6px}
+.top{background:#ff5722;color:#fff;padding:4px 8px;border-radius:6px;font-size:12px;margin-bottom:6px}
+.acoes{display:flex;gap:10px;justify-content:center;margin-top:15px;flex-wrap:wrap}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>
-      <span class="logo-ajuda">AJUDA</span><span class="logo-ai">AI</span>
-    </h1>
-    <p>Conectando você a profissionais de confiança perto de você</p>
-  </header>
+<header>
+<h1>AJUDAAI SUPREMO</h1>
+<p>Profissionais perto de você — rápido, seguro e inteligente</p>
 
-  <main>
-    <section class="cards" id="listaPrestadores"></section>
-  </main>
+<div class="filtros">
+<input type="text" id="busca" placeholder="Buscar serviço ou cidade">
+<button class="botao" onclick="filtrar()">Buscar</button>
+<button class="botao" onclick="buscarProximos()">Perto de mim</button>
+<button class="botao" onclick="somenteVerificados()">Verificados</button>
+<button class="botao" onclick="ordenarRanking()">Melhores</button>
+<button class="botao" onclick="render(prestadores)">Resetar</button>
+</div>
 
-  <footer>
-    © 2026 AJUDAAI — Todos os direitos reservados
-  </footer>
+<div class="filtros">
+<a class="botao" href="SEU_FORM_CADASTRO" target="_blank">Cadastrar Prestador</a>
+<a class="botao" href="SEU_FORM_ORCAMENTO" target="_blank">Pedir Orçamento</a>
+<a class="botao" href="SEU_FORM_VERIFICADO" target="_blank">Quero Selo Verificado</a>
+</div>
 
-  <template id="avatarPadrao">
-    <svg viewBox="0 0 200 200" width="110" height="110">
-      <circle cx="100" cy="100" r="100" fill="#E8EDFF"/>
-      <circle cx="100" cy="80" r="28" fill="#1E3A8A"/>
-      <path d="M45 160c6-40 104-40 110 0" fill="#1E3A8A"/>
-    </svg>
-  </template>
+</header>
 
-  <template id="iconeCheck">
-    <svg viewBox="0 0 24 24">
-      <path d="M9 16.2l-3.5-3.5L4 14.2l5 5L20 8.2l-1.5-1.5z"/>
-    </svg>
-  </template>
+<div id="listaPrestadores" class="cards">
+<div class="loading">Carregando plataforma AJUDAAI...</div>
+</div>
 
-  <script>
-    const container = document.getElementById("listaPrestadores");
-    const avatarTemplate = document.getElementById("avatarPadrao").innerHTML;
-    const iconeCheck = document.getElementById("iconeCheck").innerHTML;
+<script>
 
-    // 🔴 TROQUE SE PRECISAR
-    const URL_JSON = "https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
+let prestadores=[];
+const FORM_AVALIACAO="SEU_FORM_AVALIACAO";
 
-    // 🔴 TROQUE PELO SEU FORM DE AVALIAÇÃO
-    const FORM_AVALIACAO = "https://docs.google.com/forms/d/e/SEU_FORM_AVALIACAO/viewform?usp=pp_url&entry.NOME=";
+async function carregar(){
+const res=await fetch("https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json");
+prestadores=await res.json();
+ranking();
+render(prestadores);
+}
 
-    fetch(URL_JSON)
-      .then(res => res.json())
-      .then(prestadores => {
-        container.innerHTML = "";
+function ranking(){
+prestadores.sort((a,b)=>(b.media||0)-(a.media||0));
+if(prestadores[0])prestadores[0].top=true;
+}
 
-        prestadores.forEach(p => {
-          const card = document.createElement("div");
-          card.className = "card";
+function render(lista){
+const container=document.getElementById("listaPrestadores");
+container.innerHTML="";
 
-          if (p.verificado) {
-            const selo = document.createElement("div");
-            selo.className = "selo";
-            selo.innerHTML = `${iconeCheck} Verificado`;
-            card.appendChild(selo);
-          }
+if(lista.length===0){
+container.innerHTML="<div class='vazio'>Nenhum profissional encontrado</div>";
+return;
+}
 
-          const avatar = document.createElement("div");
-          avatar.className = "avatar";
+lista.forEach(p=>{
 
-          avatar.innerHTML = p.foto
-            ? `<img src="${p.foto}" alt="Foto de ${p.nome}">`
-            : avatarTemplate;
+const estrelas=p.media?"⭐".repeat(Math.round(p.media)):"Sem avaliações";
+const selo=p.verificado?"<div class='selo'>VERIFICADO</div>":"";
+const top=p.top?"<div class='top'>TOP AJUDAAI</div>":"";
 
-          card.appendChild(avatar);
+container.innerHTML+=`
+<div class="card">
+${top}
+${selo}
+<h3>${p.nome}</h3>
+<div>${p.servico}</div>
+<div>${p.cidade}</div>
+<div>${estrelas}</div>
 
-          const estrelas = p.media
-            ? "⭐".repeat(Math.round(p.media))
-            : "Sem avaliações";
+<div class="acoes">
+<a class="botao" href="https://wa.me/55${p.whatsapp}" target="_blank">Contratar</a>
+<a class="botao" style="background:#1E3A8A;color:#fff" href="${FORM_AVALIACAO}?nome=${encodeURIComponent(p.nome)}" target="_blank">Avaliar</a>
+</div>
 
-          card.innerHTML += `
-            <div class="nome">${p.nome}</div>
-            <div class="profissao">${p.servico || p.profissao}</div>
-            <div class="cidade">${p.cidade}</div>
-            <div>${estrelas}</div>
+</div>
+`;
+});
+}
 
-            <a class="botao" href="https://wa.me/55${p.whatsapp}" target="_blank">
-              WhatsApp
-            </a>
+function filtrar(){
+const termo=document.getElementById("busca").value.toLowerCase();
+render(prestadores.filter(p=>
+p.servico.toLowerCase().includes(termo)||
+p.cidade.toLowerCase().includes(termo)
+));
+}
 
-            <a class="botao" style="background:#1E3A8A;color:#fff"
-               href="${FORM_AVALIACAO}${encodeURIComponent(p.nome)}"
-               target="_blank">
-              Avaliar
-            </a>
-          `;
+function somenteVerificados(){
+render(prestadores.filter(p=>p.verificado));
+}
 
-          container.appendChild(card);
-        });
-      });
-  </script>
+function ordenarRanking(){
+render([...prestadores].sort((a,b)=>(b.media||0)-(a.media||0)));
+}
+
+function distancia(lat1,lon1,lat2,lon2){
+const R=6371;
+const dLat=(lat2-lat1)*Math.PI/180;
+const dLon=(lon2-lon1)*Math.PI/180;
+const a=Math.sin(dLat/2)**2+
+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
+Math.sin(dLon/2)**2;
+return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
+}
+
+function buscarProximos(){
+navigator.geolocation.getCurrentPosition(pos=>{
+const lat=pos.coords.latitude;
+const lng=pos.coords.longitude;
+
+const proximos=prestadores
+.map(p=>{
+if(!p.lat||!p.lng)return null;
+return {...p,dist:distancia(lat,lng,p.lat,p.lng)};
+})
+.filter(p=>p&&p.dist<=20)
+.sort((a,b)=>a.dist-b.dist);
+
+render(proximos);
+});
+}
+
+carregar();
+
+</script>
 
 </body>
 </html>
