@@ -14,11 +14,7 @@
 --whatsapp:#25D366;
 }
 
-body{
-margin:0;
-background:var(--cinza);
-font-family:Arial;
-}
+body{margin:0;background:var(--cinza);font-family:Arial}
 
 header{
 background:#fff;
@@ -27,8 +23,8 @@ text-align:center;
 border-bottom:3px solid var(--amarelo);
 }
 
-.logo-ajuda{color:var(--azul);}
-.logo-ai{color:var(--amarelo);}
+.logo-ajuda{color:var(--azul)}
+.logo-ai{color:var(--amarelo)}
 
 .barra{
 display:flex;
@@ -54,15 +50,8 @@ font-weight:bold;
 transition:.2s;
 }
 
-.btn-azul{
-background:var(--azul);
-color:#fff;
-}
-
-.btn-amarelo{
-background:var(--amarelo);
-color:#000;
-}
+.btn-azul{background:var(--azul);color:#fff}
+.btn-amarelo{background:var(--amarelo)}
 
 .cards{
 display:grid;
@@ -82,9 +71,7 @@ box-shadow:0 6px 18px rgba(0,0,0,.08);
 transition:.2s;
 }
 
-.card:hover{
-transform:translateY(-5px);
-}
+.card:hover{transform:translateY(-5px)}
 
 .botao{
 display:inline-block;
@@ -93,18 +80,12 @@ padding:10px 14px;
 border-radius:10px;
 font-weight:bold;
 text-decoration:none;
-transition:.2s;
 }
 
 .botao-whatsapp{
 background:var(--whatsapp);
-color:#fff !important;
+color:#fff!important;
 }
-
-.botao-whatsapp:hover{
-transform:scale(1.05);
-}
-
 </style>
 </head>
 
@@ -116,9 +97,9 @@ transform:scale(1.05);
 </header>
 
 <div class="barra">
-<input id="busca" placeholder="Buscar serviço ou cidade...">
+<input id="busca" placeholder="Buscar serviço ou cidade">
 <button class="btn-amarelo" onclick="filtrar()">Buscar</button>
-<button class="btn-azul" onclick="perto()">📍 Perto de mim</button>
+<button class="btn-azul" onclick="ativarLocalizacao()">📍 Perto de mim</button>
 <button class="btn-azul" onclick="verificados()">✔ Verificados</button>
 <button onclick="resetar()">Limpar</button>
 </div>
@@ -128,21 +109,52 @@ transform:scale(1.05);
 <script>
 const URL_JSON="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
 let dados=[];
+let userLat=null;
+let userLng=null;
 
 fetch(URL_JSON).then(r=>r.json()).then(d=>{
 dados=d;
 render(dados);
 });
 
+function calcularDistancia(lat1,lng1,lat2,lng2){
+const R=6371;
+const dLat=(lat2-lat1)*Math.PI/180;
+const dLng=(lng2-lng1)*Math.PI/180;
+const a=
+Math.sin(dLat/2)**2+
+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
+Math.sin(dLng/2)**2;
+return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
+}
+
+function ativarLocalizacao(){
+navigator.geolocation.getCurrentPosition(pos=>{
+userLat=pos.coords.latitude;
+userLng=pos.coords.longitude;
+
+dados.forEach(p=>{
+if(p.lat && p.lng){
+p.distancia=calcularDistancia(userLat,userLng,p.lat,p.lng);
+}
+});
+
+dados.sort((a,b)=>(a.distancia||999)-(b.distancia||999));
+render(dados);
+});
+}
+
 function render(lista){
-const container=document.getElementById("lista");
-container.innerHTML="";
+const c=document.getElementById("lista");
+c.innerHTML="";
 lista.forEach(p=>{
-container.innerHTML+=`
+const dist=p.distancia?`📍 ${p.distancia.toFixed(1)} km`:"";
+c.innerHTML+=`
 <div class="card">
 <h3>${p.nome}</h3>
 <div>${p.servico}</div>
 <div>${p.cidade}</div>
+<div>${dist}</div>
 <div>${"⭐".repeat(Math.round(p.media||0))}</div>
 <a class="botao botao-whatsapp" href="https://wa.me/55${p.whatsapp}" target="_blank">WhatsApp</a>
 </div>`;
@@ -151,22 +163,15 @@ container.innerHTML+=`
 
 function filtrar(){
 const t=document.getElementById("busca").value.toLowerCase();
-render(dados.filter(p=>p.nome.toLowerCase().includes(t)||p.servico.toLowerCase().includes(t)||p.cidade.toLowerCase().includes(t)));
+render(dados.filter(p=>
+p.nome.toLowerCase().includes(t)||
+p.servico.toLowerCase().includes(t)||
+p.cidade.toLowerCase().includes(t)
+));
 }
 
-function verificados(){
-render(dados.filter(p=>p.verificado));
-}
-
-function resetar(){
-render(dados);
-}
-
-function perto(){
-navigator.geolocation.getCurrentPosition(()=>{
-alert("Função perto de mim ativada — adicione lat/lng no JSON para distância real.");
-});
-}
+function verificados(){render(dados.filter(p=>p.verificado))}
+function resetar(){render(dados)}
 </script>
 
 </body>
