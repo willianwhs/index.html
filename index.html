@@ -123,23 +123,6 @@ button{
   font-size:12px;
 }
 
-.distancia{
-  margin-top:6px;
-  font-weight:bold;
-  color:var(--azul);
-}
-
-.botao-whatsapp{
-  display:block;
-  margin-top:10px;
-  padding:12px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold;
-  background:var(--whatsapp);
-  color:#fff;
-}
-
 .cta-prestador{
   background:linear-gradient(135deg,var(--azul),#0f2c6e);
   color:#fff;
@@ -148,6 +131,8 @@ button{
   border-radius:20px;
   text-align:center;
 }
+
+.cta-prestador h2{margin-top:0}
 
 footer{
   text-align:center;
@@ -171,9 +156,11 @@ footer{
     <input id="busca" placeholder="Buscar serviço ou cidade">
     <button class="btn-amarelo" onclick="buscar()">Buscar</button>
     <button class="btn-azul" onclick="localizacao()">📍 Perto de mim</button>
-    <button class="btn-outline" onclick="alert('Cadastro de prestadores em breve')">
-      Sou prestador
-    </button>
+
+    <!-- ÚNICA ADIÇÃO FUNCIONAL -->
+    <a href="cadastro.html">
+      <button class="btn-outline">Sou prestador</button>
+    </a>
   </div>
 </header>
 
@@ -190,9 +177,9 @@ footer{
 <section class="cta-prestador">
   <h2>É prestador de serviços?</h2>
   <p>Cadastre-se gratuitamente e comece a receber clientes.</p>
-  <button class="btn-amarelo" onclick="alert('Cadastro em breve')">
-    Quero me cadastrar
-  </button>
+  <a href="cadastro.html">
+    <button class="btn-amarelo">Quero me cadastrar</button>
+  </a>
 </section>
 
 <footer>
@@ -202,63 +189,49 @@ footer{
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
 const URL="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
-let dados=[],map,markers=[];
-
-map=L.map('map').setView([-15.8,-47.9],4);
+let dados=[],map=L.map('map').setView([-15.8,-47.9],4),markers=[];
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
 fetch(URL).then(r=>r.json()).then(d=>dados=d);
 
-// distância real em KM
-function distanciaKm(lat1,lng1,lat2,lng2){
-const R=6371;
-const dLat=(lat2-lat1)*Math.PI/180;
-const dLng=(lng2-lng1)*Math.PI/180;
-const a=Math.sin(dLat/2)**2+
-Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
-Math.sin(dLng/2)**2;
-return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
-}
-
 function buscar(){
-const t=document.getElementById("busca").value.trim().toLowerCase();
-mostrar(dados.filter(p=>
-p.servico.toLowerCase().includes(t)||
-p.cidade.toLowerCase().includes(t)
-));
+  const t=document.getElementById("busca").value.toLowerCase().trim();
+  mostrar(dados.filter(p =>
+    p.servico.toLowerCase().includes(t) ||
+    p.cidade.toLowerCase().includes(t)
+  ));
 }
 
 function localizacao(){
-navigator.geolocation.getCurrentPosition(pos=>{
-dados.forEach(p=>{
-p.distancia=distanciaKm(pos.coords.latitude,pos.coords.longitude,p.lat,p.lng);
-});
-dados.sort((a,b)=>a.distancia-b.distancia);
-mostrar(dados,true);
-map.setView([pos.coords.latitude,pos.coords.longitude],12);
-});
+  navigator.geolocation.getCurrentPosition(pos=>{
+    dados.forEach(p=>{
+      p.dist=Math.hypot(pos.coords.latitude-p.lat,pos.coords.longitude-p.lng);
+    });
+    dados.sort((a,b)=>a.dist-b.dist);
+    mostrar(dados);
+    map.setView([pos.coords.latitude,pos.coords.longitude],12);
+  });
 }
 
-function mostrar(lista,mostrarDist){
-document.querySelector(".cards").style.display="grid";
-const c=document.getElementById("lista");
-c.innerHTML="";
-markers.forEach(m=>map.removeLayer(m));markers=[];
-lista.forEach(p=>{
-if(p.lat&&p.lng){
-markers.push(L.marker([p.lat,p.lng]).addTo(map));
-}
-c.innerHTML+=`
-<div class="card">
-${p.verificado?'<div class="selo">✔ Verificado</div>':''}
-<strong>${p.nome}</strong><br>
-${p.servico}<br>${p.cidade}
-${mostrarDist && p.distancia?`<div class="distancia">📍 ${p.distancia.toFixed(1)} km</div>`:''}
-<a class="botao-whatsapp" href="https://wa.me/55${p.whatsapp}" target="_blank">
-WhatsApp
-</a>
-</div>`;
-});
+function mostrar(lista){
+  document.querySelector(".cards").style.display="grid";
+  const c=document.getElementById("lista");
+  c.innerHTML="";
+  markers.forEach(m=>map.removeLayer(m));markers=[];
+  lista.forEach(p=>{
+    if(p.lat&&p.lng){
+      markers.push(L.marker([p.lat,p.lng]).addTo(map));
+    }
+    c.innerHTML+=`
+    <div class="card">
+      ${p.verificado?'<div class="selo">✔ Verificado</div>':''}
+      <strong>${p.nome}</strong><br>
+      ${p.servico}<br>
+      ${p.cidade}<br><br>
+      <a class="btn-azul" href="https://wa.me/55${p.whatsapp}" target="_blank">
+        WhatsApp
+      </a>
+    </div>`;
+  });
 }
 </script>
 
