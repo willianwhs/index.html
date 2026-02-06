@@ -3,124 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AJUDAAI</title>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<title>AjudaAi — Serviços perto de você</title>
 
 <style>
 :root{
---amarelo:#FFC107;
 --azul:#1E3A8A;
+--amarelo:#FFC107;
 --cinza:#f4f6f8;
---escuro:#222;
 --whatsapp:#25D366;
 }
+body{margin:0;font-family:Arial;background:var(--cinza);color:#222}
 
-*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{margin:0;background:var(--cinza);color:var(--escuro)}
-
+/* HEADER */
 header{
-text-align:center;
-padding:26px;
 background:#fff;
-border-bottom:3px solid var(--amarelo)
+padding:30px 20px;
+text-align:center;
+border-bottom:4px solid var(--amarelo);
 }
-
-h1{margin:0;font-size:32px;font-weight:800}
+header h1{margin:0;font-size:36px;font-weight:800}
 .logo1{color:var(--azul)}
 .logo2{color:var(--amarelo)}
-
-.descricao{
-max-width:720px;
-margin:14px auto 0;
-color:#555;
-font-size:16px;
-line-height:1.5;
+header p{margin:12px auto;max-width:600px;font-size:18px}
+.header-buttons{
+margin-top:20px;
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
 }
+.btn{
+padding:14px 20px;
+border-radius:12px;
+border:none;
+font-weight:bold;
+cursor:pointer;
+}
+.btn-azul{background:var(--azul);color:#fff}
+.btn-amarelo{background:var(--amarelo);color:#000}
 
-.barra{
+/* MENU */
+.menu{
 display:flex;
 flex-wrap:wrap;
 gap:10px;
 justify-content:center;
-margin:20px
+padding:20px;
 }
-
-input{
+.menu input{
 padding:12px;
 border-radius:10px;
-border:1px solid #ddd;
+border:1px solid #ccc;
 min-width:240px;
-font-size:15px
 }
-
-button{
-border:none;
+.menu button{
 padding:12px 16px;
 border-radius:10px;
+border:none;
 cursor:pointer;
 font-weight:bold;
-transition:.2s
 }
 
-.btn-azul{background:var(--azul);color:#fff}
-.btn-amarelo{background:var(--amarelo);color:#000}
-button:hover{opacity:.9}
-
-/* MAPA CONTIDO E ELEGANTE */
-.mapa-wrapper{
-display:none;
-max-width:1100px;
-margin:20px auto 0;
-padding:0 16px;
-}
-
+/* MAPA */
 #map{
-width:100%;
-height:240px;
-border-radius:14px;
-box-shadow:0 4px 12px rgba(0,0,0,.08);
-}
-
-.container{
 max-width:1100px;
-margin:auto;
-padding:20px
-}
-
-.resultado-header{
-display:none;
-margin-bottom:10px
-}
-
-.ads{
-display:none;
-background:#fff;
+margin:20px auto;
+height:260px;
 border-radius:14px;
-padding:18px;
-margin:20px 0;
-text-align:center;
-color:#888;
-font-size:14px
+display:none;
 }
 
+/* CARDS */
 .cards{
+max-width:1100px;
+margin:20px auto;
+padding:20px;
 display:grid;
 grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-gap:20px
+gap:20px;
 }
-
 .card{
 background:#fff;
 padding:20px;
-border-radius:14px;
+border-radius:16px;
 text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,.08);
+box-shadow:0 8px 20px rgba(0,0,0,.08);
 position:relative;
-transition:.2s
 }
-.card:hover{transform:translateY(-5px)}
-
 .selo{
 position:absolute;
 top:10px;
@@ -129,87 +98,55 @@ background:var(--azul);
 color:#fff;
 padding:4px 10px;
 border-radius:20px;
-font-size:12px
+font-size:12px;
 }
-
+.distancia{
+margin:6px 0;
+font-weight:bold;
+color:var(--azul);
+}
 .botao{
 display:block;
 margin-top:8px;
-padding:10px;
-border-radius:8px;
+padding:12px;
+border-radius:10px;
 text-decoration:none;
-font-weight:bold
-}
-
-.botao-whatsapp{background:var(--whatsapp);color:#fff}
-.botao-avaliar{background:var(--azul);color:#fff}
-
-.distancia{
-margin-top:6px;
 font-weight:bold;
-color:var(--azul)
 }
-
-footer{
-margin-top:40px;
-padding:20px;
-text-align:center;
-font-size:14px;
-color:#666
-}
+.whatsapp{background:var(--whatsapp);color:#fff}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1><span class="logo1">AJUDA</span><span class="logo2">AI</span></h1>
-<div class="descricao">
-Encontre profissionais de confiança perto de você.
-Busque por serviço ou permita sua localização.
+<h1><span class="logo1">Ajuda</span><span class="logo2">Ai</span></h1>
+<p>Encontre prestadores de serviços confiáveis perto de você, em poucos cliques.</p>
+
+<div class="header-buttons">
+<button class="btn btn-azul" onclick="ativarLocalizacao()">📍 Perto de mim</button>
+<button class="btn btn-amarelo" onclick="alert('Cadastro em breve')">Sou prestador</button>
 </div>
 </header>
 
-<div class="barra">
+<div class="menu">
 <input id="busca" placeholder="Buscar serviço ou cidade">
-<button class="btn-amarelo" onclick="buscar()">Buscar</button>
-<button class="btn-azul" onclick="localizacao()">📍 Perto de mim</button>
+<button onclick="buscar()">Buscar</button>
+<button onclick="verificados()">✔ Verificados</button>
+<button onclick="resetar()">Limpar</button>
 </div>
 
-<div class="mapa-wrapper" id="mapWrapper">
 <div id="map"></div>
-</div>
-
-<div class="container">
-
-<div class="resultado-header" id="resultadoHeader">
-<strong>Resultados encontrados</strong>
-</div>
-
-<div class="ads" id="adsTopo">Publicidade</div>
-
 <div class="cards" id="lista"></div>
 
-<div class="ads" id="adsMeio">Publicidade</div>
-
-</div>
-
-<footer>
-© 2026 AJUDAAI — Plataforma independente
-</footer>
-
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
 <script>
-const URL_JSON="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
-let prestadores=[];
-let userLat=null,userLng=null;
+const URL="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
+let prestadores=[], map, markers=[];
 
-const map=L.map('map',{zoomControl:true}).setView([-15.8,-47.9],4);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-attribution:'© OpenStreetMap'
-}).addTo(map);
-
-fetch(URL_JSON).then(r=>r.json()).then(d=>prestadores=d);
+fetch(URL).then(r=>r.json()).then(d=>prestadores=d);
 
 function calcularDistancia(lat1,lng1,lat2,lng2){
 const R=6371;
@@ -221,66 +158,66 @@ Math.sin(dLng/2)**2;
 return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
 }
 
-function buscar(){
-const termo=document.getElementById("busca").value.toLowerCase().trim();
-if(!termo) return;
-
-render(prestadores.filter(p=>
-p.nome.toLowerCase().includes(termo)||
-p.servico.toLowerCase().includes(termo)||
-p.cidade.toLowerCase().includes(termo)
-));
-}
-
-function localizacao(){
+function ativarLocalizacao(){
 navigator.geolocation.getCurrentPosition(pos=>{
-userLat=pos.coords.latitude;
-userLng=pos.coords.longitude;
-
 prestadores.forEach(p=>{
-p.distancia=calcularDistancia(userLat,userLng,p.lat,p.lng);
+p.distancia=calcularDistancia(pos.coords.latitude,pos.coords.longitude,p.lat,p.lng);
 });
-
 prestadores.sort((a,b)=>a.distancia-b.distancia);
-render(prestadores,true);
+mostrar(prestadores,true);
 });
 }
 
-function render(lista,centralizar=false){
-document.getElementById("mapWrapper").style.display="block";
-document.getElementById("resultadoHeader").style.display="block";
-document.getElementById("adsTopo").style.display="block";
-document.getElementById("adsMeio").style.display="block";
+function buscar(){
+const t=document.getElementById("busca").value.trim().toLowerCase();
+const r=prestadores.filter(p=>
+p.nome.toLowerCase().includes(t)||
+p.servico.toLowerCase().includes(t)||
+p.cidade.toLowerCase().includes(t)
+);
+mostrar(r,true);
+}
 
-setTimeout(()=>{ map.invalidateSize(); },200);
+function verificados(){
+mostrar(prestadores.filter(p=>p.verificado),true);
+}
 
+function resetar(){
+document.getElementById("lista").innerHTML="";
+document.getElementById("map").style.display="none";
+}
+
+function mostrar(lista,mostrarMapa){
 const c=document.getElementById("lista");
 c.innerHTML="";
-
 lista.forEach(p=>{
-const estrelas=p.media?"⭐".repeat(Math.round(p.media)):"Sem avaliações";
-const km=p.distancia?`📍 ${p.distancia.toFixed(1)} km`:"";
-
-if(p.lat && p.lng && centralizar){
-map.setView([p.lat,p.lng],12);
-centralizar=false;
-}
-
-L.marker([p.lat,p.lng]).addTo(map);
-
 c.innerHTML+=`
 <div class="card">
 ${p.verificado?'<div class="selo">✔ Verificado</div>':''}
 <h3>${p.nome}</h3>
 <div>${p.servico}</div>
 <div>${p.cidade}</div>
-<div class="distancia">${km}</div>
-<div>${estrelas}</div>
-<a class="botao botao-whatsapp" href="https://wa.me/55${p.whatsapp}" target="_blank">WhatsApp</a>
-<a class="botao botao-avaliar" href="#">Avaliar</a>
-</div>
-`;
+<div class="distancia">${p.distancia?`📍 ${p.distancia.toFixed(1)} km`:''}</div>
+<div>${"⭐".repeat(p.media||0)}</div>
+<a class="botao whatsapp" href="https://wa.me/55${p.whatsapp}" target="_blank">WhatsApp</a>
+</div>`;
 });
+if(mostrarMapa) desenharMapa(lista);
+}
+
+function desenharMapa(lista){
+document.getElementById("map").style.display="block";
+if(!map){
+map=L.map('map').setView([-22.9,-47],6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+}
+markers.forEach(m=>map.removeLayer(m));
+markers=[];
+lista.forEach(p=>{
+const m=L.marker([p.lat,p.lng]).addTo(map).bindPopup(p.nome);
+markers.push(m);
+});
+if(lista[0]) map.setView([lista[0].lat,lista[0].lng],12);
 }
 </script>
 
