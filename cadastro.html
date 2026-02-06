@@ -13,7 +13,10 @@
   --escuro:#222;
 }
 
-*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+*{
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
 body{
   margin:0;
@@ -23,15 +26,20 @@ body{
 
 header{
   background:#fff;
-  padding:24px;
+  padding:26px 16px;
   text-align:center;
   border-bottom:3px solid var(--amarelo);
 }
 
-h1{
+header h1{
   margin:0;
   font-size:28px;
   font-weight:800;
+}
+
+header p{
+  margin-top:8px;
+  color:#555;
 }
 
 .container{
@@ -55,10 +63,11 @@ input{
   margin-top:6px;
   border-radius:12px;
   border:1px solid #ddd;
+  font-size:15px;
 }
 
 button{
-  margin-top:24px;
+  margin-top:26px;
   width:100%;
   padding:16px;
   border:none;
@@ -70,10 +79,26 @@ button{
   cursor:pointer;
 }
 
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 .status{
   margin-top:20px;
   font-size:14px;
   text-align:center;
+}
+
+.voltar{
+  margin-top:20px;
+  text-align:center;
+}
+
+.voltar a{
+  text-decoration:none;
+  color:var(--azul);
+  font-weight:bold;
 }
 </style>
 </head>
@@ -82,62 +107,79 @@ button{
 
 <header>
   <h1>Cadastro de Prestador</h1>
-  <p>Entre gratuitamente na plataforma AJUDAAI</p>
+  <p>Cadastre-se gratuitamente na plataforma AJUDAAI</p>
 </header>
 
 <div class="container">
   <form id="form">
 
     <label>Nome completo</label>
-    <input required name="nome">
+    <input name="nome" required>
 
     <label>Serviço</label>
-    <input required name="servico" placeholder="Ex: Eletricista">
+    <input name="servico" required placeholder="Ex: Eletricista, Pedreiro">
 
     <label>Cidade</label>
-    <input required name="cidade">
+    <input name="cidade" required>
 
     <label>WhatsApp</label>
-    <input required name="whatsapp" placeholder="DDD + número">
+    <input name="whatsapp" required placeholder="DDD + número">
 
+    <!-- Localização automática -->
     <input type="hidden" name="lat">
     <input type="hidden" name="lng">
 
-    <button type="submit">Finalizar cadastro</button>
+    <button id="btn" type="submit">Finalizar cadastro</button>
 
     <div class="status" id="status"></div>
   </form>
+
+  <div class="voltar">
+    <a href="index.html">← Voltar para o site</a>
+  </div>
 </div>
 
 <script>
-const WEBHOOK_URL = "COLE_AQUI_SEU_WEBHOOK_DO_MAKE";
+// 🔑 WEBHOOK MAKE (já configurado)
+const WEBHOOK_URL = "https://hook.us2.make.com/rmdusinc4e6pg1akovep4zrd6rw1fpyw";
 
-navigator.geolocation.getCurrentPosition(pos=>{
-  document.querySelector('[name="lat"]').value = pos.coords.latitude;
-  document.querySelector('[name="lng"]').value = pos.coords.longitude;
-});
+// Captura localização automaticamente
+navigator.geolocation.getCurrentPosition(
+  pos => {
+    document.querySelector('[name="lat"]').value = pos.coords.latitude;
+    document.querySelector('[name="lng"]').value = pos.coords.longitude;
+  },
+  () => {
+    document.getElementById("status").innerText =
+      "⚠️ Permita a localização para aparecer no site.";
+  }
+);
 
-document.getElementById("form").addEventListener("submit",e=>{
+document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
-  const form = e.target;
-  const data = Object.fromEntries(new FormData(form).entries());
+  const btn = document.getElementById("btn");
+  const status = document.getElementById("status");
 
-  document.getElementById("status").innerText = "Enviando cadastro...";
+  btn.disabled = true;
+  status.innerText = "⏳ Enviando cadastro...";
 
-  fetch(WEBHOOK_URL,{
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
+  const data = Object.fromEntries(new FormData(e.target).entries());
+
+  fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   })
-  .then(()=> {
-    document.getElementById("status").innerText =
-      "Cadastro enviado com sucesso! Em breve você aparecerá no site.";
-    form.reset();
+  .then(() => {
+    status.innerText =
+      "✅ Cadastro enviado com sucesso! Em breve você aparecerá no site.";
+    e.target.reset();
   })
-  .catch(()=>{
-    document.getElementById("status").innerText =
-      "Erro ao enviar. Tente novamente.";
+  .catch(() => {
+    status.innerText =
+      "❌ Erro ao enviar. Tente novamente.";
+    btn.disabled = false;
   });
 });
 </script>
