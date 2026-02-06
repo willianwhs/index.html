@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AJUDAAI</title>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
 <style>
 :root{
 --amarelo:#FFC107;
@@ -65,14 +67,19 @@ transition:.2s
 .btn-amarelo{background:var(--amarelo);color:#000}
 button:hover{opacity:.9}
 
-#map{
+/* MAPA CONTIDO E ELEGANTE */
+.mapa-wrapper{
 display:none;
-width:100%;
-height:220px;
-border-radius:14px;
-margin:16px auto;
 max-width:1100px;
-box-shadow:0 4px 12px rgba(0,0,0,.08)
+margin:20px auto 0;
+padding:0 16px;
+}
+
+#map{
+width:100%;
+height:240px;
+border-radius:14px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
 .container{
@@ -134,15 +141,8 @@ text-decoration:none;
 font-weight:bold
 }
 
-.botao-whatsapp{
-background:var(--whatsapp);
-color:#fff
-}
-
-.botao-avaliar{
-background:var(--azul);
-color:#fff
-}
+.botao-whatsapp{background:var(--whatsapp);color:#fff}
+.botao-avaliar{background:var(--azul);color:#fff}
 
 .distancia{
 margin-top:6px;
@@ -176,7 +176,9 @@ Busque por serviço ou permita sua localização.
 <button class="btn-azul" onclick="localizacao()">📍 Perto de mim</button>
 </div>
 
+<div class="mapa-wrapper" id="mapWrapper">
 <div id="map"></div>
+</div>
 
 <div class="container">
 
@@ -184,12 +186,10 @@ Busque por serviço ou permita sua localização.
 <strong>Resultados encontrados</strong>
 </div>
 
-<!-- Espaço futuro AdSense -->
 <div class="ads" id="adsTopo">Publicidade</div>
 
 <div class="cards" id="lista"></div>
 
-<!-- Espaço futuro AdSense -->
 <div class="ads" id="adsMeio">Publicidade</div>
 
 </div>
@@ -203,8 +203,8 @@ Busque por serviço ou permita sua localização.
 const URL_JSON="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
 let prestadores=[];
 let userLat=null,userLng=null;
-let map=L.map('map').setView([-15.8,-47.9],4);
 
+const map=L.map('map',{zoomControl:true}).setView([-15.8,-47.9],4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
 attribution:'© OpenStreetMap'
 }).addTo(map);
@@ -222,10 +222,7 @@ return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
 }
 
 function buscar(){
-const termo=document.getElementById("busca").value
-.toLowerCase()
-.trim();
-
+const termo=document.getElementById("busca").value.toLowerCase().trim();
 if(!termo) return;
 
 render(prestadores.filter(p=>
@@ -245,15 +242,17 @@ p.distancia=calcularDistancia(userLat,userLng,p.lat,p.lng);
 });
 
 prestadores.sort((a,b)=>a.distancia-b.distancia);
-render(prestadores);
+render(prestadores,true);
 });
 }
 
-function render(lista){
-document.getElementById("map").style.display="block";
+function render(lista,centralizar=false){
+document.getElementById("mapWrapper").style.display="block";
 document.getElementById("resultadoHeader").style.display="block";
 document.getElementById("adsTopo").style.display="block";
 document.getElementById("adsMeio").style.display="block";
+
+setTimeout(()=>{ map.invalidateSize(); },200);
 
 const c=document.getElementById("lista");
 c.innerHTML="";
@@ -261,6 +260,13 @@ c.innerHTML="";
 lista.forEach(p=>{
 const estrelas=p.media?"⭐".repeat(Math.round(p.media)):"Sem avaliações";
 const km=p.distancia?`📍 ${p.distancia.toFixed(1)} km`:"";
+
+if(p.lat && p.lng && centralizar){
+map.setView([p.lat,p.lng],12);
+centralizar=false;
+}
+
+L.marker([p.lat,p.lng]).addTo(map);
 
 c.innerHTML+=`
 <div class="card">
