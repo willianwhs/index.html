@@ -1,336 +1,298 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AJUDAAI — Profissionais perto de você</title><link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"><style>
-:root{
-  --amarelo:#FFC107;
-  --azul:#1E3A8A;
-  --azul2:#0f2c6e;
-  --cinza:#f4f6f8;
-  --escuro:#222;
-  --whatsapp:#25D366;
+
+<title>AJUDAAÍ — Profissionais perto de você</title>
+
+<!-- FONTES -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- LEAFLET MAP -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<style>
+body{
+font-family:'Poppins',sans-serif;
+margin:0;
+background:#f4f6fb;
+color:#1f2937;
 }
 
-*{box-sizing:border-box;font-family:'Inter',Arial,Helvetica,sans-serif}
-body{margin:0;background:var(--cinza);color:var(--escuro)}
-
+/* HEADER */
 header{
-  background:linear-gradient(135deg,#ffffff, #f9fbff);
-  padding:48px 16px 34px;
-  text-align:center;
-  border-bottom:3px solid var(--amarelo);
+background:linear-gradient(135deg,#0f172a,#2563eb);
+color:white;
+padding:22px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 20px rgba(0,0,0,0.15);
 }
 
-h1{margin:0;font-size:40px;font-weight:800;letter-spacing:2px}
-.logo-ajuda{color:var(--azul)}
-.logo-ai{color:var(--amarelo)}
-
-.hero-text{
-  max-width:760px;
-  margin:18px auto 0;
-  font-size:18px;
-  color:#555;
-  line-height:1.6;
+.logo{
+font-size:26px;
+font-weight:700;
+letter-spacing:1px;
 }
 
-.hero-actions{
-  margin-top:26px;
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
+nav a{
+color:white;
+margin-left:25px;
+text-decoration:none;
+font-weight:500;
+opacity:0.9;
 }
 
-input{
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #ddd;
-  min-width:260px;
+nav a:hover{opacity:1}
+
+/* HERO */
+.hero{
+padding:70px 20px;
+text-align:center;
+background:linear-gradient(180deg,#eef2ff,#ffffff);
 }
 
-button{
-  border:none;
-  padding:14px 18px;
-  border-radius:12px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.2s;
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
 }
 
-button:hover{transform:translateY(-1px)}
-
-.btn-azul{background:var(--azul);color:#fff}
-.btn-amarelo{background:var(--amarelo);color:#000}
-.btn-outline{
-  background:#fff;
-  border:2px solid var(--azul);
-  color:var(--azul);
+.hero p{
+font-size:18px;
+opacity:0.8;
 }
 
-.botao-whatsapp{
-  display:inline-block;
-  background:var(--whatsapp);
-  color:#fff;
-  padding:12px 14px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold;
+.search-box{
+margin-top:25px;
 }
 
-.como-funciona{
-  max-width:1100px;
-  margin:34px auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  padding:0 16px;
+.search-box input{
+padding:14px 16px;
+width:260px;
+border-radius:10px;
+border:1px solid #d1d5db;
+margin-right:10px;
 }
 
-.card-info{
-  background:#fff;
-  padding:22px;
-  border-radius:16px;
-  text-align:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.06);
+.search-box button{
+padding:14px 20px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+font-weight:600;
+cursor:pointer;
 }
 
-#map{
-  height:240px;
-  max-width:1100px;
-  margin:20px auto;
-  border-radius:18px;
-  box-shadow:0 8px 22px rgba(0,0,0,.08);
+/* SEÇÃO */
+.section{
+padding:50px 20px;
+max-width:1200px;
+margin:auto;
 }
 
-.cards{
-  display:none;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:22px;
-  padding:20px;
-  max-width:1100px;
-  margin:auto;
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:22px;
 }
 
+/* CARD */
 .card{
-  background:#fff;
-  padding:24px;
-  border-radius:18px;
-  text-align:center;
-  box-shadow:0 10px 26px rgba(0,0,0,.08);
-  position:relative;
+background:white;
+border-radius:16px;
+padding:20px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+position:relative;
+transition:0.2s;
 }
 
-.selo{
-  position:absolute;
-  top:12px;
-  right:12px;
-  background:var(--azul);
-  color:#fff;
-  padding:6px 10px;
-  border-radius:20px;
-  font-size:12px;
-}
-
-.distancia{
-  margin-top:6px;
-  font-size:14px;
-  color:#1E3A8A;
-  font-weight:600;
-}
-
-.badges{
-  margin-top:8px;
-  display:flex;
-  gap:6px;
-  justify-content:center;
-  flex-wrap:wrap;
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 30px rgba(0,0,0,0.12);
 }
 
 .badge{
-  font-size:11px;
-  padding:4px 8px;
-  border-radius:10px;
-  background:#eef2ff;
-  color:#1E3A8A;
+position:absolute;
+top:15px;
+right:15px;
+background:#16a34a;
+color:white;
+padding:5px 10px;
+border-radius:8px;
+font-size:12px;
 }
 
-.categorias{
-  max-width:1100px;
-  margin:10px auto 0;
-  padding:0 16px;
-  display:flex;
-  gap:10px;
-  overflow:auto;
+.name{
+font-size:20px;
+font-weight:600;
+margin-bottom:5px;
 }
 
-.cat-btn{
-  background:#fff;
-  border:1px solid #e5e7eb;
-  padding:10px 14px;
-  border-radius:999px;
-  cursor:pointer;
-  white-space:nowrap;
+.category{
+color:#2563eb;
+font-weight:500;
+margin-bottom:8px;
 }
 
-.cat-btn:hover{background:#f3f4f6}
-
-.cta-prestador{
-  background:linear-gradient(135deg,var(--azul),var(--azul2));
-  color:#fff;
-  margin:40px 16px;
-  padding:34px;
-  border-radius:22px;
-  text-align:center;
+.rating{
+color:#f59e0b;
+margin-bottom:10px;
 }
 
-.cta-prestador h2{margin-top:0}
+.phone{
+font-size:14px;
+margin-bottom:12px;
+}
 
+.btn{
+display:block;
+text-align:center;
+background:#2563eb;
+color:white;
+padding:10px;
+border-radius:10px;
+text-decoration:none;
+font-weight:600;
+}
+
+/* MAPA */
+#map{
+height:420px;
+border-radius:16px;
+margin-top:30px;
+}
+
+/* FOOTER */
 footer{
-  text-align:center;
-  padding:22px;
-  color:#666;
+background:#0f172a;
+color:white;
+padding:40px 20px;
+text-align:center;
+margin-top:50px;
 }
 
-.fixo-contratar{
-  position:fixed;
-  bottom:18px;
-  right:18px;
-  background:var(--amarelo);
-  color:#000;
-  padding:14px 18px;
-  border-radius:999px;
-  font-weight:700;
-  box-shadow:0 10px 26px rgba(0,0,0,.2);
-  cursor:pointer;
-  z-index:999;
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">AJUDAAÍ</div>
+<nav>
+<a href="#">Início</a>
+<a href="#">Categorias</a>
+<a href="#">Como funciona</a>
+<a href="#">Quem somos</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Encontre profissionais confiáveis perto de você</h1>
+<p>Prestadores avaliados e verificados na sua cidade</p>
+
+<div class="search-box">
+<input id="cidadeInput" placeholder="Digite sua cidade">
+<button onclick="carregarPrestadores()">Buscar</button>
+</div>
+</section>
+
+<section class="section">
+<h2>Profissionais disponíveis</h2>
+<div class="grid" id="prestadores"></div>
+<div id="map"></div>
+</section>
+
+<footer>
+© 2026 AJUDAAÍ — Plataforma de serviços locais
+</footer>
+
+<script>
+const csvURL="https://docs.google.com/spreadsheets/d/e/2PACX-1vTLS8pi42xxH00b_hymc4W8Vu3zTrepr35Vt2rSLlyWe2QABWUWhQTdj7KChWMpAS79m7HPUfLITJRA/pub?output=csv";
+
+let map=L.map('map').setView([-22.75,-47.29],11);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'© OpenStreetMap'
+}).addTo(map);
+
+let markers=[];
+
+function estrelas(n){
+return "★".repeat(n)+"☆".repeat(5-n);
 }
 
-</style></head><body><header>
-  <h1><span class="logo-ajuda">AJUDA</span><span class="logo-ai">AI</span></h1>  <div class="hero-text">
-    Encontre prestadores de serviços confiáveis perto de você.<br>
-    Rápido, simples e direto pelo WhatsApp.
-  </div>  <div class="hero-actions">
-    <input id="busca" placeholder="Buscar serviço ou cidade">
-    <button class="btn-amarelo" onclick="buscar()">Buscar</button>
-    <button class="btn-azul" onclick="localizacao()">📍 Perto de mim</button>
-    <a href="cadastro.html">
-      <button class="btn-outline">Sou prestador</button>
-    </a>
-  </div>
-</header><div class="categorias" id="categorias"></div><section class="como-funciona">
-  <div class="card-info">📍 <strong>Encontre perto de você</strong><br>Profissionais locais</div>
-  <div class="card-info">⭐ <strong>Avaliações reais</strong><br>Mais confiança</div>
-  <div class="card-info">💬 <strong>Contato direto</strong><br>Sem intermediários</div>
-</section><div id="map"></div><section class="cards" id="lista"></section><section class="cta-prestador">
-  <h2>É prestador de serviços?</h2>
-  <p>Cadastre-se gratuitamente e comece a receber clientes.</p>
-  <a href="cadastro.html">
-    <button class="btn-amarelo">Quero me cadastrar</button>
-  </a>
-</section><footer>
-  © 2026 AJUDAAI — Todos os direitos reservados
-</footer><div class="fixo-contratar" onclick="localizacao()">🔎 Encontrar profissionais</div><script src="https://unpkg.com/leaflet/dist/leaflet.js"></script><script>
-const URL="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
-let dados=[],markers=[],map=L.map('map').setView([-15.8,-47.9],4);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+async function carregarPrestadores(){
+const cidadeBusca=document.getElementById("cidadeInput").value.toLowerCase();
 
-fetch(URL).then(r=>r.json()).then(d=>{
-  dados=d;
-  gerarCategorias();
+const res=await fetch(csvURL);
+const text=await res.text();
+const rows=text.split("\n").slice(1);
+
+let prestadores=[];
+
+rows.forEach(r=>{
+const c=r.split(",");
+if(c.length<6)return;
+
+prestadores.push({
+nome:c[0],
+categoria:c[1],
+cidade:c[2],
+telefone:c[3],
+lat:parseFloat(c[4]),
+lng:parseFloat(c[5]),
+nota:parseFloat(c[6]||4)
+});
 });
 
-function gerarCategorias(){
-  const set=new Set(dados.map(p=>p.servico));
-  const div=document.getElementById('categorias');
-  div.innerHTML='';
-  set.forEach(cat=>{
-    const b=document.createElement('div');
-    b.className='cat-btn';
-    b.innerText=cat;
-    b.onclick=()=>filtrarCategoria(cat);
-    div.appendChild(b);
-  });
+if(cidadeBusca){
+prestadores=prestadores.filter(p=>p.cidade.toLowerCase().includes(cidadeBusca));
 }
 
-function filtrarCategoria(cat){
-  mostrar(dados.filter(p=>p.servico===cat));
+prestadores.sort((a,b)=>b.nota-a.nota);
+
+const container=document.getElementById("prestadores");
+container.innerHTML="";
+
+markers.forEach(m=>map.removeLayer(m));
+markers=[];
+
+prestadores.forEach(p=>{
+
+const div=document.createElement("div");
+div.className="card";
+
+div.innerHTML=`
+<div class="badge">Verificado</div>
+<div class="name">${p.nome}</div>
+<div class="category">${p.categoria}</div>
+<div class="rating">${estrelas(Math.round(p.nota))}</div>
+<div class="phone">${p.telefone}</div>
+<a class="btn" href="https://wa.me/55${p.telefone.replace(/\D/g,"")}" target="_blank">Contratar</a>
+`;
+
+container.appendChild(div);
+
+if(!isNaN(p.lat)&&!isNaN(p.lng)){
+const marker=L.marker([p.lat,p.lng]).addTo(map);
+marker.bindPopup(`<b>${p.nome}</b><br>${p.categoria}`);
+markers.push(marker);
+}
+});
+
+if(markers.length>0){
+const group=L.featureGroup(markers);
+map.fitBounds(group.getBounds(),{padding:[40,40]});
+}
 }
 
-function calcularDistancia(lat1,lng1,lat2,lng2){
-  const R=6371;
-  const dLat=(lat2-lat1)*Math.PI/180;
-  const dLng=(lng2-lng1)*Math.PI/180;
-  const a=Math.sin(dLat/2)**2+
-    Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
-    Math.sin(dLng/2)**2;
-  return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
-}
+carregarPrestadores();
+</script>
 
-function buscar(){
-  const t=document.getElementById("busca").value.toLowerCase().trim();
-  mostrar(dados.filter(p =>
-    p.servico.toLowerCase().includes(t) ||
-    p.cidade.toLowerCase().includes(t)
-  ));
-}
-
-function localizacao(){
-  navigator.geolocation.getCurrentPosition(pos=>{
-    dados.forEach(p=>{
-      if(p.lat&&p.lng){
-        p.distancia=calcularDistancia(
-          pos.coords.latitude,
-          pos.coords.longitude,
-          p.lat,
-          p.lng
-        );
-      }
-    });
-
-    dados.sort((a,b)=>{
-      return (
-        (b.verificado?1:0)-(a.verificado?1:0) ||
-        (b.media||0)-(a.media||0) ||
-        (a.distancia||999)-(b.distancia||999)
-      );
-    });
-
-    mostrar(dados);
-    map.setView([pos.coords.latitude,pos.coords.longitude],12);
-    document.getElementById("lista").scrollIntoView({behavior:"smooth"});
-  });
-}
-
-function mostrar(lista){
-  document.querySelector(".cards").style.display="grid";
-  const c=document.getElementById("lista");
-  c.innerHTML="";
-  markers.forEach(m=>map.removeLayer(m));
-  markers=[];
-
-  lista.forEach(p=>{
-    if(p.lat&&p.lng){
-      markers.push(L.marker([p.lat,p.lng]).addTo(map));
-    }
-    c.innerHTML+=`
-    <div class="card">
-      ${p.verificado?'<div class="selo">✔ Verificado</div>':''}
-      <strong>${p.nome}</strong><br>
-      ${p.servico}<br>
-      ${p.cidade}
-      ${p.distancia?`<div class="distancia">📍 ${p.distancia.toFixed(1)} km de você</div>`:''}
-      <div class="badges">
-        ${p.verificado?'<div class="badge">Verificado</div>':''}
-        ${p.media?`<div class="badge">⭐ ${p.media}</div>`:''}
-      </div>
-      <br>
-      <a class="botao-whatsapp" href="https://wa.me/55${p.whatsapp}" target="_blank">
-        WhatsApp
-      </a>
-    </div>`;
-  });
-}
-</script></body>
+</body>
 </html>
