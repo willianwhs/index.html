@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ajudaí — Serviços confiáveis perto de você</title>
+<title>Ajuda Aí — Serviços perto de você</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -34,14 +34,21 @@ align-items:center;
 padding:14px 20px;
 }
 
+/* LOGO ORIGINAL */
 .logo{
 font-weight:700;
-font-size:24px;
-background:linear-gradient(90deg,#2D9CDB,#56CCF2);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+font-size:26px;
 }
 
+.logo span.azul{
+color:#2D9CDB;
+}
+
+.logo span.amarelo{
+color:#FFB800;
+}
+
+/* MENU */
 .menu a{
 margin-left:24px;
 text-decoration:none;
@@ -52,9 +59,9 @@ font-weight:500;
 .btn-cadastrar{
 background:#FFB800;
 color:#1c2b36;
-padding:8px 16px;
-border-radius:8px;
-font-weight:600;
+padding:9px 18px;
+border-radius:10px;
+font-weight:700;
 }
 
 /* HERO */
@@ -93,19 +100,24 @@ width:260px;
 padding:14px 20px;
 border:none;
 border-radius:10px;
-background:#2D9CDB;
-color:white;
-font-weight:600;
+background:#FFB800;
+color:#1c2b36;
+font-weight:700;
 cursor:pointer;
 }
 
-/* CARDS */
+/* SEÇÕES */
 .section{
 max-width:1200px;
 margin:auto;
-padding:60px 20px;
+padding:70px 20px;
 }
 
+h2{
+margin-bottom:24px;
+}
+
+/* CARDS */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -123,13 +135,31 @@ transition:0.3s;
 .card:hover{
 transform:translateY(-6px);
 box-shadow:0 12px 28px rgba(0,0,0,0.08);
+border:1px solid #FFB80033;
 }
 
 /* FEED */
 .feed{
 background:#f3f8fc;
-padding:40px;
+padding:30px;
 border-radius:20px;
+}
+
+.feed-top{
+display:flex;
+justify-content:space-between;
+margin-bottom:16px;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.feed-top button{
+background:#2D9CDB;
+border:none;
+color:white;
+padding:10px 16px;
+border-radius:8px;
+cursor:pointer;
 }
 
 .pedido{
@@ -143,11 +173,12 @@ align-items:center;
 }
 
 .pedido button{
-background:#2D9CDB;
+background:#FFB800;
 border:none;
-color:white;
+color:#1c2b36;
 padding:8px 14px;
 border-radius:8px;
+font-weight:700;
 }
 
 /* AVALIAÇÕES */
@@ -160,6 +191,27 @@ margin-top:10px;
 
 .stars{
 color:#FFB800;
+}
+
+/* COMO FUNCIONA */
+.passos{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+}
+
+.passo{
+background:white;
+padding:20px;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* SOBRE */
+.sobre{
+background:#fff8e6;
+border-radius:20px;
+padding:30px;
 }
 
 /* ANIMAÇÃO */
@@ -181,7 +233,11 @@ transform:translateY(0);
 
 <header>
 <div class="nav">
-<div class="logo">Ajudaí</div>
+
+<div class="logo">
+<span class="azul">Ajuda</span> <span class="amarelo">Aí</span>
+</div>
+
 <div class="menu">
 <a href="#categorias">Categorias</a>
 <a href="#como">Como funciona</a>
@@ -189,6 +245,7 @@ transform:translateY(0);
 <a href="#sobre">Sobre</a>
 <a href="#cadastro" class="btn-cadastrar">Cadastrar</a>
 </div>
+
 </div>
 </header>
 
@@ -214,28 +271,34 @@ transform:translateY(0);
 </section>
 
 <section class="section fade">
-<h2>Pedidos recentes</h2>
+<h2>Pedidos próximos de você</h2>
+
 <div class="feed">
 
-<div class="pedido">
-<span>Preciso de encanador — Centro</span>
-<button>Enviar orçamento</button>
+<div class="feed-top">
+<button onclick="usarLocalizacao()">Minha localização</button>
+<button>Publicar pedido</button>
 </div>
 
 <div class="pedido">
-<span>Instalação de ventilador — Vila Nova</span>
-<button>Enviar orçamento</button>
+<span>Encanador — Centro</span>
+<button>Atender</button>
 </div>
 
 <div class="pedido">
-<span>Limpeza pós-obra — Jardim Sul</span>
-<button>Enviar orçamento</button>
+<span>Diarista — Vila Nova</span>
+<button>Atender</button>
+</div>
+
+<div class="pedido">
+<span>Pintura — Jardim Sul</span>
+<button>Atender</button>
 </div>
 
 </div>
 </section>
 
-<section class="section fade">
+<section id="prestadores" class="section fade">
 <h2>Profissionais bem avaliados</h2>
 
 <div class="cards">
@@ -257,6 +320,28 @@ transform:translateY(0);
 </div>
 
 </div>
+</section>
+
+<section id="como" class="section fade">
+<h2>Como funciona</h2>
+<div class="passos">
+<div class="passo"><strong>1.</strong> Cliente publica pedido</div>
+<div class="passo"><strong>2.</strong> Profissionais próximos veem</div>
+<div class="passo"><strong>3.</strong> Serviço realizado</div>
+<div class="passo"><strong>4.</strong> Avaliação gera confiança</div>
+</div>
+</section>
+
+<section id="sobre" class="section fade">
+<div class="sobre">
+<h2>Sobre o Ajuda Aí</h2>
+<p>O Ajuda Aí conecta clientes e prestadores locais com confiança, rapidez e avaliações reais. Nossa missão é facilitar a contratação de serviços próximos com segurança e qualidade.</p>
+</div>
+</section>
+
+<section id="cadastro" class="section fade">
+<h2>Cadastre-se</h2>
+<p>Entre para a rede Ajuda Aí e comece a receber pedidos na sua região.</p>
 </section>
 
 <script>
