@@ -3,265 +3,283 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AJUDAAÍ — Profissionais confiáveis perto de você</title>
+<title>Ajudaí — Serviços confiáveis perto de você</title>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --azul:#2563EB;
-  --azul-claro:#EFF6FF;
-  --amarelo:#FFC107;
-  --amarelo-claro:#FFF8E1;
-  --cinza:#F8FAFC;
-  --texto:#1E293B;
-  --verde:#25D366;
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#f9fbfd;
+color:#1c2b36;
 }
 
-*{box-sizing:border-box;font-family:Inter,Arial,Helvetica,sans-serif}
-body{margin:0;background:var(--cinza);color:var(--texto)}
-
+/* MENU */
 header{
-  background:linear-gradient(180deg,var(--azul-claro),#ffffff);
-  padding:60px 20px 40px;
-  text-align:center;
-  border-bottom:1px solid #e5e7eb;
+position:fixed;
+top:0;
+width:100%;
+background:white;
+box-shadow:0 2px 12px rgba(0,0,0,0.05);
+z-index:999;
+}
+
+.nav{
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px 20px;
 }
 
 .logo{
-  font-size:42px;
-  font-weight:900;
-  letter-spacing:1px;
+font-weight:700;
+font-size:24px;
+background:linear-gradient(90deg,#2D9CDB,#56CCF2);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-.logo span:first-child{color:var(--azul)}
-.logo span:last-child{color:var(--amarelo)}
-
-.sub{
-  margin-top:14px;
-  font-size:20px;
-  color:#334155;
+.menu a{
+margin-left:24px;
+text-decoration:none;
+color:#2F3A45;
+font-weight:500;
 }
 
-.busca-box{
-  margin:28px auto 0;
-  max-width:720px;
-  background:#fff;
-  padding:14px;
-  border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+.btn-cadastrar{
+background:#FFB800;
+color:#1c2b36;
+padding:8px 16px;
+border-radius:8px;
+font-weight:600;
 }
 
-.busca-box input{
-  flex:1;
-  padding:14px;
-  border-radius:10px;
-  border:1px solid #e2e8f0;
+/* HERO */
+.hero{
+padding-top:120px;
+padding-bottom:80px;
+background:linear-gradient(180deg,#eaf6fd,#ffffff);
+text-align:center;
 }
 
-.btn{
-  border:none;
-  padding:14px 18px;
-  border-radius:10px;
-  font-weight:600;
-  cursor:pointer;
+.hero h1{
+font-size:38px;
+margin-bottom:10px;
 }
 
-.btn-buscar{background:var(--amarelo)}
-.btn-local{background:var(--azul);color:#fff}
-.btn-prestador{background:#fff;border:2px solid var(--azul);color:var(--azul)}
-
-.categorias{
-  margin:30px auto 0;
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
+.hero p{
+color:#5b6b76;
+margin-bottom:30px;
 }
 
-.cat{
-  background:#fff;
-  border:1px solid #e2e8f0;
-  padding:10px 14px;
-  border-radius:20px;
-  cursor:pointer;
-  font-size:14px;
+.search-box{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
 }
 
-.cat:hover{background:var(--azul-claro)}
-
-.mapa-box{
-  max-width:1100px;
-  margin:40px auto;
-  padding:0 20px;
+.search-box input{
+padding:14px;
+border-radius:10px;
+border:1px solid #d9e4ec;
+width:260px;
 }
 
-#map{
-  height:260px;
-  border-radius:16px;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
+.search-box button{
+padding:14px 20px;
+border:none;
+border-radius:10px;
+background:#2D9CDB;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
+/* CARDS */
+.section{
+max-width:1200px;
+margin:auto;
+padding:60px 20px;
 }
 
 .cards{
-  max-width:1100px;
-  margin:20px auto 60px;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:20px;
-  padding:0 20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 
 .card{
-  background:#fff;
-  border-radius:16px;
-  padding:20px;
-  box-shadow:0 8px 24px rgba(0,0,0,.06);
-  position:relative;
+background:white;
+border-radius:16px;
+padding:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.05);
+transition:0.3s;
 }
 
-.selo{
-  position:absolute;
-  top:12px;
-  right:12px;
-  background:var(--azul);
-  color:#fff;
-  font-size:12px;
-  padding:6px 10px;
-  border-radius:20px;
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 12px 28px rgba(0,0,0,0.08);
 }
 
-.nome{font-weight:700;font-size:18px}
-.serv{color:#475569;margin-top:4px}
-
-.dist{margin-top:6px;font-size:13px;color:var(--azul);font-weight:600}
-
-.btn-wa{
-  display:inline-block;
-  margin-top:12px;
-  background:var(--verde);
-  color:#fff;
-  padding:10px 12px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:600;
+/* FEED */
+.feed{
+background:#f3f8fc;
+padding:40px;
+border-radius:20px;
 }
 
-.cta-prestador{
-  background:linear-gradient(135deg,var(--azul),#3b82f6);
-  color:#fff;
-  padding:50px 20px;
-  text-align:center;
+.pedido{
+background:white;
+padding:16px;
+border-radius:12px;
+margin-bottom:12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-.cta-prestador h2{margin:0;font-size:28px}
-
-.cta-prestador p{margin:10px 0 20px}
-
-.cta-prestador button{
-  background:var(--amarelo);
-  border:none;
-  padding:14px 18px;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
+.pedido button{
+background:#2D9CDB;
+border:none;
+color:white;
+padding:8px 14px;
+border-radius:8px;
 }
 
-footer{
-  background:#ffffff;
-  padding:30px 20px;
-  text-align:center;
-  border-top:1px solid #e5e7eb;
-  color:#64748b;
+/* AVALIAÇÕES */
+.avaliacao{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:10px;
 }
+
+.stars{
+color:#FFB800;
+}
+
+/* ANIMAÇÃO */
+.fade{
+opacity:0;
+transform:translateY(20px);
+transition:0.6s;
+}
+
+.fade.show{
+opacity:1;
+transform:translateY(0);
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo"><span>AJUDA</span><span>AÍ</span></div>
-  <div class="sub">Profissionais confiáveis perto de você</div>
-
-  <div class="busca-box">
-    <input id="busca" placeholder="Digite sua cidade ou serviço (ex: encanador)">
-    <button class="btn btn-buscar" onclick="buscar()">Buscar</button>
-    <button class="btn btn-local" onclick="perto()">Perto de mim</button>
-    <button class="btn btn-prestador" onclick="window.location='cadastro.html'">
-      Sou prestador
-    </button>
-  </div>
-
-  <div class="categorias">
-    <div class="cat" onclick="cat('eletricista')">Eletricista</div>
-    <div class="cat" onclick="cat('encanador')">Encanador</div>
-    <div class="cat" onclick="cat('faxina')">Faxina</div>
-    <div class="cat" onclick="cat('pedreiro')">Pedreiro</div>
-  </div>
+<div class="nav">
+<div class="logo">Ajudaí</div>
+<div class="menu">
+<a href="#categorias">Categorias</a>
+<a href="#como">Como funciona</a>
+<a href="#prestadores">Prestadores</a>
+<a href="#sobre">Sobre</a>
+<a href="#cadastro" class="btn-cadastrar">Cadastrar</a>
+</div>
+</div>
 </header>
 
-<div class="mapa-box">
-  <div id="map"></div>
+<section class="hero fade">
+<h1>Encontre profissionais confiáveis perto de você</h1>
+<p>Rápido, seguro e sem complicação</p>
+
+<div class="search-box">
+<input type="text" placeholder="Qual serviço você precisa?">
+<input type="text" id="local" placeholder="Sua localização">
+<button onclick="usarLocalizacao()">Perto de mim</button>
 </div>
-
-<section class="cards" id="lista"></section>
-
-<section class="cta-prestador">
-  <h2>É prestador de serviços?</h2>
-  <p>Cadastre-se gratuitamente e comece a receber clientes na sua região.</p>
-  <button onclick="window.location='cadastro.html'">Cadastrar agora</button>
 </section>
 
-<footer>
-  © 2026 AJUDAAÍ • Plataforma brasileira de profissionais locais confiáveis
-</footer>
+<section id="categorias" class="section fade">
+<h2>Categorias populares</h2>
+<div class="cards">
+<div class="card">Encanador</div>
+<div class="card">Eletricista</div>
+<div class="card">Diarista</div>
+<div class="card">Pintor</div>
+</div>
+</section>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<section class="section fade">
+<h2>Pedidos recentes</h2>
+<div class="feed">
+
+<div class="pedido">
+<span>Preciso de encanador — Centro</span>
+<button>Enviar orçamento</button>
+</div>
+
+<div class="pedido">
+<span>Instalação de ventilador — Vila Nova</span>
+<button>Enviar orçamento</button>
+</div>
+
+<div class="pedido">
+<span>Limpeza pós-obra — Jardim Sul</span>
+<button>Enviar orçamento</button>
+</div>
+
+</div>
+</section>
+
+<section class="section fade">
+<h2>Profissionais bem avaliados</h2>
+
+<div class="cards">
+
+<div class="card">
+<strong>João — Encanador</strong>
+<div class="avaliacao">
+<div class="stars">★★★★★</div>
+<span>48 avaliações</span>
+</div>
+</div>
+
+<div class="card">
+<strong>Maria — Diarista</strong>
+<div class="avaliacao">
+<div class="stars">★★★★★</div>
+<span>32 avaliações</span>
+</div>
+</div>
+
+</div>
+</section>
+
 <script>
-const URL="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
-let dados=[],markers=[];
-let map=L.map('map').setView([-15.8,-47.9],4);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-fetch(URL).then(r=>r.json()).then(d=>dados=d);
-
-function mostrar(lista){
-  const el=document.getElementById("lista");
-  el.innerHTML="";
-  markers.forEach(m=>map.removeLayer(m));
-  markers=[];
-
-  lista.forEach(p=>{
-    if(p.lat&&p.lng){
-      markers.push(L.marker([p.lat,p.lng]).addTo(map));
-    }
-
-    el.innerHTML+=`
-    <div class="card">
-      ${p.verificado?'<div class="selo">Verificado</div>':''}
-      <div class="nome">${p.nome}</div>
-      <div class="serv">${p.servico} • ${p.cidade}</div>
-      <a class="btn-wa" href="https://wa.me/55${p.whatsapp}" target="_blank">WhatsApp</a>
-    </div>`;
-  });
+function usarLocalizacao(){
+if(navigator.geolocation){
+navigator.geolocation.getCurrentPosition(function(pos){
+document.getElementById("local").value="Localização detectada";
+});
+}else{
+alert("Geolocalização não suportada");
+}
 }
 
-function buscar(){
-  const t=document.getElementById("busca").value.toLowerCase();
-  mostrar(dados.filter(p=>p.servico.toLowerCase().includes(t)||p.cidade.toLowerCase().includes(t)));
+/* animação */
+const fades=document.querySelectorAll(".fade");
+window.addEventListener("scroll",()=>{
+fades.forEach(el=>{
+const top=el.getBoundingClientRect().top;
+if(top<window.innerHeight-80){
+el.classList.add("show");
 }
-
-function cat(c){
-  mostrar(dados.filter(p=>p.servico.toLowerCase().includes(c)));
-}
-
-function perto(){
-  navigator.geolocation.getCurrentPosition(pos=>{
-    map.setView([pos.coords.latitude,pos.coords.longitude],12);
-  });
-}
+});
+});
 </script>
 
 </body>
