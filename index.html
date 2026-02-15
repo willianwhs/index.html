@@ -9,178 +9,116 @@
 
 <style>
 :root{
+  --azul:#2563EB;
+  --azul-claro:#EFF6FF;
   --amarelo:#FFC107;
-  --azul:#1E3A8A;
-  --azul2:#0f2c6e;
-  --cinza:#f4f6f8;
-  --escuro:#1f2937;
-  --whatsapp:#25D366;
+  --amarelo-claro:#FFF8E1;
+  --cinza:#F8FAFC;
+  --texto:#1E293B;
+  --verde:#25D366;
 }
 
 *{box-sizing:border-box;font-family:Inter,Arial,Helvetica,sans-serif}
+body{margin:0;background:var(--cinza);color:var(--texto)}
 
-body{
-  margin:0;
-  background:#ffffff;
-  color:var(--escuro);
-}
-
-/* NAVBAR */
-
-nav{
-  background:#fff;
-  padding:14px 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid #eee;
-  position:sticky;
-  top:0;
-  z-index:10;
+header{
+  background:linear-gradient(180deg,var(--azul-claro),#ffffff);
+  padding:60px 20px 40px;
+  text-align:center;
+  border-bottom:1px solid #e5e7eb;
 }
 
 .logo{
+  font-size:42px;
   font-weight:900;
-  font-size:22px;
+  letter-spacing:1px;
 }
 
-.logo span:nth-child(1){color:var(--azul)}
-.logo span:nth-child(2){color:var(--amarelo)}
+.logo span:first-child{color:var(--azul)}
+.logo span:last-child{color:var(--amarelo)}
 
-.menu{
-  display:flex;
-  gap:22px;
-  align-items:center;
-}
-
-.menu a{
-  text-decoration:none;
-  color:#374151;
-  font-weight:600;
-}
-
-.btn-cadastrar{
-  background:var(--azul);
-  color:#fff;
-  padding:10px 16px;
-  border-radius:10px;
-}
-
-/* HERO */
-
-.hero{
-  background:linear-gradient(135deg,var(--azul),var(--azul2));
-  color:#fff;
-  padding:70px 20px 90px;
-  text-align:center;
-}
-
-.hero h1{
-  font-size:40px;
-  margin:0;
-  font-weight:900;
-}
-
-.hero p{
-  max-width:720px;
-  margin:18px auto 30px;
-  font-size:18px;
-  line-height:1.6;
-  opacity:.95;
+.sub{
+  margin-top:14px;
+  font-size:20px;
+  color:#334155;
 }
 
 .busca-box{
-  background:#fff;
-  border-radius:16px;
-  padding:16px;
+  margin:28px auto 0;
   max-width:720px;
-  margin:auto;
+  background:#fff;
+  padding:14px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  justify-content:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.2);
 }
 
 .busca-box input{
   flex:1;
-  min-width:220px;
   padding:14px;
   border-radius:10px;
-  border:1px solid #ddd;
+  border:1px solid #e2e8f0;
 }
 
-.busca-box button{
+.btn{
   border:none;
   padding:14px 18px;
   border-radius:10px;
-  font-weight:700;
+  font-weight:600;
   cursor:pointer;
 }
 
-.btn-amarelo{background:var(--amarelo)}
-.btn-azul{background:var(--azul);color:#fff}
-
-/* CATEGORIAS */
+.btn-buscar{background:var(--amarelo)}
+.btn-local{background:var(--azul);color:#fff}
+.btn-prestador{background:#fff;border:2px solid var(--azul);color:var(--azul)}
 
 .categorias{
-  padding:40px 20px;
-  text-align:center;
-}
-
-.categorias h2{
-  margin:0 0 20px;
-  font-size:28px;
-}
-
-.cat-list{
+  margin:30px auto 0;
   display:flex;
-  flex-wrap:wrap;
   justify-content:center;
-  gap:14px;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
 .cat{
   background:#fff;
-  border:1px solid #eee;
-  padding:12px 18px;
-  border-radius:999px;
-  font-weight:600;
+  border:1px solid #e2e8f0;
+  padding:10px 14px;
+  border-radius:20px;
   cursor:pointer;
-  transition:.2s;
+  font-size:14px;
 }
 
-.cat:hover{
-  background:var(--amarelo);
-}
+.cat:hover{background:var(--azul-claro)}
 
-/* MAP */
+.mapa-box{
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 20px;
+}
 
 #map{
   height:260px;
-  max-width:1100px;
-  margin:30px auto;
   border-radius:16px;
-  box-shadow:0 6px 18px rgba(0,0,0,.1);
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
 }
 
-/* LISTA */
-
 .cards{
-  display:none;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:22px;
-  padding:20px;
   max-width:1100px;
-  margin:auto;
+  margin:20px auto 60px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
+  padding:0 20px;
 }
 
 .card{
   background:#fff;
-  padding:22px;
   border-radius:16px;
-  text-align:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  padding:20px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
   position:relative;
 }
 
@@ -190,237 +128,108 @@ nav{
   right:12px;
   background:var(--azul);
   color:#fff;
+  font-size:12px;
   padding:6px 10px;
   border-radius:20px;
-  font-size:12px;
 }
 
-.botao-whatsapp{
-  display:inline-block;
-  background:var(--whatsapp);
-  color:#fff;
-  padding:12px 14px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold;
-  margin-top:10px;
-}
+.nome{font-weight:700;font-size:18px}
+.serv{color:#475569;margin-top:4px}
 
-/* COMO FUNCIONA */
+.dist{margin-top:6px;font-size:13px;color:var(--azul);font-weight:600}
 
-.como{
-  background:#f8fafc;
-  padding:60px 20px;
-  text-align:center;
-}
-
-.como h2{margin-bottom:30px}
-
-.steps{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  max-width:1100px;
-  margin:auto;
-}
-
-.step{
-  background:#fff;
-  padding:20px;
-  border-radius:16px;
-  box-shadow:0 6px 18px rgba(0,0,0,.06);
-}
-
-/* CTA PRESTADOR */
-
-.prestador{
-  background:linear-gradient(135deg,var(--amarelo),#ffb300);
-  padding:60px 20px;
-  text-align:center;
-}
-
-.prestador h2{margin:0 0 10px}
-
-.btn-prestador{
-  background:var(--azul);
-  color:#fff;
-  padding:14px 22px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:800;
+.btn-wa{
   display:inline-block;
   margin-top:12px;
+  background:var(--verde);
+  color:#fff;
+  padding:10px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
 }
 
-/* FOOTER */
+.cta-prestador{
+  background:linear-gradient(135deg,var(--azul),#3b82f6);
+  color:#fff;
+  padding:50px 20px;
+  text-align:center;
+}
+
+.cta-prestador h2{margin:0;font-size:28px}
+
+.cta-prestador p{margin:10px 0 20px}
+
+.cta-prestador button{
+  background:var(--amarelo);
+  border:none;
+  padding:14px 18px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+}
 
 footer{
-  background:#0f172a;
-  color:#cbd5e1;
-  padding:40px 20px;
-}
-
-.footer-grid{
-  max-width:1100px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-}
-
-footer h4{color:#fff;margin-bottom:10px}
-
-footer a{
-  display:block;
-  color:#cbd5e1;
-  text-decoration:none;
-  margin:6px 0;
-}
-
-.copy{
+  background:#ffffff;
+  padding:30px 20px;
   text-align:center;
-  margin-top:20px;
-  font-size:14px;
+  border-top:1px solid #e5e7eb;
+  color:#64748b;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
+<header>
   <div class="logo"><span>AJUDA</span><span>AÍ</span></div>
-  <div class="menu">
-    <a href="categorias.html">Categorias</a>
-    <a href="como-funciona.html">Como funciona</a>
-    <a href="para-prestadores.html">Para prestadores</a>
-    <a href="sobre.html">Sobre</a>
-    <a class="btn-cadastrar" href="cadastro.html">Cadastrar</a>
-  </div>
-</nav>
-
-<section class="hero">
-  <h1>Encontre profissionais confiáveis perto de você</h1>
-  <p>Prestadores verificados na sua cidade. Fale direto pelo WhatsApp, sem intermediários e com total segurança.</p>
+  <div class="sub">Profissionais confiáveis perto de você</div>
 
   <div class="busca-box">
-    <input id="busca" placeholder="Digite sua cidade ou serviço">
-    <button class="btn-amarelo" onclick="buscar()">Buscar</button>
-    <button class="btn-azul" onclick="localizacao()">Perto de mim</button>
+    <input id="busca" placeholder="Digite sua cidade ou serviço (ex: encanador)">
+    <button class="btn btn-buscar" onclick="buscar()">Buscar</button>
+    <button class="btn btn-local" onclick="perto()">Perto de mim</button>
+    <button class="btn btn-prestador" onclick="window.location='cadastro.html'">
+      Sou prestador
+    </button>
   </div>
-</section>
 
-<section class="categorias">
-  <h2>Serviços populares</h2>
-  <div class="cat-list">
-    <div class="cat" onclick="filtrar('eletricista')">Eletricista</div>
-    <div class="cat" onclick="filtrar('encanador')">Encanador</div>
-    <div class="cat" onclick="filtrar('diarista')">Diarista</div>
-    <div class="cat" onclick="filtrar('pedreiro')">Pedreiro</div>
-    <div class="cat" onclick="filtrar('pintor')">Pintor</div>
-    <div class="cat" onclick="filtrar('montador')">Montador</div>
+  <div class="categorias">
+    <div class="cat" onclick="cat('eletricista')">Eletricista</div>
+    <div class="cat" onclick="cat('encanador')">Encanador</div>
+    <div class="cat" onclick="cat('faxina')">Faxina</div>
+    <div class="cat" onclick="cat('pedreiro')">Pedreiro</div>
   </div>
-</section>
+</header>
 
-<div id="map"></div>
+<div class="mapa-box">
+  <div id="map"></div>
+</div>
 
 <section class="cards" id="lista"></section>
 
-<section class="como">
-  <h2>Como o AjudaAí funciona</h2>
-  <div class="steps">
-    <div class="step"><strong>1. Busque</strong><br>Digite o serviço ou sua cidade</div>
-    <div class="step"><strong>2. Escolha</strong><br>Compare profissionais próximos</div>
-    <div class="step"><strong>3. Fale</strong><br>Contato direto pelo WhatsApp</div>
-    <div class="step"><strong>4. Resolva</strong><br>Seu serviço feito com confiança</div>
-  </div>
-</section>
-
-<section class="prestador">
+<section class="cta-prestador">
   <h2>É prestador de serviços?</h2>
-  <p>Cadastre-se gratuitamente e receba clientes da sua região.</p>
-  <a class="btn-prestador" href="cadastro.html">Quero me cadastrar</a>
+  <p>Cadastre-se gratuitamente e comece a receber clientes na sua região.</p>
+  <button onclick="window.location='cadastro.html'">Cadastrar agora</button>
 </section>
 
 <footer>
-  <div class="footer-grid">
-    <div>
-      <h4>AjudaAí</h4>
-      <a href="sobre.html">Sobre nós</a>
-      <a href="como-funciona.html">Como funciona</a>
-    </div>
-    <div>
-      <h4>Profissionais</h4>
-      <a href="para-prestadores.html">Para prestadores</a>
-      <a href="cadastro.html">Cadastrar</a>
-    </div>
-    <div>
-      <h4>Serviços</h4>
-      <a href="categorias.html">Categorias</a>
-    </div>
-  </div>
-  <div class="copy">© 2026 AjudaAí — Plataforma de serviços locais</div>
+  © 2026 AJUDAAÍ • Plataforma brasileira de profissionais locais confiáveis
 </footer>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
 const URL="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
-let dados=[],markers=[],map=L.map('map').setView([-15.8,-47.9],4);
+let dados=[],markers=[];
+let map=L.map('map').setView([-15.8,-47.9],4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 fetch(URL).then(r=>r.json()).then(d=>dados=d);
 
-function filtrar(serv){
-  mostrar(dados.filter(p=>p.servico.toLowerCase().includes(serv)));
-}
-
-function buscar(){
-  const t=document.getElementById("busca").value.toLowerCase().trim();
-  mostrar(dados.filter(p =>
-    p.servico.toLowerCase().includes(t) ||
-    p.cidade.toLowerCase().includes(t)
-  ));
-}
-
-function localizacao(){
-  navigator.geolocation.getCurrentPosition(pos=>{
-    dados.forEach(p=>{
-      if(p.lat&&p.lng){
-        p.distancia=calcularDistancia(
-          pos.coords.latitude,
-          pos.coords.longitude,
-          p.lat,
-          p.lng
-        );
-      }
-    });
-
-    dados.sort((a,b)=>{
-      return (
-        (b.verificado?1:0)-(a.verificado?1:0) ||
-        (b.media||0)-(a.media||0) ||
-        (a.distancia||999)-(b.distancia||999)
-      );
-    });
-
-    mostrar(dados);
-    map.setView([pos.coords.latitude,pos.coords.longitude],12);
-  });
-}
-
-function calcularDistancia(lat1,lng1,lat2,lng2){
-  const R=6371;
-  const dLat=(lat2-lat1)*Math.PI/180;
-  const dLng=(lng2-lng1)*Math.PI/180;
-  const a=Math.sin(dLat/2)**2+
-    Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
-    Math.sin(dLng/2)**2;
-  return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
-}
-
 function mostrar(lista){
-  document.querySelector(".cards").style.display="grid";
-  const c=document.getElementById("lista");
-  c.innerHTML="";
+  const el=document.getElementById("lista");
+  el.innerHTML="";
   markers.forEach(m=>map.removeLayer(m));
   markers=[];
 
@@ -428,16 +237,29 @@ function mostrar(lista){
     if(p.lat&&p.lng){
       markers.push(L.marker([p.lat,p.lng]).addTo(map));
     }
-    c.innerHTML+=`
+
+    el.innerHTML+=`
     <div class="card">
-      ${p.verificado?'<div class="selo">✔ Verificado</div>':''}
-      <strong>${p.nome}</strong><br>
-      ${p.servico}<br>
-      ${p.cidade}
-      <a class="botao-whatsapp" href="https://wa.me/55${p.whatsapp}" target="_blank">
-        WhatsApp
-      </a>
+      ${p.verificado?'<div class="selo">Verificado</div>':''}
+      <div class="nome">${p.nome}</div>
+      <div class="serv">${p.servico} • ${p.cidade}</div>
+      <a class="btn-wa" href="https://wa.me/55${p.whatsapp}" target="_blank">WhatsApp</a>
     </div>`;
+  });
+}
+
+function buscar(){
+  const t=document.getElementById("busca").value.toLowerCase();
+  mostrar(dados.filter(p=>p.servico.toLowerCase().includes(t)||p.cidade.toLowerCase().includes(t)));
+}
+
+function cat(c){
+  mostrar(dados.filter(p=>p.servico.toLowerCase().includes(c)));
+}
+
+function perto(){
+  navigator.geolocation.getCurrentPosition(pos=>{
+    map.setView([pos.coords.latitude,pos.coords.longitude],12);
   });
 }
 </script>
