@@ -11,35 +11,36 @@
 :root{
   --amarelo:#FFC107;
   --azul:#1E3A8A;
+  --azul2:#0f2c6e;
   --cinza:#f4f6f8;
-  --escuro:#222;
+  --escuro:#1f2937;
   --whatsapp:#25D366;
 }
 
-*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box;font-family:"Inter",Arial,Helvetica,sans-serif}
 body{margin:0;background:var(--cinza);color:var(--escuro)}
 
 header{
-  background:#fff;
-  padding:40px 16px 30px;
+  background:linear-gradient(135deg,#fff,#f8fafc);
+  padding:60px 16px 40px;
   text-align:center;
   border-bottom:3px solid var(--amarelo);
 }
 
-h1{margin:0;font-size:36px;font-weight:800;letter-spacing:2px}
+h1{margin:0;font-size:42px;font-weight:900;letter-spacing:2px}
 .logo-ajuda{color:var(--azul)}
 .logo-ai{color:var(--amarelo)}
 
 .hero-text{
   max-width:760px;
   margin:18px auto 0;
-  font-size:18px;
+  font-size:19px;
   color:#555;
   line-height:1.6;
 }
 
 .hero-actions{
-  margin-top:24px;
+  margin-top:26px;
   display:flex;
   justify-content:center;
   gap:12px;
@@ -51,6 +52,7 @@ input{
   border-radius:12px;
   border:1px solid #ddd;
   min-width:260px;
+  font-size:15px;
 }
 
 button{
@@ -59,7 +61,10 @@ button{
   border-radius:12px;
   font-weight:bold;
   cursor:pointer;
+  transition:.2s;
 }
+
+button:hover{transform:translateY(-1px)}
 
 .btn-azul{background:var(--azul);color:#fff}
 .btn-amarelo{background:var(--amarelo);color:#000}
@@ -81,33 +86,34 @@ button{
 
 .como-funciona{
   max-width:1100px;
-  margin:30px auto;
+  margin:40px auto;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+  gap:22px;
   padding:0 16px;
 }
 
 .card-info{
   background:#fff;
-  padding:20px;
-  border-radius:16px;
+  padding:24px;
+  border-radius:18px;
   text-align:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  box-shadow:0 8px 22px rgba(0,0,0,.06);
+  font-size:15px;
 }
 
 #map{
-  height:200px;
+  height:320px;
   max-width:1100px;
   margin:20px auto;
-  border-radius:16px;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  border-radius:18px;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
 }
 
 .cards{
   display:none;
   grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:22px;
+  gap:24px;
   padding:20px;
   max-width:1100px;
   margin:auto;
@@ -116,11 +122,14 @@ button{
 .card{
   background:#fff;
   padding:22px;
-  border-radius:16px;
+  border-radius:18px;
   text-align:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  box-shadow:0 10px 24px rgba(0,0,0,.08);
   position:relative;
+  transition:.2s;
 }
+
+.card:hover{transform:translateY(-4px)}
 
 .selo{
   position:absolute;
@@ -136,24 +145,25 @@ button{
 .distancia{
   margin-top:6px;
   font-size:14px;
-  color:#1E3A8A;
+  color:var(--azul);
   font-weight:bold;
 }
 
 .cta-prestador{
-  background:linear-gradient(135deg,var(--azul),#0f2c6e);
+  background:linear-gradient(135deg,var(--azul),var(--azul2));
   color:#fff;
-  margin:40px 16px;
-  padding:30px;
-  border-radius:20px;
+  margin:50px 16px;
+  padding:40px;
+  border-radius:22px;
   text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
 }
 
-.cta-prestador h2{margin-top:0}
+.cta-prestador h2{margin-top:0;font-size:28px}
 
 footer{
   text-align:center;
-  padding:20px;
+  padding:30px;
   color:#666;
 }
 </style>
@@ -166,7 +176,7 @@ footer{
 
   <div class="hero-text">
     Encontre prestadores de serviços confiáveis perto de você.<br>
-    Rápido, simples e direto pelo WhatsApp.
+    Rápido, seguro e direto pelo WhatsApp.
   </div>
 
   <div class="hero-actions">
@@ -180,17 +190,14 @@ footer{
 </header>
 
 <section class="como-funciona">
-  <div class="card-info">📍 <strong>Encontre perto de você</strong><br>Profissionais locais</div>
-  <div class="card-info">⭐ <strong>Avaliações reais</strong><br>Mais confiança</div>
+  <div class="card-info">📍 <strong>Encontre perto</strong><br>Profissionais da sua região</div>
+  <div class="card-info">⭐ <strong>Verificados</strong><br>Mais confiança</div>
   <div class="card-info">💬 <strong>Contato direto</strong><br>Sem intermediários</div>
 </section>
 
 <div id="map"></div>
 
 <section class="cards" id="lista"></section>
-
-<!-- SLOT ADSENSE FUTURO (invisível por enquanto) -->
-<!-- <div class="ads-slot"></div> -->
 
 <section class="cta-prestador">
   <h2>É prestador de serviços?</h2>
@@ -210,14 +217,23 @@ const URL="https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores
 let dados=[],markers=[],map=L.map('map').setView([-15.8,-47.9],4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-fetch(URL).then(r=>r.json()).then(d=>dados=d);
+/* CACHE BYPASS → sempre dados novos */
+async function carregarDados(){
+  const r=await fetch(URL+"?t="+Date.now());
+  dados=await r.json();
+}
+
+carregarDados();
+
+/* auto atualização a cada 60s */
+setInterval(carregarDados,60000);
 
 function calcularDistancia(lat1,lng1,lat2,lng2){
   const R=6371;
   const dLat=(lat2-lat1)*Math.PI/180;
   const dLng=(lng2-lng1)*Math.PI/180;
   const a=Math.sin(dLat/2)**2+
-    Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
+    Math.cos(lat1*Math.PI/180)Math.cos(lat2*Math.PI/180)
     Math.sin(dLng/2)**2;
   return R*(2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
 }
@@ -243,7 +259,6 @@ function localizacao(){
       }
     });
 
-    // ranking invisível
     dados.sort((a,b)=>{
       return (
         (b.verificado?1:0)-(a.verificado?1:0) ||
@@ -276,8 +291,8 @@ function mostrar(lista){
       <strong>${p.nome}</strong><br>
       ${p.servico}<br>
       ${p.cidade}
-      ${p.distancia?`<div class="distancia">📍 ${p.distancia.toFixed(1)} km de você</div>`:''}
-      <br>
+      ${p.distancia?<div class="distancia">📍 ${p.distancia.toFixed(1)} km de você</div>:''}
+      <br><br>
       <a class="botao-whatsapp" href="https://wa.me/55${p.whatsapp}" target="_blank">
         WhatsApp
       </a>
