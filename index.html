@@ -3,44 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ajuda Aí — Conectando pessoas com confiança</title>
+<title>Ajuda Aí — Plataforma Inteligente de Serviços</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* ==============================
-   IDENTIDADE VISUAL SUPREMA
-============================== */
-
 :root{
---azul:#1F3C88;
---azul-claro:#2D9CDB;
---amarelo:#FFB800;
---fundo:#f4f8fb;
---texto:#1c2b36;
---cinza:#6b7c8a;
---sucesso:#27ae60;
---erro:#e74c3c;
+--azul-escuro:#0F172A;
+--azul-profundo:#1E293B;
+--azul-tech:#2563EB;
+--amarelo:#FFC107;
+--fundo:#EEF2F7;
+--card:#FFFFFF;
 }
 
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
 background:var(--fundo);
-color:var(--texto);
+color:#1c2b36;
 }
 
-/* ==============================
-   HEADER PREMIUM
-============================== */
-
+/* HEADER */
 header{
 position:fixed;
 top:0;
 width:100%;
-background:white;
-box-shadow:0 4px 20px rgba(0,0,0,0.05);
+background:var(--azul-escuro);
+box-shadow:0 8px 25px rgba(0,0,0,0.25);
 z-index:999;
 }
 
@@ -50,97 +40,129 @@ margin:auto;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:16px 24px;
+padding:16px 20px;
 }
 
 .logo{
-font-size:26px;
 font-weight:700;
+font-size:26px;
+color:white;
 }
 
-.logo span:first-child{ color:var(--azul-claro); }
-.logo span:last-child{ color:var(--amarelo); }
+.logo span.azul{ color:#2D9CDB; }
+.logo span.amarelo{ color:#FFC107; }
 
 .menu a{
-margin-left:22px;
+margin-left:24px;
 text-decoration:none;
-color:var(--texto);
+color:white;
 font-weight:500;
 }
 
-.btn{
-background:var(--amarelo);
-padding:10px 18px;
-border-radius:12px;
+.btn-cadastrar{
+background:#FFC107;
+color:#0F172A;
+padding:9px 18px;
+border-radius:10px;
 font-weight:700;
 }
 
-/* ==============================
-   HERO
-============================== */
-
+/* HERO */
 .hero{
-padding-top:130px;
-padding-bottom:80px;
+padding-top:150px;
+padding-bottom:120px;
+background:linear-gradient(135deg,#0F172A,#1E3A8A);
 text-align:center;
-background:linear-gradient(180deg,#eaf4fc,#ffffff);
+color:white;
 }
 
 .hero h1{
 font-size:42px;
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
 .hero p{
-color:var(--cinza);
+opacity:0.9;
 margin-bottom:30px;
 }
 
-/* ==============================
-   SEÇÕES
-============================== */
+.search-box{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+}
 
+.search-box input{
+padding:14px;
+border-radius:12px;
+border:none;
+width:260px;
+}
+
+.search-box button{
+padding:14px 20px;
+border:none;
+border-radius:12px;
+background:#FFC107;
+color:#0F172A;
+font-weight:700;
+cursor:pointer;
+}
+
+/* SECTIONS */
 .section{
 max-width:1200px;
 margin:auto;
-padding:70px 20px;
+padding:80px 20px;
 }
 
 h2{
 margin-bottom:30px;
+font-size:28px;
 }
 
-/* ==============================
-   CARDS
-============================== */
-
+/* CARDS */
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:22px;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:25px;
 }
 
 .card{
-background:white;
+background:var(--card);
+border-radius:20px;
 padding:24px;
-border-radius:18px;
-box-shadow:0 10px 30px rgba(0,0,0,0.06);
-transition:0.3s;
+box-shadow:0 15px 40px rgba(0,0,0,0.08);
+transition:0.4s;
+border:1px solid #e2e8f0;
 }
 
 .card:hover{
-transform:translateY(-6px);
+transform:translateY(-8px);
+box-shadow:0 25px 60px rgba(0,0,0,0.12);
 }
 
-/* ==============================
-   FEED PROFISSIONAL
-============================== */
+/* NÍVEIS */
+.nivel{
+display:inline-block;
+padding:6px 14px;
+border-radius:30px;
+font-size:12px;
+font-weight:600;
+margin-top:8px;
+}
 
-.feed-container{
+.ouro{ background:linear-gradient(45deg,#FFD700,#FFC107); color:#1c2b36;}
+.prata{ background:#E5E7EB; color:#1c2b36;}
+.bronze{ background:#CD7F32; color:white;}
+
+/* FEED */
+.feed{
 background:white;
 padding:30px;
-border-radius:22px;
-box-shadow:0 10px 30px rgba(0,0,0,0.06);
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,0.06);
 }
 
 .feed-top{
@@ -152,62 +174,86 @@ gap:10px;
 }
 
 .feed-top button{
-background:var(--azul-claro);
+background:#2563EB;
 border:none;
 color:white;
-padding:10px 18px;
+padding:12px 18px;
 border-radius:10px;
 cursor:pointer;
+font-weight:600;
 }
 
 .pedido{
-background:var(--fundo);
+background:#f8fafc;
 padding:18px;
 border-radius:14px;
-margin-bottom:14px;
+margin-bottom:12px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 }
 
 .pedido button{
-background:var(--amarelo);
+background:#FFC107;
 border:none;
-padding:8px 14px;
+padding:10px 16px;
+border-radius:8px;
+font-weight:700;
+cursor:pointer;
+}
+
+/* MODAL */
+#modalPedido{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.modal-box{
+background:white;
+padding:30px;
+border-radius:20px;
+width:90%;
+max-width:500px;
+}
+
+.modal-box input{
+width:100%;
+padding:14px;
+margin-bottom:12px;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+.modal-box button{
+width:100%;
+padding:14px;
+border:none;
 border-radius:10px;
 font-weight:700;
 cursor:pointer;
 }
 
-/* ==============================
-   STATUS BADGE
-============================== */
-
-.badge{
-padding:6px 10px;
-border-radius:20px;
-font-size:12px;
-font-weight:600;
+.publicar{
+background:#FFC107;
+color:#0F172A;
 }
 
-.aberto{ background:#d4f5e0; color:#0f7b3a; }
-.atendido{ background:#ffe5e5; color:#c0392b; }
-
-/* ==============================
-   ANIMAÇÃO
-============================== */
-
-.fade{
-opacity:0;
-transform:translateY(20px);
-transition:0.6s;
+.cancelar{
+background:#1E293B;
+color:white;
+margin-top:10px;
 }
 
-.fade.show{
-opacity:1;
-transform:translateY(0);
-}
-
+.fade{opacity:0;transform:translateY(20px);transition:0.6s;}
+.fade.show{opacity:1;transform:translateY(0);}
 </style>
 </head>
 
@@ -215,153 +261,123 @@ transform:translateY(0);
 
 <header>
 <div class="nav">
-<div class="logo">
-<span>Ajuda</span> <span>Aí</span>
-</div>
-
+<div class="logo"><span class="azul">Ajuda</span> <span class="amarelo">Aí</span></div>
 <div class="menu">
-<a href="#feed">Pedidos</a>
+<a href="#categorias">Categorias</a>
 <a href="#prestadores">Prestadores</a>
-<a href="#como">Como funciona</a>
-<a href="#sobre" class="btn">Cadastrar</a>
+<a href="#feed">Feed</a>
+<a href="#sobre">Sobre</a>
+<a href="#cadastro" class="btn-cadastrar">Cadastrar</a>
 </div>
 </div>
 </header>
 
 <section class="hero fade">
-<h1>Conectando clientes e profissionais com confiança real</h1>
-<p>Pedidos públicos. Profissionais acessam gratuitamente.</p>
-</section>
-
-<section id="feed" class="section fade">
-<h2>Pedidos disponíveis</h2>
-
-<div class="feed-container">
-
-<div class="feed-top">
-<button onclick="carregarPedidos()">Atualizar</button>
-<button onclick="abrirFormulario()">Publicar pedido</button>
-</div>
-
-<div id="feed"></div>
-
+<h1>Encontre profissionais confiáveis perto de você</h1>
+<p>Plataforma inteligente que conecta clientes e prestadores com segurança</p>
+<div class="search-box">
+<input type="text" placeholder="Qual serviço você precisa?">
+<input type="text" id="local" placeholder="Sua localização">
+<button onclick="usarLocalizacao()">Perto de mim</button>
 </div>
 </section>
 
 <section id="prestadores" class="section fade">
 <h2>Profissionais bem avaliados</h2>
-<div class="cards" id="listaPrestadores"></div>
+<div class="cards">
+<div class="card">
+<strong>João — Encanador</strong>
+<div class="nivel ouro">Ouro</div>
+<div>★★★★★ (48 avaliações)</div>
+</div>
+<div class="card">
+<strong>Maria — Diarista</strong>
+<div class="nivel prata">Prata</div>
+<div>★★★★★ (32 avaliações)</div>
+</div>
+</div>
 </section>
 
-<section id="como" class="section fade">
-<h2>Como funciona</h2>
-<div class="cards">
-<div class="card"><strong>1.</strong> Cliente publica pedido</div>
-<div class="card"><strong>2.</strong> Profissional pega o serviço</div>
-<div class="card"><strong>3.</strong> Serviço concluído</div>
-<div class="card"><strong>4.</strong> Avaliação obrigatória</div>
+<section id="feed" class="section fade">
+<h2>Pedidos em aberto</h2>
+<div class="feed">
+<div class="feed-top">
+<button onclick="usarLocalizacao()">Minha localização</button>
+<button onclick="abrirModal()">Publicar pedido</button>
+</div>
+<div id="listaPedidos"></div>
 </div>
 </section>
 
 <section id="sobre" class="section fade">
-<div class="card">
-<h2>Ajuda Aí 2026</h2>
-<p>Uma plataforma transparente, sem avaliações falsas, focada em reputação real e crescimento sustentável.</p>
-</div>
+<h2>Sobre o Ajuda Aí</h2>
+<p>Conectamos pessoas e profissionais locais com tecnologia, reputação real e sistema inteligente de confiança.</p>
 </section>
 
-<script>
+<section id="cadastro" class="section fade">
+<h2>Cadastre-se</h2>
+<p>Entre para a rede Ajuda Aí e comece a receber pedidos na sua região.</p>
+</section>
 
-/* ==============================
-   CONFIG JSON
-============================== */
-
-const URL_PEDIDOS = "https://raw.githubusercontent.com/willianwhs/ajudaai/main/pedidos.json";
-const URL_PRESTADORES = "https://raw.githubusercontent.com/willianwhs/ajudaai/main/prestadores.json";
-
-/* ==============================
-   FEED DINÂMICO
-============================== */
-
-async function carregarPedidos(){
-try{
-const resposta = await fetch(URL_PEDIDOS + "?t=" + new Date().getTime());
-const dados = await resposta.json();
-const container = document.getElementById("feed");
-container.innerHTML="";
-
-if(!dados.pedidos || dados.pedidos.length===0){
-container.innerHTML="<p>Nenhum pedido disponível.</p>";
-return;
-}
-
-dados.pedidos.forEach(p=>{
-const div=document.createElement("div");
-div.className="pedido";
-
-div.innerHTML=`
-<div>
-<strong>${p.servico}</strong><br>
-<small>${p.bairro}</small><br>
-<span class="badge ${p.status==="aberto"?"aberto":"atendido"}">
-${p.status}
-</span>
+<!-- MODAL -->
+<div id="modalPedido">
+<div class="modal-box">
+<h3>Publicar Pedido</h3>
+<input id="servicoPedido" placeholder="Qual serviço você precisa?">
+<input id="localPedido" placeholder="Localização">
+<button class="publicar" onclick="publicarPedido()">Publicar</button>
+<button class="cancelar" onclick="fecharModal()">Cancelar</button>
 </div>
-<button onclick="pegarServico('${p.id}')">
-${p.status==="aberto"?"Atender":"Finalizado"}
-</button>
-`;
+</div>
 
-container.appendChild(div);
+<script>
+let pedidos=[];
+
+function usarLocalizacao(){
+if(navigator.geolocation){
+navigator.geolocation.getCurrentPosition(function(pos){
+document.getElementById("local").value="Localização detectada";
 });
-
-}catch(e){
-console.log(e);
 }
 }
 
-carregarPedidos();
-
-/* ==============================
-   PEGAR SERVIÇO (estrutura base)
-============================== */
-
-function pegarServico(id){
-alert("Você pegou o serviço ID: "+id+"\nApós concluir, o cliente será obrigado a avaliar.");
+function abrirModal(){
+document.getElementById("modalPedido").style.display="flex";
 }
 
-/* ==============================
-   PRESTADORES DINÂMICOS
-============================== */
+function fecharModal(){
+document.getElementById("modalPedido").style.display="none";
+}
 
-async function carregarPrestadores(){
-try{
-const resposta = await fetch(URL_PRESTADORES + "?t=" + new Date().getTime());
-const dados = await resposta.json();
-const lista = document.getElementById("listaPrestadores");
-lista.innerHTML="";
+function publicarPedido(){
+let servico=document.getElementById("servicoPedido").value;
+let local=document.getElementById("localPedido").value;
+if(servico===""||local===""){alert("Preencha todos os campos");return;}
+let pedido={servico,local,status:"aberto"};
+pedidos.push(pedido);
+renderPedidos();
+fecharModal();
+}
 
-dados.prestadores.forEach(p=>{
-const div=document.createElement("div");
-div.className="card";
+function assumirServico(index){
+pedidos[index].status="em andamento";
+renderPedidos();
+alert("Serviço assumido. Após concluir, o cliente deverá avaliar.");
+}
 
-div.innerHTML=`
-<strong>${p.nome} — ${p.servico}</strong>
-<p>⭐ ${p.media} estrelas</p>
-`;
-
-lista.appendChild(div);
+function renderPedidos(){
+let container=document.getElementById("listaPedidos");
+container.innerHTML="";
+pedidos.forEach((p,i)=>{
+if(p.status==="aberto"){
+container.innerHTML+=`
+<div class="pedido">
+<span>${p.servico} — ${p.local}</span>
+<button onclick="assumirServico(${i})">Assumir</button>
+</div>`;
+}
 });
-}catch(e){
-console.log(e);
 }
-}
-
-carregarPrestadores();
-
-/* ==============================
-   ANIMAÇÃO
-============================== */
 
 const fades=document.querySelectorAll(".fade");
 window.addEventListener("scroll",()=>{
@@ -371,8 +387,7 @@ el.classList.add("show");
 }
 });
 });
-
 </script>
 
 </body>
-</html>
+   </html>
