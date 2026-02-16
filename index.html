@@ -1,155 +1,348 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ajuda Aí — Serviços perto de você</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
 <style>
 :root{
-  --azul:#0B3C66;
-  --azul2:#123F6B;
-  --amarelo:#FFC107;
-  --laranja:#F57C00;
-  --cinza:#F4F6F8;
-  --texto:#1F2D3D;
+--azul:#0B3C5D;
+--azul-claro:#1F5F8B;
+--amarelo:#FFC107;
+--laranja:#FF7A00;
+--prata:#E5E7EB;
+--fundo:#F5F7FB;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Segoe UI,Arial;background:#fff;color:var(--texto)}
-.container{max-width:1200px;margin:auto;padding:0 20px}/* NAVBAR */ .nav{background:#fff;border-bottom:1px solid #eee} .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px} .logo{font-weight:800;font-size:22px;color:var(--azul)} .logo span{color:var(--amarelo)} .menu{display:flex;gap:24px;font-weight:600;color:#555} .menu a{text-decoration:none;color:#555} .cta{background:var(--laranja);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
 
-/* HERO */ .hero{background:linear-gradient(135deg,var(--azul),#0E2F4E);color:#fff;padding:80px 0} .hero h1{font-size:42px;margin:0 0 20px} .search-box{background:#fff;border-radius:12px;padding:16px;display:flex;gap:12px;box-shadow:0 10px 30px rgba(0,0,0,.15)} .search-box input{flex:1;border:1px solid #ddd;border-radius:8px;padding:12px;font-size:16px} .search-box button{background:var(--laranja);border:none;color:#fff;border-radius:8px;padding:12px 20px;font-weight:700}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:var(--fundo);color:#1f2937}
+.container{max-width:1200px;margin:auto;padding:0 20px}
 
-/* CATEGORIAS */ .categorias{padding:60px 0;background:var(--cinza)} .categorias h2{margin-bottom:30px} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:20px} .cat-card{background:#fff;border-radius:14px;padding:18px;text-align:center;cursor:pointer;border:1px solid #eee;transition:.2s} .cat-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.08)} .cat-ico{font-size:32px;margin-bottom:8px}
+nav{background:white;border-bottom:1px solid var(--prata);position:sticky;top:0;z-index:999}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
 
-/* PROFISSIONAIS */ .profissionais{padding:60px 0} .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px} .card{border:1px solid #eee;border-radius:14px;padding:18px;background:#fff} .card strong{font-size:18px} .badge{display:inline-block;background:var(--amarelo);padding:4px 8px;border-radius:6px;font-size:12px;margin:6px 0} .btn{display:inline-block;margin-top:10px;background:#25D366;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700}
+.logo{font-size:26px;font-weight:800;color:var(--azul);display:flex;align-items:center;gap:8px}
+.logo span{color:var(--amarelo)}
 
-/* MAPA */ #map{height:420px;border-radius:14px;margin-top:30px}
+.menu{display:flex;gap:28px}
+.menu a{text-decoration:none;color:var(--azul);font-weight:600}
+.menu a:hover{color:var(--laranja)}
 
-/* FOOTER */ .footer{background:var(--azul);color:#fff;padding:30px;text-align:center;margin-top:60px}
+.btn-prestador{
+background:var(--amarelo);
+color:var(--azul);
+padding:10px 18px;
+border-radius:8px;
+font-weight:700;
+cursor:pointer;border:none
+}
 
-@media(max-width:768px){ .hero h1{font-size:28px} .menu{display:none} } </style>
+.hero{background:linear-gradient(135deg,var(--azul),var(--azul-claro));color:white;padding:80px 0}
+.hero h1{font-size:40px;max-width:700px;line-height:1.2}
 
+.search-box{
+margin-top:30px;background:white;padding:16px;border-radius:12px;
+display:flex;gap:10px;box-shadow:0 12px 28px rgba(0,0,0,0.15)
+}
+.search-box input{flex:1;padding:12px;border:1px solid #ddd;border-radius:8px}
+
+.btn-buscar{background:var(--laranja);color:white;border:none;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer}
+.btn-loc{background:var(--azul);color:white;border:none;padding:12px 16px;border-radius:8px;cursor:pointer}
+
+section{padding:70px 0}
+h2{font-size:30px;color:var(--azul);margin-bottom:30px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+
+.card{
+background:white;padding:22px;border-radius:14px;
+box-shadow:0 8px 22px rgba(0,0,0,0.08);
+font-weight:600;color:var(--azul);
+transition:.25s
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(0,0,0,0.15)}
+
+.cat-icon{font-size:34px;margin-bottom:8px}
+
+.feed{background:white;padding:25px;border-radius:14px;box-shadow:0 8px 25px rgba(0,0,0,0.08)}
+.feed textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;resize:none;height:80px}
+.feed input{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #ddd}
+
+.feed button{margin-top:10px;background:var(--azul);color:white;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:600}
+
+.pedido{border-bottom:1px solid #eee;padding:12px 0}
+.status{font-size:13px;margin-top:4px;font-weight:700}
+
+.btn-aceitar{background:var(--amarelo);border:none;padding:6px 10px;border-radius:6px;font-weight:700;cursor:pointer;margin-top:6px}
+.btn-concluir{background:#10B981;color:white;border:none;padding:6px 10px;border-radius:6px;font-weight:700;cursor:pointer;margin-top:6px}
+
+.stars{color:#F59E0B;margin-top:4px}
+
+#map{height:260px;border-radius:14px}
+
+footer{background:var(--azul);color:white;padding:40px 0;margin-top:60px}
+footer p{opacity:.8}
+
+@media(max-width:768px){
+.menu{display:none}
+.hero h1{font-size:28px}
+}
+</style>
 </head>
-<body><!-- NAV --><div class="nav">
-  <div class="container nav-inner">
-    <div class="logo">Ajuda <span>Aí</span></div>
-    <div class="menu">
-      <a href="#categorias">Categorias</a>
-      <a href="#profissionais">Profissionais</a>
-      <a href="#mapa">Mapa</a>
-    </div>
-    <a href="#cadastro" class="cta">Cadastrar prestador</a>
-  </div>
-</div><!-- HERO --><div class="hero">
-  <div class="container">
-    <h1>Encontre profissionais confiáveis perto de você</h1>
-    <div class="search-box">
-      <input id="busca" placeholder="Buscar serviço ou profissional">
-      <button onclick="buscar()">Buscar</button>
-    </div>
-  </div>
-</div><!-- CATEGORIAS --><div class="categorias" id="categorias">
-  <div class="container">
-    <h2>Categorias</h2>
-    <div class="grid" id="gridCategorias"></div>
-  </div>
-</div><!-- PROFISSIONAIS --><div class="profissionais" id="profissionais">
-  <div class="container">
-    <h2>Profissionais</h2>
-    <div class="cards" id="listaProf"></div>
-    <div id="map"></div>
-  </div>
-</div><!-- CADASTRO --><div class="categorias" id="cadastro">
-  <div class="container">
-    <h2>Cadastrar profissional</h2>
-    <div class="search-box" style="box-shadow:none">
-      <input id="nome" placeholder="Nome">
-      <input id="profissao" placeholder="Profissão">
-      <select id="categoria"></select>
-      <input id="cidade" placeholder="Cidade">
-      <input id="whats" placeholder="WhatsApp">
-      <button onclick="salvar()">Salvar</button>
-    </div>
-  </div>
-</div><div class="footer">© 2026 Ajuda Aí</div><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
-const categorias=[
-"Reparos e Reformas","Elétrica","Encanador","Limpeza","Aulas","Tecnologia","Saúde","Beleza","Eventos","Domésticos"
-];
 
-const icones={
-"Reparos e Reformas":"🔨",
-"Elétrica":"💡",
-"Encanador":"🚰",
-"Limpeza":"🧹",
-"Aulas":"📚",
-"Tecnologia":"💻",
-"Saúde":"❤️",
-"Beleza":"💄",
-"Eventos":"🎉",
-"Domésticos":"🏠"
-};
+<body>
 
-const grid=document.getElementById("gridCategorias");
-const select=document.getElementById("categoria");
+<nav>
+<div class="container nav-inner">
+<div class="logo">📍 Ajuda <span>Aí</span></div>
 
-categorias.forEach(c=>{
-  grid.innerHTML+=`<div class="cat-card" onclick="filtrarCategoria('${c}')">
-    <div class="cat-ico">${icones[c]}</div>
-    ${c}
-  </div>`;
-  select.innerHTML+=`<option>${c}</option>`;
+<div class="menu">
+<a href="#categorias">Categorias</a>
+<a href="#feed">Pedidos</a>
+<a href="#profissionais">Profissionais</a>
+<a href="#sobre">Quem somos</a>
+<a href="#cadastro">Cadastrar</a>
+</div>
+
+<button class="btn-prestador" onclick="abrirCadastro()">Cadastrar Prestador</button>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container">
+<h1>Encontre profissionais confiáveis perto de você em minutos</h1>
+
+<div class="search-box">
+<input id="busca" placeholder="Qual serviço você precisa?">
+<input id="cidade" placeholder="Sua cidade ou bairro">
+<button class="btn-loc" onclick="usarLocalizacao()">📍</button>
+<button class="btn-buscar">Buscar</button>
+</div>
+</div>
+</section>
+
+<section id="categorias">
+<div class="container">
+<h2>Categorias</h2>
+<div class="grid">
+<div class="card"><div class="cat-icon">🔌</div>Eletricista</div>
+<div class="card"><div class="cat-icon">🚰</div>Encanador</div>
+<div class="card"><div class="cat-icon">🧹</div>Diarista</div>
+<div class="card"><div class="cat-icon">🧱</div>Pedreiro</div>
+<div class="card"><div class="cat-icon">🪑</div>Montador</div>
+<div class="card"><div class="cat-icon">🎨</div>Pintor</div>
+</div>
+</div>
+</section>
+
+<section id="feed">
+<div class="container">
+<h2>Pedidos próximos</h2>
+
+<div class="feed">
+<textarea id="pedidoTexto" placeholder="Descreva o serviço"></textarea>
+<input id="pedidoBairro" placeholder="Bairro">
+<input id="pedidoWhats" placeholder="WhatsApp">
+<button onclick="postar()">Publicar pedido</button>
+
+<div id="listaPedidos"></div>
+</div>
+
+</div>
+</section>
+
+<section id="profissionais">
+<div class="container">
+<h2>Profissionais cadastrados</h2>
+<div id="listaProfissionais" class="grid"></div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<h2>Profissionais no mapa</h2>
+<div id="map"></div>
+</div>
+</section>
+
+<section id="cadastro">
+<div class="container">
+<h2>Seja um profissional Ajuda Aí</h2>
+<p style="max-width:650px;margin-bottom:25px">
+Cadastre-se gratuitamente e comece a receber pedidos de clientes da sua região.
+</p>
+
+<form id="formPrestador"
+action="https://docs.google.com/forms/d/e/1FAIpQLSeubljQINo6-xz2BCRhO0YvA2GyCdcFOApSqR3FP-tbEHX9bw/formResponse"
+method="POST"
+target="hidden_iframe"
+onsubmit="mostrarSucesso()">
+
+<div class="grid">
+<input name="entry.2005620554" placeholder="Nome completo" required>
+<input name="entry.1166974658" placeholder="WhatsApp" required>
+<input name="entry.839337160" placeholder="Serviço" required>
+<input name="entry.167902150" placeholder="Cidade / Bairro" required>
+</div>
+
+<textarea name="entry.1065046570"
+placeholder="Descreva seus serviços"
+style="width:100%;margin-top:12px;padding:12px;border-radius:8px;border:1px solid #ddd"></textarea>
+
+<button class="btn-prestador" style="margin-top:15px">
+Cadastrar gratuitamente
+</button>
+</form>
+
+<iframe name="hidden_iframe" style="display:none"></iframe>
+
+<div id="msgSucesso" style="display:none;margin-top:20px;
+background:#ECFDF5;border:1px solid #10B981;padding:16px;border-radius:10px;color:#065F46;font-weight:600">
+Cadastro recebido com sucesso. Em breve você aparecerá no Ajuda Aí.
+</div>
+
+</div>
+</section>
+
+<section id="sobre">
+<div class="container">
+<h2>Quem somos</h2>
+<p>
+O Ajuda Aí nasceu com o propósito de conectar pessoas que precisam resolver problemas do dia a dia
+a profissionais locais confiáveis. Acreditamos no poder do trabalho local, na valorização dos serviços
+essenciais e na proximidade entre cliente e prestador. Nossa plataforma facilita encontrar ajuda
+rápida, segura e próxima, fortalecendo a economia local e criando oportunidades para trabalhadores
+em todo o Brasil.
+</p>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>© 2026 Ajuda Aí — Plataforma brasileira de serviços locais</p>
+</div>
+</footer>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+function abrirCadastro(){
+document.getElementById("cadastro").scrollIntoView({behavior:"smooth"});
+}
+
+function mostrarSucesso(){
+setTimeout(()=>{
+document.getElementById("formPrestador").reset();
+document.getElementById("msgSucesso").style.display="block";
+},500);
+}
+
+// GEOLOCALIZAÇÃO
+function usarLocalizacao(){
+navigator.geolocation.getCurrentPosition(pos=>{
+document.getElementById("cidade").value="Minha localização";
 });
-
-let dados=JSON.parse(localStorage.getItem("profissionais")||"[]");
-
-function salvar(){
-  const p={
-    nome:nome.value,
-    profissao:profissao.value,
-    categoria:categoria.value,
-    cidade:cidade.value,
-    whats:whats.value
-  };
-  dados.push(p);
-  localStorage.setItem("profissionais",JSON.stringify(dados));
-  render();
 }
 
-function render(lista=dados){
-  listaProf.innerHTML="";
-  lista.forEach(p=>{
-    listaProf.innerHTML+=`<div class="card">
-      <strong>${p.nome}</strong><br>
-      ${p.profissao}<br>
-      <span class="badge">${p.categoria}</span><br>
-      ${p.cidade}<br>
-      <a class="btn" target="_blank" href="https://wa.me/55${p.whats}">WhatsApp</a>
-    </div>`;
-  });
+// FEED
+let pedidos=JSON.parse(localStorage.getItem("pedidos")||"[]");
+
+function salvarPedidos(){
+localStorage.setItem("pedidos",JSON.stringify(pedidos));
 }
 
-function filtrarCategoria(cat){
-  render(dados.filter(p=>p.categoria===cat));
+function postar(){
+let texto=document.getElementById("pedidoTexto").value;
+let bairro=document.getElementById("pedidoBairro").value;
+let whats=document.getElementById("pedidoWhats").value;
+if(!texto) return;
+
+pedidos.unshift({
+texto,bairro,whats,
+status:"aberto",
+prestador:null,
+avaliacao:0
+});
+salvarPedidos();
+renderPedidos();
 }
 
-function buscar(){
-  const t=busca.value.toLowerCase();
-  render(dados.filter(p=>
-    p.nome.toLowerCase().includes(t)||
-    p.profissao.toLowerCase().includes(t)||
-    p.categoria.toLowerCase().includes(t)
-  ));
+function aceitar(i){
+pedidos[i].status="atendimento";
+salvarPedidos();
+renderPedidos();
 }
 
-render();
+function concluir(i){
+pedidos[i].status="concluido";
+pedidos[i].avaliacao=5;
+salvarPedidos();
+renderPedidos();
+}
+
+function renderPedidos(){
+let lista=document.getElementById("listaPedidos");
+lista.innerHTML="";
+pedidos.forEach((p,i)=>{
+let div=document.createElement("div");
+div.className="pedido";
+
+let statusTxt="🟡 Em aberto";
+if(p.status==="atendimento") statusTxt="🔵 Em atendimento";
+if(p.status==="concluido") statusTxt="🟢 Concluído";
+
+div.innerHTML=`
+<strong>${p.texto}</strong><br>
+${p.bairro}<br>
+<a href="https://wa.me/55${p.whats}" target="_blank">WhatsApp</a>
+<div class="status">${statusTxt}</div>
+${p.status==="aberto"?`<button class="btn-aceitar" onclick="aceitar(${i})">Aceitar</button>`:""}
+${p.status==="atendimento"?`<button class="btn-concluir" onclick="concluir(${i})">Concluir</button>`:""}
+${p.status==="concluido"?`<div class="stars">★★★★★</div>`:""}
+`;
+lista.appendChild(div);
+});
+}
+renderPedidos();
+
+// PROFISSIONAIS
+async function carregarProfissionais(){
+const url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTLS8pi42xxH00b_hymc4W8Vu3zTrepr35Vt2rSLlyWe2QABWUWhQTdj7KChWMpAS79m7HPUfLITJRA/pub?output=csv";
+const resp=await fetch(url);
+const texto=await resp.text();
+const linhas=texto.split("\n").slice(1);
+const container=document.getElementById("listaProfissionais");
+
+linhas.forEach(l=>{
+if(!l) return;
+const col=l.split(",");
+const nome=col[0];
+const telefone=col[1];
+const servico=col[2];
+const cidade=col[3];
+
+const card=document.createElement("div");
+card.className="card";
+card.innerHTML=`
+<strong>${nome}</strong><br>
+${servico}<br>
+${cidade}<br>
+<a href="https://wa.me/55${telefone}" target="_blank"
+style="color:var(--laranja);font-weight:700">WhatsApp</a>
+`;
+container.appendChild(card);
+});
+}
+carregarProfissionais();
 
 // MAPA
-const map=L.map('map').setView([-22.9,-47.05],11);
+var map=L.map('map').setView([-23.55,-46.63],11);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+</script>
 
-navigator.geolocation?.getCurrentPosition(pos=>{
-  L.marker([pos.coords.latitude,pos.coords.longitude]).addTo(map).bindPopup("Você está aqui");
-  map.setView([pos.coords.latitude,pos.coords.longitude],12);
-});
-</script></body>
+</body>
 </html>
