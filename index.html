@@ -1,203 +1,260 @@
-<!-- COLOQUE O ARQUIVO logo-ajudai.png NA MESMA PASTA -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ajudaí</title>
+<title>Ajudaí — Serviços perto de você</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
 <style>
+:root{
+--azul:#0B3C5D;
+--amarelo:#FFC107;
+--cinza:#F5F7FA;
+--texto:#1F2933;
+}
+
 body{
 margin:0;
 font-family:Arial,Helvetica,sans-serif;
-background:#0f172a;
-color:#fff;
+background:#fff;
+color:var(--texto);
 }
-header{
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+/* NAVBAR */
+.nav{
 display:flex;
-align-items:center;
 justify-content:space-between;
-padding:16px 24px;
-background:#020617;
-border-bottom:1px solid #1e293b;
+align-items:center;
+padding:15px 25px;
+background:#fff;
+border-bottom:1px solid #eee;
 }
+
 .logo{
 display:flex;
 align-items:center;
-gap:10px;
-font-size:22px;
+font-size:24px;
 font-weight:700;
+color:var(--azul);
 }
-.logo img{width:28px}
-.search{
+
+.logo img{
+width:28px;
+margin-right:8px;
+}
+
+.menu a{
+margin-left:20px;
+text-decoration:none;
+color:#333;
+font-weight:500;
+}
+
+/* BUSCA */
+.busca{
+margin:30px auto;
 display:flex;
-gap:8px;
-padding:16px 24px;
+gap:10px;
+max-width:700px;
 }
-.search input{
+
+.busca input{
 flex:1;
-padding:14px;
+padding:16px;
 border-radius:10px;
-border:none;
+border:1px solid #ddd;
+font-size:16px;
 }
+
 .btn{
-padding:14px 18px;
-border-radius:10px;
+background:var(--amarelo);
 border:none;
-background:#facc15;
-font-weight:700;
+padding:16px 22px;
+border-radius:10px;
+font-weight:600;
 cursor:pointer;
 }
-.section{
-padding:32px 24px;
-}
-.categories{
+
+/* CATEGORIAS */
+.categorias{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:16px;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:15px;
+margin:30px 0;
 }
+
 .cat{
-background:#020617;
-padding:20px;
+background:#fff;
+border:1px solid #eee;
 border-radius:14px;
-text-align:center;
-border:1px solid #1e293b;
-}
-.feed-card{
-background:#020617;
 padding:18px;
-border-radius:14px;
-margin-bottom:12px;
-border:1px solid #1e293b;
-}
-.cta{
-background:linear-gradient(135deg,#facc15,#fde047);
-color:#000;
-padding:60px 24px;
 text-align:center;
-font-size:28px;
-font-weight:700;
+cursor:pointer;
+transition:.2s;
 }
-.modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.7);
-display:none;
-align-items:center;
-justify-content:center;
+
+.cat:hover{
+transform:translateY(-3px);
+box-shadow:0 6px 18px rgba(0,0,0,.08);
 }
-.modal-box{
-background:#020617;
-padding:24px;
-border-radius:16px;
-width:320px;
-}
-.modal input{
-width:100%;
-padding:12px;
+
+.cat img{
+width:42px;
 margin-bottom:10px;
-border-radius:8px;
-border:none;
 }
-.star{cursor:pointer}
+
+/* FEED */
+.feed{
+margin:40px 0;
+}
+
+.card{
+border:1px solid #eee;
+border-radius:14px;
+padding:18px;
+margin-bottom:15px;
+background:#fff;
+}
+
+.status{
+font-size:12px;
+padding:4px 8px;
+border-radius:6px;
+background:#eee;
+display:inline-block;
+margin-bottom:8px;
+}
+
+/* CTA */
+.cta{
+background:var(--amarelo);
+padding:60px 20px;
+text-align:center;
+margin:50px 0;
+}
+
+.cta h2{
+font-size:32px;
+margin-bottom:10px;
+color:#000;
+}
+
+.cta button{
+margin-top:15px;
+font-size:18px;
+padding:16px 28px;
+border-radius:12px;
+border:none;
+background:#000;
+color:#fff;
+cursor:pointer;
+}
+
+/* PROFISSIONAIS */
+.profis{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin:40px 0;
+}
+
+.pro-card{
+border:1px solid #eee;
+border-radius:14px;
+padding:18px;
+background:#fff;
+}
+
+/* MAPA */
+#map{
+height:280px;
+border-radius:14px;
+margin:40px 0;
+}
+
 </style>
 </head>
+
 <body>
-<header>
+
+<!-- NAV -->
+<div class="nav">
 <div class="logo">
-<img src="logo-ajudai.png">
+<img src="logo.png">
 Ajudaí
 </div>
-<button class="btn" onclick="openCadastro()">Cadastrar prestador</button>
-</header>
 
-<div class="search">
+<div class="menu">
+<a href="#">Categorias</a>
+<a href="#">Pedidos</a>
+<a href="#">Profissionais</a>
+<a href="#">Cadastrar</a>
+</div>
+</div>
+
+<div class="container">
+
+<!-- BUSCA -->
+<div class="busca">
 <input placeholder="Qual serviço você precisa?">
-<button class="btn" onclick="novoPedido()">Novo pedido</button>
+<button class="btn">Buscar</button>
+<button class="btn" onclick="geo()">📍</button>
 </div>
 
-<div class="section">
-<h2>Categorias</h2>
-<div class="categories">
-<div class="cat">Reparos</div>
-<div class="cat">Limpeza</div>
-<div class="cat">Elétrica</div>
-<div class="cat">Pintura</div>
-</div>
-</div>
-
-<div class="section">
-<h2>Pedidos</h2>
-<div id="feed"></div>
+<!-- CATEGORIAS -->
+<div class="categorias">
+<div class="cat"><img src="https://img.icons8.com/ios-filled/100/hammer.png"><div>Reparos</div></div>
+<div class="cat"><img src="https://img.icons8.com/ios-filled/100/broom.png"><div>Limpeza</div></div>
+<div class="cat"><img src="https://img.icons8.com/ios-filled/100/plug.png"><div>Elétrica</div></div>
+<div class="cat"><img src="https://img.icons8.com/ios-filled/100/paint.png"><div>Pintura</div></div>
+<div class="cat"><img src="https://img.icons8.com/ios-filled/100/maintenance.png"><div>Assistência</div></div>
 </div>
 
-<div class="cta" onclick="openCadastro()">
-Seja um profissional Ajudaí — Cadastre-se grátis
+<!-- FEED -->
+<div class="feed" id="feed"></div>
+
+<!-- CTA -->
+<div class="cta">
+<h2>Seja um profissional Ajudaí</h2>
+<p>Cadastre-se gratuitamente e receba pedidos perto de você</p>
+<button onclick="cadastro()">Cadastrar-se grátis</button>
 </div>
 
-<div class="modal" id="cadastroModal">
-<div class="modal-box">
-<h3>Cadastro</h3>
-<input id="nome" placeholder="Nome">
-<input id="whats" placeholder="WhatsApp">
-<input id="servico" placeholder="Serviço">
-<button class="btn" onclick="salvarPrestador()">Salvar</button>
+<!-- PROFISSIONAIS -->
+<div class="profis" id="profis"></div>
+
+<!-- MAPA -->
+<div id="map"></div>
+
 </div>
-</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-let feed = JSON.parse(localStorage.getItem("feed")||"[]")
-let pros = JSON.parse(localStorage.getItem("pros")||"[]")
+const feedDiv=document.getElementById("feed")
+const profDiv=document.getElementById("profis")
 
-function render(){
-document.getElementById("feed").innerHTML=""
-feed.forEach((p,i)=>{
-let el=document.createElement("div")
-el.className="feed-card"
-el.innerHTML=`
-<b>${p.texto}</b><br>
-Status: ${p.status}<br>
-${p.status=="aberto"?`<button onclick="aceitar(${i})">Aceitar</button>`:""}
-${p.status=="andamento"?`<button onclick="concluir(${i})">Concluir</button>`:""}
-`
-document.getElementById("feed").appendChild(el)
+function cadastro(){
+alert("Abrir tela de cadastro premium")
+}
+
+function geo(){
+navigator.geolocation.getCurrentPosition(pos=>{
+alert("Localização detectada")
 })
 }
 
-function novoPedido(){
-let t=prompt("Descreva o serviço")
-if(!t)return
-feed.push({texto:t,status:"aberto"})
-localStorage.setItem("feed",JSON.stringify(feed))
-render()
-}
-
-function aceitar(i){
-feed[i].status="andamento"
-localStorage.setItem("feed",JSON.stringify(feed))
-render()
-}
-
-function concluir(i){
-feed[i].status="concluido"
-localStorage.setItem("feed",JSON.stringify(feed))
-render()
-}
-
-function openCadastro(){
-document.getElementById("cadastroModal").style.display="flex"
-}
-
-function salvarPrestador(){
-let n=document.getElementById("nome").value
-let w=document.getElementById("whats").value
-let s=document.getElementById("servico").value
-pros.push({n,w,s})
-localStorage.setItem("pros",JSON.stringify(pros))
-alert("Cadastro enviado")
-document.getElementById("cadastroModal").style.display="none"
-}
-
-render()
+let mapa=L.map('map').setView([-23.55,-46.63],12)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapa)
 </script>
+
 </body>
 </html>
