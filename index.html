@@ -1,189 +1,310 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ajudaí</title>  <!-- Leaflet -->  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>  <style>
-    :root {
-      --azul:#0B5CFF;
-      --amarelo:#FFD400;
-      --bg:#F7F9FC;
-      --card:#FFFFFF;
-      --text:#1F2937;
-      --radius:18px;
-      --shadow:0 10px 25px rgba(0,0,0,.08);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajuda Aí — Serviços perto de você</title>
 
-    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    body{background:var(--bg);color:var(--text)}
+<style>
+:root{
+--azul:#0B3C5D;
+--azul-claro:#1F5F8B;
+--amarelo:#FFC107;
+--laranja:#FF7A00;
+--prata:#E5E7EB;
+--fundo:#F5F7FB;
+}
 
-    header{
-      background:var(--azul);
-      color:#fff;
-      padding:16px 24px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 
-    .logo{font-size:22px;font-weight:bold}
+body{background:var(--fundo);color:#1f2937}
 
-    .btn{
-      border:none;
-      padding:10px 16px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:600;
-    }
+.container{max-width:1200px;margin:auto;padding:0 20px}
 
-    .btn-amarelo{background:var(--amarelo)}
-    .btn-azul{background:var(--azul);color:#fff}
+nav{
+background:white;
+border-bottom:1px solid var(--prata);
+position:sticky;top:0;z-index:999
+}
 
-    .container{max-width:1200px;margin:auto;padding:24px}
+.nav-inner{
+display:flex;align-items:center;justify-content:space-between;height:70px
+}
 
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.logo{font-size:26px;font-weight:800;color:var(--azul)}
+.logo span{color:var(--amarelo)}
 
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:20px;
-      box-shadow:var(--shadow);
-    }
+.menu{display:flex;gap:28px}
+.menu a{text-decoration:none;color:var(--azul);font-weight:600}
+.menu a:hover{color:var(--laranja)}
 
-    #map{height:420px;border-radius:18px}
+.btn-prestador{
+background:var(--amarelo);
+color:var(--azul);
+padding:10px 18px;
+border-radius:8px;
+font-weight:700;
+cursor:pointer;border:none
+}
 
-    input,select{
-      width:100%;
-      padding:10px;
-      margin-top:8px;
-      margin-bottom:14px;
-      border-radius:10px;
-      border:1px solid #ddd;
-    }
+.hero{
+background:linear-gradient(135deg,var(--azul),var(--azul-claro));
+color:white;padding:80px 0
+}
 
-    .prof-card{
-      border:1px solid #eee;
-      padding:12px;
-      border-radius:12px;
-      margin-bottom:10px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
+.hero h1{font-size:40px;max-width:700px;line-height:1.2}
 
-    footer{
-      text-align:center;
-      padding:30px;
-      color:#777;
-    }
-  </style></head>
-<body><header>
-  <div class="logo">Ajudaí</div>
-  <div>
-    <button class="btn btn-amarelo" onclick="abrirCadastro()">Cadastrar profissional</button>
-    <button class="btn btn-azul" onclick="localizarUsuario()">Perto de mim</button>
-  </div>
-</header><div class="container">  <div class="grid"><div class="card">
-  <h2>Profissionais próximos</h2>
-  <div id="listaProfissionais"></div>
+.search-box{
+margin-top:30px;background:white;padding:16px;border-radius:12px;
+display:flex;gap:10px;box-shadow:0 12px 28px rgba(0,0,0,0.15)
+}
+
+.search-box input{
+flex:1;padding:12px;border:1px solid #ddd;border-radius:8px
+}
+
+.btn-buscar{
+background:var(--laranja);
+color:white;border:none;padding:12px 20px;border-radius:8px;
+font-weight:700;cursor:pointer
+}
+
+section{padding:70px 0}
+
+h2{font-size:30px;color:var(--azul);margin-bottom:30px}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:22px
+}
+
+.card{
+background:white;padding:22px;border-radius:14px;
+box-shadow:0 8px 22px rgba(0,0,0,0.08);
+font-weight:600;color:var(--azul);
+transition:.25s
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 14px 28px rgba(0,0,0,0.15)
+}
+
+.feed{
+background:white;padding:25px;border-radius:14px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08)
+}
+
+.feed textarea{
+width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;
+resize:none;height:80px
+}
+
+.feed button{
+margin-top:10px;background:var(--azul);color:white;
+border:none;padding:10px 16px;border-radius:8px;
+cursor:pointer;font-weight:600
+}
+
+.pedido{border-bottom:1px solid #eee;padding:12px 0}
+.pedido:last-child{border:none}
+
+footer{
+background:var(--azul);color:white;padding:40px 0;margin-top:60px
+}
+
+footer p{opacity:.8}
+
+@media(max-width:768px){
+.menu{display:none}
+.hero h1{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="container nav-inner">
+<div class="logo">Ajuda <span>Aí</span></div>
+
+<div class="menu">
+<a href="#categorias">Categorias</a>
+<a href="#feed">Pedidos</a>
+<a href="#profissionais">Profissionais</a>
+<a href="#sobre">Sobre</a>
+<a href="#cadastro">Cadastrar</a>
 </div>
 
-<div class="card">
-  <h2>Mapa</h2>
-  <div id="map"></div>
+<button class="btn-prestador" onclick="abrirCadastro()">Cadastrar Prestador</button>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container">
+<h1>Encontre profissionais confiáveis perto de você em minutos</h1>
+
+<div class="search-box">
+<input id="busca" placeholder="Qual serviço você precisa?">
+<input id="cidade" placeholder="Sua cidade ou bairro">
+<button class="btn-buscar">Buscar</button>
+</div>
+</div>
+</section>
+
+<section id="categorias">
+<div class="container">
+<h2>Categorias</h2>
+<div class="grid">
+<div class="card">Eletricista</div>
+<div class="card">Encanador</div>
+<div class="card">Diarista</div>
+<div class="card">Pedreiro</div>
+<div class="card">Montador</div>
+<div class="card">Pintor</div>
+</div>
+</div>
+</section>
+
+<section id="feed">
+<div class="container">
+<h2>Pedidos próximos</h2>
+
+<div class="feed">
+<textarea id="pedidoTexto" placeholder="Descreva o serviço que você precisa..."></textarea>
+<button onclick="postar()">Publicar pedido</button>
+<div id="listaPedidos"></div>
 </div>
 
-  </div>  <div id="cadastro" class="card" style="margin-top:24px;display:none">
-    <h2>Cadastro de profissional</h2><input id="nome" placeholder="Nome" />
-<input id="categoria" placeholder="Categoria" />
-<input id="cidade" placeholder="Cidade" />
-<input id="whats" placeholder="WhatsApp" />
+</div>
+</section>
 
-<button class="btn btn-azul" onclick="salvarProfissional()">Salvar cadastro</button>
+<section id="profissionais">
+<div class="container">
+<h2>Profissionais cadastrados</h2>
+<div id="listaProfissionais" class="grid"></div>
+</div>
+</section>
 
-  </div></div><footer>
-Ajudaí © plataforma de serviços locais
-</footer><script>
-let mapa = L.map('map').setView([-23.5505,-46.6333],12);
+<section id="cadastro">
+<div class="container">
+<h2>Seja um profissional Ajuda Aí</h2>
+<p style="max-width:650px;margin-bottom:25px">
+Cadastre-se gratuitamente e comece a receber pedidos de clientes da sua região.
+</p>
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-  maxZoom:19
-}).addTo(mapa);
+<form id="formPrestador"
+action="https://docs.google.com/forms/d/e/1FAIpQLSeubljQINo6-xz2BCRhO0YvA2GyCdcFOApSqR3FP-tbEHX9bw/formResponse"
+method="POST"
+target="hidden_iframe"
+onsubmit="mostrarSucesso()">
 
-let marcadores = [];
+<div class="grid">
+<input name="entry.2005620554" placeholder="Nome completo" required>
+<input name="entry.1166974658" placeholder="WhatsApp" required>
+<input name="entry.839337160" placeholder="Serviço" required>
+<input name="entry.167902150" placeholder="Cidade / Bairro" required>
+</div>
 
+<textarea name="entry.1065046570"
+placeholder="Descreva seus serviços"
+style="width:100%;margin-top:12px;padding:12px;border-radius:8px;border:1px solid #ddd"></textarea>
+
+<button class="btn-prestador" style="margin-top:15px">
+Cadastrar gratuitamente
+</button>
+</form>
+
+<iframe name="hidden_iframe" style="display:none"></iframe>
+
+<div id="msgSucesso" style="display:none;margin-top:20px;
+background:#ECFDF5;border:1px solid #10B981;padding:16px;border-radius:10px;color:#065F46;font-weight:600">
+Cadastro recebido com sucesso. Em breve você aparecerá no Ajuda Aí.
+</div>
+
+</div>
+</section>
+
+<section id="sobre">
+<div class="container">
+<h2>Sobre o Ajuda Aí</h2>
+<p>
+O Ajuda Aí conecta clientes a profissionais locais confiáveis de forma rápida, simples e segura.
+Nossa missão é facilitar a resolução de problemas do dia a dia e gerar oportunidades para trabalhadores locais.
+</p>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>© 2026 Ajuda Aí — Plataforma brasileira de serviços locais</p>
+</div>
+</footer>
+
+<script>
 function abrirCadastro(){
-  document.getElementById('cadastro').style.display='block';
-  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+document.getElementById("cadastro").scrollIntoView({behavior:"smooth"});
 }
 
-function salvarProfissional(){
-  const nome=document.getElementById('nome').value;
-  const categoria=document.getElementById('categoria').value;
-  const cidade=document.getElementById('cidade').value;
-  const whats=document.getElementById('whats').value;
-
-  if(!nome||!categoria||!whats){
-    alert('Preencha os campos');
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(pos=>{
-    const lat=pos.coords.latitude;
-    const lng=pos.coords.longitude;
-
-    const profissional={nome,categoria,cidade,whats,lat,lng};
-
-    let lista=JSON.parse(localStorage.getItem('profissionais')||'[]');
-    lista.push(profissional);
-    localStorage.setItem('profissionais',JSON.stringify(lista));
-
-    alert('Cadastro salvo');
-    carregarProfissionais();
-  });
+function mostrarSucesso(){
+setTimeout(()=>{
+document.getElementById("formPrestador").reset();
+document.getElementById("msgSucesso").style.display="block";
+},500);
 }
 
-function carregarProfissionais(){
-  let lista=JSON.parse(localStorage.getItem('profissionais')||'[]');
-  const div=document.getElementById('listaProfissionais');
-  div.innerHTML='';
+function postar(){
+let texto=document.getElementById("pedidoTexto").value;
+if(!texto) return;
 
-  marcadores.forEach(m=>mapa.removeLayer(m));
-  marcadores=[];
+let div=document.createElement("div");
+div.className="pedido";
+div.innerText=texto;
 
-  lista.forEach(p=>{
-    const el=document.createElement('div');
-    el.className='prof-card';
-    el.innerHTML=`
-      <div>
-        <strong>${p.nome}</strong><br>
-        ${p.categoria}
-      </div>
-      <button class="btn btn-amarelo" onclick="contato('${p.whats}')">WhatsApp</button>
-    `;
-    div.appendChild(el);
-
-    const marker=L.marker([p.lat,p.lng]).addTo(mapa)
-      .bindPopup(`<b>${p.nome}</b><br>${p.categoria}<br><a target="_blank" href="https://wa.me/55${p.whats}">WhatsApp</a>`);
-
-    marcadores.push(marker);
-  });
+document.getElementById("listaPedidos").prepend(div);
+document.getElementById("pedidoTexto").value="";
 }
 
-function contato(num){
-  window.open(`https://wa.me/55${num}`,'_blank');
-}
+// ================= PROFISSIONAIS AUTOMÁTICOS =================
 
-function localizarUsuario(){
-  navigator.geolocation.getCurrentPosition(pos=>{
-    const lat=pos.coords.latitude;
-    const lng=pos.coords.longitude;
-    mapa.setView([lat,lng],14);
-    L.marker([lat,lng]).addTo(mapa).bindPopup('Você está aqui').openPopup();
-  });
+async function carregarProfissionais(){
+const url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTLS8pi42xxH00b_hymc4W8Vu3zTrepr35Vt2rSLlyWe2QABWUWhQTdj7KChWMpAS79m7HPUfLITJRA/pub?output=csv";
+
+const resp=await fetch(url);
+const texto=await resp.text();
+
+const linhas=texto.split("\n").slice(1);
+const container=document.getElementById("listaProfissionais");
+
+linhas.forEach(l=>{
+if(!l) return;
+const col=l.split(",");
+
+const nome=col[0];
+const telefone=col[1];
+const servico=col[2];
+const cidade=col[3];
+
+const card=document.createElement("div");
+card.className="card";
+card.innerHTML=`
+<strong>${nome}</strong><br>
+${servico}<br>
+${cidade}<br>
+<a href="https://wa.me/55${telefone}" target="_blank"
+style="color:var(--laranja);font-weight:700">
+WhatsApp
+</a>
+`;
+container.appendChild(card);
+});
 }
 
 carregarProfissionais();
-</script></body>
+</script>
+
+</body>
 </html>
