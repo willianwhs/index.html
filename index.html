@@ -1,298 +1,251 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ajudaí</title>  <style>
-    :root {
-      --azul:#0B3C5D;
-      --amarelo:#FFD54F;
-      --cinza:#f5f7fa;
-      --texto:#1f2933;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AJUDA AI</title>
 
-    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial, Helvetica, sans-serif}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    body{background:var(--cinza);color:var(--texto)}
+<style>
+:root{
+--azul:#0B3C5D;
+--amarelo:#FFC107;
+--cinza:#F5F7FA;
+}
 
-    /* NAVBAR */
-    .navbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:14px 20px;
-      background:white;
-      box-shadow:0 2px 6px rgba(0,0,0,0.08);
-      position:sticky;
-      top:0;
-      z-index:10;
-    }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}
 
-    .logo{
-      display:flex;
-      align-items:center;
-      font-size:22px;
-      font-weight:bold;
-      color:var(--azul);
-      gap:8px;
-    }
+body{background:#fff;color:#222}
 
-    .logo img{
-      width:22px;
-      height:22px;
-    }
+/* NAVBAR */
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:16px 28px;
+background:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+position:sticky;
+top:0;
+z-index:10;
+}
 
-    .nav-buttons{
-      display:flex;
-      gap:10px;
-    }
+.logo{
+display:flex;
+align-items:center;
+gap:8px;
+font-weight:700;
+font-size:22px;
+color:var(--azul);
+}
 
-    .btn{
-      border:none;
-      padding:10px 14px;
-      border-radius:8px;
-      cursor:pointer;
-      font-weight:600;
-    }
+.logo img{width:26px}
 
-    .btn-amarelo{background:var(--amarelo)}
-    .btn-azul{background:var(--azul);color:white}
+.menu{
+display:flex;
+gap:22px;
+align-items:center;
+}
 
-    /* HERO */
-    .hero{
-      padding:30px 20px;
-      text-align:center;
-    }
+.menu a{
+text-decoration:none;
+color:#333;
+font-weight:500;
+}
 
-    .search-box{
-      max-width:600px;
-      margin:0 auto;
-      display:flex;
-      background:white;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 4px 12px rgba(0,0,0,0.08);
-    }
+.btn{
+background:var(--amarelo);
+padding:10px 18px;
+border-radius:8px;
+font-weight:600;
+text-decoration:none;
+color:#000;
+}
 
-    .search-box input{
-      flex:1;
-      padding:14px;
-      border:none;
-      outline:none;
-      font-size:16px;
-    }
+/* HERO */
+.hero{
+padding:60px 20px;
+text-align:center;
+background:linear-gradient(#fff,#f9fbff);
+}
 
-    .search-box button{
-      padding:14px 18px;
-      border:none;
-      background:var(--azul);
-      color:white;
-      cursor:pointer;
-    }
+.hero h1{
+font-size:32px;
+color:var(--azul);
+margin-bottom:20px;
+}
 
-    .perto{
-      margin-top:12px;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      cursor:pointer;
-      color:var(--azul);
-      font-weight:600;
-    }
+.search-box{
+max-width:700px;
+margin:auto;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
 
-    .perto img{width:16px}
+.search-box input{
+flex:1;
+padding:14px;
+border-radius:10px;
+border:1px solid #ddd;
+}
 
-    /* CATEGORIAS */
-    .categorias{
-      padding:20px;
-    }
+.search-box button{
+background:var(--azul);
+color:#fff;
+border:none;
+padding:14px 22px;
+border-radius:10px;
+cursor:pointer;
+}
 
-    .cat-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-      gap:12px;
-    }
+.pedir{
+margin-top:24px;
+background:#fff;
+padding:20px;
+border-radius:14px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+max-width:700px;
+margin-left:auto;
+margin-right:auto;
+}
 
-    .cat{
-      background:white;
-      padding:14px;
-      border-radius:10px;
-      text-align:center;
-      font-weight:600;
-      box-shadow:0 2px 6px rgba(0,0,0,0.05);
-    }
+.pedir textarea{
+width:100%;
+border:1px solid #ddd;
+border-radius:10px;
+padding:12px;
+resize:none;
+}
 
-    /* LISTA */
-    .lista{
-      padding:20px;
-    }
+.pedir button{
+margin-top:10px;
+background:var(--amarelo);
+border:none;
+padding:12px 20px;
+border-radius:10px;
+font-weight:600;
+}
 
-    .card{
-      background:white;
-      border-radius:12px;
-      padding:16px;
-      margin-bottom:12px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.05);
-    }
+/* FEED */
+.feed{
+padding:50px 20px;
+background:var(--cinza);
+}
 
-    .card h3{margin-bottom:6px}
+.feed h2{
+text-align:center;
+margin-bottom:30px;
+color:var(--azul);
+}
 
-    .acoes{
-      margin-top:10px;
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
+.card{
+background:#fff;
+border-radius:14px;
+padding:18px;
+margin:12px auto;
+max-width:700px;
+box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
 
-    /* MAPA */
-    .mapa{
-      padding:20px;
-    }
+.card button{
+margin-top:10px;
+background:var(--azul);
+color:#fff;
+border:none;
+padding:10px 14px;
+border-radius:8px;
+}
 
-    .mapa iframe{
-      width:100%;
-      height:300px;
-      border:0;
-      border-radius:12px;
-    }
+/* CTA */
+.cta{
+padding:70px 20px;
+text-align:center;
+}
 
-    /* CTA */
-    .cta{
-      padding:30px 20px;
-      text-align:center;
-    }
+.cta h2{
+font-size:30px;
+color:var(--azul);
+margin-bottom:20px;
+}
 
-    .cta button{
-      padding:14px 22px;
-      font-size:16px;
-      border-radius:10px;
-      border:none;
-      background:var(--amarelo);
-      font-weight:bold;
-      cursor:pointer;
-    }
+.cta a{
+background:var(--amarelo);
+padding:16px 28px;
+border-radius:12px;
+text-decoration:none;
+font-weight:700;
+color:#000;
+}
 
-    /* FOOTER */
-    footer{
-      padding:20px;
-      text-align:center;
-      font-size:14px;
-      color:#6b7280;
-    }
+/* RESPONSIVO */
+@media(max-width:700px){
+.hero h1{font-size:24px}
+.menu{display:none}
+}
+</style>
+</head>
 
-    /* RESPONSIVO */
-    @media (max-width:600px){
-      .navbar{flex-direction:column;align-items:flex-start;gap:10px}
-      .nav-buttons{width:100%;justify-content:space-between}
-      .hero{padding:20px}
-      .search-box input{font-size:14px}
-    }
-  </style></head>
-<body>  <!-- NAVBAR -->  <div class="navbar">
-    <div class="logo">
-      <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="pin" />
-      Ajudaí
-    </div><div class="nav-buttons">
-  <button class="btn btn-azul" onclick="abrirCadastro()">Cadastrar prestador</button>
-  <button class="btn" onclick="abrirAvaliacao()">Avaliar</button>
+<body>
+
+<!-- NAV -->
+<div class="nav">
+<div class="logo">
+<img src="PIN_AMARELO.png">
+AJUDA AI
 </div>
 
-  </div>  <!-- HERO -->  <section class="hero">
-    <div class="search-box">
-      <input id="busca" placeholder="Que serviço você precisa?" />
-      <button onclick="buscar()">Buscar</button>
-    </div><div class="perto" onclick="usarLocalizacao()">
-  <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" />
-  Perto de mim
+<div class="menu">
+<a href="#">Buscar</a>
+<a href="#">Categorias</a>
+<a href="#">Profissionais</a>
+<a href="#">Quem somos</a>
+<a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf8J459p0bqDGLWIOO7lEAYP4brd44-j-073lC4FJNxAgPjVA/viewform">Cadastrar prestador</a>
+</div>
 </div>
 
-  </section>  <!-- CATEGORIAS -->  <section class="categorias">
-    <div class="cat-grid">
-      <div class="cat">Eletricista</div>
-      <div class="cat">Encanador</div>
-      <div class="cat">Diarista</div>
-      <div class="cat">Pintor</div>
-      <div class="cat">Jardineiro</div>
-      <div class="cat">Montador</div>
-    </div>
-  </section>  <!-- LISTA PROFISSIONAIS -->  <section class="lista" id="listaProfissionais"></section>  <!-- MAPA -->  <section class="mapa">
-    <iframe id="mapFrame" src="https://maps.google.com/maps?q=-23.5505,-46.6333&z=12&output=embed"></iframe>
-  </section>  <!-- CTA -->  <section class="cta">
-    <button onclick="abrirCadastro()">Seja um profissional Ajudaí</button>
-  </section>  <footer>
-    Ajudaí © 2026 • Conectando clientes e profissionais locais
-  </footer>  <script>
-    const FORM_CADASTRO = "https://docs.google.com/forms/d/e/1FAIpQLSf8J459p0bqDGLWIOO7lEAYP4brd44-j-073lC4FJNxAgPjVA/viewform";
-    const FORM_AVALIACAO = "https://docs.google.com/forms/d/e/1FAIpQLSeubljQINo6-xz2BCRhO0YvA2GyCdcFOApSqR3FP-tbEHX9bw/viewform";
+<!-- HERO -->
+<section class="hero">
+<h1>Encontre profissionais perto de você</h1>
 
-    function abrirCadastro(){
-      window.open(FORM_CADASTRO,"_blank");
-    }
+<div class="search-box">
+<input placeholder="Qual serviço você precisa?">
+<input placeholder="Sua cidade">
+<button>Buscar</button>
+</div>
 
-    function abrirAvaliacao(){
-      window.open(FORM_AVALIACAO,"_blank");
-    }
+<div class="pedir">
+<textarea rows="3" placeholder="Descreva o serviço que você precisa"></textarea>
+<button>Postar pedido</button>
+</div>
+</section>
 
-    function buscar(){
-      const termo = document.getElementById("busca").value.toLowerCase();
-      renderLista(termo);
-    }
+<!-- FEED -->
+<section class="feed">
+<h2>Pedidos próximos</h2>
 
-    function usarLocalizacao(){
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(pos=>{
-          const lat = pos.coords.latitude;
-          const lng = pos.coords.longitude;
-          document.getElementById("mapFrame").src = `https://maps.google.com/maps?q=${lat},${lng}&z=14&output=embed`;
-        });
-      }
-    }
+<div class="card">
+<strong>Cano quebrado</strong><br>
+Bairro Centro<br>
+<button>Pegar serviço</button>
+</div>
 
-    async function carregarPrestadores(){
-      try{
-        const url = "https://opensheet.elk.sh/1ImYSb5Cih3eGu7jqU3zjLTbvNvGTuhGjeTKSTo5_j7M/Página1";
-        const res = await fetch(url);
-        const data = await res.json();
-        window.prestadores = data;
-        renderLista();
-      }catch(e){
-        console.log("erro ao carregar",e);
-      }
-    }
+<div class="card">
+<strong>Instalar ventilador</strong><br>
+Jardim América<br>
+<button>Pegar serviço</button>
+</div>
 
-    function renderLista(filtro=""){
-      const lista = document.getElementById("listaProfissionais");
-      lista.innerHTML="";
+</section>
 
-      const dados = (window.prestadores||[]).filter(p=>
-        !filtro || p.servico?.toLowerCase().includes(filtro)
-      );
+<!-- CTA -->
+<section class="cta">
+<h2>Seja um profissional AJUDA AI</h2>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSf8J459p0bqDGLWIOO7lEAYP4brd44-j-073lC4FJNxAgPjVA/viewform">
+Cadastrar-se grátis
+</a>
+</section>
 
-      dados.forEach(p=>{
-        const card = document.createElement("div");
-        card.className="card";
-
-        card.innerHTML = `
-          <h3>${p.nome}</h3>
-          <div>${p.servico} • ${p.cidade}</div>
-          <div class="acoes">
-            <button class="btn btn-amarelo" onclick="contato('${p.whatsapp}')">WhatsApp</button>
-            <button class="btn" onclick="verMapa(${p.lat},${p.lng})">Ver no mapa</button>
-          </div>
-        `;
-
-        lista.appendChild(card);
-      });
-    }
-
-    function contato(wpp){
-      window.open(`https://wa.me/55${wpp}`,'_blank');
-    }
-
-    function verMapa(lat,lng){
-      document.getElementById("mapFrame").src = `https://maps.google.com/maps?q=${lat},${lng}&z=14&output=embed`;
-      window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
-    }
-
-    carregarPrestadores();
-  </script></body>
+</body>
 </html>
