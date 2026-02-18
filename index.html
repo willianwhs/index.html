@@ -12,54 +12,67 @@
 --azul:#0B5FFF;
 --azulEsc:#002C5B;
 --amarelo:#FFB400;
---borda:#E6E9EF;
 --cinza:#F5F7FA;
+--borda:#E6E9EF;
 }
 
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,Arial;background:#fff;color:#333}
-
 .container{max-width:1200px;margin:auto;padding:0 16px}
 
 /* NAV */
-header{background:#fff;border-bottom:1px solid var(--borda);position:sticky;top:0;z-index:10}
-.nav{display:flex;justify-content:space-between;align-items:center;height:64px}
-.logo{font-weight:800;color:var(--azul);font-size:20px}
-.menu a{margin-left:20px;text-decoration:none;color:#333;font-weight:500}
+header{background:#fff;border-bottom:1px solid var(--borda);position:sticky;top:0;z-index:50}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-size:22px;font-weight:800;color:var(--azul)}
+.menu a{margin-left:24px;text-decoration:none;color:#333;font-weight:500}
 
 /* HERO */
-.hero{background:linear-gradient(135deg,var(--azul),var(--azulEsc));color:#fff;padding:60px 0;text-align:center}
-.hero h1{margin:0 0 10px;font-size:34px}
-.search{display:flex;max-width:600px;margin:20px auto;background:#fff;border-radius:12px;overflow:hidden}
-.search input{flex:1;border:none;padding:14px}
-.search button{background:var(--amarelo);border:none;padding:0 24px;font-weight:700}
+.hero{background:linear-gradient(135deg,var(--azul),var(--azulEsc));color:#fff;padding:70px 0;text-align:center}
+.hero h1{font-size:40px;margin:0 0 12px}
+.hero p{opacity:.9}
+.search{display:flex;max-width:680px;margin:28px auto;background:#fff;border-radius:14px;overflow:hidden}
+.search input{flex:1;border:none;padding:16px;font-size:16px}
+.search button{background:var(--amarelo);border:none;padding:0 26px;font-weight:700}
 
 /* CATEGORIAS */
-.categories{background:var(--cinza);padding:40px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}
-.cat{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:16px;text-align:center}
+.categories{background:var(--cinza);padding:50px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:18px}
+.cat{background:#fff;border:1px solid var(--borda);border-radius:14px;padding:18px;text-align:center;font-weight:600}
+
+/* COMO FUNCIONA */
+.how{padding:60px 0;text-align:center}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;margin-top:30px}
+.step{padding:10px}
 
 /* FEED */
-.feed{padding:40px 0}
-.card{border:1px solid var(--borda);border-radius:12px;padding:14px;margin-bottom:12px}
+.feed{padding:60px 0;background:#fff}
+.card{border:1px solid var(--borda);border-radius:14px;padding:16px;margin-bottom:14px}
 
 /* MAP */
-.mapWrap{padding:40px 0}
-#map{height:380px;border-radius:12px;border:1px solid var(--borda)}
+.mapWrap{padding:60px 0;background:var(--cinza)}
+#map{height:320px;border-radius:14px;border:1px solid var(--borda)}
+.leaflet-container{z-index:1}
 
 /* CTA */
-.cta{background:var(--azul);color:#fff;text-align:center;padding:40px 0}
-.btn{background:var(--amarelo);border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}
+.cta{background:var(--azul);color:#fff;text-align:center;padding:60px 0}
+.btn{background:var(--amarelo);border:none;padding:14px 22px;border-radius:12px;font-weight:700;cursor:pointer}
+
+/* ABOUT */
+.about{padding:60px 0;text-align:center;max-width:800px;margin:auto}
+
+/* FOOTER */
+footer{background:var(--azulEsc);color:#fff;padding:40px 0;margin-top:40px}
+footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px}
 
 /* MODAL */
-.modalBg{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:100}
-.modal{background:#fff;border-radius:12px;padding:20px;width:100%;max-width:400px}
-.modal input{width:100%;padding:10px;margin-bottom:10px;border:1px solid var(--borda);border-radius:8px}
+.modalBg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:9999}
+.modal{background:#fff;border-radius:16px;padding:24px;width:100%;max-width:420px}
+.modal input{width:100%;padding:12px;margin-bottom:12px;border:1px solid var(--borda);border-radius:10px}
 
 @media(max-width:768px){
-.hero h1{font-size:26px}
+.hero h1{font-size:28px}
 .search{flex-direction:column}
-.search button{width:100%;padding:12px}
+.search button{width:100%;padding:14px}
 }
 </style>
 </head>
@@ -70,8 +83,9 @@ header{background:#fff;border-bottom:1px solid var(--borda);position:sticky;top:
 <div class="container nav">
 <div class="logo">AJUDA AI</div>
 <div class="menu">
-<a href="#">Serviços</a>
-<a href="#">Como funciona</a>
+<a href="#servicos">Serviços</a>
+<a href="#como">Como funciona</a>
+<a href="#sobre">Quem somos</a>
 <a href="#" onclick="openModal()">Cadastrar prestador</a>
 </div>
 </div>
@@ -79,7 +93,8 @@ header{background:#fff;border-bottom:1px solid var(--borda);position:sticky;top:
 
 <section class="hero">
 <div class="container">
-<h1>Encontre profissionais perto de você</h1>
+<h1>Contrate profissionais confiáveis perto de você</h1>
+<p>Solicite serviços, compare e contrate com segurança</p>
 <div class="search">
 <input placeholder="Qual serviço você precisa?">
 <button>Buscar</button>
@@ -87,7 +102,7 @@ header{background:#fff;border-bottom:1px solid var(--borda);position:sticky;top:
 </div>
 </section>
 
-<section class="categories">
+<section class="categories" id="servicos">
 <div class="container">
 <div class="grid">
 <div class="cat">Reformas</div>
@@ -95,30 +110,66 @@ header{background:#fff;border-bottom:1px solid var(--borda);position:sticky;top:
 <div class="cat">Limpeza</div>
 <div class="cat">Eventos</div>
 <div class="cat">Aulas</div>
+<div class="cat">Assistência</div>
+</div>
+</div>
+</section>
+
+<section class="how" id="como">
+<div class="container">
+<h2>Como funciona</h2>
+<div class="steps">
+<div class="step"><b>1.</b><br>Descreva o serviço</div>
+<div class="step"><b>2.</b><br>Receba contatos</div>
+<div class="step"><b>3.</b><br>Escolha o profissional</div>
+<div class="step"><b>4.</b><br>Avalie após o serviço</div>
 </div>
 </div>
 </section>
 
 <section class="feed">
 <div class="container">
-<h2>Profissionais</h2>
+<h2>Profissionais disponíveis</h2>
 <div id="prestadores"></div>
 </div>
 </section>
 
 <section class="mapWrap">
 <div class="container">
-<h2>Perto de você</h2>
+<h2>Profissionais perto de você</h2>
 <div id="map"></div>
 </div>
 </section>
 
 <section class="cta">
 <div class="container">
-<h2>É profissional?</h2>
-<button class="btn" onclick="openModal()">Cadastrar grátis</button>
+<h2>Você é profissional?</h2>
+<p>Cadastre-se gratuitamente e receba clientes</p>
+<button class="btn" onclick="openModal()">Cadastrar como profissional</button>
 </div>
 </section>
+
+<section class="about" id="sobre">
+<h2>Quem é o AJUDA AI</h2>
+<p>
+O AJUDA AI nasceu para conectar pessoas a profissionais confiáveis de forma simples,
+segura e rápida. Nossa missão é facilitar a contratação de serviços locais,
+trazendo transparência, avaliações reais e proximidade geográfica.
+</p>
+<p>
+A plataforma permite que clientes encontrem especialistas próximos e que
+profissionais ampliem sua presença digital e conquistem novos clientes.
+</p>
+</section>
+
+<footer>
+<div class="container cols">
+<div><b>AJUDA AI</b><br>Marketplace de serviços locais</div>
+<div>Profissionais</div>
+<div>Suporte</div>
+<div>Termos</div>
+</div>
+</footer>
 
 <!-- MODAL -->
 <div class="modalBg" id="modal">
@@ -144,12 +195,11 @@ function closeModal(){modal.style.display="none"}
 const map=L.map('map').setView([-22.75,-47.33],10)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
 
-/* VALIDAR LAT LNG */
 function latLngValido(lat,lng){
 return lat>=-90 && lat<=90 && lng>=-180 && lng<=180
 }
 
-/* CARREGAR PRESTADORES */
+/* PRESTADORES */
 async function carregar(){
 const url="https://opensheet.elk.sh/1ImYSb5Cih3eGu7jqU3zjLTbvNvGTuhGjeTKSTo5_j7M/Pagina1"
 const res=await fetch(url)
@@ -171,25 +221,24 @@ L.marker([lat,lng]).addTo(map).bindPopup(p.nome)
 }
 })
 }
-
 carregar()
 
-/* ENVIO AO FORMS REAL */
+/* ENVIO FORMS */
 formPrestador.addEventListener("submit",e=>{
 e.preventDefault()
 
-const formURL="https://docs.google.com/forms/d/e/1FAIpQLSf8J459p0bqDGLWIOO7lEAYP4brd44-j-073lC4FJNxAgPjVA/formResponse"
-
+const url="https://docs.google.com/forms/d/e/1FAIpQLSf8J459p0bqDGLWIOO7lEAYP4brd44-j-073lC4FJNxAgPjVA/formResponse"
 const data=new FormData()
+
 data.append("entry.1030652642",nome.value)
 data.append("entry.564738291",servico.value)
 data.append("entry.918273645",cidade.value)
 data.append("entry.192837465",whatsapp.value)
 
-fetch(formURL,{method:"POST",mode:"no-cors",body:data})
+fetch(url,{method:"POST",mode:"no-cors",body:data})
 
 alert("Cadastro enviado!")
-closeModal()
+modal.style.display="none"
 })
 </script>
 
