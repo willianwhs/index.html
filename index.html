@@ -1,251 +1,282 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AJUDA AI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AJUDA AI</title>  <!-- Leaflet (mapa gratuito) -->  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>  <style>
+    :root{
+      --azul:#0B5CFF;
+      --amarelo:#FFD500;
+      --bg:#F7F9FC;
+      --texto:#1A1A1A;
+      --card:#FFFFFF;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    body{
+      margin:0;
+      font-family:Inter,Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--texto);
+    }
 
-<style>
-:root{
---azul:#0B3C5D;
---amarelo:#FFC107;
---cinza:#F5F7FA;
+    header{
+      background:white;
+      box-shadow:0 2px 8px rgba(0,0,0,0.06);
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:700;
+      font-size:20px;
+      color:var(--azul);
+    }
+
+    .logo img{height:28px}
+
+    .btn{
+      background:var(--amarelo);
+      border:none;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    .hero{
+      padding:40px 20px;
+      text-align:center;
+    }
+
+    .search{
+      max-width:520px;
+      margin:20px auto;
+      display:flex;
+      background:white;
+      border-radius:14px;
+      box-shadow:0 4px 16px rgba(0,0,0,0.08);
+      overflow:hidden;
+    }
+
+    .search input{
+      flex:1;
+      border:none;
+      padding:14px;
+      font-size:16px;
+      outline:none;
+    }
+
+    .search button{
+      background:var(--azul);
+      color:white;
+      border:none;
+      padding:0 18px;
+      cursor:pointer;
+    }
+
+    .section{
+      padding:30px 20px;
+      max-width:1100px;
+      margin:auto;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:16px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    #map{
+      width:100%;
+      height:380px;
+      border-radius:16px;
+    }
+
+    /* MODAL */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.4);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:20;
+    }
+
+    .modal-content{
+      background:white;
+      border-radius:16px;
+      padding:24px;
+      width:95%;
+      max-width:420px;
+    }
+
+    .modal-content h3{margin-top:0}
+
+    .modal-content input{
+      width:100%;
+      padding:10px;
+      margin:6px 0 12px;
+      border-radius:8px;
+      border:1px solid #ddd;
+    }
+
+    .stars span{
+      font-size:22px;
+      cursor:pointer;
+      color:#ccc;
+    }
+
+    .stars span.active{color:#FFD500}
+
+    @media(max-width:700px){
+      .hero{padding:30px 16px}
+      header{padding:10px 14px}
+    }
+  </style></head>
+<body><header>
+  <div class="logo">
+    <img src="logo.png" alt="AJUDA AI">
+    AJUDA AI
+  </div>
+  <button class="btn" onclick="abrirCadastro()">Cadastrar prestador</button>
+</header><section class="hero">
+  <h1>Encontre profissionais confiáveis perto de você</h1>
+  <div class="search">
+    <input placeholder="Qual serviço você precisa?" />
+    <button>Buscar</button>
+  </div>
+  <button class="btn" onclick="pertoDeMim()">📍 Perto de mim</button>
+</section><section class="section">
+  <h2>Profissionais próximos</h2>
+  <div id="map"></div>
+</section><section class="section">
+  <h2>Prestadores</h2>
+  <div id="lista" class="grid"></div>
+</section><!-- MODAL CADASTRO --><div id="modalCadastro" class="modal">
+  <div class="modal-content">
+    <h3>Cadastrar prestador</h3>
+    <input id="nome" placeholder="Nome" />
+    <input id="servico" placeholder="Serviço" />
+    <input id="cidade" placeholder="Cidade" />
+    <input id="whatsapp" placeholder="WhatsApp" />
+    <button class="btn" onclick="enviarCadastro()">Enviar</button>
+  </div>
+</div><!-- MODAL AVALIAÇÃO --><div id="modalAvaliacao" class="modal">
+  <div class="modal-content">
+    <h3>Avalie o prestador</h3>
+    <div id="nomePrestador"></div>
+    <div class="stars" id="stars"></div>
+    <button class="btn" onclick="enviarAvaliacao()">Enviar avaliação</button>
+  </div>
+</div><script>
+const SHEET_JSON = "https://opensheet.elk.sh/1ImYSb5Cih3eGu7jqU3zjLTbvNvGTuhGjeTKSTo5_j7M/Página1";
+
+let map = L.map('map').setView([-22.73,-47.65],11);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
+
+async function carregarPrestadores(){
+  const res = await fetch(SHEET_JSON);
+  const data = await res.json();
+
+  const lista = document.getElementById('lista');
+  lista.innerHTML='';
+
+  data.forEach(p=>{
+    if(p.lat && p.lng){
+      L.marker([p.lat,p.lng]).addTo(map)
+        .bindPopup(`<b>${p.nome}</b><br>${p.servico}`);
+    }
+
+    lista.innerHTML += `
+      <div class="card">
+        <b>${p.nome}</b><br>
+        ${p.servico}<br>
+        ⭐ ${p.media || 0}
+      </div>`;
+  });
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}
+carregarPrestadores();
 
-body{background:#fff;color:#222}
-
-/* NAVBAR */
-.nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:16px 28px;
-background:#fff;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
-position:sticky;
-top:0;
-z-index:10;
+function abrirCadastro(){
+  document.getElementById('modalCadastro').style.display='flex';
 }
 
-.logo{
-display:flex;
-align-items:center;
-gap:8px;
-font-weight:700;
-font-size:22px;
-color:var(--azul);
+async function enviarCadastro(){
+  const nome=document.getElementById('nome').value;
+  const servico=document.getElementById('servico').value;
+  const cidade=document.getElementById('cidade').value;
+  const whatsapp=document.getElementById('whatsapp').value;
+
+  navigator.geolocation.getCurrentPosition(async pos=>{
+    const lat=pos.coords.latitude;
+    const lng=pos.coords.longitude;
+
+    await fetch("https://hook.us2.make.com/1851637",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({nome,servico,cidade,whatsapp,lat,lng})
+    });
+
+    alert("Cadastro enviado!");
+    location.reload();
+  });
 }
 
-.logo img{width:26px}
-
-.menu{
-display:flex;
-gap:22px;
-align-items:center;
+function pertoDeMim(){
+  navigator.geolocation.getCurrentPosition(pos=>{
+    map.setView([pos.coords.latitude,pos.coords.longitude],13);
+  });
 }
 
-.menu a{
-text-decoration:none;
-color:#333;
-font-weight:500;
+// Avaliação pós-serviço via link ?avaliar=Nome
+const urlParams=new URLSearchParams(location.search);
+const avaliar=urlParams.get('avaliar');
+
+if(avaliar){
+  document.getElementById('modalAvaliacao').style.display='flex';
+  document.getElementById('nomePrestador').innerText=avaliar;
 }
 
-.btn{
-background:var(--amarelo);
-padding:10px 18px;
-border-radius:8px;
-font-weight:600;
-text-decoration:none;
-color:#000;
+let nota=0;
+const starsDiv=document.getElementById('stars');
+for(let i=1;i<=5;i++){
+  const s=document.createElement('span');
+  s.innerText='★';
+  s.onclick=()=>{nota=i;renderStars()};
+  starsDiv.appendChild(s);
 }
 
-/* HERO */
-.hero{
-padding:60px 20px;
-text-align:center;
-background:linear-gradient(#fff,#f9fbff);
+function renderStars(){
+  [...starsDiv.children].forEach((s,i)=>{
+    s.classList.toggle('active',i<nota);
+  });
 }
 
-.hero h1{
-font-size:32px;
-color:var(--azul);
-margin-bottom:20px;
+async function enviarAvaliacao(){
+  const prestador=avaliar;
+  await fetch("https://hook.us2.make.com/avaliacao",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({prestador,nota})
+  });
+  alert("Avaliação enviada");
 }
-
-.search-box{
-max-width:700px;
-margin:auto;
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-}
-
-.search-box input{
-flex:1;
-padding:14px;
-border-radius:10px;
-border:1px solid #ddd;
-}
-
-.search-box button{
-background:var(--azul);
-color:#fff;
-border:none;
-padding:14px 22px;
-border-radius:10px;
-cursor:pointer;
-}
-
-.pedir{
-margin-top:24px;
-background:#fff;
-padding:20px;
-border-radius:14px;
-box-shadow:0 6px 20px rgba(0,0,0,0.08);
-max-width:700px;
-margin-left:auto;
-margin-right:auto;
-}
-
-.pedir textarea{
-width:100%;
-border:1px solid #ddd;
-border-radius:10px;
-padding:12px;
-resize:none;
-}
-
-.pedir button{
-margin-top:10px;
-background:var(--amarelo);
-border:none;
-padding:12px 20px;
-border-radius:10px;
-font-weight:600;
-}
-
-/* FEED */
-.feed{
-padding:50px 20px;
-background:var(--cinza);
-}
-
-.feed h2{
-text-align:center;
-margin-bottom:30px;
-color:var(--azul);
-}
-
-.card{
-background:#fff;
-border-radius:14px;
-padding:18px;
-margin:12px auto;
-max-width:700px;
-box-shadow:0 4px 12px rgba(0,0,0,0.06);
-}
-
-.card button{
-margin-top:10px;
-background:var(--azul);
-color:#fff;
-border:none;
-padding:10px 14px;
-border-radius:8px;
-}
-
-/* CTA */
-.cta{
-padding:70px 20px;
-text-align:center;
-}
-
-.cta h2{
-font-size:30px;
-color:var(--azul);
-margin-bottom:20px;
-}
-
-.cta a{
-background:var(--amarelo);
-padding:16px 28px;
-border-radius:12px;
-text-decoration:none;
-font-weight:700;
-color:#000;
-}
-
-/* RESPONSIVO */
-@media(max-width:700px){
-.hero h1{font-size:24px}
-.menu{display:none}
-}
-</style>
-</head>
-
-<body>
-
-<!-- NAV -->
-<div class="nav">
-<div class="logo">
-<img src="PIN_AMARELO.png">
-AJUDA AI
-</div>
-
-<div class="menu">
-<a href="#">Buscar</a>
-<a href="#">Categorias</a>
-<a href="#">Profissionais</a>
-<a href="#">Quem somos</a>
-<a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf8J459p0bqDGLWIOO7lEAYP4brd44-j-073lC4FJNxAgPjVA/viewform">Cadastrar prestador</a>
-</div>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-<h1>Encontre profissionais perto de você</h1>
-
-<div class="search-box">
-<input placeholder="Qual serviço você precisa?">
-<input placeholder="Sua cidade">
-<button>Buscar</button>
-</div>
-
-<div class="pedir">
-<textarea rows="3" placeholder="Descreva o serviço que você precisa"></textarea>
-<button>Postar pedido</button>
-</div>
-</section>
-
-<!-- FEED -->
-<section class="feed">
-<h2>Pedidos próximos</h2>
-
-<div class="card">
-<strong>Cano quebrado</strong><br>
-Bairro Centro<br>
-<button>Pegar serviço</button>
-</div>
-
-<div class="card">
-<strong>Instalar ventilador</strong><br>
-Jardim América<br>
-<button>Pegar serviço</button>
-</div>
-
-</section>
-
-<!-- CTA -->
-<section class="cta">
-<h2>Seja um profissional AJUDA AI</h2>
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSf8J459p0bqDGLWIOO7lEAYP4brd44-j-073lC4FJNxAgPjVA/viewform">
-Cadastrar-se grátis
-</a>
-</section>
-
-</body>
+</script></body>
 </html>
