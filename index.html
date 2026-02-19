@@ -71,7 +71,7 @@
         .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 10px 20px rgba(255, 180, 0, 0.2); }
         .btn-outline { background: transparent; color: white; border: 2px solid var(--border); }
 
-        /* ESTILO DOS FILTROS (ACRESCENTADO) */
+        /* ESTILO DOS FILTROS */
         .filter-wrapper { display: flex; gap: 10px; overflow-x: auto; padding: 20px 0; scrollbar-width: none; -ms-overflow-style: none; }
         .filter-wrapper::-webkit-scrollbar { display: none; }
         .filter-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 8px 18px; border-radius: 50px; color: white; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.2s; }
@@ -273,6 +273,9 @@
         { id: 3, categoria: "Reparos", titulo: "Montagem de Guarda-Roupa", desc: "Móvel novo na caixa.", status: "aberto" }
     ];
 
+    let userLat = "";
+    let userLng = "";
+
     const map = L.map('map', { zoomControl: false }).setView([-15.78, -47.92], 4); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
@@ -280,8 +283,10 @@
         renderizarMural("Todos");
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(p => {
-                map.flyTo([p.coords.latitude, p.coords.longitude], 14, {animate: true, duration: 2});
-                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Você está aqui!').openPopup();
+                userLat = p.coords.latitude;
+                userLng = p.coords.longitude;
+                map.flyTo([userLat, userLng], 14, {animate: true, duration: 2});
+                L.marker([userLat, userLng]).addTo(map).bindPopup('Você está aqui!').openPopup();
             });
         }
     });
@@ -368,11 +373,53 @@
             renderizarMural("Todos");
             alert("Pedido lançado com sucesso! Aguardando propostas de prestadores próximos.");
             closeModal('modalPedido');
-        } else {
-            alert("Cadastro de Prestador realizado! Seus dados foram validados.");
-            closeModal('modalPrestador');
+            e.target.reset();
+        } else if (tipo === 'prestador') {
+            
+            // Alterar o botão para mostrar que está enviando
+            const btnSubmit = e.target.querySelector('button[type="submit"]');
+            const originalText = btnSubmit.innerHTML;
+            btnSubmit.innerHTML = "ENVIANDO...";
+            btnSubmit.disabled = true;
+
+            // Coletar e agrupar os dados conforme a planilha
+            const nome = inputs[0].value;
+            const profissao = inputs[3].value;
+            const cidade = inputs[4].value;
+            const servicosText = e.target.querySelector('textarea').value;
+            const servicoFinal = profissao + (servicosText ? " - " + servicosText : "");
+
+            const payload = {
+                nome: nome,
+                servico: servicoFinal,
+                cidade: cidade,
+                whatsapp: whatsapp,
+                lat: userLat,
+                lng: userLng
+            };
+
+            // Enviar para o Webhook do Make
+            fetch("https://hook.us2.make.com/rmdusinc4e6pg1akovep4zrd6rw1fpyw", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                alert("Cadastro de Prestador realizado com sucesso! Seus dados foram enviados para o sistema.");
+                closeModal('modalPrestador');
+                e.target.reset();
+            })
+            .catch(error => {
+                console.error("Erro no envio:", error);
+                alert("Houve um erro na comunicação. Tente novamente.");
+            })
+            .finally(() => {
+                btnSubmit.innerHTML = originalText;
+                btnSubmit.disabled = false;
+            });
         }
-        e.target.reset();
     }
 
     // --- AUXILIARES ---
