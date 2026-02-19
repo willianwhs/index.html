@@ -23,7 +23,7 @@
         body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--brand-dark); color: var(--text-main); overflow-x: hidden; }
         .container { max-width: 1200px; margin: auto; padding: 0 24px; }
 
-        /* HEADER ADAPTADO (MANTENDO DESIGN ORIGINAL) */
+        /* HEADER */
         header { 
             background: rgba(5, 11, 20, 0.95); backdrop-filter: blur(15px);
             border-bottom: 2px solid var(--brand-yellow);
@@ -39,7 +39,6 @@
         .nav-link-top { color: white; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; }
         .nav-link-top:hover { border-color: var(--brand-yellow); color: var(--brand-yellow); }
 
-        /* ESTILO DO MENU HAMBURGUER */
         .menu-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 5px; }
         .menu-hamburger span { width: 25px; height: 3px; background: var(--brand-yellow); border-radius: 2px; transition: 0.3s; }
 
@@ -52,10 +51,9 @@
                 box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 200px;
             }
             .nav-actions.active { display: flex; }
-            .nav-actions a { width: 100%; text-align: center; padding: 10px; }
         }
 
-        /* HERO ORIGINAL */
+        /* HERO */
         .hero { 
             padding: 60px 0; text-align: center;
             background: radial-gradient(circle at top, #185ADB33, transparent);
@@ -71,46 +69,49 @@
         .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 10px 20px rgba(255, 180, 0, 0.2); }
         .btn-outline { background: transparent; color: white; border: 2px solid var(--border); }
 
-        /* ESTILO DOS FILTROS (ACRESCENTADO) */
-        .filter-wrapper { display: flex; gap: 10px; overflow-x: auto; padding: 20px 0; scrollbar-width: none; -ms-overflow-style: none; }
-        .filter-wrapper::-webkit-scrollbar { display: none; }
-        .filter-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 8px 18px; border-radius: 50px; color: white; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+        /* AJUSTE DOS FILTROS (CORRIGIDO PARA SCROLL NO COMPUTADOR) */
+        .filter-wrapper { 
+            display: flex; 
+            gap: 12px; 
+            overflow-x: auto; 
+            padding: 20px 5px; 
+            scrollbar-width: thin; 
+            scrollbar-color: var(--brand-yellow) transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+        .filter-wrapper::-webkit-scrollbar { height: 6px; }
+        .filter-wrapper::-webkit-scrollbar-thumb { background: var(--brand-yellow); border-radius: 10px; }
+
+        .filter-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 10px 22px; border-radius: 50px; color: white; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
         .filter-tag:hover, .filter-tag.active { border-color: var(--brand-yellow); color: var(--brand-yellow); background: rgba(255, 180, 0, 0.1); }
 
-        /* MAPA ESTILO AIRBNB */
+        /* MAPA */
         .map-section { padding: 40px 0; }
         .map-wrapper { position: relative; max-width: 1000px; margin: 0 auto; border-radius: 40px; overflow: hidden; border: 4px solid var(--brand-blue); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         #map { height: 350px; width: 100%; }
-        .btn-near { position: absolute; bottom: 20px; right: 20px; z-index: 500; background: var(--brand-yellow); border: none; padding: 12px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .btn-near { position: absolute; bottom: 20px; right: 20px; z-index: 500; background: var(--brand-yellow); border: none; padding: 12px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 12px; }
 
         /* MURAL */
         .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; margin-top: 30px; }
         .job-card { background: var(--brand-blue); border-radius: 30px; padding: 25px; border: 1px solid var(--border); text-align: left; position: relative; }
-        .badge-live { width: 10px; height: 10px; background: #FF4B4B; border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 1.5s infinite; }
         .status-pill { font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: 800; text-transform: uppercase; float: right; }
         .status-open { background: rgba(255, 180, 0, 0.2); color: var(--brand-yellow); }
-        .status-progress { background: rgba(24, 90, 219, 0.3); color: #7cb9ff; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         /* SOBRE NÓS */
         .about-section { padding: 100px 0; background: linear-gradient(to bottom, var(--brand-dark), #0A1931); border-radius: 60px; margin: 60px 0; border: 1px solid var(--border); text-align: center; }
-        .about-content { max-width: 850px; margin: auto; padding: 0 20px; }
-        .about-content h2 { font-size: 42px; margin-bottom: 25px; }
-        .about-content p { line-height: 1.8; color: var(--text-muted); font-size: 19px; margin-bottom: 20px; text-align: justify; }
+        .about-content { max-width: 850px; margin: auto; }
 
-        /* DEPOIMENTOS & RODAPÉ MANTIDOS */
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 40px 0; }
-        .testimonial-card { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 25px; border: 1px solid var(--border); }
-        .comment-box { background: #0D1625; padding: 40px; border-radius: 40px; border: 1px solid var(--brand-yellow); max-width: 800px; margin: 40px auto; text-align: center; }
+        /* FOOTER */
         footer { padding: 80px 0 40px; border-top: 1px solid var(--border); background: #03070C; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; margin-bottom: 40px; }
         .footer-col h4 { color: white; margin-bottom: 20px; font-size: 18px; }
-        .footer-col a { color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 12px; font-size: 14px; }
+        .footer-col a { color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 12px; font-size: 14px; cursor: pointer; }
+        .footer-col a:hover { color: var(--brand-yellow); }
         
+        /* MODAL */
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
         .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 45px; width: 100%; max-width: 550px; border: 1px solid var(--border); text-align: center; max-height: 90vh; overflow-y: auto; }
         input, textarea { width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; }
-        input:invalid { border-color: #ff4b4b; }
     </style>
 </head>
 <body>
@@ -121,14 +122,10 @@
             <svg class="pin-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             <div class="logo-text">AJUDA<span>AI</span></div>
         </a>
-        
         <div style="display: flex; align-items: center; gap: 15px;">
-            <button onclick="openModal('modalPrestador')" class="btn-yellow btn-work-top" style="padding:10px 14px; border-radius:10px; border:none; font-weight:800; cursor:pointer; font-size: 10px;">QUERO TRABALHAR</button>
-            <button class="menu-hamburger" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </button>
+            <button onclick="openModal('modalPrestador')" class="btn-yellow" style="padding:10px 14px; border-radius:10px; border:none; font-weight:800; cursor:pointer; font-size: 10px;">QUERO TRABALHAR</button>
+            <button class="menu-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
         </div>
-
         <div class="nav-actions" id="navActions">
             <a href="#" class="nav-link-top">Home</a>
             <a href="#como-funciona" class="nav-link-top">Como Funciona</a>
@@ -140,7 +137,7 @@
 <section class="hero">
     <div class="container">
         <h1>Sua ajuda chegou.<span> Onde você estiver.</span></h1>
-        <p>A plataforma definitiva que conecta desafios reais a pessoas prontas para agir. Simples, direto e humano.</p>
+        <p>A plataforma definitiva que conecta desafios reais a pessoas prontas para agir.</p>
         <div class="btn-group">
             <button class="btn-mega btn-yellow" onclick="openModal('modalPedido')">🎯 PEDIR UMA AJUDA AGORA</button>
             <button class="btn-mega btn-outline" onclick="openModal('modalPrestador')">🚀 QUERO FATURAR COMO PRESTADOR</button>
@@ -150,7 +147,7 @@
 
 <div class="container">
     <section class="map-section">
-        <h2 style="color:var(--brand-yellow); font-size: 28px; text-align: center; margin-bottom: 20px;">📍 Encontre Soluções ao seu Redor</h2>
+        <h2 style="color:var(--brand-yellow); text-align: center;">📍 Encontre Soluções ao seu Redor</h2>
         <div class="map-wrapper">
             <div id="map"></div>
             <button class="btn-near" onclick="getGPS()">📍 PERTO DE MIM</button>
@@ -169,35 +166,14 @@
         <div class="filter-tag" data-category="Design">🎨 Design & Social Media</div>
     </div>
 
-    <section id="como-funciona" style="padding: 60px 0; text-align: center;">
-        <h2 style="font-size: 32px; margin-bottom: 40px;">Como Funciona</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card"><h4>1. Publique</h4><p>Diga o que você precisa ou qual serviço você oferece.</p></div>
-            <div class="testimonial-card"><h4>2. Localize</h4><p>Nosso mapa mostra quem está mais próximo para te ajudar.</p></div>
-            <div class="testimonial-card"><h4>3. Conecte</h4><p>Chame no WhatsApp e resolva tudo sem taxas ocultas.</p></div>
-        </div>
-    </section>
-
     <section id="feed">
-        <h2 style="font-size: 32px; text-align: center;"><span class="badge-live"></span> Mural de Oportunidades</h2>
-        <div class="mural-grid" id="muralGrid">
-            </div>
+        <div class="mural-grid" id="muralGrid"></div>
     </section>
 
     <section id="quem-somos" class="about-section">
         <div class="about-content">
             <h2>A Identidade do <span>AJUDA AI</span></h2>
-            <p>O <b>Ajuda Aí</b> não é apenas um site de classificados; é um ecossistema de confiança projetado para eliminar as barreiras entre a necessidade e a solução. </p>
-            <p>Nossa proposta é clara: <b>"Problema postado, solução encontrada"</b>. Criamos uma vitrine transparente onde a sua localização é a chave para uma economia colaborativa mais justa e rápida.</p>
-            <p style="font-size: 16px; margin-top: 30px; opacity: 0.8;">Acreditamos que, em um mundo cada vez mais digital, o valor real ainda está nas conexões humanas e na agilidade da prestação de serviço local. Aqui, o lucro fica com quem trabalha.</p>
-        </div>
-    </section>
-
-    <section class="social-proof">
-        <h2 style="text-align: center; font-size: 32px;">O que dizem sobre nós</h2>
-        <div class="testimonial-grid" id="depoimentosFeed">
-            <div class="testimonial-card"><p>"Finalmente uma plataforma onde não perco dinheiro com comissões absurdas. Direto e eficiente!"</p><b>⭐ Carlos Silva (Técnico)</b></div>
-            <div class="testimonial-card"><p>"Consegui consertar meu fogão em 1 hora. O técnico morava no quarteirão de trás!"</p><b>⭐ Maria Oliveira (Cliente)</b></div>
+            <p>O Ajuda Aí foi criado para conectar pessoas de forma rápida e segura através da geolocalização.</p>
         </div>
     </section>
 </div>
@@ -207,21 +183,20 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <div class="logo-text">AJUDA<span>AI</span></div>
-                <p style="color:var(--text-muted); font-size: 14px; margin-top: 15px;">Conectando talentos e necessidades em tempo real.</p>
             </div>
             <div class="footer-col">
                 <h4>Navegação</h4>
                 <a href="#">Home</a>
-                <a href="#como-funciona">Como Funciona</a>
                 <a href="#quem-somos">Sobre Nós</a>
             </div>
             <div class="footer-col">
-                <h4>Suporte</h4>
+                <h4>Suporte e Legal</h4>
+                <a onclick="alert('Termos de Uso: Ao usar nossa plataforma, você concorda em agir com honestidade e respeito na prestação de serviços.')">Termos de Uso</a>
+                <a onclick="alert('Privacidade: Seus dados de localização e contato são usados exclusivamente para conectar você ao prestador ou cliente.')">Privacidade</a>
                 <a href="mailto:contato@ajudaai.com">Contato</a>
-                <a href="#">Termos de Uso</a>
             </div>
         </div>
-        <div style="border-top: 1px solid var(--border); padding-top: 20px; color: rgba(255,255,255,0.2); font-size: 12px; text-align: center;">
+        <div style="text-align: center; color: rgba(255,255,255,0.2); font-size: 12px; border-top: 1px solid var(--border); padding-top: 20px;">
             © 2026 AJUDA AI - Todos os direitos reservados.
         </div>
     </div>
@@ -235,9 +210,9 @@
             <input type="tel" class="whatsapp-mask" placeholder="WhatsApp (DDD + 9 + Número)" required>
             <input type="email" placeholder="Email" required>
             <input type="text" placeholder="Profissão" required>
-            <input type="text" placeholder="Cidade" id="p_cidade" required>
+            <input type="text" placeholder="Cidade" required>
             <textarea placeholder="Serviços"></textarea>
-            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px;">FINALIZAR</button>
+            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border-radius:15px; margin-top:15px; border:none; font-weight:800;">FINALIZAR</button>
             <button type="button" onclick="closeModal('modalPrestador')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer;">Voltar</button>
         </form>
     </div>
@@ -250,7 +225,7 @@
             <input placeholder="Necessidade" id="ped_titulo" required>
             <input type="tel" class="whatsapp-mask" placeholder="WhatsApp (DDD + 9 + Número)" required>
             <textarea placeholder="Descrição" id="ped_desc"></textarea>
-            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px;">LANÇAR NO MURAL</button>
+            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border-radius:15px; margin-top:15px; border:none; font-weight:800;">LANÇAR NO MURAL</button>
             <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer;">Cancelar</button>
         </form>
     </div>
@@ -258,27 +233,26 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // --- DADOS INICIAIS ---
     let servicosDB = [
-        { id: 1, categoria: "Elétrica", titulo: "Instalação de Chuveiro", desc: "Preciso trocar a resistência e fiação.", status: "aberto" },
-        { id: 2, categoria: "Limpeza", titulo: "Diarista Meio Período", desc: "Limpeza de apto 2 quartos.", status: "aberto" },
+        { id: 1, categoria: "Elétrica", titulo: "Instalação de Chuveiro", desc: "Preciso trocar a resistência.", status: "aberto" },
         { id: 3, categoria: "Reparos", titulo: "Montagem de Guarda-Roupa", desc: "Móvel novo na caixa.", status: "aberto" }
     ];
 
     const map = L.map('map', { zoomControl: false }).setView([-15.78, -47.92], 4); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
-    window.addEventListener('load', () => {
-        renderizarMural("Todos");
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(p => {
-                map.flyTo([p.coords.latitude, p.coords.longitude], 14, {animate: true, duration: 2});
-                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Você está aqui!').openPopup();
-            });
-        }
-    });
+    function renderizarMural(filtro) {
+        const grid = document.getElementById('muralGrid');
+        grid.innerHTML = "";
+        const filtrados = filtro === "Todos" ? servicosDB : servicosDB.filter(s => s.categoria === filtro);
+        filtrados.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'job-card';
+            card.innerHTML = `<span class="status-pill status-open">Aguardando</span><h3>${item.titulo}</h3><p>${item.desc}</p><button class="btn-yellow" style="width:100%; padding:15px; border-radius:15px; border:none; font-weight:800; margin-top:15px;">ACEITAR SERVIÇO</button>`;
+            grid.appendChild(card);
+        });
+    }
 
-    // --- FUNCIONALIDADE DE FILTRO REAL ---
     document.querySelectorAll('.filter-tag').forEach(tag => {
         tag.addEventListener('click', function() {
             document.querySelector('.filter-tag.active').classList.remove('active');
@@ -287,103 +261,32 @@
         });
     });
 
-    function renderizarMural(filtro) {
-        const grid = document.getElementById('muralGrid');
-        grid.innerHTML = "";
-        
-        const filtrados = filtro === "Todos" ? servicosDB : servicosDB.filter(s => s.categoria === filtro);
-        
-        if(filtrados.length === 0) {
-            grid.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding: 40px;'>Nenhuma solicitação nesta categoria no momento.</p>";
-            return;
-        }
-
-        filtrados.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'job-card';
-            const statusClass = item.status === 'aberto' ? 'status-open' : 'status-progress';
-            const statusText = item.status === 'aberto' ? 'Aguardando Proposta' : 'Em Andamento';
-            
-            card.innerHTML = `
-                <span class="status-pill ${statusClass}">${statusText}</span>
-                <h3>${item.titulo}</h3>
-                <p style="color:var(--text-muted); font-size:14px;">Categoria: ${item.categoria}</p>
-                <p>${item.desc}</p>
-                <button class="btn-yellow" onclick="interagirPedido(${item.id})" style="width:100%; padding:15px; border-radius:15px; border:none; font-weight:800; margin-top:15px;">
-                    ${item.status === 'aberto' ? 'ACEITAR SERVIÇO' : 'VER LOCALIZAÇÃO'}
-                </button>
-            `;
-            grid.appendChild(card);
-        });
-    }
-
-    // --- LÓGICA DE STATUS E LOCALIZAÇÃO ---
-    function interagirPedido(id) {
-        const pedido = servicosDB.find(s => s.id === id);
-        if(pedido.status === 'aberto') {
-            pedido.status = 'progresso';
-            alert("Sucesso! Você aceitou o serviço. Status alterado para: EM ANDAMENTO.");
-            renderizarMural(document.querySelector('.filter-tag.active').dataset.category);
-        } else {
-            alert("O Cliente compartilhou a localização com você. Verifique o mapa acima para traçar a rota.");
-            getGPS();
-        }
-    }
-
-    // --- VALIDAÇÃO WHATSAPP CORRIGIDA ---
     document.querySelectorAll('.whatsapp-mask').forEach(input => {
         input.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não é número
-            e.target.value = value.substring(0, 11); // Limita ao máximo de 11 dígitos
+            let value = e.target.value.replace(/\D/g, "");
+            e.target.value = value.substring(0, 11);
         });
     });
 
     function validarCadastro(e, tipo) {
         e.preventDefault();
-        
-        // Localiza o input de telefone dentro do formulário atual
         const whatsappInput = e.target.querySelector('.whatsapp-mask');
         const whatsappValue = whatsappInput.value.replace(/\D/g, "");
-
-        // Validação estrita: DDD (2) + 9 + Número (8) = 11 dígitos
         if(whatsappValue.length < 11) {
-            alert("ERRO: Digite o WhatsApp completo com DDD + 9 + Número (Total 11 dígitos).");
+            alert("ERRO: Digite o WhatsApp completo com DDD + 9 + Número.");
             whatsappInput.focus();
-            return false;
+            return;
         }
-
-        if(tipo === 'cliente') {
-            const novo = {
-                id: Date.now(),
-                categoria: "Reparos",
-                titulo: document.getElementById('ped_titulo').value,
-                desc: document.getElementById('ped_desc').value,
-                status: "aberto"
-            };
-            servicosDB.unshift(novo);
-            renderizarMural("Todos");
-            alert("Pedido lançado com sucesso! Aguardando propostas de prestadores próximos.");
-            closeModal('modalPedido');
-        } else {
-            alert("Cadastro de Prestador realizado! Seus dados foram validados com sucesso.");
-            closeModal('modalPrestador');
-        }
-        e.target.reset();
+        alert("Sucesso! Dados validados.");
+        closeModal(tipo === 'cliente' ? 'modalPedido' : 'modalPrestador');
     }
 
-    // --- AUXILIARES ---
     function toggleMenu() { document.getElementById('navActions').classList.toggle('active'); }
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    function getGPS() { if (navigator.geolocation) { navigator.geolocation.getCurrentPosition(p => { map.setView([p.coords.latitude, p.coords.longitude], 15); L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Você está aqui!').openPopup(); }); } }
 
-    function getGPS() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(p => {
-                map.setView([p.coords.latitude, p.coords.longitude], 15);
-                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Local do Serviço').openPopup();
-            });
-        }
-    }
+    window.onload = () => renderizarMural("Todos");
 </script>
 </body>
 </html>
