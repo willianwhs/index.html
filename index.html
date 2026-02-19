@@ -2,77 +2,93 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AJUDA AI | Fintech de Serviços</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AJUDA AI | Soluções Inteligentes & Oportunidades</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
         :root {
-            --brand-blue: #0A1931;       
-            --brand-blue-light: #185ADB; 
-            --brand-yellow: #FFB400;     
-            --bg-site: #F8FAFC;          
-            --card-white: #FFFFFF;
-            --text-dark: #0A1931;
-            --text-muted: #64748B;
-            --star-gold: #FFD700;
+            --brand-dark: #050B14;
+            --brand-blue: #0A1931;
+            --brand-blue-light: #185ADB;
+            --brand-yellow: #FFB400; 
+            --text-main: #FFFFFF;
+            --text-muted: #94A3B8;
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        * { box-sizing: border-box; transition: all 0.2s ease; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { margin: 0; background: var(--bg-site); color: var(--text-dark); overflow-x: hidden; }
-        .container { max-width: 1200px; margin: auto; padding: 0 20px; }
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--brand-dark); color: var(--text-main); overflow-x: hidden; }
+        .container { max-width: 1200px; margin: auto; padding: 0 24px; }
 
-        /* HEADER PREMIUM */
+        /* HEADER */
         header { 
-            background: var(--brand-blue); padding: 15px 0; 
-            position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid var(--brand-yellow);
+            background: rgba(5, 11, 20, 0.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000; padding: 18px 0;
         }
         .nav { display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 24px; font-weight: 800; color: var(--brand-yellow); text-decoration: none; letter-spacing: -1px; }
+        .logo { font-size: 28px; font-weight: 800; color: var(--brand-yellow); text-decoration: none; letter-spacing: -1.5px; }
         .logo span { color: white; }
 
-        /* HERO AREA */
+        /* HERO SUPREMO - A PRESENÇA */
         .hero { 
-            background: linear-gradient(135deg, var(--brand-blue) 0%, #061121 100%); 
-            color: white; padding: 80px 0; text-align: center; border-radius: 0 0 60px 60px;
+            padding: 120px 0 80px; text-align: center;
+            background: radial-gradient(circle at 50% -20%, #185ADB44, transparent), 
+                        radial-gradient(circle at 0% 100%, #FFB40011, transparent);
+            border-radius: 0 0 100px 100px;
         }
-        .hero h1 { font-size: clamp(34px, 8vw, 60px); margin: 0 0 20px; letter-spacing: -2px; line-height: 1; }
-        .hero h1 mark { background: none; color: var(--brand-yellow); }
-        
-        .action-btns { display: flex; gap: 15px; justify-content: center; margin-top: 35px; flex-wrap: wrap; }
-        .btn { padding: 18px 32px; border-radius: 20px; border: none; font-weight: 800; cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 10px; }
-        .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); }
-        .btn-outline { background: transparent; border: 2px solid white; color: white; }
-        .btn-outline:hover { background: white; color: var(--brand-blue); }
+        .hero h1 { font-size: clamp(42px, 10vw, 72px); font-weight: 800; line-height: 0.95; margin: 0 0 25px; letter-spacing: -4px; }
+        .hero h1 span { color: var(--brand-yellow); display: block; font-size: 0.9em; }
+        .hero p { font-size: 22px; color: var(--text-muted); max-width: 750px; margin: 0 auto 45px; font-weight: 500; }
 
-        /* MURAL DE PEDIDOS (FEED) */
-        .section-title { font-size: 28px; font-weight: 800; margin: 40px 0 20px; display: flex; align-items: center; gap: 10px; }
-        .feed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        
-        .job-card {
-            background: var(--card-white); border-radius: 28px; padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05); border: 1px solid #E2E8F0;
+        /* BOTÕES DE IMPACTO */
+        .hero-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn-mega { 
+            padding: 24px 48px; border-radius: 24px; font-weight: 800; cursor: pointer; border: none; 
+            font-size: 18px; display: flex; align-items: center; gap: 12px; text-transform: uppercase;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-        .job-card .tag { font-size: 11px; font-weight: 800; color: var(--brand-blue-light); text-transform: uppercase; background: #E0E7FF; padding: 4px 12px; border-radius: 100px; }
-        .job-card h3 { margin: 15px 0 10px; font-size: 20px; }
-        .job-card .meta { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 13px; font-weight: 600; }
+        .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); border: 2px solid var(--brand-yellow); }
+        .btn-yellow:hover { transform: translateY(-5px); box-shadow: 0 25px 50px rgba(255, 180, 0, 0.3); }
         
-        /* SISTEMA DE ESTRELAS NO CARD DO PRESTADOR */
-        .stars { color: var(--star-gold); font-size: 14px; margin-bottom: 5px; display: flex; align-items: center; gap: 4px; }
-        .rating-avg { color: var(--text-dark); font-weight: 800; margin-left: 5px; }
+        .btn-outline { background: transparent; color: white; border: 2px solid var(--border); }
+        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: white; }
 
-        .btn-grab { width: 100%; background: var(--brand-blue); color: white; border: none; padding: 15px; border-radius: 15px; margin-top: 20px; font-weight: 800; cursor: pointer; }
-        .btn-grab:hover { background: var(--brand-yellow); color: var(--brand-blue); }
+        /* SEÇÃO DE PASSO A PASSO INTUITIVO */
+        .steps-section { padding: 100px 0; }
+        .step-card { 
+            background: var(--brand-blue); padding: 45px; border-radius: 40px; border: 1px solid var(--border);
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .step-card:hover { border-color: var(--brand-yellow); transform: scale(1.02); }
+        .step-card h3 { font-size: 24px; margin: 20px 0 10px; color: var(--brand-yellow); }
 
-        /* MAPA */
-        #map { height: 400px; border-radius: 40px; margin: 40px 0; border: 8px solid white; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        /* MURAL DE OPORTUNIDADES */
+        .mural-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+        .job-card { 
+            background: #0D1625; border-radius: 30px; padding: 30px; border: 1px solid var(--border);
+            position: relative; transition: 0.3s;
+        }
+        .job-card:hover { background: #121E33; }
+        .badge-live { width: 10px; height: 10px; background: #FF4B4B; border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 1.5s infinite; }
 
-        /* MODAL */
-        .modal { position: fixed; inset: 0; background: rgba(10, 25, 49, 0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; backdrop-filter: blur(5px); }
-        .modal-content { background: white; padding: 40px; border-radius: 35px; width: 100%; max-width: 500px; position: relative; }
-        .modal-content input, .modal-content textarea { width: 100%; padding: 18px; margin-bottom: 15px; border-radius: 15px; border: 1px solid #E2E8F0; background: #F8FAFC; outline: none; font-size: 16px; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* FOOTER / QUEM SOMOS */
+        .about-box { 
+            background: linear-gradient(135deg, var(--brand-blue), var(--brand-dark));
+            padding: 80px 40px; border-radius: 60px; margin: 60px 0; border: 1px solid var(--border);
+        }
+
+        /* MODAIS */
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        .modal-content { background: #0D1625; padding: 50px; border-radius: 40px; width: 100%; max-width: 550px; border: 1px solid var(--border); text-align: center; }
+        .modal-content input { width: 100%; padding: 18px; margin-bottom: 15px; border-radius: 15px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: white; font-size: 16px; }
+
+        #map { height: 500px; border-radius: 50px; border: 8px solid #0D1625; margin: 40px 0; }
     </style>
 </head>
 <body>
@@ -80,111 +96,165 @@
 <header>
     <div class="container nav">
         <a href="#" class="logo">AJUDA<span>AI</span></a>
-        <button onclick="openModal('modalPrestador')" class="btn btn-yellow" style="padding: 10px 20px; font-size: 13px;">SOU PRESTADOR</button>
+        <div style="display:flex; gap:15px;">
+            <button onclick="openModal('modalPrestador')" class="btn-yellow" style="padding: 12px 24px; border-radius: 14px; font-size: 14px; font-weight: 800; border:none; cursor:pointer;">QUERO TRABALHAR</button>
+        </div>
     </div>
 </header>
 
 <section class="hero">
     <div class="container">
-        <h1>Sua Fintech de <mark>Serviços</mark><br>Locais Confiáveis.</h1>
-        <p>Poste um pedido, receba propostas e avalie quem te ajudou.</p>
+        <h1>Sua ajuda chegou.<span>A oportunidade também.</span></h1>
+        <p>O AJUDA AI é a ponte inteligente que resolve o seu problema em minutos ou coloca dinheiro no seu bolso com serviços reais.</p>
         
-        <div class="action-btns">
-            <button onclick="openModal('modalCliente')" class="btn btn-yellow">📢 PRECISO DE AJUDA</button>
-            <button onclick="document.getElementById('mural').scrollIntoView()" class="btn btn-outline">🔍 VER OPORTUNIDADES</button>
+        <div class="hero-btns">
+            <button class="btn-mega btn-yellow" onclick="openModal('modalPedido')">🎯 PEDIR UMA AJUDA AGORA</button>
+            <button class="btn-mega btn-outline" onclick="openModal('modalPrestador')">🚀 QUERO FATURAR COMO PRESTADOR</button>
         </div>
     </div>
 </section>
 
 <div class="container">
-    <div id="map"></div>
-
-    <div id="mural">
-        <h2 class="section-title">📍 Mural de Pedidos Recentes</h2>
-        <div class="feed-grid" id="jobFeed">
-            <div class="job-card">
-                <span class="tag">Hidráulica</span>
-                <h3>Vazamento Urgente em Cozinha</h3>
-                <p style="color:var(--text-muted); font-size:14px;">Preciso de alguém que conserte um sifão e uma torneira que não para de pingar.</p>
-                <div class="meta">
-                    <span>🏠 Bairro: Sumaré</span>
-                    <span>⏰ Há 15 min</span>
-                </div>
-                <button class="btn-grab">PEGAR ESTE SERVIÇO</button>
+    <section class="steps-section" id="como-funciona">
+        <div style="text-align:center; margin-bottom: 60px;">
+            <h2 style="font-size: 42px; letter-spacing: -2px;">Como o Ajuda Ai facilita sua vida?</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="step-card">
+                <span style="font-size: 40px;">🏠</span>
+                <h3>Para quem precisa</h3>
+                <p style="color:var(--text-muted); line-height: 1.6;">Você posta o que precisa, nós avisamos os melhores da região. Você escolhe por nota e distância, paga e avalia com segurança.</p>
             </div>
+            <div class="step-card">
+                <span style="font-size: 40px;">🛠️</span>
+                <h3>Para quem faz</h3>
+                <p style="color:var(--text-muted); line-height: 1.6;">Acesse um mural cheio de serviços reais. Sem mensalidade, sem burocracia. Pegue o serviço, faça um bom trabalho e seja o #1 da sua cidade.</p>
+            </div>
+        </div>
+    </section>
 
-            <div class="job-card" style="border-top: 5px solid var(--brand-yellow);">
-                <div class="stars">⭐⭐⭐⭐⭐ <span class="rating-avg">5.0</span></div>
-                <span class="tag" style="background: #FEF3C7; color: #92400E;">PROFISSIONAL DESTAQUE</span>
-                <h3>Carlos Antunes - Eletricista</h3>
-                <p style="color:var(--text-muted); font-size:14px;">Especialista em quadros de força e iluminação LED.</p>
-                <div class="meta">
-                    <span>📍 Atende Centro e Jd. Ipê</span>
+    <div id="mural" style="padding-top: 40px;">
+        <div class="mural-header">
+            <div>
+                <h2 style="font-size: 32px; margin-bottom: 5px;"><span class="badge-live"></span> Mural de Pedidos Urgentes</h2>
+                <p style="color:var(--text-muted); margin:0;">Profissionais: Escolham um serviço abaixo para atender agora.</p>
+            </div>
+            <button class="btn-outline" style="padding: 10px 20px; border-radius: 12px; font-size: 12px;" onclick="location.reload()">ATUALIZAR LISTA</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px;" id="muralJobs">
+            <div class="job-card">
+                <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                    <span style="background:var(--brand-blue-light); padding:5px 12px; border-radius:8px; font-size:10px; font-weight:800;">REFORMAS</span>
+                    <span style="color:var(--text-muted); font-size:12px;">Há 5 min</span>
                 </div>
-                <button class="btn-grab" style="background:var(--brand-blue-light)">VER PERFIL / CHAMAR</button>
+                <h3 style="margin:0 0 10px;">Pintura de Fachada Comercial</h3>
+                <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">📍 Sumaré - Centro. Preciso de orçamento para pintura externa de 40m².</p>
+                <button class="btn-yellow" style="width:100%; padding:15px; border-radius:15px; font-size:14px;" onclick="pegarServico()">PEGAR ESTE SERVIÇO</button>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal" id="modalCliente">
-    <div class="modal-content">
-        <h2 style="margin-top:0">O que você precisa?</h2>
-        <form id="formJob">
-            <input name="titulo" placeholder="Ex: Conserto de Máquina de Lavar" required>
-            <input name="bairro" placeholder="Seu Bairro" required>
-            <textarea name="descricao" placeholder="Dê detalhes do serviço..." rows="4"></textarea>
-            <input name="whatsapp" placeholder="Seu WhatsApp" required>
-            <button type="submit" class="btn btn-yellow" style="width:100%; justify-content:center;">POSTAR NO MURAL</button>
-            <button type="button" onclick="closeModal('modalCliente')" style="width:100%; background:none; border:none; margin-top:15px; cursor:pointer;">Fechar</button>
-        </form>
-    </div>
+    <h2 style="font-size: 32px; margin: 80px 0 20px;">📍 Especialistas Próximos de Você</h2>
+    <div id="map"></div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;" id="providersList"></div>
+
+    <section class="about-box" id="quem-somos">
+        <div style="max-width: 800px; margin: auto; text-align: center;">
+            <h2 style="font-size: 48px; margin-bottom: 20px; letter-spacing: -2px;">Não somos apenas um site. Somos o <span>AJUDA AI.</span></h2>
+            <p style="font-size: 18px; color: var(--text-muted); line-height: 1.8;">Nascemos da necessidade de Sumaré por serviços de confiança. Unimos geolocalização de ponta com um sistema de avaliação blindado. Aqui, o bom prestador cresce e o cliente dorme tranquilo. Transparência total, sem letras miúdas.</p>
+        </div>
+    </section>
 </div>
 
 <div class="modal" id="modalPrestador">
     <div class="modal-content">
-        <h2 style="margin-top:0">Seja um Parceiro</h2>
+        <h2 style="font-size: 32px; margin-bottom: 10px;">Sua nova fase começa aqui.</h2>
+        <p style="color:var(--text-muted); margin-bottom: 30px;">Preencha seus dados e comece a receber pedidos hoje mesmo.</p>
         <form id="formPrestador">
-            <input name="nome" placeholder="Seu Nome / Empresa" required>
-            <input name="servico" placeholder="Especialidade" required>
-            <input name="cidade" placeholder="Cidade" required>
-            <input name="whatsapp" placeholder="WhatsApp" required>
-            <button type="submit" class="btn btn-grab" style="margin-top:0">FINALIZAR CADASTRO</button>
-            <button type="button" onclick="closeModal('modalPrestador')" style="width:100%; background:none; border:none; margin-top:15px; cursor:pointer;">Fechar</button>
+            <input name="nome" placeholder="Nome ou Nome da Empresa" required>
+            <input name="servico" placeholder="Qual sua especialidade? (ex: Eletricista)" required>
+            <input name="cidade" placeholder="Sua Cidade principal" required>
+            <input name="whatsapp" placeholder="Seu WhatsApp (DDD + Número)" required>
+            <input type="hidden" name="lat" id="reg_lat">
+            <input type="hidden" name="lng" id="reg_lng">
+            <button type="submit" class="btn-mega btn-yellow" style="width:100%; justify-content:center;">CADASTRAR E TRABALHAR</button>
+            <button type="button" onclick="closeModal('modalPrestador')" style="background:none; border:none; color:white; margin-top:20px; cursor:pointer; opacity:0.5;">Agora não</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="modalPedido">
+    <div class="modal-content">
+        <h2 style="font-size: 32px; margin-bottom: 10px;">Qual a sua emergência?</h2>
+        <p style="color:var(--text-muted); margin-bottom: 30px;">Descreva rápido e os melhores profissionais vão te chamar.</p>
+        <form id="formPedido">
+            <input name="titulo" placeholder="O que você precisa?" required>
+            <input name="bairro" placeholder="Seu Bairro" required>
+            <textarea name="descricao" placeholder="Explique brevemente o problema..." rows="3" style="width:100%; padding:18px; border-radius:15px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--border); margin-bottom:15px; font-family:inherit;"></textarea>
+            <input name="whatsapp" placeholder="Seu WhatsApp para contato" required>
+            <button type="submit" class="btn-mega btn-yellow" style="width:100%; justify-content:center;">LANÇAR NO MURAL</button>
+            <button type="button" onclick="closeModal('modalPedido')" style="background:none; border:none; color:white; margin-top:20px; cursor:pointer; opacity:0.5;">Cancelar</button>
         </form>
     </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const map = L.map('map', { zoomControl: false }).setView([-22.75, -47.33], 12);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+    const map = L.map('map', { zoomControl: false }).setView([-22.75, -47.33], 13);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function openModal(id) { 
+        document.getElementById(id).style.display = 'flex'; 
+        if(id === 'modalPrestador') {
+            navigator.geolocation.getCurrentPosition(p => {
+                document.getElementById('reg_lat').value = p.coords.latitude;
+                document.getElementById('reg_lng').value = p.coords.longitude;
+            });
+        }
+    }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    // Formulário de Pedido (Cliente)
-    document.getElementById('formJob').onsubmit = async (e) => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(e.target));
-        // Aqui você envia para uma aba "PEDIDOS" na sua planilha via Make
-        alert("Pedido enviado para o Mural! Os prestadores serão avisados.");
-        closeModal('modalCliente');
-    };
+    // CARREGAR PRESTADORES
+    async function loadData() {
+        try {
+            const res = await fetch("https://opensheet.elk.sh/1ImYSb5Cih3eGu7jqU3zjLTbvNvGTuhGjeTKSTo5_j7M/Página1");
+            const data = await res.json();
+            const list = document.getElementById('providersList');
+            list.innerHTML = "";
+            data.forEach(p => {
+                const media = p.media_avaliacao || "5.0";
+                const card = document.createElement('div');
+                card.style = "background:#0D1625; padding:30px; border-radius:30px; border:1px solid var(--border); text-align:center;";
+                card.innerHTML = `
+                    <div style="color:var(--brand-yellow); font-weight:800; margin-bottom:10px;">⭐ ${media}</div>
+                    <h3 style="margin:0;">${p.nome}</h3>
+                    <p style="color:var(--brand-blue-light); font-weight:800; font-size:12px; margin:5px 0;">${p.servico}</p>
+                    <a href="https://wa.me/55${p.whatsapp.replace(/\D/g,'')}" target="_blank" class="btn-yellow" style="padding:10px; border-radius:10px; text-decoration:none; font-size:12px; display:block; margin-top:15px; text-align:center;">CONTRATAR</a>
+                `;
+                list.appendChild(card);
+                if(p.lat) L.circleMarker([p.lat, p.lng], { color: '#FFB400', radius: 8 }).addTo(map);
+            });
+        } catch(e) {}
+    }
 
-    // Formulário de Prestador
     document.getElementById('formPrestador').onsubmit = async (e) => {
         e.preventDefault();
-        const data = Object.fromEntries(new FormData(e.target));
+        const payload = Object.fromEntries(new FormData(e.target));
         await fetch("https://hook.us2.make.com/rmdusinc4e6pg1akovep4zrd6rw1fpyw", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
+            body: JSON.stringify(payload)
         });
-        alert("Cadastro realizado!");
+        alert("Bem-vindo ao time! Seu perfil está sendo ativado.");
         closeModal('modalPrestador');
     };
+
+    function pegarServico() {
+        alert("Interesse registrado! O cliente receberá seu contato via WhatsApp.");
+    }
+
+    loadData();
 </script>
 </body>
-    </html>
-    
+</html>
