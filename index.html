@@ -57,17 +57,9 @@
 
         /* MURAL */
         .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 30px; }
-        .badge-live { width: 10px; height: 10px; background: #FF4B4B; border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         /* QUEM SOMOS */
         .about-section { padding: 100px 0; background: linear-gradient(to bottom, var(--brand-dark), #0A1931); border-radius: 60px; margin: 60px 0; border: 1px solid var(--border); }
-
-        /* DEPOIMENTOS */
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 40px 0; }
-        .testimonial-card { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 25px; border: 1px solid var(--border); }
-        .comment-box { background: #0D1625; padding: 40px; border-radius: 40px; border: 1px solid var(--brand-yellow); max-width: 800px; margin: auto; text-align: center; }
-        .comment-box input, .comment-box textarea { width: 100%; padding: 18px; margin-bottom: 15px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; font-family: inherit; }
 
         /* MODAIS "IRMÃOS" PREMIUM */
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
@@ -110,7 +102,7 @@
 <section class="hero">
     <div class="container">
         <h1>Sua ajuda chegou.<span>Em qualquer lugar do Brasil.</span></h1>
-        <p>A maior plataforma nacional conectando problemas reais a profissionais qualificados. Onde quer que você esteja, o Ajuda Aí está com você.</p>
+        <p>A maior plataforma nacional conectando problemas reais a profissionais qualificados.</p>
         <div class="btn-group">
             <button class="btn-mega btn-yellow" onclick="openModal('modalPedido')">🎯 PEDIR UMA AJUDA AGORA</button>
             <button class="btn-mega btn-outline" onclick="openModal('modalPrestador')">🚀 QUERO FATURAR COMO PRESTADOR</button>
@@ -122,41 +114,12 @@
     <section class="map-section">
         <h2 style="color:var(--brand-yellow); font-size: 32px;">📍 Encontre Especialistas Perto de Você</h2>
         <div id="map"></div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;" id="providersList"></div>
-    </section>
-
-    <section id="feed">
-        <h2 style="font-size: 32px;"><span class="badge-live"></span> Mural Nacional de Oportunidades</h2>
-        <div class="mural-grid" id="muralJobs"></div>
     </section>
 
     <section id="quem-somos" class="about-section">
         <div style="max-width: 900px; margin: auto; text-align: center;">
             <h2 style="font-size: 42px; margin-bottom: 30px;">A Revolução do <span>AJUDA AI</span></h2>
-            <p style="line-height: 1.8; color: var(--text-muted); font-size: 18px;">O Ajuda Aí nasceu com uma missão clara: democratizar o acesso a serviços de qualidade em todo o território nacional. Não importa se você está em uma capital ou no interior, nossa tecnologia de geolocalização e sistema de reputação blindada garantem que o melhor profissional esteja sempre a um clique de distância. Unimos a praticidade da fintech com a necessidade do dia a dia, criando uma rede de confiança onde todos ganham.</p>
-        </div>
-    </section>
-
-    <section class="social-proof">
-        <h2 style="text-align:center; font-size: 32px;">Impactando Vidas pelo Brasil</h2>
-        <div class="testimonial-grid" id="depoimentosFeed">
-            <div class="testimonial-card">
-                <p>"Excelente plataforma! Encontrei um técnico para minha empresa em tempo recorde. Recomendo muito!"</p>
-                <b>⭐ Marcos Almeida (São Paulo)</b>
-            </div>
-            <div class="testimonial-card">
-                <p>"Cadastrei meus serviços e no mesmo dia já fechei dois trabalhos. O sistema de localização é perfeito."</p>
-                <b>⭐ Ana Costa (Belo Horizonte)</b>
-            </div>
-        </div>
-
-        <div class="comment-box">
-            <h3>Conte sua história com o AJUDA AI</h3>
-            <form id="formFeedback">
-                <input type="text" id="fb_nome" placeholder="Seu Nome e Cidade" required>
-                <textarea id="fb_texto" rows="3" placeholder="Como nossa plataforma ajudou você hoje?" required></textarea>
-                <button type="submit" class="btn-mega btn-yellow" style="margin:30px auto 0;">PUBLICAR FEEDBACK</button>
-            </form>
+            <p style="line-height: 1.8; color: var(--text-muted); font-size: 18px;">O Ajuda Aí nasceu com uma missão clara: democratizar o acesso a serviços de qualidade em todo o Brasil.</p>
         </div>
     </section>
 </div>
@@ -166,13 +129,15 @@
         <h2>Seja um Parceiro <span>Nacional</span></h2>
         <p>Aumente seu faturamento e atenda clientes na sua região.</p>
         <div id="geoStatus" class="geo-status">📡 Detectando sua localização automática...</div>
-        <form id="formPrestador">
+        <form id="formPrestador" onsubmit="return validarWhats(this)">
             <div class="form-group"><label>Nome / Empresa</label><input name="nome" placeholder="Seu nome completo" required></div>
             <div class="form-group"><label>Sua Especialidade</label><input name="servico" placeholder="Ex: Eletricista, Design..." required></div>
             
             <div class="form-row">
                 <div class="form-group"><label>Sua Cidade/UF</label><input name="cidade" placeholder="Ex: Sumaré/SP" required></div>
-                <div class="form-group"><label>Seu WhatsApp</label><input name="whatsapp" placeholder="(00) 00000-0000" required></div>
+                <div class="form-group"><label>Seu WhatsApp</label>
+                    <input name="whatsapp" class="whats-mask" placeholder="(00) 00000-0000" maxlength="15" required>
+                </div>
             </div>
 
             <input type="hidden" name="lat" id="reg_lat" value="0">
@@ -186,17 +151,18 @@
 <div class="modal" id="modalPedido">
     <div class="modal-content">
         <h2>O que você <span>precisa</span> agora?</h2>
-        <p>Poste seu pedido e receba propostas rapidamente de profissionais qualificados.</p>
-        
-        <form id="formPedido">
+        <p>Poste seu pedido e receba propostas rapidamente.</p>
+        <form id="formPedido" onsubmit="return validarWhats(this)">
             <div class="form-group"><label>Título do Pedido</label><input name="titulo" placeholder="Ex: Conserto de ar condicionado" required></div>
             
             <div class="form-row">
                 <div class="form-group"><label>Cidade / Bairro</label><input name="bairro" placeholder="Onde você está?" required></div>
-                <div class="form-group"><label>Seu WhatsApp</label><input name="whatsapp" placeholder="(00) 00000-0000" required></div>
+                <div class="form-group"><label>Seu WhatsApp</label>
+                    <input name="whatsapp" class="whats-mask" placeholder="(00) 00000-0000" maxlength="15" required>
+                </div>
             </div>
 
-            <div class="form-group"><label>Descrição Detalhada</label><textarea name="descricao" rows="2" placeholder="Explique brevemente o que precisa ser feito..."></textarea></div>
+            <div class="form-group"><label>Descrição Detalhada</label><textarea name="descricao" rows="2" placeholder="Explique o que precisa..."></textarea></div>
             
             <button type="submit" class="btn-mega btn-yellow" style="width:100%; justify-content:center; margin-top:15px;">LANÇAR NO MURAL</button>
             <button type="button" onclick="closeModal('modalPedido')" style="background:none; border:none; color:white; margin-top:20px; cursor:pointer; opacity:0.6; font-weight:600;">Cancelar</button>
@@ -209,38 +175,10 @@
     const map = L.map('map', { zoomControl: false }).setView([-15.78, -47.92], 4); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
-    function openModal(id) {
-        document.getElementById(id).style.display = 'flex';
-        if(id === 'modalPrestador') getGPS();
-    }
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; if(id === 'modalPrestador') getGPS(); }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    function getGPS() {
-        const status = document.getElementById('geoStatus');
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(p => {
-                document.getElementById('reg_lat').value = p.coords.latitude;
-                document.getElementById('reg_lng').value = p.coords.longitude;
-                status.innerText = "✅ Localização de alta precisão detectada!";
-                status.style.color = "#22C55E";
-                map.setView([p.coords.latitude, p.coords.longitude], 13);
-            }, () => {
-                status.innerText = "⚠️ GPS negado. Digite sua cidade abaixo.";
-            });
-        }
-    }
-
-    document.getElementById('formFeedback').onsubmit = (e) => {
-        e.preventDefault();
-        const nome = document.getElementById('fb_nome').value;
-        const texto = document.getElementById('fb_texto').value;
-        const card = document.createElement('div');
-        card.className = 'testimonial-card';
-        card.innerHTML = `<p>"${texto}"</p><b>⭐ ${nome}</b>`;
-        document.getElementById('depoimentosFeed').prepend(card);
-        e.target.reset();
-        alert("Obrigado pelo seu feedback nacional!");
-    };
-</script>
-</body>
-</html>
+    // MÁSCARA DE WHATSAPP AUTOMÁTICA
+    document.querySelectorAll('.whats-mask').forEach(input => {
+        input.addEventListener('input', e => {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5
