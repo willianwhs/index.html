@@ -23,7 +23,6 @@
         body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--brand-dark); color: var(--text-main); overflow-x: hidden; }
         .container { max-width: 1200px; margin: auto; padding: 0 24px; }
 
-        /* HEADER ADAPTADO (MANTENDO DESIGN ORIGINAL) */
         header { 
             background: rgba(5, 11, 20, 0.95); backdrop-filter: blur(15px);
             border-bottom: 2px solid var(--brand-yellow);
@@ -37,77 +36,48 @@
 
         .nav-actions { display: flex; gap: 12px; align-items: center; }
         .nav-link-top { color: white; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; }
-        .nav-link-top:hover { border-color: var(--brand-yellow); color: var(--brand-yellow); }
-
-        /* ESTILO DO MENU HAMBURGUER (ADICIONADO) */
         .menu-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 5px; }
-        .menu-hamburger span { width: 25px; height: 3px; background: var(--brand-yellow); border-radius: 2px; transition: 0.3s; }
+        .menu-hamburger span { width: 25px; height: 3px; background: var(--brand-yellow); border-radius: 2px; }
 
         @media (max-width: 850px) {
             .menu-hamburger { display: flex; }
-            .nav-actions { 
-                display: none; position: absolute; top: 70px; right: 24px; 
-                flex-direction: column; background: var(--brand-blue); 
-                padding: 20px; border-radius: 20px; border: 1px solid var(--brand-yellow); 
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 200px;
-            }
+            .nav-actions { display: none; position: absolute; top: 70px; right: 24px; flex-direction: column; background: var(--brand-blue); padding: 20px; border-radius: 20px; border: 1px solid var(--brand-yellow); width: 200px; }
             .nav-actions.active { display: flex; }
-            .nav-actions a { width: 100%; text-align: center; padding: 10px; }
-            .btn-work-top { display: block !important; } /* Mantém o botão de trabalho sempre visível no topo */
         }
 
-        /* HERO ORIGINAL */
-        .hero { 
-            padding: 60px 0; text-align: center;
-            background: radial-gradient(circle at top, #185ADB33, transparent);
-            border-radius: 0 0 80px 80px;
-        }
+        .hero { padding: 60px 0; text-align: center; background: radial-gradient(circle at top, #185ADB33, transparent); border-radius: 0 0 80px 80px; }
         .hero h1 { font-size: clamp(32px, 8vw, 65px); font-weight: 800; line-height: 1; margin-bottom: 20px; letter-spacing: -3px; }
         .hero h1 span { color: var(--brand-yellow); }
         .hero p { font-size: 18px; color: var(--text-muted); max-width: 750px; margin: 0 auto 40px; }
 
         .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .btn-mega { padding: 18px 30px; border-radius: 20px; font-weight: 800; cursor: pointer; border: none; font-size: 15px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; width: 100%; max-width: 380px; justify-content: center; }
-        @media (min-width: 768px) { .btn-mega { width: auto; } }
-        .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 10px 20px rgba(255, 180, 0, 0.2); }
+        .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); }
         .btn-outline { background: transparent; color: white; border: 2px solid var(--border); }
 
-        /* MAPA ESTILO AIRBNB */
+        /* ESTILO DOS FILTROS (NOVO) */
+        .filter-container { display: flex; gap: 15px; overflow-x: auto; padding: 20px 0; margin-bottom: 20px; scrollbar-width: none; }
+        .filter-container::-webkit-scrollbar { display: none; }
+        .filter-btn { background: var(--glass); border: 1px solid var(--border); color: white; padding: 10px 20px; border-radius: 50px; white-space: nowrap; cursor: pointer; font-size: 13px; font-weight: 600; }
+        .filter-btn:hover, .filter-btn.active { border-color: var(--brand-yellow); color: var(--brand-yellow); background: rgba(255,180,0,0.05); }
+
         .map-section { padding: 40px 0; }
         .map-wrapper { position: relative; max-width: 1000px; margin: 0 auto; border-radius: 40px; overflow: hidden; border: 4px solid var(--brand-blue); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         #map { height: 350px; width: 100%; }
-        .btn-near { position: absolute; bottom: 20px; right: 20px; z-index: 500; background: var(--brand-yellow); border: none; padding: 12px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .btn-near { position: absolute; bottom: 20px; right: 20px; z-index: 500; background: var(--brand-yellow); border: none; padding: 12px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 12px; }
 
-        /* MURAL */
-        .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; margin-top: 30px; }
+        .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; }
         .job-card { background: var(--brand-blue); border-radius: 30px; padding: 25px; border: 1px solid var(--border); text-align: left; }
         .badge-live { width: 10px; height: 10px; background: #FF4B4B; border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* SOBRE NÓS EXPANDIDO */
         .about-section { padding: 100px 0; background: linear-gradient(to bottom, var(--brand-dark), #0A1931); border-radius: 60px; margin: 60px 0; border: 1px solid var(--border); text-align: center; }
         .about-content { max-width: 850px; margin: auto; padding: 0 20px; }
-        .about-content h2 { font-size: 42px; margin-bottom: 25px; }
-        .about-content p { line-height: 1.8; color: var(--text-muted); font-size: 19px; margin-bottom: 20px; text-align: justify; }
-
-        /* DEPOIMENTOS */
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 40px 0; }
-        .testimonial-card { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 25px; border: 1px solid var(--border); }
-        .comment-box { background: #0D1625; padding: 40px; border-radius: 40px; border: 1px solid var(--brand-yellow); max-width: 800px; margin: 40px auto; text-align: center; }
-
-        /* RODAPÉ */
-        footer { padding: 80px 0 40px; border-top: 1px solid var(--border); background: #03070C; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; margin-bottom: 40px; }
-        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 18px; }
-        .footer-col a { color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 12px; font-size: 14px; }
         
-        #cookieBanner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--brand-blue); border: 1px solid var(--brand-yellow); padding: 15px 25px; border-radius: 20px; display: flex; align-items: center; gap: 20px; z-index: 10001; width: 90%; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
-        /* MODAIS */
+        footer { padding: 80px 0 40px; border-top: 1px solid var(--border); background: #03070C; }
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
-        .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 45px; width: 100%; max-width: 550px; border: 1px solid var(--border); text-align: center; max-height: 90vh; overflow-y: auto; }
+        .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 45px; width: 100%; max-width: 550px; border: 1px solid var(--border); text-align: center; }
         input, textarea, select { width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; }
-        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-top: 15px; text-align: left; color: var(--text-muted); font-size: 14px; }
     </style>
 </head>
 <body>
@@ -118,15 +88,10 @@
             <svg class="pin-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             <div class="logo-text">AJUDA<span>AI</span></div>
         </a>
-        
         <div style="display: flex; align-items: center; gap: 15px;">
-            <button onclick="openModal('modalPrestador')" class="btn-yellow btn-work-top" style="padding:10px 14px; border-radius:10px; border:none; font-weight:800; cursor:pointer; font-size: 10px;">QUERO TRABALHAR</button>
-            
-            <button class="menu-hamburger" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </button>
+            <button onclick="openModal('modalPrestador')" class="btn-yellow" style="padding:10px 14px; border-radius:10px; border:none; font-weight:800; cursor:pointer; font-size: 10px;">QUERO TRABALHAR</button>
+            <button class="menu-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
         </div>
-
         <div class="nav-actions" id="navActions">
             <a href="#" class="nav-link-top">Home</a>
             <a href="#como-funciona" class="nav-link-top">Como Funciona</a>
@@ -155,14 +120,16 @@
         </div>
     </section>
 
-    <section id="como-funciona" style="padding: 60px 0; text-align: center;">
-        <h2 style="font-size: 32px; margin-bottom: 40px;">Como Funciona</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card"><h4>1. Publique</h4><p>Diga o que você precisa ou qual serviço você oferece.</p></div>
-            <div class="testimonial-card"><h4>2. Localize</h4><p>Nosso mapa mostra quem está mais próximo para te ajudar.</p></div>
-            <div class="testimonial-card"><h4>3. Conecte</h4><p>Chame no WhatsApp e resolva tudo sem taxas ocultas.</p></div>
-        </div>
-    </section>
+    <div class="filter-container">
+        <button class="filter-btn active">Todos</button>
+        <button class="filter-btn">⚡ Elétrica</button>
+        <button class="filter-btn">🚰 Hidráulica</button>
+        <button class="filter-btn">🧹 Limpeza</button>
+        <button class="filter-btn">🛠️ Reformas</button>
+        <button class="filter-btn">💻 Tecnologia</button>
+        <button class="filter-btn">📦 Fretes</button>
+        <button class="filter-btn">🎨 Design</button>
+    </div>
 
     <section id="feed">
         <h2 style="font-size: 32px; text-align: center;"><span class="badge-live"></span> Mural de Oportunidades</h2>
@@ -178,60 +145,17 @@
     <section id="quem-somos" class="about-section">
         <div class="about-content">
             <h2>A Identidade do <span>AJUDA AI</span></h2>
-            <p>O <b>Ajuda Aí</b> não é apenas um site de classificados; é um ecossistema de confiança projetado para eliminar as barreiras entre a necessidade e a solução. Acreditamos que, em um mundo cada vez mais digital, o valor real ainda está nas conexões humanas e na agilidade da prestação de serviço local.</p>
-            <p>Nossa proposta é clara: <b>"Problema postado, solução encontrada"</b>. Nascemos da indignação com taxas abusivas e burocracias que impedem profissionais talentosos de prosperar. Aqui, o lucro fica com quem trabalha. Criamos uma vitrine transparente onde a sua localização é a chave para uma economia colaborativa mais justa e rápida, em qualquer lugar do mundo.</p>
-        </div>
-    </section>
-
-    <section class="social-proof">
-        <h2 style="text-align: center; font-size: 32px;">O que dizem sobre nós</h2>
-        <div class="testimonial-grid" id="depoimentosFeed">
-            <div class="testimonial-card"><p>"Finalmente uma plataforma onde não perco dinheiro com comissões absurdas. Direto e eficiente!"</p><b>⭐ Carlos Silva (Técnico)</b></div>
-            <div class="testimonial-card"><p>"Consegui consertar meu fogão em 1 hora. O técnico morava no quarteirão de trás!"</p><b>⭐ Maria Oliveira (Cliente)</b></div>
-            <div class="testimonial-card"><p>"Interface limpa e fácil de usar no celular. Recomendo para todos os meus amigos profissionais."</p><b>⭐ João Pereira (Eletricista)</b></div>
-        </div>
-        <div class="comment-box">
-            <h3>Conte sua história</h3>
-            <form id="formFeedback">
-                <input type="text" id="fb_nome" placeholder="Seu Nome" required>
-                <textarea id="fb_texto" rows="3" placeholder="Sua experiência..." required></textarea>
-                <button type="submit" class="btn-mega btn-yellow" style="margin:20px auto 0;">PUBLICAR FEEDBACK</button>
-            </form>
+            <p>O <b>Ajuda Aí</b> não é apenas um site de classificados; é um ecossistema de confiança projetado para eliminar as barreiras entre a necessidade e a solução.</p>
+            <p>Nossa proposta é clara: <b>"Problema postado, solução encontrada"</b>. Criamos uma vitrine transparente onde a sua localização é a chave para uma economia colaborativa mais justa e rápida.</p>
         </div>
     </section>
 </div>
 
 <footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="logo-text">AJUDA<span>AI</span></div>
-                <p style="color:var(--text-muted); font-size: 14px; margin-top: 15px;">Conectando talentos e necessidades em tempo real.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Navegação</h4>
-                <a href="#">Home</a>
-                <a href="#como-funciona">Como Funciona</a>
-                <a href="#quem-somos">Sobre Nós</a>
-                <a href="#feed">Mural de Vagas</a>
-            </div>
-            <div class="footer-col">
-                <h4>Suporte & Legal</h4>
-                <a href="javascript:void(0)" onclick="openModal('modalPrivacidade')">Política de Privacidade</a>
-                <a href="javascript:void(0)" onclick="openModal('modalTermos')">Termos de Uso</a>
-                <a href="mailto:contato@ajudaai.com">Contato</a>
-            </div>
-        </div>
-        <div style="border-top: 1px solid var(--border); padding-top: 20px; color: rgba(255,255,255,0.2); font-size: 12px;">
-            © 2026 AJUDA AI - Todos os direitos reservados.
-        </div>
+    <div class="container" style="text-align: center; padding: 40px 0; color: rgba(255,255,255,0.2); font-size: 12px;">
+        © 2026 AJUDA AI - Todos os direitos reservados.
     </div>
 </footer>
-
-<div id="cookieBanner">
-    <div style="font-size: 11px;">Usamos cookies para personalizar anúncios (Google AdSense) e melhorar sua navegação conforme nossa política.</div>
-    <button class="btn-yellow" onclick="this.parentElement.style.display='none'" style="padding:8px 15px; border:none; border-radius:10px; cursor:pointer; font-weight:800; font-size: 11px;">ACEITAR</button>
-</div>
 
 <div class="modal" id="modalPrestador">
     <div class="modal-content">
@@ -239,10 +163,7 @@
         <form onsubmit="alert('Cadastro enviado!'); closeModal('modalPrestador'); return false;">
             <input type="text" placeholder="Nome completo" required>
             <input type="tel" placeholder="WhatsApp" required>
-            <input type="email" placeholder="Email" required>
-            <input type="text" placeholder="Profissão" required>
             <input type="text" placeholder="Cidade" id="p_cidade" required>
-            <textarea placeholder="Serviços"></textarea>
             <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px;">FINALIZAR</button>
             <button type="button" onclick="closeModal('modalPrestador')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer;">Voltar</button>
         </form>
@@ -255,7 +176,6 @@
         <form onsubmit="alert('Lançado!'); closeModal('modalPedido'); return false;">
             <input placeholder="Necessidade" required>
             <input placeholder="WhatsApp" required>
-            <textarea placeholder="Descrição"></textarea>
             <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px;">LANÇAR NO MURAL</button>
             <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer;">Cancelar</button>
         </form>
@@ -267,30 +187,17 @@
     const map = L.map('map', { zoomControl: false }).setView([-15.78, -47.92], 4); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
-    // FUNÇÃO PARA AUTO-LOCALIZAR AO CARREGAR (ADICIONADO)
     window.addEventListener('load', () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(p => {
-                map.flyTo([p.coords.latitude, p.coords.longitude], 14, {animate: true, duration: 2});
+                map.flyTo([p.coords.latitude, p.coords.longitude], 14);
                 L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Você está aqui!').openPopup();
             });
         }
     });
 
-    // FUNÇÃO MENU HAMBURGUER (ADICIONADO)
-    function toggleMenu() {
-        document.getElementById('navActions').classList.toggle('active');
-    }
-
-    function openModal(id) { 
-        document.getElementById(id).style.display = 'flex'; 
-        if(id === 'modalPrestador' && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(p => {
-                document.getElementById('p_lat').value = p.coords.latitude;
-                document.getElementById('p_lng').value = p.coords.longitude;
-            });
-        }
-    }
+    function toggleMenu() { document.getElementById('navActions').classList.toggle('active'); }
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
     function getGPS() {
@@ -302,14 +209,14 @@
         }
     }
 
-    document.getElementById('formFeedback').onsubmit = (e) => {
-        e.preventDefault();
-        const card = document.createElement('div');
-        card.className = 'testimonial-card';
-        card.innerHTML = `<p>"${document.getElementById('fb_texto').value}"</p><b>⭐ ${document.getElementById('fb_nome').value}</b>`;
-        document.getElementById('depoimentosFeed').prepend(card);
-        e.target.reset();
-    };
+    // Lógica para os botões de filtro ficarem ativos
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelector('.filter-btn.active').classList.remove('active');
+            this.classList.add('active');
+            // Futuramente, aqui você filtra os dados reais do mural
+        });
+    });
 </script>
 </body>
 </html>
