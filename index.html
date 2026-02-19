@@ -232,7 +232,7 @@
         <h2>Seja um <span>Parceiro</span></h2>
         <form onsubmit="validarCadastro(event, 'prestador')">
             <input type="text" placeholder="Nome completo" required>
-            <input type="tel" class="whatsapp-mask" placeholder="WhatsApp (apenas números)" required>
+            <input type="tel" class="whatsapp-mask" placeholder="WhatsApp (DDD + 9 + Número)" required>
             <input type="email" placeholder="Email" required>
             <input type="text" placeholder="Profissão" required>
             <input type="text" placeholder="Cidade" id="p_cidade" required>
@@ -248,7 +248,7 @@
         <h2>O que você <span>precisa</span>?</h2>
         <form onsubmit="validarCadastro(event, 'cliente')">
             <input placeholder="Necessidade" id="ped_titulo" required>
-            <input type="tel" class="whatsapp-mask" placeholder="WhatsApp (apenas números)" required>
+            <input type="tel" class="whatsapp-mask" placeholder="WhatsApp (DDD + 9 + Número)" required>
             <textarea placeholder="Descrição" id="ped_desc"></textarea>
             <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px;">LANÇAR NO MURAL</button>
             <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer;">Cancelar</button>
@@ -326,38 +326,36 @@
             renderizarMural(document.querySelector('.filter-tag.active').dataset.category);
         } else {
             alert("O Cliente compartilhou a localização com você. Verifique o mapa acima para traçar a rota.");
-            // Aqui simularia a rota no mapa real
             getGPS();
         }
     }
 
-    // --- CORREÇÃO DA MÁSCARA E VALIDAÇÃO WHATSAPP ---
+    // --- VALIDAÇÃO WHATSAPP CORRIGIDA ---
     document.querySelectorAll('.whatsapp-mask').forEach(input => {
         input.addEventListener('input', (e) => {
-            // Remove tudo o que não for dígito e limita a 11 números
-            let value = e.target.value.replace(/\D/g, "");
-            e.target.value = value.substring(0, 11);
+            let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não é número
+            e.target.value = value.substring(0, 11); // Limita ao máximo de 11 dígitos
         });
     });
 
     function validarCadastro(e, tipo) {
         e.preventDefault();
         
-        // Busca o input de telefone específico deste formulário enviado
+        // Localiza o input de telefone dentro do formulário atual
         const whatsappInput = e.target.querySelector('.whatsapp-mask');
         const whatsappValue = whatsappInput.value.replace(/\D/g, "");
 
-        // Validação: No Brasil, WhatsApps têm 10 (fixo/antigo) ou 11 (celular) dígitos com DDD
-        if(whatsappValue.length < 10) {
-            alert("Erro: Por favor, insira um WhatsApp válido com DDD (mínimo 10 dígitos numéricos).");
+        // Validação estrita: DDD (2) + 9 + Número (8) = 11 dígitos
+        if(whatsappValue.length < 11) {
+            alert("ERRO: Digite o WhatsApp completo com DDD + 9 + Número (Total 11 dígitos).");
             whatsappInput.focus();
-            return;
+            return false;
         }
 
         if(tipo === 'cliente') {
             const novo = {
                 id: Date.now(),
-                categoria: "Reparos", 
+                categoria: "Reparos",
                 titulo: document.getElementById('ped_titulo').value,
                 desc: document.getElementById('ped_desc').value,
                 status: "aberto"
@@ -367,7 +365,7 @@
             alert("Pedido lançado com sucesso! Aguardando propostas de prestadores próximos.");
             closeModal('modalPedido');
         } else {
-            alert("Cadastro de Prestador realizado! Seus dados foram validados.");
+            alert("Cadastro de Prestador realizado! Seus dados foram validados com sucesso.");
             closeModal('modalPrestador');
         }
         e.target.reset();
