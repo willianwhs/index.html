@@ -69,7 +69,7 @@
         .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 10px 20px rgba(255, 180, 0, 0.2); }
         .btn-outline { background: transparent; color: white; border: 2px solid var(--border); }
 
-        /* AJUSTE DOS FILTROS (CORRIGIDO PARA SCROLL NO COMPUTADOR) */
+        /* AJUSTE DOS FILTROS - CORRIGIDO PARA COMPUTADOR */
         .filter-wrapper { 
             display: flex; 
             gap: 12px; 
@@ -82,7 +82,18 @@
         .filter-wrapper::-webkit-scrollbar { height: 6px; }
         .filter-wrapper::-webkit-scrollbar-thumb { background: var(--brand-yellow); border-radius: 10px; }
 
-        .filter-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 10px 22px; border-radius: 50px; color: white; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+        .filter-tag { 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid var(--border); 
+            padding: 10px 22px; 
+            border-radius: 50px; 
+            color: white; 
+            font-size: 13px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            white-space: nowrap; 
+            flex-shrink: 0; 
+        }
         .filter-tag:hover, .filter-tag.active { border-color: var(--brand-yellow); color: var(--brand-yellow); background: rgba(255, 180, 0, 0.1); }
 
         /* MAPA */
@@ -108,10 +119,14 @@
         .footer-col a { color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 12px; font-size: 14px; cursor: pointer; }
         .footer-col a:hover { color: var(--brand-yellow); }
         
-        /* MODAL */
+        /* MODAIS */
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
         .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 45px; width: 100%; max-width: 550px; border: 1px solid var(--border); text-align: center; max-height: 90vh; overflow-y: auto; }
         input, textarea { width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; }
+        
+        /* TEXTO DO CONTRATO */
+        .legal-text { text-align: justify; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 20px 0; padding-right: 10px; }
+        .legal-text h3 { color: white; font-size: 16px; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -191,8 +206,8 @@
             </div>
             <div class="footer-col">
                 <h4>Suporte e Legal</h4>
-                <a onclick="alert('Termos de Uso: Ao usar nossa plataforma, você concorda em agir com honestidade e respeito na prestação de serviços.')">Termos de Uso</a>
-                <a onclick="alert('Privacidade: Seus dados de localização e contato são usados exclusivamente para conectar você ao prestador ou cliente.')">Privacidade</a>
+                <a onclick="openModal('modalLegal')">Termos de Uso</a>
+                <a onclick="openModal('modalLegal')">Privacidade</a>
                 <a href="mailto:contato@ajudaai.com">Contato</a>
             </div>
         </div>
@@ -201,6 +216,29 @@
         </div>
     </div>
 </footer>
+
+<div class="modal" id="modalLegal">
+    <div class="modal-content" style="max-width: 700px;">
+        <h2 id="legalTitle">Termos e <span>Privacidade</span></h2>
+        <div class="legal-text">
+            <h3>1. DA NATUREZA DO SERVIÇO</h3>
+            <p>O AJUDA AÍ opera estritamente como uma plataforma tecnológica de intermediação entre Clientes e Prestadores autônomos.</p>
+            
+            <h3>2. AUSÊNCIA DE VÍNCULO</h3>
+            <p>Conforme Art. 442-B da CLT, o uso da plataforma não estabelece vínculo empregatício. O Prestador é um profissional independente.</p>
+            
+            <h3>3. RESPONSABILIDADE</h3>
+            <p>A responsabilidade por danos durante o serviço é exclusiva das partes. O site atua apenas como vitrine digital.</p>
+            
+            <h3>4. CONDUTA</h3>
+            <p>É proibido o uso da plataforma para fins ilícitos. Usuários com má conduta serão banidos sem aviso prévio.</p>
+            
+            <h3>5. DADOS E PRIVACIDADE</h3>
+            <p>Seus dados de contato e localização são usados exclusivamente para a finalidade de conectar você à solução desejada (Lei 13.709/18 - LGPD).</p>
+        </div>
+        <button onclick="closeModal('modalLegal')" class="btn-yellow" style="width:100%; padding:15px; border-radius:15px; border:none; font-weight:800; cursor:pointer;">ESTOU DE ACORDO</button>
+    </div>
+</div>
 
 <div class="modal" id="modalPrestador">
     <div class="modal-content">
@@ -277,7 +315,7 @@
             whatsappInput.focus();
             return;
         }
-        alert("Sucesso! Dados validados.");
+        alert("Sucesso! Seus dados foram validados conforme nossos termos.");
         closeModal(tipo === 'cliente' ? 'modalPedido' : 'modalPrestador');
     }
 
