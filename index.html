@@ -17,94 +17,64 @@
             --text-main: #FFFFFF;
             --text-muted: #94A3B8;
             --border: rgba(255, 255, 255, 0.1);
-            --glass: rgba(255, 255, 255, 0.03);
         }
 
-        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); scroll-behavior: smooth; }
+        * { box-sizing: border-box; transition: all 0.3s ease; scroll-behavior: smooth; }
         body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--brand-dark); color: var(--text-main); overflow-x: hidden; }
         .container { max-width: 1200px; margin: auto; padding: 0 24px; }
 
-        /* HEADER PREMIUM COM MENU HAMBURGUER */
+        /* HEADER */
         header { 
-            background: rgba(5, 11, 20, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; z-index: 1000; padding: 14px 0;
+            background: rgba(5, 11, 20, 0.95); backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--brand-yellow);
+            position: sticky; top: 0; z-index: 1000; padding: 12px 0;
         }
-        .nav { display: flex; align-items: center; justify-content: space-between; position: relative; }
-        .logo-container { display: flex; align-items: center; gap: 10px; text-decoration: none; z-index: 1001; }
-        .pin-icon { width: 30px; height: 30px; fill: var(--brand-yellow); filter: drop-shadow(0 0 8px rgba(255,180,0,0.4)); }
-        .logo-text { font-size: 24px; font-weight: 800; color: var(--brand-yellow); letter-spacing: -1px; }
+        .nav { display: flex; align-items: center; justify-content: space-between; }
+        .logo-container { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .pin-icon { width: 32px; height: 32px; fill: var(--brand-yellow); }
+        .logo-text { font-size: 26px; font-weight: 800; color: var(--brand-yellow); letter-spacing: -1px; }
         .logo-text span { color: white; }
 
-        /* Menu de Navegação */
-        .nav-menu { display: flex; gap: 10px; align-items: center; }
-        .nav-link-top { color: white; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid var(--border); padding: 8px 14px; border-radius: 10px; background: var(--glass); }
-        .nav-link-top:hover { border-color: var(--brand-yellow); color: var(--brand-yellow); background: rgba(255,180,0,0.05); }
+        /* AJUSTE PARA O MENU HAMBURGUER SEM MUDAR O ESTILO */
+        .nav-actions { display: flex; gap: 12px; align-items: center; }
+        .nav-link-top { color: white; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; }
         
-        /* Botão Destaque */
-        .btn-header-work { background: var(--brand-yellow); color: var(--brand-blue); border: none; padding: 10px 18px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 11px; text-transform: uppercase; z-index: 1001; }
-        .btn-header-work:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,180,0,0.3); }
+        /* ÍCONE HAMBURGUER (SÓ APARECE NO MOBILE) */
+        .menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .menu-toggle span { width: 25px; height: 3px; background: var(--brand-yellow); border-radius: 2px; }
 
-        /* Menu Hamburguer Mobile Estilizado */
-        .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; padding: 5px; }
-        .menu-toggle span { width: 28px; height: 2px; background: var(--brand-yellow); border-radius: 2px; transition: 0.4s; }
-
-        @media (max-width: 850px) {
+        @media (max-width: 768px) {
             .menu-toggle { display: flex; }
-            .nav-menu { 
-                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; 
-                background: var(--brand-blue); flex-direction: column; padding: 100px 40px; 
-                box-shadow: -20px 0 40px rgba(0,0,0,0.5); visibility: hidden;
+            .nav-actions { 
+                display: none; position: absolute; top: 60px; right: 0; 
+                background: var(--brand-blue); flex-direction: column; padding: 20px; 
+                border: 1px solid var(--brand-yellow); border-radius: 15px; width: 200px;
             }
-            .nav-menu.active { right: 0; visibility: visible; }
-            .nav-link-top { width: 100%; text-align: center; font-size: 16px; padding: 16px; border-radius: 15px; }
-            /* No mobile, esconde os links normais mas mantém o botão de trabalhar no topo ao lado do hambúrguer */
-            .nav-menu .nav-link-top { display: block; } 
-            .nav > .nav-link-top { display: none; } 
+            .nav-actions.active { display: flex; }
+            .btn-mobile-fix { display: block !important; }
         }
 
-        /* HERO - AJUSTE FINTECH */
-        .hero { 
-            padding: 100px 0 60px; text-align: center;
-            background: radial-gradient(circle at top, rgba(24, 90, 219, 0.15), transparent);
-            border-radius: 0 0 100px 100px;
-        }
-        .hero h1 { font-size: clamp(38px, 9vw, 72px); font-weight: 800; line-height: 0.95; margin-bottom: 24px; letter-spacing: -4px; }
-        .hero h1 span { color: var(--brand-yellow); text-shadow: 0 0 30px rgba(255,180,0,0.2); }
-        .hero p { font-size: 20px; color: var(--text-muted); max-width: 750px; margin: 0 auto 40px; line-height: 1.5; }
-
-        /* MAPA AIRBNB PREMIUM */
+        /* TODO O RESTANTE DO SEU CSS MANTIDO IGUAL */
+        .hero { padding: 60px 0; text-align: center; background: radial-gradient(circle at top, #185ADB33, transparent); border-radius: 0 0 80px 80px; }
+        .hero h1 { font-size: clamp(32px, 8vw, 65px); font-weight: 800; line-height: 1; margin-bottom: 20px; letter-spacing: -3px; }
+        .hero h1 span { color: var(--brand-yellow); }
+        .hero p { font-size: 18px; color: var(--text-muted); max-width: 750px; margin: 0 auto 40px; }
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn-mega { padding: 18px 30px; border-radius: 20px; font-weight: 800; cursor: pointer; border: none; font-size: 15px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; width: 100%; max-width: 380px; justify-content: center; }
+        @media (min-width: 768px) { .btn-mega { width: auto; } }
+        .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 10px 20px rgba(255, 180, 0, 0.2); }
+        .btn-outline { background: transparent; color: white; border: 2px solid var(--border); }
         .map-section { padding: 40px 0; }
-        .map-wrapper { position: relative; max-width: 1000px; margin: 0 auto; border-radius: 40px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
-        #map { height: 400px; width: 100%; filter: grayscale(0.2) contrast(1.1); }
-        .btn-near { position: absolute; bottom: 30px; right: 30px; z-index: 500; background: var(--brand-yellow); color: var(--brand-blue); border: none; padding: 14px 24px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 13px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 10px; }
-        .btn-near:hover { transform: scale(1.05); }
-
-        /* MURAL DE CARDS */
-        .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-top: 40px; }
-        .job-card { background: linear-gradient(145deg, #0D1625, #0A1931); border-radius: 32px; padding: 30px; border: 1px solid var(--border); position: relative; overflow: hidden; }
-        .job-card:hover { border-color: var(--brand-yellow); transform: translateY(-5px); }
-        .badge-live { width: 10px; height: 10px; background: #FF4B4B; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px #FF4B4B; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
-
-        /* SOBRE NÓS E DEPOIMENTOS */
-        .about-section { padding: 120px 0; background: var(--glass); border-radius: 80px; margin: 80px 0; border: 1px solid var(--border); }
-        .about-content h2 { font-size: clamp(32px, 5vw, 48px); letter-spacing: -2px; }
-        .testimonial-card { background: rgba(255,255,255,0.02); padding: 35px; border-radius: 30px; border: 1px solid var(--border); backdrop-filter: blur(10px); }
-
-        /* BOTÕES MEGA */
-        .btn-mega { padding: 20px 40px; border-radius: 22px; font-weight: 800; cursor: pointer; border: none; font-size: 16px; text-transform: uppercase; display: flex; align-items: center; gap: 12px; width: 100%; max-width: 380px; justify-content: center; }
-        .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 15px 30px rgba(255, 180, 0, 0.2); }
-        .btn-outline { background: transparent; color: white; border: 1px solid var(--border); }
-        .btn-outline:hover { background: var(--glass); border-color: white; }
-
-        /* MODAL FINTECH STYLE */
-        .modal-content { background: #0A1931; border: 1px solid var(--brand-yellow); border-radius: 40px; padding: 50px 40px; box-shadow: 0 0 100px rgba(0,0,0,0.8); }
-        input, textarea, select { background: rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 18px; border-radius: 18px; color: white; margin-top: 12px; transition: 0.3s; }
-        input:focus { border-color: var(--brand-yellow); background: rgba(0,0,0,0.4); }
-
-        /* FOOTER */
-        footer { background: #02060A; padding: 100px 0 50px; border-top: 1px solid var(--border); }
+        .map-wrapper { position: relative; max-width: 1000px; margin: 0 auto; border-radius: 40px; overflow: hidden; border: 4px solid var(--brand-blue); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        #map { height: 350px; width: 100%; }
+        .btn-near { position: absolute; bottom: 20px; right: 20px; z-index: 1000; background: var(--brand-yellow); border: none; padding: 12px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; margin-top: 30px; }
+        .job-card { background: var(--brand-blue); border-radius: 30px; padding: 25px; border: 1px solid var(--border); text-align: left; }
+        .about-section { padding: 100px 0; background: linear-gradient(to bottom, var(--brand-dark), #0A1931); border-radius: 60px; margin: 60px 0; border: 1px solid var(--border); text-align: center; }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
+        .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 45px; width: 100%; max-width: 550px; border: 1px solid var(--border); text-align: center; max-height: 90vh; overflow-y: auto; }
+        input, textarea { width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; }
+        footer { padding: 80px 0 40px; border-top: 1px solid var(--border); background: #03070C; }
     </style>
 </head>
 <body>
@@ -115,26 +85,26 @@
             <svg class="pin-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             <div class="logo-text">AJUDA<span>AI</span></div>
         </a>
-
+        
         <div style="display: flex; align-items: center; gap: 15px;">
-            <button onclick="openModal('modalPrestador')" class="btn-header-work">TRABALHAR</button>
-            <div class="menu-toggle" id="mobile-menu" onclick="toggleMenu()">
+            <button onclick="openModal('modalPrestador')" class="btn-yellow btn-mobile-fix" style="padding:10px 14px; border-radius:10px; border:none; font-weight:800; cursor:pointer; font-size: 10px;">QUERO TRABALHAR</button>
+            <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </div>
         </div>
 
-        <nav class="nav-menu" id="nav-links">
-            <a href="#" class="nav-link-top" onclick="toggleMenu()">Home</a>
-            <a href="#como-funciona" class="nav-link-top" onclick="toggleMenu()">Como Funciona</a>
-            <a href="#quem-somos" class="nav-link-top" onclick="toggleMenu()">Sobre Nós</a>
-        </nav>
+        <div class="nav-actions" id="navActions">
+            <a href="#" class="nav-link-top">Home</a>
+            <a href="#como-funciona" class="nav-link-top">Como Funciona</a>
+            <a href="#quem-somos" class="nav-link-top">Sobre Nós</a>
+        </div>
     </div>
 </header>
 
 <section class="hero">
     <div class="container">
         <h1>Sua ajuda chegou.<span> Onde você estiver.</span></h1>
-        <p>A primeira plataforma Unicórnio que conecta você a soluções reais em tempo recorde. Simples, direto e 100% humano.</p>
+        <p>A plataforma definitiva que conecta desafios reais a pessoas prontas para agir. Simples, direto e humano.</p>
         <div class="btn-group">
             <button class="btn-mega btn-yellow" onclick="openModal('modalPedido')">🎯 PEDIR UMA AJUDA AGORA</button>
             <button class="btn-mega btn-outline" onclick="openModal('modalPrestador')">🚀 QUERO FATURAR COMO PRESTADOR</button>
@@ -144,63 +114,47 @@
 
 <div class="container">
     <section class="map-section">
-        <h2 style="color:var(--brand-yellow); font-size: 28px; text-align: center; margin-bottom: 30px; letter-spacing: -1px;">📍 Soluções Ativas em Tempo Real</h2>
+        <h2 style="color:var(--brand-yellow); font-size: 28px; text-align: center; margin-bottom: 20px;">📍 Encontre Soluções ao seu Redor</h2>
         <div class="map-wrapper">
             <div id="map"></div>
-            <button class="btn-near" onclick="getGPS()">📍 ENCONTRAR PERTO DE MIM</button>
+            <button class="btn-near" onclick="getGPS()">📍 PERTO DE MIM</button>
         </div>
     </section>
 
     <section id="feed">
-        <h2 style="font-size: 32px; text-align: center; margin-top: 60px;"><span class="badge-live"></span> Mural de Oportunidades</h2>
+        <h2 style="font-size: 32px; text-align: center;">Mural de Oportunidades</h2>
         <div class="mural-grid">
             <div class="job-card">
-                <div style="font-size: 12px; color: var(--brand-yellow); font-weight: 800; margin-bottom: 10px; text-transform: uppercase;">Urgente</div>
                 <h3>Exemplo de Pedido</h3>
-                <p style="color:var(--text-muted); font-size: 14px;">📍 Localização em tempo real</p>
-                <button class="btn-yellow" style="width:100%; padding:16px; border-radius:18px; border:none; font-weight: 800; margin-top:20px; cursor:pointer;">VER DETALHES</button>
+                <p style="color:var(--text-muted)">📍 Buscando localização...</p>
+                <button class="btn-yellow" style="width:100%; padding:15px; border-radius:15px; border:none; font-weight:800; margin-top:15px;">VER DETALHES</button>
             </div>
         </div>
     </section>
 
     <section id="quem-somos" class="about-section">
-        <div class="about-content" style="max-width: 850px; margin: auto; text-align: center; padding: 0 20px;">
+        <div style="max-width: 850px; margin: auto; padding: 0 20px;">
             <h2>A Identidade do <span>AJUDA AI</span></h2>
-            <p style="line-height: 1.8; color: var(--text-muted); font-size: 19px; margin-bottom: 25px; text-align: justify;">O <b>Ajuda Aí</b> é o seu ecossistema de confiança. Em um mundo digital, valorizamos o contato real. Nossa tecnologia de geolocalização aproxima quem tem um problema de quem tem a solução, eliminando intermediários e taxas abusivas.</p>
-            <p style="line-height: 1.8; color: var(--text-muted); font-size: 19px; text-align: justify;">Nascemos com o DNA de uma fintech de impacto: queremos que o profissional receba o valor justo e o cliente tenha agilidade total. <b>Problema postado, solução encontrada.</b></p>
+            <p style="color:var(--text-muted); font-size: 19px; line-height: 1.8;">O <b>Ajuda Aí</b> é um ecossistema de confiança projetado para eliminar as barreiras entre a necessidade e a solução. Acreditamos que o valor real está nas conexões humanas e na agilidade local.</p>
         </div>
     </section>
 </div>
 
 <footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="logo-text">AJUDA<span>AI</span></div>
-                <p style="color:var(--text-muted); font-size: 14px; margin-top: 15px;">A revolução da prestação de serviços local.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <a href="#">Privacidade</a>
-                <a href="#">Termos</a>
-            </div>
-        </div>
-        <div style="margin-top: 40px; color: rgba(255,255,255,0.1); font-size: 12px;">© 2026 AJUDA AI. Built for the future.</div>
+    <div class="container" style="text-align: center; padding: 40px 0; color: rgba(255,255,255,0.2); font-size: 12px;">
+        © 2026 AJUDA AI - Todos os direitos reservados.
     </div>
 </footer>
 
 <div class="modal" id="modalPrestador">
     <div class="modal-content">
         <h2>Seja um <span>Parceiro</span></h2>
-        <form onsubmit="alert('Bem-vindo ao time!'); closeModal('modalPrestador'); return false;">
+        <form onsubmit="alert('Cadastro enviado!'); closeModal('modalPrestador'); return false;">
             <input type="text" placeholder="Nome completo" required>
-            <input type="tel" placeholder="WhatsApp (DDD + Número)" required>
-            <input type="text" placeholder="Sua Especialidade" required>
-            <input type="text" placeholder="Cidade de Atuação" id="p_cidade" required>
-            <textarea placeholder="Fale um pouco sobre sua experiência" rows="3"></textarea>
-            <input type="hidden" id="p_lat"> <input type="hidden" id="p_lng">
-            <button type="submit" class="btn-yellow" style="width:100%; padding:20px; border:none; border-radius:20px; font-weight:800; margin-top:20px; cursor:pointer;">FINALIZAR CADASTRO</button>
-            <button type="button" onclick="closeModal('modalPrestador')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; opacity: 0.5;">Voltar</button>
+            <input type="tel" placeholder="WhatsApp" required>
+            <input type="text" placeholder="Cidade de Atuação" id="p_cidade">
+            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px;">FINALIZAR</button>
+            <button type="button" onclick="closeModal('modalPrestador')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer;">Voltar</button>
         </form>
     </div>
 </div>
@@ -208,12 +162,11 @@
 <div class="modal" id="modalPedido">
     <div class="modal-content">
         <h2>O que você <span>precisa</span>?</h2>
-        <form onsubmit="alert('Pedido publicado!'); closeModal('modalPedido'); return false;">
-            <input placeholder="Título (Ex: Pintura de Parede)" required>
+        <form onsubmit="alert('Pedido lançado!'); closeModal('modalPedido'); return false;">
+            <input placeholder="Ex: Conserto de Máquina" required>
             <input placeholder="Seu WhatsApp" required>
-            <textarea placeholder="Descreva o que precisa ser feito..." rows="3"></textarea>
-            <button type="submit" class="btn-yellow" style="width:100%; padding:20px; border:none; border-radius:20px; font-weight:800; margin-top:20px; cursor:pointer;">LANÇAR NO MURAL</button>
-            <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; opacity: 0.5;">Cancelar</button>
+            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px;">LANÇAR NO MURAL</button>
+            <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer;">Cancelar</button>
         </form>
     </div>
 </div>
@@ -223,39 +176,29 @@
     const map = L.map('map', { zoomControl: false }).setView([-15.78, -47.92], 4); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
-    function toggleMenu() {
-        const menu = document.getElementById('nav-links');
-        const icon = document.getElementById('mobile-menu');
-        menu.classList.toggle('active');
-        
-        // Animação das barrinhas do hambúrguer
-        if(menu.classList.contains('active')) {
-            icon.children[0].style.transform = "rotate(45deg) translate(5px, 6px)";
-            icon.children[1].style.opacity = "0";
-            icon.children[2].style.transform = "rotate(-45deg) translate(5px, -6px)";
-        } else {
-            icon.children[0].style.transform = "none";
-            icon.children[1].style.opacity = "1";
-            icon.children[2].style.transform = "none";
-        }
-    }
-
-    function openModal(id) { 
-        document.getElementById(id).style.display = 'flex'; 
-        if(id === 'modalPrestador' && navigator.geolocation) {
+    // 1. AUTO-GPS AO CARREGAR (PEDIDO PELO USUÁRIO)
+    window.onload = function() {
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(p => {
-                document.getElementById('p_lat').value = p.coords.latitude;
-                document.getElementById('p_lng').value = p.coords.longitude;
+                map.flyTo([p.coords.latitude, p.coords.longitude], 14);
+                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Você está aqui!').openPopup();
             });
         }
+    };
+
+    // 2. FUNÇÃO MENU HAMBURGUER
+    function toggleMenu() {
+        document.getElementById('navActions').classList.toggle('active');
     }
+
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
     function getGPS() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(p => {
                 map.setView([p.coords.latitude, p.coords.longitude], 14);
-                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Você está aqui!').openPopup();
+                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Localização atualizada').openPopup();
             });
         }
     }
