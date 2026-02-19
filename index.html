@@ -85,8 +85,11 @@
 
         /* MURAL */
         .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; margin-top: 30px; }
-        .job-card { background: var(--brand-blue); border-radius: 30px; padding: 25px; border: 1px solid var(--border); text-align: left; }
+        .job-card { background: var(--brand-blue); border-radius: 30px; padding: 25px; border: 1px solid var(--border); text-align: left; position: relative; }
         .badge-live { width: 10px; height: 10px; background: #FF4B4B; border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 1.5s infinite; }
+        .status-pill { font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: 800; text-transform: uppercase; float: right; }
+        .status-open { background: rgba(255, 180, 0, 0.2); color: var(--brand-yellow); }
+        .status-progress { background: rgba(24, 90, 219, 0.3); color: #7cb9ff; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         /* SOBRE NÓS */
@@ -107,6 +110,7 @@
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
         .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 45px; width: 100%; max-width: 550px; border: 1px solid var(--border); text-align: center; max-height: 90vh; overflow-y: auto; }
         input, textarea { width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; }
+        input:invalid { border-color: #ff4b4b; }
     </style>
 </head>
 <body>
@@ -153,16 +157,16 @@
         </div>
     </section>
 
-    <div class="filter-wrapper">
-        <div class="filter-tag active">Todos</div>
-        <div class="filter-tag">🏠 Reparos Domésticos</div>
-        <div class="filter-tag">⚡ Elétrica</div>
-        <div class="filter-tag">🚰 Hidráulica</div>
-        <div class="filter-tag">🧼 Limpeza</div>
-        <div class="filter-tag">📦 Carretos</div>
-        <div class="filter-tag">🐾 Pet Walker</div>
-        <div class="filter-tag">💻 Assistência Técnica</div>
-        <div class="filter-tag">🎨 Design & Social Media</div>
+    <div class="filter-wrapper" id="filterContainer">
+        <div class="filter-tag active" data-category="Todos">Todos</div>
+        <div class="filter-tag" data-category="Reparos">🏠 Reparos Domésticos</div>
+        <div class="filter-tag" data-category="Elétrica">⚡ Elétrica</div>
+        <div class="filter-tag" data-category="Hidráulica">🚰 Hidráulica</div>
+        <div class="filter-tag" data-category="Limpeza">🧼 Limpeza</div>
+        <div class="filter-tag" data-category="Carretos">📦 Carretos</div>
+        <div class="filter-tag" data-category="Pet">🐾 Pet Walker</div>
+        <div class="filter-tag" data-category="Técnica">💻 Assistência Técnica</div>
+        <div class="filter-tag" data-category="Design">🎨 Design & Social Media</div>
     </div>
 
     <section id="como-funciona" style="padding: 60px 0; text-align: center;">
@@ -176,13 +180,8 @@
 
     <section id="feed">
         <h2 style="font-size: 32px; text-align: center;"><span class="badge-live"></span> Mural de Oportunidades</h2>
-        <div class="mural-grid">
-            <div class="job-card">
-                <h3>Exemplo de Pedido</h3>
-                <p style="color:var(--text-muted)">📍 Buscando localização...</p>
-                <button class="btn-yellow" style="width:100%; padding:15px; border-radius:15px; border:none; font-weight:800; margin-top:15px;">VER DETALHES</button>
+        <div class="mural-grid" id="muralGrid">
             </div>
-        </div>
     </section>
 
     <section id="quem-somos" class="about-section">
@@ -231,9 +230,9 @@
 <div class="modal" id="modalPrestador">
     <div class="modal-content">
         <h2>Seja um <span>Parceiro</span></h2>
-        <form onsubmit="alert('Cadastro enviado!'); closeModal('modalPrestador'); return false;">
+        <form onsubmit="validarCadastro(event, 'prestador')">
             <input type="text" placeholder="Nome completo" required>
-            <input type="tel" placeholder="WhatsApp" required>
+            <input type="tel" class="whatsapp-mask" placeholder="WhatsApp (apenas números)" required pattern="[0-9]{10,11}">
             <input type="email" placeholder="Email" required>
             <input type="text" placeholder="Profissão" required>
             <input type="text" placeholder="Cidade" id="p_cidade" required>
@@ -247,10 +246,10 @@
 <div class="modal" id="modalPedido">
     <div class="modal-content">
         <h2>O que você <span>precisa</span>?</h2>
-        <form onsubmit="alert('Lançado!'); closeModal('modalPedido'); return false;">
-            <input placeholder="Necessidade" required>
-            <input placeholder="WhatsApp" required>
-            <textarea placeholder="Descrição"></textarea>
+        <form onsubmit="validarCadastro(event, 'cliente')">
+            <input placeholder="Necessidade" id="ped_titulo" required>
+            <input type="tel" class="whatsapp-mask" placeholder="WhatsApp (apenas números)" required pattern="[0-9]{10,11}">
+            <textarea placeholder="Descrição" id="ped_desc"></textarea>
             <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px;">LANÇAR NO MURAL</button>
             <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer;">Cancelar</button>
         </form>
@@ -259,10 +258,18 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+    // --- DADOS INICIAIS ---
+    let servicosDB = [
+        { id: 1, categoria: "Elétrica", titulo: "Instalação de Chuveiro", desc: "Preciso trocar a resistência e fiação.", status: "aberto" },
+        { id: 2, categoria: "Limpeza", titulo: "Diarista Meio Período", desc: "Limpeza de apto 2 quartos.", status: "aberto" },
+        { id: 3, categoria: "Reparos", titulo: "Montagem de Guarda-Roupa", desc: "Móvel novo na caixa.", status: "aberto" }
+    ];
+
     const map = L.map('map', { zoomControl: false }).setView([-15.78, -47.92], 4); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
     window.addEventListener('load', () => {
+        renderizarMural("Todos");
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(p => {
                 map.flyTo([p.coords.latitude, p.coords.longitude], 14, {animate: true, duration: 2});
@@ -271,6 +278,97 @@
         }
     });
 
+    // --- FUNCIONALIDADE DE FILTRO REAL ---
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+            document.querySelector('.filter-tag.active').classList.remove('active');
+            this.classList.add('active');
+            renderizarMural(this.dataset.category);
+        });
+    });
+
+    function renderizarMural(filtro) {
+        const grid = document.getElementById('muralGrid');
+        grid.innerHTML = "";
+        
+        const filtrados = filtro === "Todos" ? servicosDB : servicosDB.filter(s => s.categoria === filtro);
+        
+        if(filtrados.length === 0) {
+            grid.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding: 40px;'>Nenhuma solicitação nesta categoria no momento.</p>";
+            return;
+        }
+
+        filtrados.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'job-card';
+            const statusClass = item.status === 'aberto' ? 'status-open' : 'status-progress';
+            const statusText = item.status === 'aberto' ? 'Aguardando Proposta' : 'Em Andamento';
+            
+            card.innerHTML = `
+                <span class="status-pill ${statusClass}">${statusText}</span>
+                <h3>${item.titulo}</h3>
+                <p style="color:var(--text-muted); font-size:14px;">Categoria: ${item.categoria}</p>
+                <p>${item.desc}</p>
+                <button class="btn-yellow" onclick="interagirPedido(${item.id})" style="width:100%; padding:15px; border-radius:15px; border:none; font-weight:800; margin-top:15px;">
+                    ${item.status === 'aberto' ? 'ACEITAR SERVIÇO' : 'VER LOCALIZAÇÃO'}
+                </button>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // --- LÓGICA DE STATUS E LOCALIZAÇÃO ---
+    function interagirPedido(id) {
+        const pedido = servicosDB.find(s => s.id === id);
+        if(pedido.status === 'aberto') {
+            pedido.status = 'progresso';
+            alert("Sucesso! Você aceitou o serviço. Status alterado para: EM ANDAMENTO.");
+            renderizarMural(document.querySelector('.filter-tag.active').dataset.category);
+        } else {
+            alert("O Cliente compartilhou a localização com você. Verifique o mapa acima para traçar a rota.");
+            // Aqui simularia a rota no mapa real
+            getGPS();
+        }
+    }
+
+    // --- VALIDAÇÃO WHATSAPP ---
+    document.querySelectorAll('.whatsapp-mask').forEach(input => {
+        input.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, ""); // Remove letras
+            e.target.value = value.substring(0, 11); // Limita a 11 dígitos
+        });
+    });
+
+    function validarCadastro(e, tipo) {
+        e.preventDefault();
+        const inputs = e.target.querySelectorAll('input');
+        const whatsapp = Array.from(inputs).find(i => i.type === 'tel').value;
+
+        if(whatsapp.length < 10) {
+            alert("Por favor, insira um WhatsApp válido (DDD + Número).");
+            return;
+        }
+
+        if(tipo === 'cliente') {
+            const novo = {
+                id: Date.now(),
+                categoria: "Reparos", // Categoria padrão ou capturada de select
+                titulo: document.getElementById('ped_titulo').value,
+                desc: document.getElementById('ped_desc').value,
+                status: "aberto"
+            };
+            servicosDB.unshift(novo);
+            renderizarMural("Todos");
+            alert("Pedido lançado com sucesso! Aguardando propostas de prestadores próximos.");
+            closeModal('modalPedido');
+        } else {
+            alert("Cadastro de Prestador realizado! Seus dados foram validados.");
+            closeModal('modalPrestador');
+        }
+        e.target.reset();
+    }
+
+    // --- AUXILIARES ---
     function toggleMenu() { document.getElementById('navActions').classList.toggle('active'); }
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -278,20 +376,11 @@
     function getGPS() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(p => {
-                map.setView([p.coords.latitude, p.coords.longitude], 13);
-                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Sua localização').openPopup();
+                map.setView([p.coords.latitude, p.coords.longitude], 15);
+                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Local do Serviço').openPopup();
             });
         }
     }
-
-    // Interatividade dos filtros
-    document.querySelectorAll('.filter-tag').forEach(tag => {
-        tag.addEventListener('click', function() {
-            document.querySelector('.filter-tag.active').classList.remove('active');
-            this.classList.add('active');
-        });
-    });
 </script>
 </body>
-    </html>
-    
+</html>
