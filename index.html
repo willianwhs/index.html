@@ -33,6 +33,7 @@
             overflow: hidden;
             min-height: 90px;
         }
+        /* Estilo sutil para o AdSense não chocar o visual */
         .adsbygoogle {
             background: rgba(255,255,255,0.02);
             border-radius: 12px;
@@ -123,6 +124,13 @@
         .step-card p { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
         .step-card .icon { font-size: 40px; }
 
+        @media (max-width: 600px) {
+            .step-card { padding: 20px; }
+            .step-card h3 { font-size: 18px; }
+            .step-card p { font-size: 14px; }
+            .step-card .icon { font-size: 32px; }
+        }
+        
         .about-section { 
             padding: 80px 0; 
             background: linear-gradient(135deg, #050B14 0%, #0A1931 100%); 
@@ -142,6 +150,12 @@
             padding: 0 10px;
         }
 
+        @media (max-width: 600px) {
+            .about-section { padding: 40px 20px; border-radius: 40px; margin: 30px 0; }
+            .about-title { font-size: 26px; }
+            .about-text { font-size: 15px; line-height: 1.6; }
+        }
+
         footer { padding: 60px 0 30px; border-top: 1px solid var(--border); background: #03070C; text-align: center; }
         .footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
         .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; cursor: pointer; }
@@ -150,9 +164,11 @@
         .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 40px; width: 100%; max-width: 550px; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto; }
         input, textarea { width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; }
         
+        /* Estilo do texto Jurídico */
         .legal-text { color: var(--text-muted); text-align: left; font-size: 14px; line-height: 1.6; }
         .legal-text h4 { color: var(--brand-yellow); margin-top: 20px; }
 
+        /* --- IMPLEMENTAÇÃO BANNER DE COOKIES --- */
         .cookie-consent {
             position: fixed;
             bottom: 20px;
@@ -172,6 +188,11 @@
         }
         .cookie-consent.active { transform: translateY(0); }
         .cookie-text { font-size: 14px; color: white; max-width: 70%; }
+        .cookie-text b { color: var(--brand-yellow); }
+        @media (max-width: 600px) {
+            .cookie-consent { flex-direction: column; text-align: center; gap: 15px; }
+            .cookie-text { max-width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -289,7 +310,9 @@
             <h2 class="about-title">O Coração do <span>Ajuda Aí</span></h2>
             <p class="about-text">
                 O Ajuda Aí não é apenas uma plataforma, é o facilitador de conexões reais. <br><br>
-                Nossa missão é <b>encurtar a distância</b> entre quem sabe fazer e quem precisa que seja feito...
+                Nossa missão é <b>encurtar a distância</b> entre quem sabe fazer e quem precisa que seja feito. Criamos uma vitrine onde o trabalhador ganha visibilidade e o cliente ganha agilidade. <br><br>
+                Acreditamos que a tecnologia deve servir para aproximar vizinhos: ajudamos o <b>prestador de serviço</b> a encontrar novas oportunidades e prosperar, e ajudamos o <b>cliente</b> a resolver seus problemas com segurança e praticidade. <br><br>
+                <b>No Ajuda Aí, todo mundo ganha.</b>
             </p>
         </div>
     </section>
@@ -303,34 +326,63 @@
             <a onclick="openModal('modalTermos')">Termos de Uso</a>
             <a href="#como-funciona">Como Funciona</a>
         </div>
-        <p style="margin-top: 30px; font-size: 11px; color: rgba(255,255,255,0.2);">© 2026 AJUDA AI.</p>
+        <p style="margin-top: 30px; font-size: 11px; color: rgba(255,255,255,0.2);">© 2026 AJUDA AI - CONEXÃO HUMANA E DIRETA.</p>
     </div>
 </footer>
 
-<div class="modal" id="modalPedido">
+<div class="modal" id="modalPrivacidade">
     <div class="modal-content">
-        <h2>Pedir uma <span>Ajuda</span></h2>
-        <form id="formPedido">
-            <input type="text" id="nomePedido" placeholder="Seu Nome" required>
-            <input type="tel" id="whatsappPedido" placeholder="WhatsApp (19) 9 71531281" maxlength="16" required>
-            <input type="text" id="servicoPedido" placeholder="O que você precisa?" required>
-            <input type="text" id="cidadePedido" placeholder="Sua Cidade" required>
-            <textarea id="descPedido" placeholder="Detalhes do serviço" style="resize: none;"></textarea>
-            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">PUBLICAR PEDIDO</button>
-            <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Cancelar</button>
-        </form>
+        <h2 style="color: var(--brand-yellow);">Política de <span>Privacidade</span></h2>
+        <div class="legal-text">
+            <p>A sua privacidade é importante para nós. Esta política descreve como o <b>Ajuda Aí</b> coleta e utiliza seus dados.</p>
+            
+            <h4>1. Coleta de Dados</h4>
+            <p>Coletamos seu nome, WhatsApp, localização (GPS) e profissão apenas para viabilizar na conexão entre prestadores e clientes. Não coletamos dados bancários ou documentos sensíveis através do front-end.</p>
+            
+            <h4>2. Uso da Localização</h4>
+            <p>O Ajuda Aí utiliza a sua localização geográfica para mostrar serviços próximos a você. Ao clicar em "Usar meu GPS", você autoriza esse acesso em tempo real.</p>
+            
+            <h4>3. Compartilhamento</h4>
+            <p>Seus dados de contato (WhatsApp) só ficam visíveis quando você publica um serviço ou se cadastra como prestador, permitindo o contato direto entre as partes.</p>
+            
+            <h4>4. Seus Direitos</h4>
+            <p>A qualquer momento, você pode solicitar a exclusão de seus dados de nossa base entrando em contato com o suporte.</p>
+        </div>
+        <button onclick="closeModal('modalPrivacidade')" class="btn-yellow" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; border:none; font-weight:800; cursor:pointer;">LI E CONCORDO</button>
+    </div>
+</div>
+
+<div class="modal" id="modalTermos">
+    <div class="modal-content">
+        <h2 style="color: var(--brand-yellow);">Termos de <span>Uso</span></h2>
+        <div class="legal-text">
+            <p>Ao utilizar o <b>Ajuda Aí</b>, você concorda integralmente com as seguintes condições:</p>
+            
+            <h4>1. Natureza do Serviço</h4>
+            <p>O Ajuda Aí é exclusivamente uma <b>plataforma de anúncios e conexão</b>. Não somos agência de empregos, nem empregadores. Atuamos apenas como a ponte tecnológica entre as partes.</p>
+            
+            <h4>2. Isenção de Responsabilidade</h4>
+            <p>O Ajuda Aí <b>não se responsabiliza</b> pela qualidade, prazos, pagamentos ou conduta moral dos usuários. Toda negociação é feita diretamente via WhatsApp, fora da plataforma.</p>
+            
+            <h4>3. Conduta do Usuário</h4>
+            <p>É proibido postar conteúdos falsos, ilícitos ou discriminatórios. Perfis que violarem a boa convivência serão banidos permanentemente sem aviso prévio.</p>
+            
+            <h4>4. Segurança</h4>
+            <p>Recomendamos que, ao contratar ou prestar um serviço, os usuários tomem medidas de segurança, como informar familiares sobre o local do serviço e verificar referências.</p>
+        </div>
+        <button onclick="closeModal('modalTermos')" class="btn-yellow" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; border:none; font-weight:800; cursor:pointer;">ACEITAR TERMOS</button>
     </div>
 </div>
 
 <div class="modal" id="modalPrestador">
     <div class="modal-content">
         <h2>Cadastro de <span>Parceiro</span></h2>
-        <form id="formPrestador">
-            <input type="text" id="nomePrestador" placeholder="Nome completo" required>
-            <input type="tel" id="whatsappPrestador" placeholder="WhatsApp (19) 9 71531281" maxlength="16" required>
-            <input type="text" id="profissaoPrestador" placeholder="Sua Profissão" required>
-            <input type="text" id="cidadePrestador" placeholder="Sua Cidade" required>
-            <textarea id="descPrestador" placeholder="Fale brevemente sobre seus serviços" style="resize: none;"></textarea>
+        <form onsubmit="validarCadastro(event, 'prestador')">
+            <input type="text" placeholder="Nome completo" required>
+            <input type="tel" id="whatsappInput" placeholder="WhatsApp (19) 9 71531281" maxlength="16" required>
+            <input type="text" placeholder="Sua Profissão" required>
+            <input type="text" placeholder="Sua Cidade" required>
+            <textarea placeholder="Fale brevemente sobre seus serviços" style="resize: none;"></textarea>
             <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">FINALIZAR</button>
             <button type="button" onclick="closeModal('modalPrestador')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Voltar</button>
         </form>
@@ -340,64 +392,14 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     const SUPABASE_URL = 'https://vhoiwkndxmmajwoskxdl.supabase.co';
-    const SUPABASE_KEY = 'EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // Use sua chave completa
+    const SUPABASE_KEY = 'EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZob2l3a25keG1tYWp3b3NreGRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1ODA5NTcsImV4cCI6MjA4NzE1Njk1N30.ieQQz4158eWEaHkC5yMjMIIFg-FBabbwUz-vpXyo1c8';
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let userLat = ""; let userLng = "";
     const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
-    /* --- VALIDADOR WHATSAPP (Aplicado a ambos os campos) --- */
-    function aplicarMascara(id) {
-        document.getElementById(id).addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, "");
-            if (value.length > 11) value = value.slice(0, 11);
-            if (value.length > 2) value = `(${value.slice(0, 2)}) ${value.slice(2, 3)} ${value.slice(3)}`;
-            else if (value.length > 0) value = `(${value}`;
-            e.target.value = value;
-        });
-    }
-    aplicarMascara('whatsappPrestador');
-    aplicarMascara('whatsappPedido');
-
-    /* --- AUTOMAÇÃO SUPABASE --- */
-    async function salvarDados(tabela, dados, modalId) {
-        const { error } = await _supabase.from(tabela).insert([dados]);
-        if (error) {
-            alert('Erro ao salvar: ' + error.message);
-        } else {
-            alert('Sucesso! Seu cadastro foi realizado.');
-            closeModal(modalId);
-        }
-    }
-
-    document.getElementById('formPrestador').onsubmit = async (e) => {
-        e.preventDefault();
-        const dados = {
-            nome: document.getElementById('nomePrestador').value,
-            whatsapp: document.getElementById('whatsappPrestador').value,
-            profissao: document.getElementById('profissaoPrestador').value,
-            cidade: document.getElementById('cidadePrestador').value,
-            descricao: document.getElementById('descPrestador').value,
-            lat: userLat, lng: userLng
-        };
-        await salvarDados('prestadores', dados, 'modalPrestador');
-    };
-
-    document.getElementById('formPedido').onsubmit = async (e) => {
-        e.preventDefault();
-        const dados = {
-            nome: document.getElementById('nomePedido').value,
-            whatsapp: document.getElementById('whatsappPedido').value,
-            servico: document.getElementById('servicoPedido').value,
-            cidade: document.getElementById('cidadePedido').value,
-            descricao: document.getElementById('descPedido').value,
-            lat: userLat, lng: userLng
-        };
-        await salvarDados('pedidos', dados, 'modalPedido');
-    };
-
-    /* --- FUNÇÕES GERAIS --- */
+    /* --- LÓGICA DE COOKIES --- */
     function acceptCookies() {
         localStorage.setItem('ajudaAi_cookies', 'true');
         document.getElementById('cookieBanner').classList.remove('active');
@@ -405,14 +407,43 @@
 
     window.addEventListener('load', () => {
         if (!localStorage.getItem('ajudaAi_cookies')) {
-            setTimeout(() => document.getElementById('cookieBanner').classList.add('active'), 2000);
+            setTimeout(() => {
+                document.getElementById('cookieBanner').classList.add('active');
+            }, 2000);
         }
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(p => {
                 userLat = p.coords.latitude; userLng = p.coords.longitude;
                 map.flyTo([userLat, userLng], 14);
+                L.marker([userLat, userLng]).addTo(map).bindPopup('Você está aqui!').openPopup();
             });
         }
+    });
+
+    /* --- VALIDADOR DE WHATSAPP (MÁSCARA DINÂMICA) --- */
+    const whatsappInput = document.getElementById('whatsappInput');
+    whatsappInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, ""); // Remove não-números
+        if (value.length > 11) value = value.slice(0, 11);
+        
+        // Aplica a máscara (19) 9 71531281
+        if (value.length > 2) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2, 3)} ${value.slice(3)}`;
+        } else if (value.length > 0) {
+            value = `(${value}`;
+        }
+        
+        e.target.value = value;
+    });
+
+    document.getElementById('muralSearch').addEventListener('input', function(e) {
+        const term = e.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.job-card');
+        cards.forEach(card => {
+            const content = card.innerText.toLowerCase();
+            card.style.display = content.includes(term) ? 'block' : 'none';
+        });
     });
 
     function toggleMenu() { document.getElementById('navActions').classList.toggle('active'); }
