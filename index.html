@@ -29,7 +29,7 @@
             border-bottom: 2px solid var(--brand-yellow);
             position: sticky; top: 0; z-index: 1000; padding: 12px 0;
         }
-        .nav { display: flex; align-items: center; justify-content: space-between; }
+        .nav { display: flex; align-items: center; justify-content: space-between; position: relative; }
         .logo-container { display: flex; align-items: center; gap: 8px; text-decoration: none; }
         .pin-icon { width: 28px; height: 28px; fill: var(--brand-yellow); }
         .logo-text { font-size: 22px; font-weight: 800; color: var(--brand-yellow); letter-spacing: -1px; }
@@ -38,7 +38,7 @@
         .nav-actions { display: flex; gap: 12px; align-items: center; }
         .nav-link-top { color: white; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; }
 
-        .menu-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 5px; }
+        .menu-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 5px; z-index: 1001; }
         .menu-hamburger span { width: 25px; height: 3px; background: var(--brand-yellow); border-radius: 2px; }
 
         @media (max-width: 850px) {
@@ -50,9 +50,11 @@
                 padding: 20px; border-radius: 20px; border: 1px solid var(--brand-yellow); 
                 box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 220px;
             }
-            .nav-actions.active { display: flex; }
+            .nav-actions.active { display: flex; animation: slideIn 0.3s ease; }
             .nav-actions a, .nav-actions button { width: 100%; text-align: center; }
         }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         .hero { 
             padding: 80px 0; text-align: center;
@@ -68,78 +70,37 @@
         @media (min-width: 768px) { .btn-mega { width: auto; } }
         
         .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3); }
-        
-        .btn-work { 
-            background: #0A1931; 
-            color: white; 
-            border: 2px solid var(--brand-yellow);
-            box-shadow: 0 0 15px rgba(255, 180, 0, 0.2);
-        }
-        .btn-work:hover { background: var(--brand-yellow); color: var(--brand-blue); }
+        .btn-work { background: #0A1931; color: white; border: 2px solid var(--brand-yellow); }
 
-        .search-wrapper { max-width: 600px; margin: 30px auto 10px; position: relative; }
-        .search-input-main { 
-            width: 100%; padding: 18px 25px 18px 55px; border-radius: 50px; 
-            background: rgba(255,255,255,0.05); border: 1px solid var(--border); 
-            color: white; font-size: 16px; outline: none; transition: 0.3s;
-        }
-        .search-input-main:focus { border-color: var(--brand-yellow); background: rgba(255,255,255,0.08); }
-        .search-icon-svg { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); fill: var(--brand-yellow); width: 20px; height: 20px; }
-
-        .map-section { padding: 40px 0; }
-        .map-wrapper { position: relative; max-width: 1000px; margin: 0 auto; border-radius: 40px; overflow: hidden; border: 4px solid var(--brand-blue); }
-        #map { height: 400px; width: 100%; }
-        .btn-near { position: absolute; bottom: 20px; right: 20px; z-index: 500; background: var(--brand-yellow); border: none; padding: 12px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; }
-
-        .filter-wrapper { display: flex; gap: 10px; overflow-x: auto; padding: 20px 0; scrollbar-width: none; justify-content: center; }
-        .filter-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 10px 20px; border-radius: 50px; color: white; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
-        .filter-tag.active { border-color: var(--brand-yellow); color: var(--brand-yellow); background: rgba(255, 180, 0, 0.1); }
-
-        .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; margin-top: 30px; }
-        .job-card { background: var(--brand-blue); border-radius: 30px; padding: 25px; border: 1px solid var(--border); text-align: left; }
-
-        .step-card { 
-            background: rgba(255,255,255,0.03); 
-            padding: 30px; 
-            border-radius: 25px; 
-            border: 1px solid var(--border); 
-            text-align: center; 
-        }
+        .step-card { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 25px; border: 1px solid var(--border); text-align: center; }
         .step-card h3 { font-size: 22px; margin: 15px 0 10px; }
         .step-card p { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-        .step-card .icon { font-size: 40px; }
-
+        
         @media (max-width: 600px) {
             .step-card { padding: 20px; }
             .step-card h3 { font-size: 18px; }
             .step-card p { font-size: 14px; }
-            .step-card .icon { font-size: 32px; }
-        }
-        
-        .about-section { 
-            padding: 80px 0; 
-            background: linear-gradient(135deg, #050B14 0%, #0A1931 100%); 
-            border-radius: 60px; 
-            margin: 60px 0; 
-            border: 1px solid var(--brand-yellow); 
-            text-align: center; 
-        }
-        .about-title { font-size: 36px; margin-bottom: 20px; }
-        .about-text { 
-            max-width: 900px; 
-            margin: 0 auto; 
-            color: #fff; 
-            line-height: 1.8; 
-            font-size: 19px; 
-            font-weight: 500; 
-            padding: 0 10px;
         }
 
+        .about-section { padding: 80px 0; background: linear-gradient(135deg, #050B14 0%, #0A1931 100%); border-radius: 60px; margin: 60px 0; border: 1px solid var(--brand-yellow); text-align: center; }
+        .about-title { font-size: clamp(26px, 6vw, 36px); margin-bottom: 20px; }
+        .about-text { max-width: 900px; margin: 0 auto; color: #fff; line-height: 1.8; font-size: 19px; font-weight: 500; padding: 0 10px; }
+
         @media (max-width: 600px) {
-            .about-section { padding: 40px 20px; border-radius: 40px; margin: 30px 0; }
-            .about-title { font-size: 26px; }
+            .about-section { padding: 40px 20px; border-radius: 40px; }
             .about-text { font-size: 15px; line-height: 1.6; }
         }
+
+        .map-wrapper { position: relative; max-width: 1000px; margin: 0 auto; border-radius: 40px; overflow: hidden; border: 4px solid var(--brand-blue); }
+        #map { height: 400px; width: 100%; }
+        .btn-near { position: absolute; bottom: 20px; right: 20px; z-index: 500; background: var(--brand-yellow); border: none; padding: 12px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; }
+
+        .search-wrapper { max-width: 600px; margin: 30px auto 10px; position: relative; }
+        .search-input-main { width: 100%; padding: 18px 25px 18px 55px; border-radius: 50px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; font-size: 16px; outline: none; }
+        .search-icon-svg { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); fill: var(--brand-yellow); width: 20px; height: 20px; }
+
+        .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; margin-top: 30px; }
+        .job-card { background: var(--brand-blue); border-radius: 30px; padding: 25px; border: 1px solid var(--border); }
 
         footer { padding: 60px 0 30px; border-top: 1px solid var(--border); background: #03070C; text-align: center; }
         .footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
@@ -148,8 +109,6 @@
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
         .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 40px; width: 100%; max-width: 550px; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto; }
         input, textarea { width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; }
-        
-        /* Estilo do texto Jurídico */
         .legal-text { color: var(--text-muted); text-align: left; font-size: 14px; line-height: 1.6; }
         .legal-text h4 { color: var(--brand-yellow); margin-top: 20px; }
     </style>
@@ -170,7 +129,7 @@
             <button onclick="openModal('modalPrestador'); closeMenu();" class="btn-yellow" style="padding:10px 18px; border-radius:10px; border:none; font-weight:800; cursor:pointer;">CADASTRAR PRESTADOR</button>
         </div>
 
-        <button class="menu-hamburger" onclick="toggleMenu()">
+        <button class="menu-hamburger" id="hamburgerBtn" onclick="toggleMenu(event)">
             <span></span><span></span><span></span>
         </button>
     </div>
@@ -181,7 +140,7 @@
         <h1>Sua ajuda chegou.<span> Onde você estiver.</span></h1>
         <p>A ponte que conecta o talento de quem trabalha à necessidade de quem precisa. Simples, rápido e humano.</p>
         <div class="btn-group">
-            <button class="btn-mega btn-yellow" onclick="openModal('modalPedido')">🎯 PEDIR UMA AJUDA AGORA</button>
+            <button class="btn-mega btn-yellow">🎯 PEDIR UMA AJUDA AGORA</button>
             <button class="btn-mega btn-work" onclick="openModal('modalPrestador')">🚀 QUERO TRABALHAR NO AJUDA AI</button>
         </div>
     </div>
@@ -191,26 +150,13 @@
     <section id="como-funciona" style="padding: 60px 0;">
         <h2 style="text-align: center; margin-bottom: 40px; font-size: clamp(24px, 5vw, 32px);">Como o Ajuda Aí funciona?</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
-            <div class="step-card">
-                <div class="icon">📝</div>
-                <h3>Para quem precisa</h3>
-                <p>Poste sua necessidade e encontre prestadores qualificados que já estão no seu bairro.</p>
-            </div>
-            <div class="step-card">
-                <div class="icon">🛠️</div>
-                <h3>Para quem trabalha</h3>
-                <p>Tenha acesso a um mural de serviços em tempo real e aumente sua renda sem pagar taxas extras.</p>
-            </div>
-            <div class="step-card">
-                <div class="icon">🤝</div>
-                <h3>Conexão Direta</h3>
-                <p>Nós encurtamos a distância. Você escolhe, combina e resolve tudo pelo WhatsApp.</p>
-            </div>
+            <div class="step-card"><h3>📝 Para quem precisa</h3><p>Poste sua necessidade e encontre prestadores qualificados que já estão no seu bairro.</p></div>
+            <div class="step-card"><h3>🛠️ Para quem trabalha</h3><p>Tenha acesso a um mural de serviços em tempo real e aumente sua renda sem pagar taxas extras.</p></div>
+            <div class="step-card"><h3>🤝 Conexão Direta</h3><p>Nós encurtamos a distância. Você escolhe, combina e resolve tudo pelo WhatsApp.</p></div>
         </div>
     </section>
 
     <section class="map-section">
-        <h2 style="color:var(--brand-yellow); font-size: clamp(22px, 4vw, 28px); text-align: center; margin-bottom: 20px;">📍 Encontre suporte ao seu redor</h2>
         <div class="map-wrapper">
             <div id="map"></div>
             <button class="btn-near" onclick="getGPS()">📍 USAR MEU GPS</button>
@@ -219,150 +165,105 @@
 
     <div class="search-wrapper">
         <svg class="search-icon-svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-        <input type="text" class="search-input-main" id="muralSearch" placeholder="O que você procura? (Ex: Máquina de Lavar, Pintor, Elétrica...)">
+        <input type="text" class="search-input-main" id="muralSearch" placeholder="O que você procura?">
     </div>
 
-    <div class="filter-wrapper">
-        <div class="filter-tag active">Todos</div>
-        <div class="filter-tag">🏠 Reparos</div>
-        <div class="filter-tag">⚡ Elétrica</div>
-        <div class="filter-tag">🧼 Limpeza</div>
-        <div class="filter-tag">📦 Carretos</div>
-    </div>
-
-    <section id="feed">
-        <h2 style="font-size: clamp(24px, 5vw, 32px); text-align: center; margin: 40px 0;">Mural de Oportunidades</h2>
-        <div class="mural-grid" id="muralGrid">
-            <div class="job-card">
-                <span style="color: var(--brand-yellow); font-size: 11px; font-weight: 800; text-transform: uppercase;">Exemplo de Pedido</span>
-                <h3 style="margin: 10px 0;">Instalação de Varal de Teto</h3>
-                <p style="color: var(--text-muted); font-size: 14px;">"Preciso de alguém com furadeira para instalar um varal na área de serviço..."</p>
-                <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 12px; color: var(--brand-yellow);">📍 Americana, SP</span>
-                    <button class="btn-yellow" style="padding: 8px 15px; border-radius: 8px; border: none; font-weight: 800; font-size: 12px;">AJUDAR</button>
-                </div>
-            </div>
+    <div class="mural-grid" id="muralGrid">
+        <div class="job-card">
+            <h3 style="margin: 0 0 10px;">Exemplo de Serviço</h3>
+            <p style="color: var(--text-muted); font-size: 14px;">Buscando profissionais na região de Americana...</p>
         </div>
-    </section>
+    </div>
 
     <section id="quem-somos" class="about-section">
-        <div class="container">
-            <h2 class="about-title">O Coração do <span>Ajuda Aí</span></h2>
-            <p class="about-text">
-                O Ajuda Aí não é apenas uma plataforma, é o facilitador de conexões reais. <br><br>
-                Nossa missão é <b>encurtar a distância</b> entre quem sabe fazer e quem precisa que seja feito. Criamos uma vitrine onde o trabalhador ganha visibilidade e o cliente ganha agilidade. <br><br>
-                Acreditamos que a tecnologia deve servir para aproximar vizinhos: ajudamos o <b>prestador de serviço</b> a encontrar novas oportunidades e prosperar, e ajudamos o <b>cliente</b> a resolver seus problemas com segurança e praticidade. <br><br>
-                <b>No Ajuda Aí, todo mundo ganha.</b>
-            </p>
-        </div>
+        <h2 class="about-title">O Coração do <span>Ajuda Aí</span></h2>
+        <p class="about-text">O Ajuda Aí não é apenas uma plataforma, é o facilitador de conexões reais. Criamos uma vitrine onde o trabalhador ganha visibilidade e o cliente ganha agilidade.</p>
     </section>
 </div>
 
 <footer>
-    <div class="container">
-        <div class="logo-text">AJUDA<span>AI</span></div>
-        <div class="footer-links">
-            <a onclick="openModal('modalPrivacidade')">Privacidade</a>
-            <a onclick="openModal('modalTermos')">Termos de Uso</a>
-            <a href="#como-funciona">Como Funciona</a>
-        </div>
-        <p style="margin-top: 30px; font-size: 11px; color: rgba(255,255,255,0.2);">© 2026 AJUDA AI - CONEXÃO HUMANA E DIRETA.</p>
+    <div class="logo-text">AJUDA<span>AI</span></div>
+    <div class="footer-links">
+        <a onclick="openModal('modalPrivacidade')">Privacidade</a>
+        <a onclick="openModal('modalTermos')">Termos de Uso</a>
     </div>
 </footer>
 
 <div class="modal" id="modalPrivacidade">
     <div class="modal-content">
-        <h2 style="color: var(--brand-yellow);">Política de <span>Privacidade</span></h2>
+        <h2 style="color: var(--brand-yellow);">Privacidade</h2>
         <div class="legal-text">
-            <p>A sua privacidade é importante para nós. Esta política descreve como o <b>Ajuda Aí</b> coleta e utiliza seus dados.</p>
-            
-            <h4>1. Coleta de Dados</h4>
-            <p>Coletamos seu nome, WhatsApp, localização (GPS) e profissão apenas para viabilizar a conexão entre prestadores e clientes. Não coletamos dados bancários ou documentos sensíveis através do front-end.</p>
-            
-            <h4>2. Uso da Localização</h4>
-            <p>O Ajuda Aí utiliza a sua localização geográfica para mostrar serviços próximos a você. Ao clicar em "Usar meu GPS", você autoriza esse acesso em tempo real.</p>
-            
-            <h4>3. Compartilhamento</h4>
-            <p>Seus dados de contato (WhatsApp) só ficam visíveis quando você publica um serviço ou se cadastra como prestador, permitindo o contato direto entre as partes.</p>
-            
-            <h4>4. Seus Direitos</h4>
-            <p>A qualquer momento, você pode solicitar a exclusão de seus dados de nossa base entrando em contato com o suporte.</p>
+            <h4>1. Coleta de Dados</h4><p>Coletamos WhatsApp e Localização apenas para fins de conexão entre as partes.</p>
         </div>
-        <button onclick="closeModal('modalPrivacidade')" class="btn-yellow" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; border:none; font-weight:800; cursor:pointer;">LI E CONCORDO</button>
+        <button onclick="closeModal('modalPrivacidade')" class="btn-yellow" style="width:100%; padding:15px; margin-top:20px; border:none; border-radius:15px; font-weight:800; cursor:pointer;">CONCORDO</button>
     </div>
 </div>
 
 <div class="modal" id="modalTermos">
     <div class="modal-content">
-        <h2 style="color: var(--brand-yellow);">Termos de <span>Uso</span></h2>
+        <h2 style="color: var(--brand-yellow);">Termos de Uso</h2>
         <div class="legal-text">
-            <p>Ao utilizar o <b>Ajuda Aí</b>, você concorda integralmente com as seguintes condições:</p>
-            
-            <h4>1. Natureza do Serviço</h4>
-            <p>O Ajuda Aí é exclusivamente uma <b>plataforma de anúncios e conexão</b>. Não somos agência de empregos, nem empregadores. Atuamos apenas como a ponte tecnológica entre as partes.</p>
-            
-            <h4>2. Isenção de Responsabilidade</h4>
-            <p>O Ajuda Aí <b>não se responsabiliza</b> pela qualidade, prazos, pagamentos ou conduta moral dos usuários. Toda negociação é feita diretamente via WhatsApp, fora da plataforma.</p>
-            
-            <h4>3. Conduta do Usuário</h4>
-            <p>É proibido postar conteúdos falsos, ilícitos ou discriminatórios. Perfis que violarem a boa convivência serão banidos permanentemente sem aviso prévio.</p>
-            
-            <h4>4. Segurança</h4>
-            <p>Recomendamos que, ao contratar ou prestar um serviço, os usuários tomem medidas de segurança, como informar familiares sobre o local do serviço e verificar referências.</p>
+            <h4>1. Isenção de Responsabilidade</h4><p>O Ajuda Aí não se responsabiliza por negociações externas ou pela qualidade dos serviços prestados.</p>
         </div>
-        <button onclick="closeModal('modalTermos')" class="btn-yellow" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; border:none; font-weight:800; cursor:pointer;">ACEITAR TERMOS</button>
+        <button onclick="closeModal('modalTermos')" class="btn-yellow" style="width:100%; padding:15px; margin-top:20px; border:none; border-radius:15px; font-weight:800; cursor:pointer;">ACEITAR</button>
     </div>
 </div>
 
 <div class="modal" id="modalPrestador">
     <div class="modal-content">
-        <h2>Cadastro de <span>Parceiro</span></h2>
-        <form onsubmit="validarCadastro(event, 'prestador')">
-            <input type="text" placeholder="Nome completo" required>
-            <input type="tel" placeholder="WhatsApp (DDD + Número)" required>
-            <input type="text" placeholder="Sua Profissão" required>
-            <input type="text" placeholder="Sua Cidade" required>
-            <textarea placeholder="Fale brevemente sobre seus serviços" style="resize: none;"></textarea>
-            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">FINALIZAR</button>
-            <button type="button" onclick="closeModal('modalPrestador')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer;">Voltar</button>
+        <h2>Cadastro</h2>
+        <form onsubmit="event.preventDefault(); alert('Cadastro realizado!'); closeModal('modalPrestador');">
+            <input type="text" placeholder="Seu Nome" required>
+            <input type="tel" placeholder="Seu WhatsApp" required>
+            <button type="submit" class="btn-yellow" style="width:100%; padding:15px; margin-top:15px; border:none; border-radius:15px; font-weight:800; cursor:pointer;">FINALIZAR</button>
         </form>
     </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const SUPABASE_URL = 'https://vhoiwkndxmmajwoskxdl.supabase.co';
-    const SUPABASE_KEY = 'EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZob2l3a25keG1tYWp3b3NreGRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1ODA5NTcsImV4cCI6MjA4NzE1Njk1N30.ieQQz4158eWEaHkC5yMjMIIFg-FBabbwUz-vpXyo1c8';
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const navActions = document.getElementById('navActions');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
 
-    let userLat = ""; let userLng = "";
-    const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
+    // MENU LOGIC
+    function toggleMenu(e) {
+        e.stopPropagation();
+        navActions.classList.toggle('active');
+    }
+    function closeMenu() { navActions.classList.remove('active'); }
 
-    document.getElementById('muralSearch').addEventListener('input', function(e) {
-        const term = e.target.value.toLowerCase();
-        const cards = document.querySelectorAll('.job-card');
-        cards.forEach(card => {
-            const content = card.innerText.toLowerCase();
-            card.style.display = content.includes(term) ? 'block' : 'none';
-        });
-    });
-
-    window.addEventListener('load', () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(p => {
-                userLat = p.coords.latitude; userLng = p.coords.longitude;
-                map.flyTo([userLat, userLng], 14);
-                L.marker([userLat, userLng]).addTo(map).bindPopup('Você está aqui!').openPopup();
-            });
+    // FECHAR AO CLICAR FORA
+    document.addEventListener('click', function(event) {
+        if (!navActions.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+            closeMenu();
         }
     });
 
-    function toggleMenu() { document.getElementById('navActions').classList.toggle('active'); }
-    function closeMenu() { document.getElementById('navActions').classList.remove('active'); }
+    // MODAL LOGIC
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-    function getGPS() { navigator.geolocation.getCurrentPosition(p => map.setView([p.coords.latitude, p.coords.longitude], 15)); }
+
+    // MAPA
+    const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
+
+    function getGPS() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(p => {
+                map.setView([p.coords.latitude, p.coords.longitude], 15);
+                L.marker([p.coords.latitude, p.coords.longitude]).addTo(map).bindPopup('Você está aqui!').openPopup();
+            });
+        }
+    }
+
+    // BUSCA NO MURAL
+    document.getElementById('muralSearch').addEventListener('input', function(e) {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll('.job-card').forEach(card => {
+            card.style.display = card.innerText.toLowerCase().includes(term) ? 'block' : 'none';
+        });
+    });
 </script>
 </body>
-</html>
+    </html>
+    
