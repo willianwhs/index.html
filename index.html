@@ -68,7 +68,7 @@
             .nav-actions a, .nav-actions button { width: 100%; text-align: center; }
         }
 
-        /* --- PILAR NACIONAL: BADGE DE EXPANSÃO --- */
+        /* PILAR: EXPANSÃO NACIONAL */
         .expansion-badge {
             background: linear-gradient(90deg, var(--brand-yellow), #FFD700);
             color: var(--brand-blue);
@@ -155,13 +155,6 @@
         .step-card p { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
         .step-card .icon { font-size: 40px; }
 
-        @media (max-width: 600px) {
-            .step-card { padding: 20px; }
-            .step-card h3 { font-size: 18px; }
-            .step-card p { font-size: 14px; }
-            .step-card .icon { font-size: 32px; }
-        }
-
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
         .testimonial-card { 
             background: rgba(255,255,255,0.02); 
@@ -194,12 +187,6 @@
             font-size: 19px; 
             font-weight: 500; 
             padding: 0 10px;
-        }
-
-        @media (max-width: 600px) {
-            .about-section { padding: 40px 20px; border-radius: 40px; margin: 30px 0; }
-            .about-title { font-size: 26px; }
-            .about-text { font-size: 15px; line-height: 1.6; }
         }
 
         footer { padding: 60px 0 30px; border-top: 1px solid var(--border); background: #03070C; text-align: center; }
@@ -479,7 +466,7 @@
         <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Entre na sua cidade primeiro e aumente sua renda.</p>
         <form onsubmit="registrarPrestador(event)">
             <input type="text" id="pres_nome" placeholder="Nome completo" required>
-            <input type="tel" id="whatsappInput" placeholder="WhatsApp (DDD)" maxlength="16" required>
+            <input type="tel" class="mask-whatsapp" id="whatsappInput" placeholder="WhatsApp (DDD)" maxlength="16" required>
             <input type="text" id="pres_servico" placeholder="Sua Profissão (Ex: Pintor, Diarista...)" required>
             <input type="text" id="pres_cidade" placeholder="Sua Cidade" required>
             <textarea id="pres_bio" placeholder="Fale brevemente sobre sua experiência" style="resize: none;"></textarea>
@@ -495,7 +482,7 @@
         <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Encontre profissionais avaliados perto de você.</p>
         <form id="formPedido">
             <input type="text" id="ped_nome" placeholder="Seu nome completo" required>
-            <input type="tel" id="ped_whatsapp" placeholder="Seu WhatsApp (com DDD)" required>
+            <input type="tel" class="mask-whatsapp" id="ped_whatsapp" placeholder="Seu WhatsApp (com DDD)" maxlength="16" required>
             <input type="text" id="ped_titulo" placeholder="Ex: Consertar torneira, Limpeza pesada..." required>
             <input type="text" id="ped_cidade" placeholder="Sua Cidade" required>
             <textarea id="ped_descricao" placeholder="Detalhes do que você precisa..." style="resize: none;"></textarea>
@@ -512,7 +499,7 @@
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let userLat = ""; let userLng = ""; let currentCity = "";
-    let selectedStar = 0; let prestadorAtendendoId = null; let prestadorAtendendoNome = "";
+    let selectedStar = 0;
 
     const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
@@ -731,13 +718,15 @@
         }
     });
 
-    const whatsappInput = document.getElementById('whatsappInput');
-    whatsappInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, ""); 
-        if (value.length > 11) value = value.slice(0, 11);
-        if (value.length > 2) value = `(${value.slice(0, 2)}) ${value.slice(2, 3)} ${value.slice(3)}`;
-        else if (value.length > 0) value = `(${value}`;
-        e.target.value = value;
+    // CORREÇÃO: MÁSCARA APLICADA A TODOS OS CAMPOS COM A CLASSE MASK-WHATSAPP
+    document.querySelectorAll('.mask-whatsapp').forEach(input => {
+        input.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, ""); 
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 2) value = `(${value.slice(0, 2)}) ${value.slice(2, 3)} ${value.slice(3)}`;
+            else if (value.length > 0) value = `(${value}`;
+            e.target.value = value;
+        });
     });
 
     document.getElementById('muralSearch').addEventListener('input', function(e) {
