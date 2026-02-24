@@ -130,6 +130,22 @@
             .step-card p { font-size: 14px; }
             .step-card .icon { font-size: 32px; }
         }
+
+        /* --- SEÇÃO DE DEPOIMENTOS --- */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
+        .testimonial-card { 
+            background: rgba(255,255,255,0.02); 
+            padding: 30px; 
+            border-radius: 25px; 
+            border: 1px solid var(--border); 
+            position: relative;
+        }
+        .testimonial-card::before { content: '"'; position: absolute; top: 10px; left: 20px; font-size: 60px; color: var(--brand-yellow); opacity: 0.2; }
+        .testimonial-text { font-style: italic; color: var(--text-main); line-height: 1.6; margin-bottom: 20px; font-size: 15px; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .author-avatar { width: 45px; height: 45px; background: var(--brand-blue-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; border: 2px solid var(--brand-yellow); }
+        .author-info h4 { margin: 0; font-size: 14px; color: var(--brand-yellow); }
+        .author-info span { font-size: 12px; color: var(--text-muted); }
         
         .about-section { 
             padding: 80px 0; 
@@ -164,11 +180,9 @@
         .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 40px; width: 100%; max-width: 550px; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto; }
         input, textarea { width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; }
         
-        /* Estilo do texto Jurídico */
         .legal-text { color: var(--text-muted); text-align: left; font-size: 14px; line-height: 1.6; }
         .legal-text h4 { color: var(--brand-yellow); margin-top: 20px; }
 
-        /* --- IMPLEMENTAÇÃO BANNER DE COOKIES --- */
         .cookie-consent {
             position: fixed;
             bottom: 20px;
@@ -295,6 +309,42 @@
         </div>
     </section>
 
+    <section id="depoimentos" style="padding: 60px 0;">
+        <h2 style="text-align: center; margin-bottom: 40px; font-size: clamp(24px, 5vw, 32px);">O que dizem sobre o <span style="color: var(--brand-yellow);">Ajuda Aí</span></h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Consegui um eletricista em menos de 15 minutos para um curto-circuito em casa. O contato via WhatsApp facilita muito!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RM</div>
+                    <div class="author-info">
+                        <h4>Ricardo Menezes</h4>
+                        <span>Cliente em Sorocaba</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Uso a plataforma para divulgar meus serviços de limpeza. Minha agenda lotou depois que comecei a aparecer no mural."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AS</div>
+                    <div class="author-info">
+                        <h4>Ana Silva</h4>
+                        <span>Diarista em Indaiatuba</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Muito prático! Encontrei alguém para fazer o carreto da minha mudança no mesmo dia. Recomendo a todos os vizinhos."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JP</div>
+                    <div class="author-info">
+                        <h4>João Pedro</h4>
+                        <span>Cliente em Itu</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="quem-somos" class="about-section">
         <div class="container">
             <h2 class="about-title">O Coração do <span>Ajuda Aí</span></h2>
@@ -325,16 +375,12 @@
         <h2 style="color: var(--brand-yellow);">Política de <span>Privacidade</span></h2>
         <div class="legal-text">
             <p>A sua privacidade é importante para nós. Esta política descreve como o <b>Ajuda Aí</b> coleta e utiliza seus dados.</p>
-            
             <h4>1. Coleta de Dados</h4>
             <p>Coletamos seu nome, WhatsApp, localização (GPS) e profissão apenas para viabilizar na conexão entre prestadores e clientes. Não coletamos dados bancários ou documentos sensíveis através do front-end.</p>
-            
             <h4>2. Uso da Localização</h4>
             <p>O Ajuda Aí utiliza a sua localização geográfica para mostrar serviços próximos a você. Ao clicar em "Usar meu GPS", você autoriza esse acesso em tempo real.</p>
-            
             <h4>3. Compartilhamento</h4>
             <p>Seus dados de contato (WhatsApp) só ficam visíveis quando você publica um serviço ou se cadastra como prestador, permitindo o contato direto entre as partes.</p>
-            
             <h4>4. Seus Direitos</h4>
             <p>A qualquer momento, você pode solicitar a exclusão de seus dados de nossa base entrando em contato com o suporte.</p>
         </div>
@@ -347,16 +393,12 @@
         <h2 style="color: var(--brand-yellow);">Termos de <span>Uso</span></h2>
         <div class="legal-text">
             <p>Ao utilizar o <b>Ajuda Aí</b>, você concorda integralmente com as seguintes condições:</p>
-            
             <h4>1. Natureza do Serviço</h4>
             <p>O Ajuda Aí é exclusivamente uma <b>plataforma de anúncios e conexão</b>. Não somos agência de empregos, nem empregadores. Atuamos apenas como a ponte tecnológica entre as partes.</p>
-            
             <h4>2. Isenção de Responsabilidade</h4>
             <p>O Ajuda Aí <b>não se responsabiliza</b> pela qualidade, prazos, pagamentos ou conduta moral dos usuários. Toda negociação é feita diretamente via WhatsApp, fora da plataforma.</p>
-            
             <h4>3. Conduta do Usuário</h4>
             <p>É proibido postar conteúdos falsos, ilícitos ou discriminatórios. Perfis que violarem a boa convivência serão banidos permanentemente sem aviso prévio.</p>
-            
             <h4>4. Segurança</h4>
             <p>Recomendamos que, ao contratar ou prestar um serviço, os usuários tomem medidas de segurança, como informar familiares sobre o local do serviço e verificar referências.</p>
         </div>
@@ -404,7 +446,6 @@
     const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
-    /* --- LÓGICA DE CARREGAR MURAL REAL --- */
     async function carregarMural() {
         const { data, error } = await _supabase
             .from('pedidos_ajuda')
@@ -429,7 +470,6 @@
         }
     }
 
-    /* --- LÓGICA DE ENVIAR PEDIDO --- */
     document.getElementById('formPedido').addEventListener('submit', async (e) => {
         e.preventDefault();
         const dados = {
@@ -448,7 +488,6 @@
         }
     });
 
-    /* --- LÓGICA DE ATENDER PEDIDO --- */
     async function atenderPedido(id, whatsapp) {
         const { error } = await _supabase.from('pedidos_ajuda').update({ status: 'em_atendimento' }).eq('id', id);
         if (!error) {
@@ -459,20 +498,16 @@
         }
     }
 
-    /* --- LÓGICA DE COOKIES --- */
     function acceptCookies() {
         localStorage.setItem('ajudaAi_cookies', 'true');
         document.getElementById('cookieBanner').classList.remove('active');
     }
 
     window.addEventListener('load', () => {
-        carregarMural(); // Carrega o mural dinâmico ao iniciar
+        carregarMural();
         if (!localStorage.getItem('ajudaAi_cookies')) {
-            setTimeout(() => {
-                document.getElementById('cookieBanner').classList.add('active');
-            }, 2000);
+            setTimeout(() => { document.getElementById('cookieBanner').classList.add('active'); }, 2000);
         }
-
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(p => {
                 userLat = p.coords.latitude; userLng = p.coords.longitude;
@@ -482,7 +517,6 @@
         }
     });
 
-    /* --- VALIDADOR DE WHATSAPP (MÁSCARA DINÂMICA) --- */
     const whatsappInput = document.getElementById('whatsappInput');
     whatsappInput.addEventListener('input', (e) => {
         let value = e.target.value.replace(/\D/g, ""); 
