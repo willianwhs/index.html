@@ -614,24 +614,27 @@
         }
     }
 
-    // --- FUNÇÕES DE ENVIO CORRIGIDAS (SEM TRAVAMENTO) ---
+    // --- FUNÇÕES DE ENVIO AJUSTADAS PARA O NOVO SQL ---
 
     async function registrarPrestador(e) {
         e.preventDefault();
         const btn = document.getElementById('btnSalvarPrestador');
+        const originalText = btn.innerText;
         btn.innerText = "CADASTRANDO...";
         btn.disabled = true;
 
         try {
-            const { error } = await _supabase.from('prestadores').insert([{
+            const payload = {
                 nome: document.getElementById('pres_nome').value,
                 whatsapp: document.getElementById('whatsappInput').value,
-                servico: document.getElementById('pres_servico').value, // corrigido 'sevico' para 'servico'
+                servico: document.getElementById('pres_servico').value,
                 cidade: document.getElementById('pres_cidade').value,
                 bio: document.getElementById('pres_bio').value,
-                lat: userLat || null, 
-                lng: userLng || null 
-            }]);
+                lat: userLat ? parseFloat(userLat) : null, 
+                lng: userLng ? parseFloat(userLng) : null 
+            };
+
+            const { error } = await _supabase.from('prestadores').insert([payload]);
 
             if (error) throw error;
 
@@ -641,10 +644,10 @@
             carregarVitrine(currentCity);
 
         } catch (err) {
-            console.error(err);
-            alert("Erro ao cadastrar: " + (err.message || "Verifique sua conexão."));
+            console.error("Erro no cadastro:", err);
+            alert("Erro ao cadastrar: " + (err.message || "Tente novamente mais tarde."));
         } finally {
-            btn.innerText = "FINALIZAR CADASTRO";
+            btn.innerText = originalText;
             btn.disabled = false;
         }
     }
@@ -652,18 +655,21 @@
     async function postarPedido(e) {
         e.preventDefault();
         const btn = document.getElementById('btnPostarPedido');
+        const originalText = btn.innerText;
         btn.innerText = "POSTANDO...";
         btn.disabled = true;
 
         try {
-            const { data, error } = await _supabase.from('pedidos_ajuda').insert([{
+            const payload = {
                 cliente_nome: document.getElementById('ped_nome').value,
                 cliente_whatsapp: document.getElementById('ped_whatsapp').value,
                 titulo_ajuda: document.getElementById('ped_titulo').value,
                 cidade: document.getElementById('ped_cidade').value,
                 descricao: document.getElementById('ped_descricao').value,
                 status: 'aberto'
-            }]).select();
+            };
+
+            const { data, error } = await _supabase.from('pedidos_ajuda').insert([payload]).select();
 
             if (error) throw error;
 
@@ -677,15 +683,15 @@
             carregarMural(currentCity);
 
         } catch (err) {
-            console.error(err);
-            alert("Erro ao postar pedido. Tente novamente.");
+            console.error("Erro no pedido:", err);
+            alert("Erro ao postar pedido: " + (err.message || "Tente novamente."));
         } finally {
-            btn.innerText = "POSTAR NO MURAL";
+            btn.innerText = originalText;
             btn.disabled = false;
         }
     }
 
-    // --- RESTANTE DO CÓDIGO PRESERVADO ---
+    // --- RESTANTE DO CÓDIGO ---
 
     function setStar(n) {
         selectedStar = n;
