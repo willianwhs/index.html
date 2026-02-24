@@ -289,16 +289,6 @@
     <section id="feed">
         <h2 style="font-size: clamp(24px, 5vw, 32px); text-align: center; margin: 40px 0;">Mural de Oportunidades</h2>
         <div class="mural-grid" id="muralGrid">
-            <div class="job-card">
-                <span style="color: var(--brand-yellow); font-size: 11px; font-weight: 800; text-transform: uppercase;">Exemplo de Pedido</span>
-                <h3 style="margin: 10px 0;">Instalação de Varal de Teto</h3>
-                <p style="color: var(--text-muted); font-size: 14px;">"Preciso de alguém com furadeira para instalar um varal na área de serviço..."</p>
-                <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 12px; color: var(--brand-yellow);">📍 Americana, SP</span>
-                    <button class="btn-yellow" style="padding: 8px 15px; border-radius: 8px; border: none; font-weight: 800; font-size: 12px;">AJUDAR</button>
-                </div>
-            </div>
-
             <div class="job-card" style="display: flex; align-items: center; justify-content: center; border-style: dashed;">
                 <div style="color: var(--text-muted); font-size: 10px; text-transform: uppercase;">Publicidade Nativa</div>
             </div>
@@ -364,7 +354,7 @@
             <h4>2. Isenção de Responsabilidade</h4>
             <p>O Ajuda Aí <b>não se responsabiliza</b> pela qualidade, prazos, pagamentos ou conduta moral dos usuários. Toda negociação é feita diretamente via WhatsApp, fora da plataforma.</p>
             
-            <h4>3. Conduta do Usuário</h4>
+            <h4>3. Conduca do Usuário</h4>
             <p>É proibido postar conteúdos falsos, ilícitos ou discriminatórios. Perfis que violarem a boa convivência serão banidos permanentemente sem aviso prévio.</p>
             
             <h4>4. Segurança</h4>
@@ -389,6 +379,21 @@
     </div>
 </div>
 
+<div class="modal" id="modalPedido">
+    <div class="modal-content">
+        <h2>O que você <span>precisa?</span></h2>
+        <form id="formPedido">
+            <input type="text" id="ped_nome" placeholder="Seu nome completo" required>
+            <input type="tel" id="ped_whatsapp" placeholder="Seu WhatsApp (com DDD)" required>
+            <input type="text" id="ped_titulo" placeholder="Ex: Consertar torneira, Aula de violão..." required>
+            <input type="text" id="ped_cidade" placeholder="Sua Cidade" required>
+            <textarea id="ped_descricao" placeholder="Detalhes da ajuda que precisa..." rows="4" style="width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; resize: none;"></textarea>
+            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">POSTAR NO MURAL</button>
+            <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Cancelar</button>
+        </form>
+    </div>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     const SUPABASE_URL = 'https://vhoiwkndxmmajwoskxdl.supabase.co';
@@ -399,6 +404,65 @@
     const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
+    /* --- LÓGICA DE CARREGAR MURAL REAL --- */
+    async function carregarMural() {
+        const { data, error } = await _supabase
+            .from('pedidos_ajuda')
+            .select('*')
+            .eq('status', 'aberto')
+            .order('created_at', { ascending: false });
+
+        const grid = document.getElementById('muralGrid');
+        if (data && data.length > 0) {
+            grid.innerHTML = data.map(pedido => `
+                <div class="job-card">
+                    <span style="color: var(--brand-yellow); font-size: 11px; font-weight: 800; text-transform: uppercase;">PRECISA-SE DE AJUDA</span>
+                    <h3 style="margin: 10px 0;">${pedido.titulo_ajuda}</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">"${pedido.descricao}"</p>
+                    <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px; color: var(--brand-yellow);">📍 ${pedido.cidade}</span>
+                        <button class="btn-yellow" onclick="atenderPedido('${pedido.id}', '${pedido.cliente_whatsapp}')" 
+                        style="padding: 8px 15px; border-radius: 8px; border: none; font-weight: 800; font-size: 12px; cursor:pointer;">AJUDAR</button>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-muted);">Aguardando novos pedidos no mural...</p>';
+        }
+    }
+
+    /* --- LÓGICA DE ENVIAR PEDIDO --- */
+    document.getElementById('formPedido').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const dados = {
+            cliente_nome: document.getElementById('ped_nome').value,
+            cliente_whatsapp: document.getElementById('ped_whatsapp').value,
+            titulo_ajuda: document.getElementById('ped_titulo').value,
+            cidade: document.getElementById('ped_cidade').value,
+            descricao: document.getElementById('ped_descricao').value
+        };
+        const { error } = await _supabase.from('pedidos_ajuda').insert([dados]);
+        if (error) {
+            alert("Erro ao postar: " + error.message);
+        } else {
+            alert("Sua ajuda foi postada com sucesso!");
+            closeModal('modalPedido');
+            document.getElementById('formPedido').reset();
+            carregarMural();
+        }
+    });
+
+    /* --- LÓGICA DE ATENDER PEDIDO --- */
+    async function atenderPedido(id, whatsapp) {
+        const { error } = await _supabase.from('pedidos_ajuda').update({ status: 'em_atendimento' }).eq('id', id);
+        if (!error) {
+            const numLimpo = whatsapp.replace(/\D/g, '');
+            const msg = encodeURIComponent("Olá! Vi seu pedido no Ajuda Aí e estou disponível para te ajudar. Podemos conversar?");
+            window.open(`https://wa.me/55${numLimpo}?text=${msg}`, '_blank');
+            carregarMural();
+        }
+    }
+
     /* --- LÓGICA DE COOKIES --- */
     function acceptCookies() {
         localStorage.setItem('ajudaAi_cookies', 'true');
@@ -406,6 +470,7 @@
     }
 
     window.addEventListener('load', () => {
+        carregarMural();
         if (!localStorage.getItem('ajudaAi_cookies')) {
             setTimeout(() => {
                 document.getElementById('cookieBanner').classList.add('active');
@@ -421,22 +486,20 @@
         }
     });
 
-    /* --- VALIDADOR DE WHATSAPP (MÁSCARA DINÂMICA) --- */
+    /* --- MÁSCARA DE WHATSAPP --- */
     const whatsappInput = document.getElementById('whatsappInput');
     whatsappInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, ""); // Remove não-números
+        let value = e.target.value.replace(/\D/g, "");
         if (value.length > 11) value = value.slice(0, 11);
-        
-        // Aplica a máscara (19) 9 71531281
         if (value.length > 2) {
             value = `(${value.slice(0, 2)}) ${value.slice(2, 3)} ${value.slice(3)}`;
         } else if (value.length > 0) {
             value = `(${value}`;
         }
-        
         e.target.value = value;
     });
 
+    /* --- BUSCA NO MURAL --- */
     document.getElementById('muralSearch').addEventListener('input', function(e) {
         const term = e.target.value.toLowerCase();
         const cards = document.querySelectorAll('.job-card');
