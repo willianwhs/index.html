@@ -91,6 +91,11 @@
         }
         .btn-work:hover { background: var(--brand-yellow); color: var(--brand-blue); }
 
+        .region-badge-info {
+            text-align: center; margin-bottom: 20px; color: var(--brand-yellow);
+            font-weight: 800; font-size: 14px; display: none;
+        }
+
         .search-wrapper { max-width: 600px; margin: 30px auto 10px; position: relative; }
         .search-input-main { 
             width: 100%; padding: 18px 25px 18px 55px; border-radius: 50px; 
@@ -269,6 +274,10 @@
 </section>
 
 <div class="container">
+    <div id="regionBadge" class="region-badge-info">
+        📍 Mostrando resultados em: <span id="cityNameDisplay">Buscando...</span>
+    </div>
+
     <div class="ads-container">
         <div style="color: var(--text-muted); font-size: 10px; text-transform: uppercase;">Publicidade</div>
     </div>
@@ -303,7 +312,7 @@
     </section>
 
     <section id="vitrine" style="padding: 40px 0;">
-        <h2 style="font-size: clamp(22px, 4vw, 28px); text-align: center; margin-bottom: 30px;">Profissionais <span style="color: var(--brand-yellow);">Disponíveis</span></h2>
+        <h2 style="font-size: clamp(22px, 4vw, 28px); text-align: center; margin-bottom: 30px;">Profissionais <span style="color: var(--brand-yellow);">em sua Região</span></h2>
         <div class="mural-grid" id="vitrineGrid">
             </div>
     </section>
@@ -326,7 +335,7 @@
     </div>
 
     <section id="feed">
-        <h2 style="font-size: clamp(24px, 5vw, 32px); text-align: center; margin: 40px 0;">Mural de Oportunidades</h2>
+        <h2 style="font-size: clamp(24px, 5vw, 32px); text-align: center; margin: 40px 0;">Mural de Oportunidades <span style="color: var(--brand-yellow);">Locais</span></h2>
         <div class="mural-grid" id="muralGrid">
             <div class="job-card" style="display: flex; align-items: center; justify-content: center; border-style: dashed;">
                 <div style="color: var(--text-muted); font-size: 10px; text-transform: uppercase;">Publicidade Nativa</div>
@@ -436,9 +445,9 @@
         <h2>Cadastro de <span>Parceiro</span></h2>
         <form onsubmit="registrarPrestador(event)">
             <input type="text" id="pres_nome" placeholder="Nome completo" required>
-            <input type="tel" id="whatsappInput" placeholder="WhatsApp (19) 9 71531281" maxlength="16" required>
+            <input type="tel" id="whatsappInput" placeholder="WhatsApp (DDD)" maxlength="16" required>
             <input type="text" id="pres_servico" placeholder="Sua Profissão" required>
-            <input type="text" id="pres_cidade" placeholder="Sua Cidade" required>
+            <input type="text" id="pres_cidade" placeholder="Sua Cidade (Ex: Sorocaba)" required>
             <textarea id="pres_bio" placeholder="Fale brevemente sobre seus serviços" style="resize: none;"></textarea>
             <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">FINALIZAR CADASTRO</button>
             <button type="button" onclick="closeModal('modalPrestador')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Voltar</button>
@@ -453,7 +462,7 @@
             <input type="text" id="ped_nome" placeholder="Seu nome completo" required>
             <input type="tel" id="ped_whatsapp" placeholder="Seu WhatsApp (com DDD)" required>
             <input type="text" id="ped_titulo" placeholder="Ex: Consertar torneira, Aula de violão..." required>
-            <input type="text" id="ped_cidade" placeholder="Sua Cidade" required>
+            <input type="text" id="ped_cidade" placeholder="Sua Cidade (Ex: Sorocaba)" required>
             <textarea id="ped_descricao" placeholder="Detalhes da ajuda que precisa..." style="resize: none;"></textarea>
             <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">POSTAR NO MURAL</button>
             <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Cancelar</button>
@@ -467,14 +476,39 @@
     const SUPABASE_KEY = 'EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZob2l3a25keG1tYWp3b3NreGRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1ODA5NTcsImV4cCI6MjA4NzE1Njk1N30.ieQQz4158eWEaHkC5yMjMIIFg-FBabbwUz-vpXyo1c8';
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    let userLat = ""; let userLng = "";
+    let userLat = ""; let userLng = ""; let currentCity = "";
     const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
-    // FUNÇÃO: CARREGAR VITRINE DE PRESTADORES
-    async function carregarVitrine() {
-        const { data, error } = await _supabase.from('prestadores').select('*').order('created_at', { ascending: false });
+    // FUNÇÃO: CARREGAR NOME DA CIDADE PELAS COORDENADAS (REVERSE GEOCODING)
+    async function getCityName(lat, lng) {
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+            const data = await response.json();
+            const city = data.address.city || data.address.town || data.address.village;
+            if (city) {
+                currentCity = city;
+                document.getElementById('regionBadge').style.display = 'block';
+                document.getElementById('cityNameDisplay').innerText = city;
+                // Preenche automaticamente os campos de cidade nos formulários
+                document.getElementById('pres_cidade').value = city;
+                document.getElementById('ped_cidade').value = city;
+                // Carrega Mural e Vitrine filtrando pela cidade detectada
+                carregarMural(city);
+                carregarVitrine(city);
+            }
+        } catch (e) { console.error("Erro ao detectar cidade", e); }
+    }
+
+    // FUNÇÃO: CARREGAR VITRINE DE PRESTADORES (COM FILTRO DE CIDADE)
+    async function carregarVitrine(filtroCidade = "") {
+        let query = _supabase.from('prestadores').select('*');
+        if (filtroCidade) {
+            query = query.ilike('cidade', `%${filtroCidade}%`);
+        }
+        const { data, error } = await query.order('created_at', { ascending: false });
         const grid = document.getElementById('vitrineGrid');
+        
         if (data && data.length > 0) {
             grid.innerHTML = data.map(p => `
                 <div class="prestador-card">
@@ -485,29 +519,31 @@
                             <span style="font-size:12px; color:var(--text-muted);">${p.sevico || p.servico || 'Profissional'}</span>
                         </div>
                     </div>
-                    <p style="font-size:13px; color:var(--text-main); margin:10px 0;">${p.bio || 'Disponível para ajudar em sua região.'}</p>
+                    <p style="font-size:13px; color:var(--text-main); margin:10px 0;">${p.bio || 'Disponível para ajudar agora.'}</p>
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <span style="font-size:11px; color:var(--text-muted);">📍 ${p.cidade}</span>
                         <button onclick="window.open('https://wa.me/55${p.whatsapp.replace(/\D/g,'')}', '_blank')" class="btn-yellow" style="padding:5px 12px; font-size:11px; border-radius:8px; border:none; cursor:pointer; font-weight:800;">CONTATO</button>
                     </div>
                 </div>
             `).join('');
+        } else {
+            grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted);">Nenhum prestador encontrado em ${filtroCidade || 'sua região'}.</p>`;
         }
     }
 
-    // FUNÇÃO: CARREGAR MURAL DE PEDIDOS (APENAS ABERTOS)
-    async function carregarMural() {
-        const { data, error } = await _supabase
-            .from('pedidos_ajuda')
-            .select('*')
-            .eq('status', 'aberto')
-            .order('created_at', { ascending: false });
+    // FUNÇÃO: CARREGAR MURAL DE PEDIDOS (COM FILTRO DE CIDADE)
+    async function carregarMural(filtroCidade = "") {
+        let query = _supabase.from('pedidos_ajuda').select('*').eq('status', 'aberto');
+        if (filtroCidade) {
+            query = query.ilike('cidade', `%${filtroCidade}%`);
+        }
+        const { data, error } = await query.order('created_at', { ascending: false });
 
         const grid = document.getElementById('muralGrid');
         if (data) {
             grid.innerHTML = data.length > 0 ? data.map(pedido => `
                 <div class="job-card">
-                    <span style="color: var(--brand-yellow); font-size: 11px; font-weight: 800; text-transform: uppercase;">PRECISA-SE DE AJUDA</span>
+                    <span style="color: var(--brand-yellow); font-size: 11px; font-weight: 800; text-transform: uppercase;">PEDIDO LOCAL</span>
                     <h3 style="margin: 10px 0;">${pedido.titulo_ajuda}</h3>
                     <p style="color: var(--text-muted); font-size: 14px;">"${pedido.descricao}"</p>
                     <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
@@ -516,7 +552,7 @@
                         style="padding: 8px 15px; border-radius: 8px; border: none; font-weight: 800; font-size: 12px; cursor:pointer;">AJUDAR</button>
                     </div>
                 </div>
-            `).join('') : '<p style="text-align:center; grid-column:1/-1; color:var(--text-muted);">Nenhum pedido aberto no momento.</p>';
+            `).join('') : `<p style="text-align:center; grid-column:1/-1; color:var(--text-muted);">Nenhum pedido aberto em ${filtroCidade || 'sua região'}.</p>`;
         }
     }
 
@@ -535,7 +571,7 @@
         if (!error) {
             alert("Cadastro realizado! Você já aparece na vitrine.");
             closeModal('modalPrestador');
-            carregarVitrine();
+            carregarVitrine(currentCity);
         }
     }
 
@@ -556,7 +592,7 @@
             alert("Sua ajuda foi postada com sucesso!");
             closeModal('modalPedido');
             document.getElementById('formPedido').reset();
-            carregarMural();
+            carregarMural(currentCity);
         }
     });
 
@@ -571,7 +607,7 @@
             const numLimpo = whatsapp.replace(/\D/g, '');
             const msg = encodeURIComponent("Olá! Vi seu pedido no Ajuda Aí e estou disponível para te ajudar.");
             window.open(`https://wa.me/55${numLimpo}?text=${msg}`, '_blank');
-            carregarMural();
+            carregarMural(currentCity);
         }
     }
 
@@ -599,7 +635,7 @@
                 alert("Pedido liberado. Outros prestadores entrarão em contato.");
             }
             document.getElementById('feedbackBanner').style.display = 'none';
-            carregarMural();
+            carregarMural(currentCity);
         }
     }
 
@@ -620,6 +656,7 @@
                 userLat = p.coords.latitude; userLng = p.coords.longitude;
                 map.flyTo([userLat, userLng], 14);
                 L.marker([userLat, userLng]).addTo(map).bindPopup('Você está aqui!').openPopup();
+                getCityName(userLat, userLng);
             });
         }
     });
@@ -649,7 +686,12 @@
     function closeMenu() { document.getElementById('navActions').classList.remove('active'); }
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-    function getGPS() { navigator.geolocation.getCurrentPosition(p => map.setView([p.coords.latitude, p.coords.longitude], 15)); }
+    function getGPS() { 
+        navigator.geolocation.getCurrentPosition(p => {
+            map.setView([p.coords.latitude, p.coords.longitude], 15);
+            getCityName(p.coords.latitude, p.coords.longitude);
+        }); 
+    }
 </script>
 </body>
 </html>
