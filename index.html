@@ -58,6 +58,22 @@
         .nav-actions { display: flex; gap: 12px; align-items: center; }
         .nav-link-top { color: white; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; }
 
+        .user-badge { background: var(--brand-blue-light); padding: 5px 12px; border-radius: 50px; font-size: 11px; font-weight: 800; display: none; color: white; border: 1px solid var(--brand-yellow); }
+
+        /* RADAR VIP ALERT */
+        .radar-alert {
+            position: fixed; bottom: 20px; right: 20px; background: var(--brand-yellow);
+            color: var(--brand-blue); padding: 20px; border-radius: 20px; z-index: 9999;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5); display: none; align-items: center; gap: 15px;
+            animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes slideIn { from { transform: translateX(120%); } to { transform: translateX(0); } }
+
+        /* PROGRESS BAR FOR VIP SEATS */
+        .vip-counter { margin: 20px 0; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; border: 1px solid var(--border); }
+        .progress-bar { height: 8px; background: #333; border-radius: 10px; margin-top: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--brand-yellow); width: 0%; transition: width 1s; }
+
         .menu-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 5px; }
         .menu-hamburger span { width: 25px; height: 3px; background: var(--brand-yellow); border-radius: 2px; }
 
@@ -262,6 +278,15 @@
 </head>
 <body>
 
+<div id="radarAlert" class="radar-alert">
+    <div style="font-size: 30px;">🚨</div>
+    <div>
+        <b style="display: block;">NOVO PEDIDO VIP!</b>
+        <span id="radarText">Alguém precisa de ajuda perto de você.</span>
+    </div>
+    <button onclick="document.getElementById('feed').scrollIntoView(); document.getElementById('radarAlert').style.display='none';" class="btn-yellow" style="padding: 10px; border-radius: 10px; border: none; font-weight: 800; cursor: pointer;">VER AGORA</button>
+</div>
+
 <div id="feedbackBanner" class="feedback-banner">
     <span id="feedbackMessage">Seu pedido foi atendido?</span>
     <div style="display: flex; gap: 8px;">
@@ -285,9 +310,12 @@
         </a>
         
         <div class="nav-actions" id="navActions">
+            <span id="userBadge" class="user-badge">PRESTADOR LOGADO</span>
             <a href="#" class="nav-link-top" onclick="closeMenu()">Home</a>
             <a href="#como-funciona" class="nav-link-top" onclick="closeMenu()">Como Funciona</a>
             <a href="#quem-somos" class="nav-link-top" onclick="closeMenu()">Quem Somos</a>
+            <button id="btnLogin" onclick="openModal('modalLogin'); closeMenu();" class="nav-link-top" style="background:none; border: 1px solid var(--brand-yellow); cursor:pointer;">ENTRAR</button>
+            <button id="btnSair" onclick="logout()" class="nav-link-top" style="background:none; cursor:pointer; display:none; border-color:red; color:red;">SAIR</button>
             <button onclick="openModal('modalPrestador'); closeMenu();" class="btn-yellow" style="padding:10px 18px; border-radius:10px; border:none; font-weight:800; cursor:pointer;">CADASTRAR PRESTADOR</button>
         </div>
 
@@ -454,9 +482,21 @@
             <span class="star-clickable" onclick="setStar(5)">★</span>
         </div>
 
-        <textarea id="evalComentario" placeholder="Conte como foi o serviço (opcional)..." style="height: 80px;"></textarea>
+        <textarea id="evalComentario" placeholder="Conte como foi o serviço (opcional)..." style="height: 80px; resize: none;"></textarea>
         
         <button onclick="enviarAvaliacaoFinal()" class="btn-yellow" style="width: 100%; margin-top: 20px; padding: 18px;">FINALIZAR E AVALIAR</button>
+    </div>
+</div>
+
+<div class="modal" id="modalLogin">
+    <div class="modal-content">
+        <h2>Entrar como <span>Prestador</span></h2>
+        <form onsubmit="login(event)">
+            <input type="email" id="login_email" placeholder="Seu e-mail" required>
+            <input type="password" id="login_senha" placeholder="Sua senha" required>
+            <button type="submit" class="btn-yellow" style="width:100%; padding:18px; border-radius:15px; border:none; font-weight:800; margin-top:15px; cursor:pointer;">ACESSAR PAINEL</button>
+            <button type="button" onclick="closeModal('modalLogin')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Voltar</button>
+        </form>
     </div>
 </div>
 
@@ -496,8 +536,17 @@
     <div class="modal-content">
         <h2>Seja seu <span>Próprio Chefe</span></h2>
         <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Entre na sua cidade primeiro e aumente sua renda.</p>
+        
+        <div class="vip-counter">
+            <span style="font-size: 12px; font-weight: 800; color: var(--brand-yellow);">🎁 VAGAS VIP GRATUITAS (OURO + RADAR):</span>
+            <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+            <p id="seatsText" style="font-size: 11px; margin-top: 10px; color: #94A3B8;">Carregando vagas...</p>
+        </div>
+
         <form onsubmit="registrarPrestador(event)">
             <input type="text" id="pres_nome" placeholder="Nome completo" required>
+            <input type="email" id="pres_email" placeholder="Seu e-mail (Para Login)" required>
+            <input type="password" id="pres_senha" placeholder="Crie uma senha" required>
             <input type="tel" class="mask-whatsapp" id="whatsappInput" placeholder="WhatsApp (DDD)" maxlength="16" required>
             <input type="text" id="pres_servico" placeholder="Sua Profissão (Ex: Pintor, Diarista...)" required>
             <input type="text" id="pres_cidade" placeholder="Sua Cidade" required>
@@ -526,13 +575,13 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // INÍCIO DO SCRIPT INTEGRAL
     const SUPABASE_URL = 'https://vhoiwkndxmmajwoskxdl.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZob2l3a25keG1tYWp3b3NreGRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1ODA5NTcsImV4cCI6MjA4NzE1Njk1N30.ieQQz4158eWEaHkC5yMjMIIFg-FBabbwUz-vpXyo1c8';
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let userLat = null; let userLng = null; let currentCity = "";
     let selectedStar = 0;
+    let logado = JSON.parse(localStorage.getItem('user_ajudaai')) || null;
 
     const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
@@ -548,6 +597,41 @@
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
     });
+
+    function atualizarInterface() {
+        if (logado) {
+            document.getElementById('btnLogin').style.display = 'none';
+            document.getElementById('btnSair').style.display = 'block';
+            document.getElementById('userBadge').style.display = 'block';
+            document.getElementById('userBadge').innerText = `OLÁ, ${logado.nome.split(' ')[0].toUpperCase()}`;
+            ativarRadar();
+        } else {
+            document.getElementById('btnLogin').style.display = 'block';
+            document.getElementById('btnSair').style.display = 'none';
+            document.getElementById('userBadge').style.display = 'none';
+        }
+    }
+
+    async function login(e) {
+        e.preventDefault();
+        const email = document.getElementById('login_email').value;
+        const senha = document.getElementById('login_senha').value;
+        const { data, error } = await _supabase.from('prestadores').select('*').eq('email', email).eq('senha', senha).single();
+        if (data) {
+            logado = data;
+            localStorage.setItem('user_ajudaai', JSON.stringify(data));
+            closeModal('modalLogin');
+            atualizarInterface();
+            alert(`Bem-vindo de volta, ${data.nome}!`);
+        } else {
+            alert("E-mail ou senha incorretos.");
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('user_ajudaai');
+        location.reload();
+    }
 
     async function getCityName(lat, lng) {
         try {
@@ -566,7 +650,6 @@
         } catch (e) { console.error("Erro GPS", e); }
     }
 
-    // CARREGAR VITRINE COM DESIGN SOCIAL
     async function carregarVitrine(filtroCidade = "") {
         let query = _supabase.from('prestadores').select('*');
         if (filtroCidade) query = query.ilike('cidade', `%${filtroCidade}%`);
@@ -575,12 +658,17 @@
         const grid = document.getElementById('vitrineGrid');
         
         if (prestadores) {
+            const total = prestadores.length;
+            const preenchido = Math.min((total / 500) * 100, 100);
+            document.getElementById('progressFill').style.width = `${preenchido}%`;
+            document.getElementById('seatsText').innerText = total < 500 ? `Restam ${500 - total} vagas VIP gratuitas!` : "Vagas VIP esgotadas.";
+
             map.eachLayer((layer) => { if (layer instanceof L.Marker && layer.getPopup()?.getContent() !== 'Você está aqui!') map.removeLayer(layer); });
 
             let html = "";
             for (let p of prestadores) {
                 if (p.lat && p.lng) {
-                    L.marker([p.lat, p.lng], {icon: p.is_premium ? goldIcon : blueIcon})
+                    L.marker([p.lat, p.lng], {icon: (p.plano === 'ouro' || p.is_premium) ? goldIcon : blueIcon})
                      .addTo(map)
                      .bindPopup(`<b>${p.nome}</b><br>${p.servico}`);
                 }
@@ -588,12 +676,14 @@
                 const { data: avs } = await _supabase.from('avaliacoes').select('nota').eq('prestador_id', p.id);
                 const media = avs && avs.length > 0 ? (avs.reduce((a, b) => a + b.nota, 0) / avs.length).toFixed(1) : "Novo";
                 const estrelas = media !== "Novo" ? "★".repeat(Math.round(media)) + "☆".repeat(5 - Math.round(media)) : "☆☆☆☆☆";
+                const corBorda = p.plano === 'ouro' ? 'border-color: #FFD700;' : (p.plano === 'prata' ? 'border-color: #C0C0C0;' : '');
+                const corBadge = p.plano === 'ouro' ? '<div class="badge-premium" style="background:#FFD700; color:#000;">DESTAQUE OURO</div>' : '';
 
                 html += `
-                    <div class="fb-card">
-                        ${p.is_premium ? '<div class="badge-premium">DESTAQUE</div>' : ''}
+                    <div class="prestador-card fb-card" style="${corBorda}">
+                        ${corBadge}
                         <div class="fb-header">
-                            <div class="fb-avatar">${p.nome.charAt(0)}</div>
+                            <div class="fb-avatar" style="${p.plano === 'ouro' ? 'background:#FFD700; color:#000;' : ''}">${p.nome.charAt(0)}</div>
                             <div class="fb-meta">
                                 <h4>${p.nome}</h4>
                                 <div class="stars-container">
@@ -603,7 +693,7 @@
                         </div>
                         <div class="fb-body">
                             <strong style="color:var(--brand-yellow); font-size:14px;">💼 ${p.servico}</strong>
-                            <p style="font-size:13px; color:var(--text-main); margin:10px 0;">"${p.bio || 'Profissional qualificado disponível para atendimento.'}"</p>
+                            <p style="font-size:13px; color:var(--text-main); margin:10px 0;">"${p.bio || 'Profissional local disponível para ajudar.'}"</p>
                         </div>
                         <div class="fb-footer">
                             <span style="font-size:11px; color:var(--text-muted);">📍 ${p.cidade}</span>
@@ -616,7 +706,6 @@
         }
     }
 
-    // CARREGAR MURAL COM DESIGN SOCIAL (FACEBOOK STYLE)
     async function carregarMural(filtroCidade = "") {
         let query = _supabase.from('pedidos_ajuda').select('*').eq('status', 'aberto');
         if (filtroCidade) query = query.ilike('cidade', `%${filtroCidade}%`);
@@ -629,7 +718,7 @@
                         <div class="fb-avatar" style="background:#3a3b3c">${pedido.cliente_nome.charAt(0)}</div>
                         <div class="fb-meta">
                             <h4>${pedido.cliente_nome}</h4>
-                            <span>📍 ${pedido.cidade} • Pedido Urgente</span>
+                            <span>📍 ${pedido.cidade} • Pedido de Ajuda</span>
                         </div>
                     </div>
                     <div class="fb-body">
@@ -637,25 +726,50 @@
                         ${pedido.descricao}
                     </div>
                     <div class="fb-footer">
-                        <span style="font-size:12px; color:#b0b3b8;">Status: Aberto</span>
-                        <button class="btn-yellow" onclick="atenderPedido('${pedido.id}', '${pedido.cliente_whats}')" 
-                        style="padding: 10px 20px; border-radius: 8px; cursor:pointer; font-weight:800;">AJUDAR AGORA</button>
+                        <span style="font-size:12px; color:#b0b3b8;">Aguardando profissional...</span>
+                        <button class="btn-yellow" onclick="atenderPedido('${pedido.id}', '${pedido.cliente_whats}', '${pedido.titulo_ajuda}')" 
+                        style="padding: 10px 20px; border-radius: 8px; cursor:pointer; font-weight:800;">AJUDAR</button>
                     </div>
                 </div>
             `).join('');
         }
     }
 
-    async function atenderPedido(id, whatsapp) {
+    async function atenderPedido(id, whatsapp, titulo) {
+        if (!logado) {
+            alert("Apenas prestadores registados e com sessão iniciada podem atender pedidos.");
+            openModal('modalLogin');
+            return;
+        }
+
         const { error } = await _supabase.from('pedidos_ajuda').update({ 
             status: 'em_atendimento',
-            atendido_por_nome: 'Prestador Local'
+            atendido_por_id: logado.id,
+            atendido_por_nome: logado.nome
         }).eq('id', id);
 
         if (!error) {
-            window.open(`https://wa.me/55${whatsapp.replace(/\D/g,'')}?text=Olá! Vi seu pedido no Ajuda Aí e posso te ajudar.`, '_blank');
+            const linkAvaliacao = `${window.location.origin}?avaliar=${id}`;
+            const mensagem = `Olá! Vi o seu pedido de "${titulo}" no Ajuda Aí. O meu nome é ${logado.nome}, profissional registado, e posso ajudar. Quando terminarmos, por favor, confirme e avalie o meu serviço através deste link seguro: ${linkAvaliacao}`;
+            window.open(`https://wa.me/55${whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(mensagem)}`, '_blank');
             carregarMural(currentCity);
         }
+    }
+
+    function ativarRadar() {
+        if (!logado || !logado.radar_ativo) return;
+        _supabase.channel('radar-pedidos')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pedidos_ajuda' }, payload => {
+            if (payload.new.cidade === logado.cidade) {
+                document.getElementById('radarAlert').style.display = 'flex';
+                document.getElementById('radarText').innerText = `Novo pedido de "${payload.new.titulo_ajuda}" na sua cidade!`;
+                try {
+                    const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+                    audio.play();
+                } catch(e) {}
+                carregarMural(currentCity);
+            }
+        }).subscribe();
     }
 
     function setStar(n) {
@@ -671,48 +785,52 @@
     async function enviarAvaliacaoFinal() {
         if (selectedStar === 0) return alert("Por favor, selecione as estrelas.");
         const meuId = localStorage.getItem('meu_ajudaai_id');
+        const { data: pedido } = await _supabase.from('pedidos_ajuda').select('atendido_por_id').eq('id', meuId).single();
         
-        await _supabase.from('avaliacoes').insert([{
-            pedido_id: meuId,
-            nota: selectedStar,
-            comentario: document.getElementById('evalComentario').value
-        }]);
+        if (pedido && pedido.atendido_por_id) {
+            await _supabase.from('avaliacoes').insert([{
+                pedido_id: meuId,
+                prestador_id: pedido.atendido_por_id,
+                nota: selectedStar,
+                comentario: document.getElementById('evalComentario').value
+            }]);
+        }
 
         await _supabase.from('pedidos_ajuda').update({ status: 'finalizado' }).eq('id', meuId);
         localStorage.removeItem('meu_ajudaai_id');
         closeModal('modalAvaliacao');
-        alert("Obrigado pela sua avaliação!");
-        location.reload();
+        alert("Obrigado por ajudar a tornar a comunidade mais segura!");
+        window.location.href = window.location.origin;
     }
 
-    // REGISTRAR PRESTADOR: FECHA MODAL E ATUALIZA
     async function registrarPrestador(e) {
-        e.preventDefault();
+        if(e) e.preventDefault();
         const btn = document.getElementById('btnSalvarPrestador');
         btn.innerText = "PROCESSANDO..."; btn.disabled = true;
 
         const { error } = await _supabase.from('prestadores').insert([{
             nome: document.getElementById('pres_nome').value,
+            email: document.getElementById('pres_email').value,
+            senha: document.getElementById('pres_senha').value,
             whatsapp: document.getElementById('whatsappInput').value,
             servico: document.getElementById('pres_servico').value,
             cidade: document.getElementById('pres_cidade').value,
             bio: document.getElementById('pres_bio').value,
-            lat: userLat, lng: userLng
+            lat: userLat || null, lng: userLng || null
         }]);
         
         if (error) {
-            alert("Erro: " + error.message);
+            alert("Erro ao cadastrar: " + error.message);
         } else {
-            alert("Bem-vindo ao Ajuda Aí! Perfil ativado.");
-            closeModal('modalPrestador'); // FECHA AUTOMÁTICO
-            carregarVitrine(currentCity); // ATUALIZA SITE
+            alert("Bem-vindo ao Ajuda Aí! Faça o Login no topo da página para ativar o seu Radar VIP."); 
+            closeModal('modalPrestador');
+            carregarVitrine(currentCity);
         }
         btn.innerText = "FINALIZAR CADASTRO"; btn.disabled = false;
     }
 
-    // REGISTRAR PEDIDO: FECHA MODAL E ATUALIZA (ID CORRIGIDO)
     document.getElementById('formPedido').onsubmit = async (e) => {
-        e.preventDefault();
+        if(e) e.preventDefault();
         const btn = document.getElementById('btnPostarPedido');
         btn.innerText = "POSTANDO..."; btn.disabled = true;
 
@@ -726,22 +844,32 @@
         }]).select();
         
         if (error) {
-            alert("Erro: " + error.message);
+            alert("Erro ao postar: " + error.message);
         } else {
             if(data && data[0]) localStorage.setItem('meu_ajudaai_id', data[0].id);
-            alert("Pedido postado no mural!");
-            closeModal('modalPedido'); // FECHA AUTOMÁTICO
-            carregarMural(currentCity); // ATUALIZA SITE
+            alert("Pedido postado! Em breve um profissional local entrará em contato.");
+            closeModal('modalPedido');
+            carregarMural(currentCity);
         }
         btn.innerText = "POSTAR NO MURAL"; btn.disabled = false;
     };
 
     async function verificarFeedbackCliente() {
+        // Verifica se a URL contém o pedido de avaliação (Link Inteligente)
+        const params = new URLSearchParams(window.location.search);
+        const avaliarId = params.get('avaliar');
+        
+        if (avaliarId) {
+            localStorage.setItem('meu_ajudaai_id', avaliarId);
+            window.history.replaceState({}, document.title, "/");
+        }
+
         const meuId = localStorage.getItem('meu_ajudaai_id');
         if (!meuId) return;
+        
         const { data } = await _supabase.from('pedidos_ajuda').select('status, atendido_por_nome').eq('id', meuId).single();
         if (data && data.status === 'em_atendimento') {
-            document.getElementById('feedbackMessage').innerText = `O ${data.atendido_por_nome || 'profissional'} está te ajudando?`;
+            document.getElementById('feedbackMessage').innerText = `O profissional ${data.atendido_por_nome || ''} realizou o serviço?`;
             document.getElementById('evalNome').innerText = data.atendido_por_nome || 'profissional';
             document.getElementById('feedbackBanner').style.display = 'flex';
         }
@@ -749,14 +877,16 @@
 
     async function confirmarAtendimento(novoStatus) {
         const meuId = localStorage.getItem('meu_ajudaai_id');
-        await _supabase.from('pedidos_ajuda').update({ status: novoStatus }).eq('id', meuId);
+        await _supabase.from('pedidos_ajuda').update({ status: novoStatus, atendido_por_id: null, atendido_por_nome: null }).eq('id', meuId);
         document.getElementById('feedbackBanner').style.display = 'none';
-        if (novoStatus === 'aberto') alert("Mural atualizado.");
+        if (novoStatus === 'aberto') alert("O seu pedido foi devolvido ao mural para outros profissionais.");
+        carregarMural(currentCity);
     }
 
     function acceptCookies() { localStorage.setItem('ajudaAi_cookies', 'true'); document.getElementById('cookieBanner').classList.remove('active'); }
 
     window.addEventListener('load', () => {
+        atualizarInterface();
         carregarMural(); carregarVitrine(); verificarFeedbackCliente();
         if (!localStorage.getItem('ajudaAi_cookies')) setTimeout(() => document.getElementById('cookieBanner').classList.add('active'), 2000);
         if (navigator.geolocation) {
@@ -769,7 +899,6 @@
         }
     });
 
-    // MÁSCARA WHATSAPP INTEGRAL
     document.querySelectorAll('.mask-whatsapp').forEach(input => {
         input.addEventListener('input', (e) => {
             let value = e.target.value.replace(/\D/g, ""); 
