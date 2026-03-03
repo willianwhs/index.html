@@ -21,174 +21,530 @@
             --fb-card: #242526;
         }
 
-        /* OCULTA BARRAS DE ROLAGEM GLOBALMENTE PARA VISUAL DE APP NATIVO E LIMPO */
-        ::-webkit-scrollbar { display: none; }
-        * { -ms-overflow-style: none; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; }
-        
-        /* Transições suaves apenas em elementos de interação */
-        a, button, .fb-card, .filter-tag { transition: background 0.3s, transform 0.2s, border-color 0.3s; }
-
-        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--brand-dark); color: var(--text-main); overflow-x: hidden; }
-        .container { max-width: 1200px; margin: auto; padding: 0 24px; }
-
-        /* --- IMPLEMENTAÇÃO ADSENSE --- */
-        .ads-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-            overflow: hidden;
-            min-height: 90px;
+        /* BARRAS DE ROLAGEM OCULTAS PARA VISUAL LIMPO */
+        ::-webkit-scrollbar { 
+            display: none; 
         }
-        .adsbygoogle {
-            background: rgba(255,255,255,0.02);
-            border-radius: 12px;
+        
+        * { 
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+            box-sizing: border-box; 
+            scroll-behavior: smooth; 
+        }
+        
+        a, button, .fb-card, .filter-tag { 
+            transition: background 0.3s, transform 0.2s, border-color 0.3s; 
+        }
+
+        body { 
+            margin: 0; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--brand-dark); 
+            color: var(--text-main); 
+            overflow-x: hidden; 
+        }
+
+        .container { 
+            max-width: 1200px; 
+            margin: auto; 
+            padding: 0 24px; 
+        }
+
+        .ads-container { 
+            width: 100%; 
+            display: flex; 
+            justify-content: center; 
+            margin: 20px 0; 
+            overflow: hidden; 
+            min-height: 90px; 
+        }
+
+        .adsbygoogle { 
+            background: rgba(255,255,255,0.02); 
+            border-radius: 12px; 
         }
 
         header { 
-            background: rgba(5, 11, 20, 0.95); backdrop-filter: blur(15px);
-            border-bottom: 2px solid var(--brand-yellow);
-            position: sticky; top: 0; z-index: 1000; padding: 12px 0;
+            background: rgba(5, 11, 20, 0.95); 
+            backdrop-filter: blur(15px); 
+            border-bottom: 2px solid var(--brand-yellow); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            padding: 12px 0; 
         }
-        .nav { display: flex; align-items: center; justify-content: space-between; }
-        .logo-container { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-        .pin-icon { width: 28px; height: 28px; fill: var(--brand-yellow); }
-        .logo-text { font-size: 22px; font-weight: 800; color: var(--brand-yellow); letter-spacing: -1px; }
-        .logo-text span { color: white; }
 
-        .nav-actions { display: flex; gap: 12px; align-items: center; }
-        .nav-link-top { color: white; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; }
-
-        .user-badge { background: var(--brand-blue-light); padding: 5px 12px; border-radius: 50px; font-size: 11px; font-weight: 800; display: none; color: white; border: 1px solid var(--brand-yellow); }
-
-        /* RADAR VIP ALERT */
-        .radar-alert {
-            position: fixed; bottom: 20px; right: 20px; background: var(--brand-yellow);
-            color: var(--brand-blue); padding: 20px; border-radius: 20px; z-index: 9999;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5); display: none; align-items: center; gap: 15px;
-            animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        .nav { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
         }
-        @keyframes slideIn { from { transform: translateX(120%); } to { transform: translateX(0); } }
 
-        /* PROGRESS BAR FOR VIP SEATS */
-        .vip-counter { margin: 20px 0; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; border: 1px solid var(--border); }
-        .progress-bar { height: 8px; background: #333; border-radius: 10px; margin-top: 10px; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--brand-yellow); width: 0%; transition: width 1s; }
+        .logo-container { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            text-decoration: none; 
+        }
 
-        .menu-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 5px; }
-        .menu-hamburger span { width: 25px; height: 3px; background: var(--brand-yellow); border-radius: 2px; }
+        .pin-icon { 
+            width: 28px; 
+            height: 28px; 
+            fill: var(--brand-yellow); 
+        }
+
+        .logo-text { 
+            font-size: 22px; 
+            font-weight: 800; 
+            color: var(--brand-yellow); 
+            letter-spacing: -1px; 
+        }
+
+        .logo-text span { 
+            color: white; 
+        }
+
+        .nav-actions { 
+            display: flex; 
+            gap: 12px; 
+            align-items: center; 
+        }
+
+        .nav-link-top { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            border: 1px solid var(--border); 
+            padding: 8px 12px; 
+            border-radius: 8px; 
+        }
+
+        .user-badge { 
+            background: var(--brand-blue-light); 
+            padding: 5px 12px; 
+            border-radius: 50px; 
+            font-size: 11px; 
+            font-weight: 800; 
+            display: none; 
+            color: white; 
+            border: 1px solid var(--brand-yellow); 
+        }
+
+        .radar-alert { 
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            background: var(--brand-yellow); 
+            color: var(--brand-blue); 
+            padding: 20px; 
+            border-radius: 20px; 
+            z-index: 9999; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5); 
+            display: none; 
+            align-items: center; 
+            gap: 15px; 
+            animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+
+        @keyframes slideIn { 
+            from { transform: translateX(120%); } 
+            to { transform: translateX(0); } 
+        }
+
+        .vip-counter { 
+            margin: 20px 0; 
+            background: rgba(255,255,255,0.05); 
+            padding: 15px; 
+            border-radius: 15px; 
+            border: 1px solid var(--border); 
+        }
+
+        .progress-bar { 
+            height: 8px; 
+            background: #333; 
+            border-radius: 10px; 
+            margin-top: 10px; 
+            overflow: hidden; 
+        }
+
+        .progress-fill { 
+            height: 100%; 
+            background: var(--brand-yellow); 
+            width: 0%; 
+            transition: width 1s; 
+        }
+
+        .menu-hamburger { 
+            display: none; 
+            cursor: pointer; 
+            flex-direction: column; 
+            gap: 5px; 
+            background: none; 
+            border: none; 
+            padding: 5px; 
+        }
+
+        .menu-hamburger span { 
+            width: 25px; 
+            height: 3px; 
+            background: var(--brand-yellow); 
+            border-radius: 2px; 
+        }
 
         @media (max-width: 850px) {
-            .menu-hamburger { display: flex; }
-            .logo-text { font-size: 18px; }
-            .nav-actions { 
-                display: none; position: absolute; top: 70px; right: 24px; 
-                flex-direction: column; background: var(--brand-blue); 
-                padding: 20px; border-radius: 20px; border: 1px solid var(--brand-yellow); 
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 220px;
+            .menu-hamburger { 
+                display: flex; 
             }
-            .nav-actions.active { display: flex; }
-            .nav-actions a, .nav-actions button { width: 100%; text-align: center; }
+            .logo-text { 
+                font-size: 18px; 
+            }
+            .nav-actions { 
+                display: none; 
+                position: absolute; 
+                top: 70px; 
+                right: 24px; 
+                flex-direction: column; 
+                background: var(--brand-blue); 
+                padding: 20px; 
+                border-radius: 20px; 
+                border: 1px solid var(--brand-yellow); 
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+                width: 220px; 
+            }
+            .nav-actions.active { 
+                display: flex; 
+            }
+            .nav-actions a, .nav-actions button { 
+                width: 100%; 
+                text-align: center; 
+            }
         }
 
-        /* PILAR: EXPANSÃO NACIONAL */
-        .expansion-badge {
-            background: linear-gradient(90deg, var(--brand-yellow), #FFD700);
-            color: var(--brand-blue);
-            padding: 6px 15px;
-            font-size: 12px;
-            font-weight: 800;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 15px;
-            text-transform: uppercase;
+        .expansion-badge { 
+            background: linear-gradient(90deg, var(--brand-yellow), #FFD700); 
+            color: var(--brand-blue); 
+            padding: 6px 15px; 
+            font-size: 12px; 
+            font-weight: 800; 
+            border-radius: 50px; 
+            display: inline-block; 
+            margin-bottom: 15px; 
+            text-transform: uppercase; 
         }
 
         .hero { 
-            padding: 80px 0; text-align: center;
-            background: radial-gradient(circle at top, #185ADB33, transparent);
-            border-radius: 0 0 80px 80px;
+            padding: 80px 0; 
+            text-align: center; 
+            background: radial-gradient(circle at top, #185ADB33, transparent); 
+            border-radius: 0 0 80px 80px; 
         }
-        .hero h1 { font-size: clamp(32px, 8vw, 60px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px; }
-        .hero h1 span { color: var(--brand-yellow); }
-        .hero p { font-size: 18px; color: var(--text-muted); max-width: 750px; margin: 0 auto 40px; }
 
-        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        .btn-mega { padding: 20px 35px; border-radius: 20px; font-weight: 800; cursor: pointer; border: none; font-size: 15px; text-transform: uppercase; display: flex; align-items: center; gap: 12px; width: 100%; max-width: 400px; justify-content: center; position: relative; overflow: hidden; }
-        @media (min-width: 768px) { .btn-mega { width: auto; } }
+        .hero h1 { 
+            font-size: clamp(32px, 8vw, 60px); 
+            font-weight: 800; 
+            line-height: 1.1; 
+            margin-bottom: 20px; 
+            letter-spacing: -2px; 
+        }
+
+        .hero h1 span { 
+            color: var(--brand-yellow); 
+        }
+
+        .hero p { 
+            font-size: 18px; 
+            color: var(--text-muted); 
+            max-width: 750px; 
+            margin: 0 auto 40px; 
+        }
+
+        .btn-group { 
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+        }
+
+        .btn-mega { 
+            padding: 20px 35px; 
+            border-radius: 20px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            border: none; 
+            font-size: 15px; 
+            text-transform: uppercase; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            width: 100%; 
+            max-width: 400px; 
+            justify-content: center; 
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        @media (min-width: 768px) { 
+            .btn-mega { 
+                width: auto; 
+            } 
+        }
         
-        .btn-yellow { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3); }
-        
+        .btn-yellow { 
+            background: var(--brand-yellow); 
+            color: var(--brand-blue); 
+            box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3); 
+        }
+
         .btn-work { 
             background: #0A1931; 
             color: white; 
-            border: 2px solid var(--brand-yellow);
-            box-shadow: 0 0 15px rgba(255, 180, 0, 0.2);
-        }
-        .btn-work:hover { background: var(--brand-yellow); color: var(--brand-blue); }
-
-        .region-badge-info {
-            text-align: center; margin-bottom: 20px; color: var(--brand-yellow);
-            font-weight: 800; font-size: 14px; display: none;
+            border: 2px solid var(--brand-yellow); 
+            box-shadow: 0 0 15px rgba(255, 180, 0, 0.2); 
         }
 
-        .search-wrapper { max-width: 600px; margin: 30px auto 10px; position: relative; }
+        .btn-work:hover { 
+            background: var(--brand-yellow); 
+            color: var(--brand-blue); 
+        }
+
+        .region-badge-info { 
+            text-align: center; 
+            margin-bottom: 20px; 
+            color: var(--brand-yellow); 
+            font-weight: 800; 
+            font-size: 14px; 
+            display: none; 
+        }
+
+        .search-wrapper { 
+            max-width: 600px; 
+            margin: 30px auto 10px; 
+            position: relative; 
+        }
+
         .search-input-main { 
-            width: 100%; padding: 18px 25px 18px 55px; border-radius: 50px; 
-            background: rgba(255,255,255,0.05); border: 1px solid var(--border); 
-            color: white; font-size: 16px; outline: none;
+            width: 100%; 
+            padding: 18px 25px 18px 55px; 
+            border-radius: 50px; 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid var(--border); 
+            color: white; 
+            font-size: 16px; 
+            outline: none; 
         }
-        .search-input-main:focus { border-color: var(--brand-yellow); background: rgba(255,255,255,0.08); }
-        .search-icon-svg { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); fill: var(--brand-yellow); width: 20px; height: 20px; }
 
-        .map-section { padding: 40px 0; }
-        .map-wrapper { position: relative; max-width: 1000px; margin: 0 auto; border-radius: 40px; overflow: hidden; border: 4px solid var(--brand-blue); }
-        #map { height: 400px; width: 100%; }
-        .btn-near { position: absolute; bottom: 20px; right: 20px; z-index: 500; background: var(--brand-yellow); border: none; padding: 12px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; }
+        .search-input-main:focus { 
+            border-color: var(--brand-yellow); 
+            background: rgba(255,255,255,0.08); 
+        }
 
-        .filter-wrapper { display: flex; gap: 10px; overflow-x: auto; padding: 20px 0; justify-content: center; }
-        .filter-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 10px 20px; border-radius: 50px; color: white; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
-        .filter-tag.active { border-color: var(--brand-yellow); color: var(--brand-yellow); background: rgba(255, 180, 0, 0.1); }
+        .search-icon-svg { 
+            position: absolute; 
+            left: 22px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            fill: var(--brand-yellow); 
+            width: 20px; 
+            height: 20px; 
+        }
 
-        /* DESIGN SOCIAL / FACEBOOK STYLE MURAL */
-        .mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; margin-top: 30px; }
+        .map-section { 
+            padding: 40px 0; 
+        }
+
+        .map-wrapper { 
+            position: relative; 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            border-radius: 40px; 
+            overflow: hidden; 
+            border: 4px solid var(--brand-blue); 
+        }
+
+        #map { 
+            height: 400px; 
+            width: 100%; 
+        }
+
+        .btn-near { 
+            position: absolute; 
+            bottom: 20px; 
+            right: 20px; 
+            z-index: 500; 
+            background: var(--brand-yellow); 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 50px; 
+            font-weight: 800; 
+            cursor: pointer; 
+        }
+
+        .filter-wrapper { 
+            display: flex; 
+            gap: 10px; 
+            overflow-x: auto; 
+            padding: 20px 0; 
+            justify-content: center; 
+        }
+
+        .filter-tag { 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid var(--border); 
+            padding: 10px 20px; 
+            border-radius: 50px; 
+            color: white; 
+            font-size: 13px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            white-space: nowrap; 
+        }
+
+        .filter-tag.active { 
+            border-color: var(--brand-yellow); 
+            color: var(--brand-yellow); 
+            background: rgba(255, 180, 0, 0.1); 
+        }
+
+        .mural-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); 
+            gap: 20px; 
+            margin-top: 30px; 
+        }
         
-        .fb-card {
-            background: var(--fb-card);
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #3e4042;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            position: relative;
+        /* CORREÇÃO DO TEXTO QUEBRANDO A TELA */
+        .fb-card { 
+            background: var(--fb-card); 
+            border-radius: 12px; 
+            padding: 16px; 
+            border: 1px solid #3e4042; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            position: relative; 
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
         }
-        .fb-header { display: flex; align-items: center; gap: 12px; }
+
+        .fb-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+
         .fb-avatar { 
-            width: 48px; height: 48px; border-radius: 50%; 
+            width: 48px; 
+            min-width: 48px; 
+            height: 48px; 
+            border-radius: 50%; 
             background: var(--brand-blue-light); 
-            display: flex; align-items: center; justify-content: center; 
-            font-weight: 800; color: white; border: 2px solid var(--brand-yellow);
-            font-size: 20px;
-            text-transform: uppercase;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 800; 
+            color: white; 
+            border: 2px solid var(--brand-yellow); 
+            font-size: 20px; 
+            text-transform: uppercase; 
         }
-        .fb-meta h4 { margin: 0; font-size: 15px; color: #e4e6eb; }
-        .fb-meta span { font-size: 12px; color: #b0b3b8; }
-        .fb-body { color: #e4e6eb; font-size: 14px; line-height: 1.5; padding: 5px 0; }
-        .fb-footer { border-top: 1px solid #3e4042; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; }
+
+        .fb-meta { 
+            overflow: hidden; 
+        }
+
+        .fb-meta h4 { 
+            margin: 0; 
+            font-size: 15px; 
+            color: #e4e6eb; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+
+        .fb-meta span { 
+            font-size: 12px; 
+            color: #b0b3b8; 
+        }
+
+        .fb-body { 
+            color: #e4e6eb; 
+            font-size: 14px; 
+            line-height: 1.5; 
+            padding: 5px 0; 
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+            white-space: pre-wrap; 
+        }
+
+        .fb-footer { 
+            border-top: 1px solid #3e4042; 
+            padding-top: 12px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
 
         .prestador-card { 
-            background: linear-gradient(145deg, #1c1e21, #050B14);
-            border-radius: 20px; padding: 20px; border: 1px solid var(--border);
-            display: flex; flex-direction: column; gap: 15px; position: relative;
+            background: linear-gradient(145deg, #1c1e21, #050B14); 
+            border-radius: 20px; 
+            padding: 20px; 
+            border: 1px solid var(--border); 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+            position: relative; 
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
         }
 
-        .stars-container { color: var(--brand-yellow); display: flex; gap: 2px; font-size: 12px; margin-top: 4px; }
-        .rating-selection { display: flex; gap: 10px; justify-content: center; margin: 20px 0; font-size: 30px; }
-        .star-clickable { cursor: pointer; color: #444; transition: 0.2s; }
-        .star-clickable.active { color: var(--brand-yellow); }
-        .badge-premium { position: absolute; top: 10px; right: 10px; background: var(--brand-yellow); color: var(--brand-blue); font-size: 10px; font-weight: 900; padding: 4px 8px; border-radius: 5px; }
+        .prestador-card p { 
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+            white-space: pre-wrap; 
+            margin: 0; 
+        }
+
+        .stars-container { 
+            color: var(--brand-yellow); 
+            display: flex; 
+            gap: 2px; 
+            font-size: 12px; 
+            margin-top: 4px; 
+        }
+
+        .rating-selection { 
+            display: flex; 
+            gap: 10px; 
+            justify-content: center; 
+            margin: 20px 0; 
+            font-size: 30px; 
+        }
+
+        .star-clickable { 
+            cursor: pointer; 
+            color: #444; 
+            transition: 0.2s; 
+        }
+
+        .star-clickable.active { 
+            color: var(--brand-yellow); 
+        }
+
+        .badge-premium { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: var(--brand-yellow); 
+            color: var(--brand-blue); 
+            font-size: 10px; 
+            font-weight: 900; 
+            padding: 4px 8px; 
+            border-radius: 5px; 
+        }
 
         .step-card { 
             background: rgba(255,255,255,0.03); 
@@ -197,24 +553,84 @@
             border: 1px solid var(--border); 
             text-align: center; 
         }
-        .step-card h3 { font-size: 22px; margin: 15px 0 10px; }
-        .step-card p { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-        .step-card .icon { font-size: 40px; }
 
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
+        .step-card h3 { 
+            font-size: 22px; 
+            margin: 15px 0 10px; 
+        }
+
+        .step-card p { 
+            font-size: 16px; 
+            color: var(--text-muted); 
+            line-height: 1.5; 
+        }
+
+        .step-card .icon { 
+            font-size: 40px; 
+        }
+
+        .testimonials-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+            margin-top: 40px; 
+        }
+
         .testimonial-card { 
             background: rgba(255,255,255,0.02); 
             padding: 30px; 
             border-radius: 25px; 
             border: 1px solid var(--border); 
-            position: relative;
+            position: relative; 
         }
-        .testimonial-card::before { content: '"'; position: absolute; top: 10px; left: 20px; font-size: 60px; color: var(--brand-yellow); opacity: 0.2; }
-        .testimonial-text { font-style: italic; color: var(--text-main); line-height: 1.6; margin-bottom: 20px; font-size: 15px; }
-        .testimonial-author { display: flex; align-items: center; gap: 12px; }
-        .author-avatar { width: 45px; height: 45px; background: var(--brand-blue-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; border: 2px solid var(--brand-yellow); }
-        .author-info h4 { margin: 0; font-size: 14px; color: var(--brand-yellow); }
-        .author-info span { font-size: 12px; color: var(--text-muted); }
+
+        .testimonial-card::before { 
+            content: '"'; 
+            position: absolute; 
+            top: 10px; 
+            left: 20px; 
+            font-size: 60px; 
+            color: var(--brand-yellow); 
+            opacity: 0.2; 
+        }
+
+        .testimonial-text { 
+            font-style: italic; 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            margin-bottom: 20px; 
+            font-size: 15px; 
+        }
+
+        .testimonial-author { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+
+        .author-avatar { 
+            width: 45px; 
+            height: 45px; 
+            background: var(--brand-blue-light); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 800; 
+            color: white; 
+            border: 2px solid var(--brand-yellow); 
+        }
+
+        .author-info h4 { 
+            margin: 0; 
+            font-size: 14px; 
+            color: var(--brand-yellow); 
+        }
+
+        .author-info span { 
+            font-size: 12px; 
+            color: var(--text-muted); 
+        }
         
         .about-section { 
             padding: 80px 0; 
@@ -224,7 +640,12 @@
             border: 1px solid var(--brand-yellow); 
             text-align: center; 
         }
-        .about-title { font-size: 36px; margin-bottom: 20px; }
+
+        .about-title { 
+            font-size: 36px; 
+            margin-bottom: 20px; 
+        }
+
         .about-text { 
             max-width: 900px; 
             margin: 0 auto; 
@@ -232,48 +653,176 @@
             line-height: 1.8; 
             font-size: 19px; 
             font-weight: 500; 
-            padding: 0 10px;
+            padding: 0 10px; 
         }
 
-        footer { padding: 60px 0 30px; border-top: 1px solid var(--border); background: #03070C; text-align: center; }
-        .footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; cursor: pointer; }
+        footer { 
+            padding: 60px 0 30px; 
+            border-top: 1px solid var(--border); 
+            background: #03070C; 
+            text-align: center; 
+        }
 
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
-        .modal-content { background: var(--brand-blue); padding: 40px 30px; border-radius: 40px; width: 100%; max-width: 550px; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto; }
-        input, textarea { width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; margin-top: 10px; outline: none; }
+        .footer-links { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            margin-top: 20px; 
+            flex-wrap: wrap; 
+        }
+
+        .footer-links a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-size: 13px; 
+            cursor: pointer; 
+        }
+
+        .modal { 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.95); 
+            backdrop-filter: blur(15px); 
+            display: none; 
+            align-items: center; 
+            justify-content: center; 
+            z-index: 9999; 
+            padding: 20px; 
+        }
+
+        .modal-content { 
+            background: var(--brand-blue); 
+            padding: 40px 30px; 
+            border-radius: 40px; 
+            width: 100%; 
+            max-width: 550px; 
+            border: 1px solid var(--border); 
+            max-height: 90vh; 
+            overflow-y: auto; 
+        }
+
+        input, textarea { 
+            width: 100%; 
+            padding: 16px; 
+            border-radius: 15px; 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid var(--border); 
+            color: white; 
+            margin-top: 10px; 
+            outline: none; 
+        }
+
+        textarea { 
+            resize: none; 
+            overflow-y: auto; 
+            min-height: 100px; 
+            word-wrap: break-word; 
+        }
+
+        .legal-text { 
+            color: var(--text-muted); 
+            text-align: left; 
+            font-size: 14px; 
+            line-height: 1.6; 
+        }
+
+        .legal-text h4 { 
+            color: var(--brand-yellow); 
+            margin-top: 20px; 
+        }
+
+        .cookie-consent { 
+            position: fixed; 
+            bottom: 20px; 
+            left: 20px; 
+            right: 20px; 
+            background: var(--brand-blue); 
+            border: 1px solid var(--brand-yellow); 
+            padding: 20px; 
+            border-radius: 20px; 
+            z-index: 10001; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8); 
+            transform: translateY(150%); 
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+
+        .cookie-consent.active { 
+            transform: translateY(0); 
+        }
+
+        .cookie-text { 
+            font-size: 14px; 
+            color: white; 
+            max-width: 70%; 
+        }
+
+        .cookie-text b { 
+            color: var(--brand-yellow); 
+        }
+
+        .feedback-banner { 
+            position: fixed; 
+            top: 90px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: #FFFFFF; 
+            color: #050B14; 
+            padding: 15px 25px; 
+            border-radius: 50px; 
+            font-weight: 800; 
+            z-index: 2000; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            display: none; 
+            align-items: center; 
+            gap: 15px; 
+            border: 3px solid var(--brand-yellow); 
+            width: 90%; 
+            max-width: 500px; 
+            flex-direction: column; 
+            text-align: center; 
+        }
         
-        /* CORREÇÃO DA BARRINHA / TRAVAMENTO NO TEXTAREA */
-        textarea { resize: none; overflow-y: hidden; min-height: 100px; }
-
-        .legal-text { color: var(--text-muted); text-align: left; font-size: 14px; line-height: 1.6; }
-        .legal-text h4 { color: var(--brand-yellow); margin-top: 20px; }
-
-        .cookie-consent {
-            position: fixed;
-            bottom: 20px; left: 20px; right: 20px;
-            background: var(--brand-blue); border: 1px solid var(--brand-yellow);
-            padding: 20px; border-radius: 20px; z-index: 10001;
-            display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-            transform: translateY(150%); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .cookie-consent.active { transform: translateY(0); }
-        .cookie-text { font-size: 14px; color: white; max-width: 70%; }
-        .cookie-text b { color: var(--brand-yellow); }
-
-        .feedback-banner {
-            position: fixed; top: 90px; left: 50%; transform: translateX(-50%);
-            background: #FFFFFF; color: #050B14;
-            padding: 15px 25px; border-radius: 50px; font-weight: 800;
-            z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            display: none; align-items: center; gap: 15px; border: 3px solid var(--brand-yellow);
-            width: 90%; max-width: 500px; flex-direction: column; text-align: center;
+        .upsell-box { 
+            background: rgba(0,0,0,0.2); 
+            border: 1px solid var(--text-muted); 
+            border-radius: 15px; 
+            padding: 15px; 
+            margin-top: 15px; 
+            text-align: left; 
         }
 
-        @media (max-width: 600px) {
-            .cookie-consent { flex-direction: column; text-align: center; gap: 15px; }
-            .cookie-text { max-width: 100%; }
+        .upsell-btn { 
+            background: var(--text-main); 
+            color: var(--brand-blue); 
+            border: none; 
+            padding: 10px; 
+            border-radius: 10px; 
+            font-weight: 800; 
+            width: 100%; 
+            margin-top: 10px; 
+            cursor: pointer; 
+        }
+
+        .upsell-btn.premium { 
+            background: #FFD700; 
+        }
+
+        .upsell-btn.platinum { 
+            background: #C0C0C0; 
+        }
+
+        @media (max-width: 600px) { 
+            .cookie-consent { 
+                flex-direction: column; 
+                text-align: center; 
+                gap: 15px; 
+            } 
+            .cookie-text { 
+                max-width: 100%; 
+            } 
         }
     </style>
 </head>
@@ -282,8 +831,8 @@
 <div id="radarAlert" class="radar-alert">
     <div style="font-size: 30px;">🚨</div>
     <div>
-        <b style="display: block;">NOVO PEDIDO VIP!</b>
-        <span id="radarText">Alguém precisa de ajuda perto de você.</span>
+        <b style="display: block;">NOVO PEDIDO VIP NA SUA ÁREA!</b>
+        <span id="radarText">Alguém precisa da sua ajuda.</span>
     </div>
     <button onclick="document.getElementById('feed').scrollIntoView(); document.getElementById('radarAlert').style.display='none';" class="btn-yellow" style="padding: 10px; border-radius: 10px; border: none; font-weight: 800; cursor: pointer;">VER AGORA</button>
 </div>
@@ -306,7 +855,9 @@
 <header>
     <div class="container nav">
         <a href="#" class="logo-container">
-            <svg class="pin-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <svg class="pin-icon" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
             <div class="logo-text">AJUDA<span>AI</span></div>
         </a>
         
@@ -323,7 +874,9 @@
         </div>
 
         <button class="menu-hamburger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
     </div>
 </header>
@@ -392,7 +945,9 @@
     </div>
 
     <div class="search-wrapper">
-        <svg class="search-icon-svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <svg class="search-icon-svg" viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
         <input type="text" class="search-input-main" id="muralSearch" placeholder="O que você procura? (Ex: Marido de Aluguel, Pintor, Elétrica...)">
     </div>
 
@@ -407,7 +962,7 @@
     <section id="feed">
         <h2 style="font-size: clamp(24px, 5vw, 32px); text-align: center; margin: 40px 0;">Mural de Oportunidades <span style="color: var(--brand-yellow);">Locais</span></h2>
         <div class="mural-grid" id="muralGrid">
-        </div>
+            </div>
     </section>
 
     <section id="depoimentos" style="padding: 60px 0;">
@@ -476,26 +1031,37 @@
         <h2 style="margin-bottom: 5px;">Meu <span>Perfil</span></h2>
         <p id="perfilNome" style="color: var(--text-main); font-size: 18px; font-weight: 800; margin-top: 0; text-transform: uppercase;"></p>
         
-        <div id="perfilPlanoCard" style="background: rgba(255,255,255,0.05); border: 2px solid var(--brand-yellow); border-radius: 20px; padding: 20px; margin: 20px 0; text-align: left;">
+        <div id="perfilPlanoCard" style="background: rgba(255,255,255,0.05); border: 2px solid var(--border); border-radius: 20px; padding: 20px; margin: 20px 0; text-align: left;">
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 15px;">
-                <h3 style="margin: 0; color: var(--brand-yellow);" id="perfilPlanoNome">Plano</h3>
-                <span id="perfilPlanoValor" style="font-weight: 800; font-size: 16px; color: white;">R$ 0,00</span>
+                <h3 style="margin: 0;" id="perfilPlanoNome">Plano</h3>
+                <span id="perfilPlanoValor" style="font-weight: 800; font-size: 16px; color: white;">...</span>
             </div>
             <ul id="perfilPlanoBeneficios" style="color: var(--text-muted); font-size: 13px; padding-left: 20px; line-height: 1.8; margin: 0;">
                 </ul>
+            
+            <div id="areaUpgrade" style="display: none;">
+                <div class="upsell-box">
+                    <h4 style="margin: 0 0 5px; color: #C0C0C0;">⭐ Adquirir Plano Platinum</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">Pino Prateado visível 24h para clientes e prioridade no Mural. (R$ 24,90/mês)</span>
+                    <button class="upsell-btn platinum" onclick="alert('Integração de pagamento Mercado Pago em breve!')">UPGRADE PLATINUM</button>
+                </div>
+                <div class="upsell-box" style="border-color: #FFD700;">
+                    <h4 style="margin: 0 0 5px; color: #FFD700;">👑 Adquirir Plano Premium</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">Pino Dourado, Radar Inteligente de WhatsApp e Visibilidade Máxima. (R$ 49,90/mês)</span>
+                    <button class="upsell-btn premium" onclick="alert('Integração de pagamento Mercado Pago em breve!')">UPGRADE PREMIUM</button>
+                </div>
+            </div>
         </div>
 
         <button class="btn-yellow" style="width:100%; padding:18px; border-radius:15px; border:none; font-weight:800; cursor:not-allowed; opacity: 0.6; margin-bottom: 10px;" disabled>💳 MEUS RECEBIMENTOS (EM BREVE)</button>
-        <button type="button" onclick="closeModal('modalPerfil')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Fechar</button>
+        <button type="button" onclick="closeModal('modalPerfil')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Fechar Painel</button>
     </div>
 </div>
 
 <div class="modal" id="modalAvaliacao">
     <div class="modal-content" style="text-align: center;">
-        <div id="evalAvatar" class="prestador-avatar" style="margin: 0 auto 15px; width: 70px; height: 70px; font-size: 24px; border-radius: 50%; background: var(--brand-yellow); color: var(--brand-blue); display: flex; align-items: center; justify-content: center; font-weight: 800;">?</div>
+        <div id="evalAvatar" style="margin: 0 auto 15px; width: 70px; height: 70px; font-size: 24px; border-radius: 50%; background: var(--brand-yellow); color: var(--brand-blue); display: flex; align-items: center; justify-content: center; font-weight: 800;">?</div>
         <h2>Avalie o atendimento de <span id="evalNome" style="color: var(--brand-yellow);">...</span></h2>
-        <p>Sua avaliação gera <b>segurança e confiança</b> para toda a comunidade.</p>
-        
         <div class="rating-selection">
             <span class="star-clickable" onclick="setStar(1)">★</span>
             <span class="star-clickable" onclick="setStar(2)">★</span>
@@ -503,9 +1069,7 @@
             <span class="star-clickable" onclick="setStar(4)">★</span>
             <span class="star-clickable" onclick="setStar(5)">★</span>
         </div>
-
         <textarea id="evalComentario" placeholder="Conte como foi o serviço (opcional)..." style="height: 80px;"></textarea>
-        
         <button onclick="enviarAvaliacaoFinal()" class="btn-yellow" style="width: 100%; margin-top: 20px; padding: 18px;">FINALIZAR E AVALIAR</button>
     </div>
 </div>
@@ -526,7 +1090,7 @@
     <div class="modal-content">
         <h2 style="color: var(--brand-yellow);">Política de <span>Privacidade</span></h2>
         <div class="legal-text">
-            <p>A sua privacidade é fundamental. Esta política descreve como o <b>Ajuda Aí</b> protege seus dados.</p>
+            <p>A sua privacidade é fundamental. Esta política descreve como o <b>Ajuda Aí</b> protege os seus dados de forma integral e segura.</p>
             <h4>1. Coleta de Dados</h4>
             <p>Coletamos nome, WhatsApp e localização apenas para viabilizar conexões profissionais locais.</p>
             <h4>2. Uso da Localização</h4>
@@ -542,7 +1106,7 @@
     <div class="modal-content">
         <h2 style="color: var(--brand-yellow);">Termos de <span>Uso</span></h2>
         <div class="legal-text">
-            <p>Ao utilizar o <b>Ajuda Aí</b>, você concorda com nossos pilares de segurança:</p>
+            <p>Ao utilizar o <b>Ajuda Aí</b>, você concorda com os nossos pilares de segurança e confiança local comunitária.</p>
             <h4>1. Natureza do Serviço</h4>
             <p>O Ajuda Aí é um marketplace de conexão direta. Promovemos a autonomia do trabalhador.</p>
             <h4>2. Isenção de Responsabilidade</h4>
@@ -560,8 +1124,10 @@
         <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Entre na sua cidade primeiro e aumente sua renda.</p>
         
         <div class="vip-counter">
-            <span style="font-size: 12px; font-weight: 800; color: var(--brand-yellow);">🎁 VAGAS VIP GRATUITAS (OURO + RADAR):</span>
-            <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+            <span style="font-size: 12px; font-weight: 800; color: var(--brand-yellow);">🎁 VAGAS PREMIUM (FUNDADOR):</span>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
             <p id="seatsText" style="font-size: 11px; margin-top: 10px; color: #94A3B8;">Carregando vagas...</p>
         </div>
 
@@ -570,9 +1136,9 @@
             <input type="email" id="pres_email" placeholder="Seu e-mail (Para Login)" required>
             <input type="password" id="pres_senha" placeholder="Crie uma senha" required>
             <input type="tel" class="mask-whatsapp" id="whatsappInput" placeholder="WhatsApp (DDD)" maxlength="16" required>
-            <input type="text" id="pres_servico" placeholder="Sua Profissão (Ex: Pintor, Diarista...)" required>
+            <input type="text" id="pres_servico" placeholder="Sua Profissão (Ex: Eletricista, Encanador...)" required>
             <input type="text" id="pres_cidade" placeholder="Sua Cidade" required>
-            <textarea id="pres_bio" placeholder="Fale brevemente sobre sua experiência"></textarea>
+            <textarea id="pres_bio" placeholder="Fale brevemente sobre sua experiência (Destaque o seu valor)"></textarea>
             <button type="submit" id="btnSalvarPrestador" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">FINALIZAR CADASTRO</button>
             <button type="button" onclick="closeModal('modalPrestador')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Voltar</button>
         </form>
@@ -586,9 +1152,9 @@
         <form id="formPedido">
             <input type="text" id="ped_nome" placeholder="Seu nome completo" required>
             <input type="tel" class="mask-whatsapp" id="ped_whatsapp" placeholder="Seu WhatsApp (com DDD)" maxlength="16" required>
-            <input type="text" id="ped_titulo" placeholder="Ex: Consertar torneira, Limpeza pesada..." required>
+            <input type="text" id="ped_titulo" placeholder="O que você precisa? (Ex: Preciso de eletricista)" required>
             <input type="text" id="ped_cidade" placeholder="Sua Cidade" required>
-            <textarea id="ped_descricao" placeholder="Detalhes do que você precisa..."></textarea>
+            <textarea id="ped_descricao" placeholder="Descreva os detalhes do serviço..."></textarea>
             <button type="submit" id="btnPostarPedido" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">POSTAR NO MURAL</button>
             <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Cancelar</button>
         </form>
@@ -601,23 +1167,31 @@
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZob2l3a25keG1tYWp3b3NreGRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1ODA5NTcsImV4cCI6MjA4NzE1Njk1N30.ieQQz4158eWEaHkC5yMjMIIFg-FBabbwUz-vpXyo1c8';
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    let userLat = null; let userLng = null; let currentCity = "";
+    let userLat = null; 
+    let userLng = null; 
+    let currentCity = "";
     let selectedStar = 0;
     let logado = JSON.parse(localStorage.getItem('user_ajudaai')) || null;
 
     const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
 
-    const goldIcon = L.icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+    const goldIcon = L.icon({ 
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png', 
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', 
+        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] 
     });
-
-    const blueIcon = L.icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+    
+    const silverIcon = L.icon({ 
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png', 
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', 
+        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] 
+    });
+    
+    const blueIcon = L.icon({ 
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png', 
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', 
+        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] 
     });
 
     function atualizarInterface() {
@@ -640,19 +1214,24 @@
         if (!logado) return;
         document.getElementById('perfilNome').innerText = logado.nome;
         
-        let nomePlano = "Plano Gratuito"; let valorPlano = "R$ 0,00";
-        let beneficios = "<li><b>Pino Azul</b> básico no mapa</li><li>Acesso padrão ao mural de pedidos</li>";
-        let corDestaque = "#FFFFFF";
+        let nomePlano = "Plano Gratuito"; 
+        let valorPlano = "R$ 0,00";
+        let beneficios = "<li><b>Pino Azul</b> básico no mapa (Visibilidade Limitada para Clientes)</li><li>Acesso com delay ao mural de pedidos</li>";
+        let corDestaque = "#185ADB";
+        let isFree = true;
 
         if (logado.plano === 'ouro') {
-            nomePlano = "Plano Ouro VIP";
+            nomePlano = "Plano Premium";
             valorPlano = logado.radar_ativo ? "Gratuito (Fundador)" : "R$ 49,90/mês";
-            beneficios = "<li><b>Pino Dourado</b> com máximo destaque no mapa</li><li><b>Prioridade Absoluta</b> no topo das buscas</li><li><b>Radar VIP:</b> Alerta sonoro de novos pedidos em tempo real</li>";
-            corDestaque = "#FFD700";
+            beneficios = `<li><b>Pino Dourado</b> com destaque máximo no mapa 24h</li><li><b>Prioridade Absoluta</b> no topo das buscas</li><li><b>Radar Inteligente:</b> Alerta sonoro de novos pedidos para a área de <b>${logado.servico}</b>.</li>`;
+            corDestaque = "#FFD700"; 
+            isFree = false;
         } else if (logado.plano === 'prata') {
-            nomePlano = "Plano Prata"; valorPlano = "R$ 24,90/mês";
-            beneficios = "<li><b>Pino Prateado</b> de destaque no mapa</li><li>Posicionamento superior nas buscas de clientes</li>";
-            corDestaque = "#C0C0C0";
+            nomePlano = "Plano Platinum"; 
+            valorPlano = "R$ 24,90/mês";
+            beneficios = "<li><b>Pino Prateado</b> de destaque no mapa 24h</li><li>Acesso Imediato ao Mural de Pedidos</li>";
+            corDestaque = "#C0C0C0"; 
+            isFree = false;
         }
 
         document.getElementById('perfilPlanoNome').innerText = nomePlano;
@@ -660,8 +1239,11 @@
         document.getElementById('perfilPlanoCard').style.borderColor = corDestaque;
         document.getElementById('perfilPlanoValor').innerText = valorPlano;
         document.getElementById('perfilPlanoBeneficios').innerHTML = beneficios;
+        
+        // Exibe área de Upsell/Pagamento se for gratuito
+        document.getElementById('areaUpgrade').style.display = isFree ? 'block' : 'none';
 
-        openModal('modalPerfil');
+        openModal('modalPerfil'); 
         closeMenu();
     }
 
@@ -669,21 +1251,26 @@
         e.preventDefault();
         const email = document.getElementById('login_email').value;
         const senha = document.getElementById('login_senha').value;
-        const { data, error } = await _supabase.from('prestadores').select('*').eq('email', email).eq('senha', senha).single();
-        if (data) {
-            logado = data;
-            localStorage.setItem('user_ajudaai', JSON.stringify(data));
-            closeModal('modalLogin');
-            atualizarInterface();
-            alert(`Bem-vindo de volta, ${data.nome}!`);
-        } else {
-            alert("E-mail ou senha incorretos.");
+        const { data, error } = await _supabase.from('prestadores')
+            .select('*')
+            .eq('email', email)
+            .eq('senha', senha)
+            .single();
+
+        if (data) { 
+            logado = data; 
+            localStorage.setItem('user_ajudaai', JSON.stringify(data)); 
+            closeModal('modalLogin'); 
+            atualizarInterface(); 
+            alert(`Bem-vindo de volta, ${data.nome}!`); 
+        } else { 
+            alert("E-mail ou senha incorretos."); 
         }
     }
 
-    function logout() {
-        localStorage.removeItem('user_ajudaai');
-        location.reload();
+    function logout() { 
+        localStorage.removeItem('user_ajudaai'); 
+        location.reload(); 
     }
 
     async function getCityName(lat, lng) {
@@ -692,20 +1279,24 @@
             const data = await response.json();
             const city = data.address.city || data.address.town || data.address.village;
             if (city) {
-                currentCity = city;
-                document.getElementById('regionBadge').style.display = 'block';
+                currentCity = city; 
+                document.getElementById('regionBadge').style.display = 'block'; 
                 document.getElementById('cityNameDisplay').innerText = city;
-                document.getElementById('pres_cidade').value = city;
+                document.getElementById('pres_cidade').value = city; 
                 document.getElementById('ped_cidade').value = city;
-                carregarMural(city);
+                carregarMural(city); 
                 carregarVitrine(city);
             }
-        } catch (e) { console.error("Erro GPS", e); }
+        } catch (e) { 
+            console.error("Erro GPS", e); 
+        }
     }
 
     async function carregarVitrine(filtroCidade = "") {
         let query = _supabase.from('prestadores').select('*');
-        if (filtroCidade) query = query.ilike('cidade', `%${filtroCidade}%`);
+        if (filtroCidade) {
+            query = query.ilike('cidade', `%${filtroCidade}%`);
+        }
         
         const { data: prestadores } = await query.order('created_at', { ascending: false });
         const grid = document.getElementById('vitrineGrid');
@@ -714,59 +1305,78 @@
             const total = prestadores.length;
             const preenchido = Math.min((total / 500) * 100, 100);
             document.getElementById('progressFill').style.width = `${preenchido}%`;
-            document.getElementById('seatsText').innerText = total < 500 ? `Restam ${500 - total} vagas VIP gratuitas!` : "Vagas VIP esgotadas.";
+            document.getElementById('seatsText').innerText = total < 500 ? `Restam ${500 - total} vagas PREMIUM gratuitas!` : "Vagas Fundador esgotadas. Cobrança ativa para novos membros.";
 
-            map.eachLayer((layer) => { if (layer instanceof L.Marker && layer.getPopup()?.getContent() !== 'Você está aqui!') map.removeLayer(layer); });
+            map.eachLayer((layer) => { 
+                if (layer instanceof L.Marker && layer.getPopup()?.getContent() !== 'Você está aqui!') {
+                    map.removeLayer(layer); 
+                }
+            });
 
             let html = "";
             for (let p of prestadores) {
-                if (p.lat && p.lng) {
-                    L.marker([p.lat, p.lng], {icon: (p.plano === 'ouro' || p.is_premium) ? goldIcon : blueIcon})
+                
+                // Lógica de Visibilidade: Clientes só veem pinos Premium e Platinum na vitrine. Grátis fica oculto ou no fim.
+                const isPremium = p.plano === 'ouro';
+                const isPlatinum = p.plano === 'prata';
+                const isOwner = logado && logado.id === p.id;
+                
+                let currentIcon = blueIcon;
+                if (isPremium) currentIcon = goldIcon;
+                if (isPlatinum) currentIcon = silverIcon;
+
+                // Mostra no mapa se for pagante (ou se for o proprio dono logado)
+                if (p.lat && p.lng && (isPremium || isPlatinum || isOwner)) {
+                    L.marker([p.lat, p.lng], {icon: currentIcon})
                      .addTo(map)
                      .bindPopup(`<b>${p.nome}</b><br>${p.servico}`);
                 }
 
-                const { data: avs } = await _supabase.from('avaliacoes').select('nota').eq('prestador_id', p.id);
-                const media = avs && avs.length > 0 ? (avs.reduce((a, b) => a + b.nota, 0) / avs.length).toFixed(1) : "Novo";
-                const estrelas = media !== "Novo" ? "★".repeat(Math.round(media)) + "☆".repeat(5 - Math.round(media)) : "☆☆☆☆☆";
-                const corBorda = p.plano === 'ouro' ? 'border-color: #FFD700;' : (p.plano === 'prata' ? 'border-color: #C0C0C0;' : '');
-                const corBadge = p.plano === 'ouro' ? '<div class="badge-premium" style="background:#FFD700; color:#000;">DESTAQUE OURO</div>' : '';
+                // Renderiza na vitrine se for Premium/Platinum
+                if (isPremium || isPlatinum) {
+                    const { data: avs } = await _supabase.from('avaliacoes').select('nota').eq('prestador_id', p.id);
+                    const media = avs && avs.length > 0 ? (avs.reduce((a, b) => a + b.nota, 0) / avs.length).toFixed(1) : "Novo";
+                    const estrelas = media !== "Novo" ? "★".repeat(Math.round(media)) + "☆".repeat(5 - Math.round(media)) : "☆☆☆☆☆";
+                    const corBorda = p.plano === 'ouro' ? 'border-color: #FFD700;' : 'border-color: #C0C0C0;';
+                    const corBadge = p.plano === 'ouro' ? '<div class="badge-premium" style="background:#FFD700; color:#000;">PREMIUM</div>' : '<div class="badge-premium" style="background:#C0C0C0; color:#000;">PLATINUM</div>';
 
-                html += `
-                    <div class="prestador-card fb-card" style="${corBorda}">
-                        ${corBadge}
-                        <div class="fb-header">
-                            <div class="fb-avatar" style="${p.plano === 'ouro' ? 'background:#FFD700; color:#000;' : ''}">${p.nome.charAt(0)}</div>
-                            <div class="fb-meta">
-                                <h4>${p.nome}</h4>
-                                <div class="stars-container">
-                                    ${estrelas} <span style="font-size:10px; color:var(--text-muted); margin-left:5px;">(${media})</span>
+                    html += `
+                        <div class="prestador-card fb-card" style="${corBorda}">
+                            ${corBadge}
+                            <div class="fb-header">
+                                <div class="fb-avatar" style="${p.plano === 'ouro' ? 'background:#FFD700; color:#000;' : (p.plano === 'prata' ? 'background:#C0C0C0; color:#000;' : '')}">${p.nome.charAt(0)}</div>
+                                <div class="fb-meta">
+                                    <h4>${p.nome}</h4>
+                                    <div class="stars-container">${estrelas} <span style="font-size:10px; color:var(--text-muted); margin-left:5px;">(${media})</span></div>
                                 </div>
                             </div>
+                            <div class="fb-body">
+                                <strong style="color:var(--brand-yellow); font-size:14px;">💼 ${p.servico}</strong>
+                                <p style="font-size:13px; color:var(--text-main); margin:10px 0;">"${p.bio || 'Profissional local disponível para ajudar.'}"</p>
+                            </div>
+                            <div class="fb-footer">
+                                <span style="font-size:11px; color:var(--text-muted);">📍 ${p.cidade}</span>
+                                <button onclick="window.open('https://wa.me/55${p.whatsapp.replace(/\D/g,'')}', '_blank')" class="btn-yellow" style="padding:8px 15px; border-radius:8px; border:none; cursor:pointer; font-weight:800;">CONTATO</button>
+                            </div>
                         </div>
-                        <div class="fb-body">
-                            <strong style="color:var(--brand-yellow); font-size:14px;">💼 ${p.servico}</strong>
-                            <p style="font-size:13px; color:var(--text-main); margin:10px 0;">"${p.bio || 'Profissional local disponível para ajudar.'}"</p>
-                        </div>
-                        <div class="fb-footer">
-                            <span style="font-size:11px; color:var(--text-muted);">📍 ${p.cidade}</span>
-                            <button onclick="window.open('https://wa.me/55${p.whatsapp.replace(/\D/g,'')}', '_blank')" class="btn-yellow" style="padding:8px 15px; border-radius:8px; border:none; cursor:pointer; font-weight:800;">CONTATO</button>
-                        </div>
-                    </div>
-                `;
+                    `;
+                }
             }
-            grid.innerHTML = html || `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted);">Nenhum prestador encontrado.</p>`;
+            grid.innerHTML = html || `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted);">Aguardando profissionais Premium nesta região.</p>`;
         }
     }
 
     async function carregarMural(filtroCidade = "") {
         let query = _supabase.from('pedidos_ajuda').select('*').eq('status', 'aberto');
-        if (filtroCidade) query = query.ilike('cidade', `%${filtroCidade}%`);
+        if (filtroCidade) {
+            query = query.ilike('cidade', `%${filtroCidade}%`);
+        }
+        
         const { data } = await query.order('created_at', { ascending: false });
         const grid = document.getElementById('muralGrid');
+        
         if (data) {
             grid.innerHTML = data.map(pedido => {
-                // Prevenção de erro caso o título contenha aspas simples (ex: "conserto d'água")
                 const safeTitulo = pedido.titulo_ajuda.replace(/'/g, "\\'");
                 return `
                 <div class="fb-card">
@@ -779,49 +1389,42 @@
                     </div>
                     <div class="fb-body">
                         <strong style="color:var(--brand-yellow); display:block; margin-bottom:5px;">${pedido.titulo_ajuda}</strong>
-                        ${pedido.descricao}
+                        <p>${pedido.descricao}</p>
                     </div>
                     <div class="fb-footer">
                         <span style="font-size:12px; color:#b0b3b8;">Aguardando profissional...</span>
-                        <button class="btn-yellow" onclick="atenderPedido('${pedido.id}', '${pedido.cliente_whats}', '${safeTitulo}', this)" 
-                        style="padding: 10px 20px; border-radius: 8px; cursor:pointer; font-weight:800;">AJUDAR AGORA</button>
+                        <button class="btn-yellow" onclick="atenderPedido('${pedido.id}', '${pedido.cliente_whats}', '${safeTitulo}', this)" style="padding: 10px 20px; border-radius: 8px; cursor:pointer; font-weight:800;">AJUDAR AGORA</button>
                     </div>
-                </div>
-                `;
+                </div>`;
             }).join('');
         }
     }
 
-    // LÓGICA CORRIGIDA DO BOTÃO AJUDAR AGORA (Impede bloqueio do navegador)
     async function atenderPedido(id, whatsapp, titulo, btnElement) {
-        if (!logado) {
-            alert("Apenas prestadores registados e com sessão iniciada podem atender pedidos.");
-            openModal('modalLogin');
-            return;
+        if (!logado) { 
+            alert("Apenas prestadores registados e com sessão iniciada podem atender pedidos."); 
+            openModal('modalLogin'); 
+            return; 
+        }
+        
+        if (btnElement) { 
+            btnElement.innerText = "PROCESSANDO..."; 
+            btnElement.disabled = true; 
         }
 
-        if (btnElement) {
-            btnElement.innerText = "PROCESSANDO...";
-            btnElement.disabled = true;
-        }
-
-        const { error } = await _supabase.from('pedidos_ajuda').update({ 
-            status: 'em_atendimento',
-            atendido_por_id: logado.id,
-            atendido_por_nome: logado.nome
-        }).eq('id', id);
+        const { error } = await _supabase.from('pedidos_ajuda')
+            .update({ status: 'em_atendimento', atendido_por_id: logado.id, atendido_por_nome: logado.nome })
+            .eq('id', id);
 
         if (!error) {
             const linkAvaliacao = `${window.location.origin}?avaliar=${id}`;
             const mensagem = `Olá! Vi o seu pedido de "${titulo}" no Ajuda Aí. O meu nome é ${logado.nome}, profissional registado, e posso ajudar. Quando terminarmos, por favor, confirme e avalie o meu serviço através deste link seguro: ${linkAvaliacao}`;
-            
             carregarMural(currentCity);
-            // Ao invés de window.open (que é bloqueado), usamos location.href para redirecionar diretamente para o WhatsApp
             window.location.href = `https://wa.me/55${whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(mensagem)}`;
         } else {
-            if (btnElement) {
-                btnElement.innerText = "AJUDAR AGORA";
-                btnElement.disabled = false;
+            if (btnElement) { 
+                btnElement.innerText = "AJUDAR AGORA"; 
+                btnElement.disabled = false; 
             }
             alert("Erro ao atender pedido: " + error.message);
         }
@@ -829,119 +1432,133 @@
 
     function ativarRadar() {
         if (!logado || !logado.radar_ativo) return;
-        _supabase.channel('radar-pedidos')
-        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pedidos_ajuda' }, payload => {
-            if (payload.new.cidade === logado.cidade) {
+        
+        _supabase.channel('radar-pedidos').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pedidos_ajuda' }, payload => {
+            const isSameCity = payload.new.cidade.toLowerCase() === logado.cidade.toLowerCase();
+            const servicoPrestador = logado.servico.toLowerCase();
+            const tituloPedido = payload.new.titulo_ajuda.toLowerCase();
+            const descricaoPedido = (payload.new.descricao || '').toLowerCase();
+            const isMatchingService = tituloPedido.includes(servicoPrestador) || descricaoPedido.includes(servicoPrestador);
+
+            if (isSameCity && isMatchingService) {
                 document.getElementById('radarAlert').style.display = 'flex';
-                document.getElementById('radarText').innerText = `Novo pedido de "${payload.new.titulo_ajuda}" na sua cidade!`;
-                try {
-                    const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
-                    audio.play();
+                document.getElementById('radarText').innerText = `Alguém precisa de um(a) ${logado.servico} perto de si!`;
+                try { 
+                    new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3').play(); 
                 } catch(e) {}
                 carregarMural(currentCity);
             }
         }).subscribe();
     }
 
-    function setStar(n) {
-        selectedStar = n;
-        document.querySelectorAll('.star-clickable').forEach((s, i) => s.classList.toggle('active', i < n));
+    function setStar(n) { 
+        selectedStar = n; 
+        document.querySelectorAll('.star-clickable').forEach((s, i) => s.classList.toggle('active', i < n)); 
     }
-
-    function abrirModalAvaliacao() {
-        document.getElementById('modalAvaliacao').style.display = 'flex';
-        document.getElementById('feedbackBanner').style.display = 'none';
+    
+    function abrirModalAvaliacao() { 
+        document.getElementById('modalAvaliacao').style.display = 'flex'; 
+        document.getElementById('feedbackBanner').style.display = 'none'; 
     }
 
     async function enviarAvaliacaoFinal() {
         if (selectedStar === 0) return alert("Por favor, selecione as estrelas.");
+        
         const meuId = localStorage.getItem('meu_ajudaai_id');
         const { data: pedido } = await _supabase.from('pedidos_ajuda').select('atendido_por_id').eq('id', meuId).single();
         
         if (pedido && pedido.atendido_por_id) {
-            await _supabase.from('avaliacoes').insert([{
-                pedido_id: meuId,
-                prestador_id: pedido.atendido_por_id,
-                nota: selectedStar,
-                comentario: document.getElementById('evalComentario').value
+            await _supabase.from('avaliacoes').insert([{ 
+                pedido_id: meuId, 
+                prestador_id: pedido.atendido_por_id, 
+                nota: selectedStar, 
+                comentario: document.getElementById('evalComentario').value 
             }]);
         }
-
+        
         await _supabase.from('pedidos_ajuda').update({ status: 'finalizado' }).eq('id', meuId);
-        localStorage.removeItem('meu_ajudaai_id');
-        closeModal('modalAvaliacao');
-        alert("Obrigado por ajudar a tornar a comunidade mais segura!");
+        localStorage.removeItem('meu_ajudaai_id'); 
+        closeModal('modalAvaliacao'); 
+        alert("Obrigado por ajudar a tornar a comunidade mais segura!"); 
         window.location.href = window.location.origin;
     }
 
     async function registrarPrestador(e) {
         if(e) e.preventDefault();
-        const btn = document.getElementById('btnSalvarPrestador');
-        btn.innerText = "PROCESSANDO..."; btn.disabled = true;
+        const btn = document.getElementById('btnSalvarPrestador'); 
+        btn.innerText = "PROCESSANDO..."; 
+        btn.disabled = true;
 
-        const { error } = await _supabase.from('prestadores').insert([{
-            nome: document.getElementById('pres_nome').value,
-            email: document.getElementById('pres_email').value,
-            senha: document.getElementById('pres_senha').value,
-            whatsapp: document.getElementById('whatsappInput').value,
-            servico: document.getElementById('pres_servico').value,
-            cidade: document.getElementById('pres_cidade').value,
-            bio: document.getElementById('pres_bio').value,
-            lat: userLat || null, lng: userLng || null
+        const { error } = await _supabase.from('prestadores').insert([{ 
+            nome: document.getElementById('pres_nome').value, 
+            email: document.getElementById('pres_email').value, 
+            senha: document.getElementById('pres_senha').value, 
+            whatsapp: document.getElementById('whatsappInput').value, 
+            servico: document.getElementById('pres_servico').value, 
+            cidade: document.getElementById('pres_cidade').value, 
+            bio: document.getElementById('pres_bio').value, 
+            lat: userLat || null, 
+            lng: userLng || null 
         }]);
         
-        if (error) {
-            alert("Erro ao cadastrar: " + error.message);
-        } else {
+        if (error) { 
+            alert("Erro ao cadastrar: " + error.message); 
+        } else { 
             alert("Bem-vindo ao Ajuda Aí! Faça o Login no topo da página para ativar o seu Radar VIP."); 
-            closeModal('modalPrestador');
-            carregarVitrine(currentCity);
+            closeModal('modalPrestador'); 
+            carregarVitrine(currentCity); 
         }
-        btn.innerText = "FINALIZAR CADASTRO"; btn.disabled = false;
+        
+        btn.innerText = "FINALIZAR CADASTRO"; 
+        btn.disabled = false;
     }
 
     document.getElementById('formPedido').onsubmit = async (e) => {
         if(e) e.preventDefault();
-        const btn = document.getElementById('btnPostarPedido');
-        btn.innerText = "POSTANDO..."; btn.disabled = true;
+        const btn = document.getElementById('btnPostarPedido'); 
+        btn.innerText = "POSTANDO..."; 
+        btn.disabled = true;
 
-        const { data, error } = await _supabase.from('pedidos_ajuda').insert([{
-            cliente_nome: document.getElementById('ped_nome').value,
-            cliente_whats: document.getElementById('ped_whatsapp').value,
-            titulo_ajuda: document.getElementById('ped_titulo').value,
-            cidade: document.getElementById('ped_cidade').value,
-            descricao: document.getElementById('ped_descricao').value,
-            status: 'aberto'
+        const { data, error } = await _supabase.from('pedidos_ajuda').insert([{ 
+            cliente_nome: document.getElementById('ped_nome').value, 
+            cliente_whats: document.getElementById('ped_whatsapp').value, 
+            titulo_ajuda: document.getElementById('ped_titulo').value, 
+            cidade: document.getElementById('ped_cidade').value, 
+            descricao: document.getElementById('ped_descricao').value, 
+            status: 'aberto' 
         }]).select();
         
-        if (error) {
-            alert("Erro ao postar: " + error.message);
-        } else {
-            if(data && data[0]) localStorage.setItem('meu_ajudaai_id', data[0].id);
-            alert("Pedido postado! Em breve um profissional local entrará em contato.");
-            closeModal('modalPedido');
-            carregarMural(currentCity);
+        if (error) { 
+            alert("Erro ao postar: " + error.message); 
+        } else { 
+            if(data && data[0]) localStorage.setItem('meu_ajudaai_id', data[0].id); 
+            alert("Pedido postado! Em breve um profissional local entrará em contato."); 
+            closeModal('modalPedido'); 
+            carregarMural(currentCity); 
         }
-        btn.innerText = "POSTAR NO MURAL"; btn.disabled = false;
+        
+        btn.innerText = "POSTAR NO MURAL"; 
+        btn.disabled = false;
     };
 
     async function verificarFeedbackCliente() {
-        const params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(window.location.search); 
         const avaliarId = params.get('avaliar');
         
-        if (avaliarId) {
-            localStorage.setItem('meu_ajudaai_id', avaliarId);
-            window.history.replaceState({}, document.title, "/");
+        if (avaliarId) { 
+            localStorage.setItem('meu_ajudaai_id', avaliarId); 
+            window.history.replaceState({}, document.title, "/"); 
         }
-
-        const meuId = localStorage.getItem('meu_ajudaai_id');
+        
+        const meuId = localStorage.getItem('meu_ajudaai_id'); 
         if (!meuId) return;
         
         const { data } = await _supabase.from('pedidos_ajuda').select('status, atendido_por_nome').eq('id', meuId).single();
-        if (data && data.status === 'em_atendimento') {
-            document.getElementById('feedbackMessage').innerText = `O profissional ${data.atendido_por_nome || ''} realizou o serviço?`;
-            document.getElementById('evalNome').innerText = data.atendido_por_nome || 'profissional';
-            document.getElementById('feedbackBanner').style.display = 'flex';
+        
+        if (data && data.status === 'em_atendimento') { 
+            document.getElementById('feedbackMessage').innerText = `O profissional ${data.atendido_por_nome || ''} realizou o serviço?`; 
+            document.getElementById('evalNome').innerText = data.atendido_por_nome || 'profissional'; 
+            document.getElementById('feedbackBanner').style.display = 'flex'; 
         }
     }
 
@@ -949,23 +1566,34 @@
         const meuId = localStorage.getItem('meu_ajudaai_id');
         await _supabase.from('pedidos_ajuda').update({ status: novoStatus, atendido_por_id: null, atendido_por_nome: null }).eq('id', meuId);
         document.getElementById('feedbackBanner').style.display = 'none';
+        
         if (novoStatus === 'aberto') alert("O seu pedido foi devolvido ao mural para outros profissionais.");
         carregarMural(currentCity);
     }
 
-    function acceptCookies() { localStorage.setItem('ajudaAi_cookies', 'true'); document.getElementById('cookieBanner').classList.remove('active'); }
+    function acceptCookies() { 
+        localStorage.setItem('ajudaAi_cookies', 'true'); 
+        document.getElementById('cookieBanner').classList.remove('active'); 
+    }
 
     window.addEventListener('load', () => {
-        atualizarInterface();
-        carregarMural(); carregarVitrine(); verificarFeedbackCliente();
-        if (!localStorage.getItem('ajudaAi_cookies')) setTimeout(() => document.getElementById('cookieBanner').classList.add('active'), 2000);
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(p => {
-                userLat = p.coords.latitude; userLng = p.coords.longitude;
-                map.flyTo([userLat, userLng], 14);
-                L.marker([userLat, userLng]).addTo(map).bindPopup('Você está aqui!').openPopup();
-                getCityName(userLat, userLng);
-            });
+        atualizarInterface(); 
+        carregarMural(); 
+        carregarVitrine(); 
+        verificarFeedbackCliente();
+        
+        if (!localStorage.getItem('ajudaAi_cookies')) {
+            setTimeout(() => document.getElementById('cookieBanner').classList.add('active'), 2000);
+        }
+        
+        if (navigator.geolocation) { 
+            navigator.geolocation.getCurrentPosition(p => { 
+                userLat = p.coords.latitude; 
+                userLng = p.coords.longitude; 
+                map.flyTo([userLat, userLng], 14); 
+                L.marker([userLat, userLng]).addTo(map).bindPopup('Você está aqui!').openPopup(); 
+                getCityName(userLat, userLng); 
+            }); 
         }
     });
 
@@ -973,14 +1601,15 @@
         input.addEventListener('input', (e) => {
             let value = e.target.value.replace(/\D/g, ""); 
             if (value.length > 11) value = value.slice(0, 11);
-            if (value.length > 2) {
-                if (value.length > 7) {
-                    value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
-                } else {
-                    value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-                }
-            } else if (value.length > 0) {
-                value = `(${value}`;
+            
+            if (value.length > 2) { 
+                if (value.length > 7) { 
+                    value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`; 
+                } else { 
+                    value = `(${value.slice(0, 2)}) ${value.slice(2)}`; 
+                } 
+            } else if (value.length > 0) { 
+                value = `(${value}`; 
             }
             e.target.value = value;
         });
@@ -988,8 +1617,8 @@
 
     document.getElementById('muralSearch').addEventListener('input', function(e) {
         const term = e.target.value.toLowerCase();
-        document.querySelectorAll('.fb-card').forEach(card => {
-            card.style.display = card.innerText.toLowerCase().includes(term) ? 'flex' : 'none';
+        document.querySelectorAll('.fb-card').forEach(card => { 
+            card.style.display = card.innerText.toLowerCase().includes(term) ? 'flex' : 'none'; 
         });
     });
 
@@ -997,7 +1626,13 @@
     function closeMenu() { document.getElementById('navActions').classList.remove('active'); }
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-    function getGPS() { navigator.geolocation.getCurrentPosition(p => { map.setView([p.coords.latitude, p.coords.longitude], 15); getCityName(p.coords.latitude, p.coords.longitude); }); }
+    
+    function getGPS() { 
+        navigator.geolocation.getCurrentPosition(p => { 
+            map.setView([p.coords.latitude, p.coords.longitude], 15); 
+            getCityName(p.coords.latitude, p.coords.longitude); 
+        }); 
+    }
 </script>
 </body>
 </html>
