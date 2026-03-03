@@ -11,13 +11,14 @@
     
     <style>
         :root {
-            --brand-dark: #050B14;
-            --brand-blue: #0A1931;
-            --brand-blue-light: #185ADB;
+            /* Fundo estilo Facebook Dark Mode, mais limpo e menos cansativo */
+            --brand-dark: #18191A; 
+            --brand-blue: #242526; 
+            --brand-blue-light: #3A3B3C;
             --brand-yellow: #FFB400; 
-            --text-main: #FFFFFF;
-            --text-muted: #94A3B8;
-            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #E4E6EB;
+            --text-muted: #B0B3B8;
+            --border: #3E4042;
             --fb-card: #242526;
         }
 
@@ -66,7 +67,7 @@
         }
 
         header { 
-            background: rgba(5, 11, 20, 0.95); 
+            background: rgba(36, 37, 38, 0.95); 
             backdrop-filter: blur(15px); 
             border-bottom: 2px solid var(--brand-yellow); 
             position: sticky; 
@@ -138,7 +139,7 @@
             bottom: 20px; 
             right: 20px; 
             background: var(--brand-yellow); 
-            color: var(--brand-blue); 
+            color: var(--brand-dark); 
             padding: 20px; 
             border-radius: 20px; 
             z-index: 9999; 
@@ -156,7 +157,7 @@
 
         .vip-counter { 
             margin: 20px 0; 
-            background: rgba(255,255,255,0.05); 
+            background: var(--brand-blue-light); 
             padding: 15px; 
             border-radius: 15px; 
             border: 1px solid var(--border); 
@@ -164,7 +165,7 @@
 
         .progress-bar { 
             height: 8px; 
-            background: #333; 
+            background: var(--brand-dark); 
             border-radius: 10px; 
             margin-top: 10px; 
             overflow: hidden; 
@@ -225,7 +226,7 @@
 
         .expansion-badge { 
             background: linear-gradient(90deg, var(--brand-yellow), #FFD700); 
-            color: var(--brand-blue); 
+            color: var(--brand-dark); 
             padding: 6px 15px; 
             font-size: 12px; 
             font-weight: 800; 
@@ -238,7 +239,7 @@
         .hero { 
             padding: 80px 0; 
             text-align: center; 
-            background: radial-gradient(circle at top, #185ADB33, transparent); 
+            background: radial-gradient(circle at top, rgba(255, 180, 0, 0.05), transparent); 
             border-radius: 0 0 80px 80px; 
         }
 
@@ -294,12 +295,12 @@
         
         .btn-yellow { 
             background: var(--brand-yellow); 
-            color: var(--brand-blue); 
+            color: var(--brand-dark); 
             box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3); 
         }
 
         .btn-work { 
-            background: #0A1931; 
+            background: var(--brand-blue); 
             color: white; 
             border: 2px solid var(--brand-yellow); 
             box-shadow: 0 0 15px rgba(255, 180, 0, 0.2); 
@@ -307,7 +308,7 @@
 
         .btn-work:hover { 
             background: var(--brand-yellow); 
-            color: var(--brand-blue); 
+            color: var(--brand-dark); 
         }
 
         .region-badge-info { 
@@ -329,7 +330,7 @@
             width: 100%; 
             padding: 18px 25px 18px 55px; 
             border-radius: 50px; 
-            background: rgba(255,255,255,0.05); 
+            background: var(--brand-blue); 
             border: 1px solid var(--border); 
             color: white; 
             font-size: 16px; 
@@ -338,7 +339,7 @@
 
         .search-input-main:focus { 
             border-color: var(--brand-yellow); 
-            background: rgba(255,255,255,0.08); 
+            background: var(--brand-blue-light); 
         }
 
         .search-icon-svg { 
@@ -375,6 +376,7 @@
             right: 20px; 
             z-index: 500; 
             background: var(--brand-yellow); 
+            color: var(--brand-dark);
             border: none; 
             padding: 12px 20px; 
             border-radius: 50px; 
@@ -391,7 +393,7 @@
         }
 
         .filter-tag { 
-            background: rgba(255,255,255,0.05); 
+            background: var(--brand-blue); 
             border: 1px solid var(--border); 
             padding: 10px 20px; 
             border-radius: 50px; 
@@ -408,6 +410,7 @@
             background: rgba(255, 180, 0, 0.1); 
         }
 
+        /* GRID E CARDS ESTILO FACEBOOK - VISUAL LIMPO E OBJETIVO */
         .mural-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); 
@@ -415,12 +418,11 @@
             margin-top: 30px; 
         }
         
-        /* CORREÇÃO DO TEXTO QUEBRANDO A TELA */
         .fb-card { 
             background: var(--fb-card); 
             border-radius: 12px; 
             padding: 16px; 
-            border: 1px solid #3e4042; 
+            border: 1px solid var(--border); 
             box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
             display: flex; 
             flex-direction: column; 
@@ -436,6 +438,7 @@
             gap: 12px; 
         }
 
+        /* Avatar com suporte a Imagem de Perfil */
         .fb-avatar { 
             width: 48px; 
             min-width: 48px; 
@@ -450,62 +453,78 @@
             border: 2px solid var(--brand-yellow); 
             font-size: 20px; 
             text-transform: uppercase; 
+            overflow: hidden; 
+        }
+
+        .fb-avatar.premium { border-color: var(--brand-yellow); }
+        .fb-avatar.platinum { border-color: #C0C0C0; }
+
+        .fb-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .fb-meta { 
             overflow: hidden; 
+            flex: 1;
         }
 
+        /* SELO DE VERIFICADO NA FRENTE DO NOME */
         .fb-meta h4 { 
             margin: 0; 
             font-size: 15px; 
-            color: #e4e6eb; 
+            color: var(--text-main); 
             white-space: nowrap; 
             overflow: hidden; 
             text-overflow: ellipsis; 
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .selo-verificado {
+            color: #00C851;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
         }
 
         .fb-meta span { 
             font-size: 12px; 
-            color: #b0b3b8; 
+            color: var(--text-muted); 
+        }
+
+        /* MAGIA DO LIMITE DE LINHAS: 
+           Impede que textos gigantes quebrem o layout do cartão */
+        .text-limit { 
+            display: -webkit-box; 
+            -webkit-line-clamp: 3; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            font-size: 14px; 
+            color: var(--text-main); 
+            line-height: 1.5; 
+            margin: 0;
+            white-space: pre-wrap;
         }
 
         .fb-body { 
-            color: #e4e6eb; 
+            color: var(--text-main); 
             font-size: 14px; 
             line-height: 1.5; 
             padding: 5px 0; 
             word-wrap: break-word; 
             overflow-wrap: break-word; 
-            white-space: pre-wrap; 
         }
 
         .fb-footer { 
-            border-top: 1px solid #3e4042; 
+            border-top: 1px solid var(--border); 
             padding-top: 12px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-        }
-
-        .prestador-card { 
-            background: linear-gradient(145deg, #1c1e21, #050B14); 
-            border-radius: 20px; 
-            padding: 20px; 
-            border: 1px solid var(--border); 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; 
-            position: relative; 
-            word-wrap: break-word; 
-            overflow-wrap: break-word; 
-        }
-
-        .prestador-card p { 
-            word-wrap: break-word; 
-            overflow-wrap: break-word; 
-            white-space: pre-wrap; 
-            margin: 0; 
         }
 
         .stars-container { 
@@ -526,7 +545,7 @@
 
         .star-clickable { 
             cursor: pointer; 
-            color: #444; 
+            color: var(--brand-blue-light); 
             transition: 0.2s; 
         }
 
@@ -539,7 +558,7 @@
             top: 10px; 
             right: 10px; 
             background: var(--brand-yellow); 
-            color: var(--brand-blue); 
+            color: var(--brand-dark); 
             font-size: 10px; 
             font-weight: 900; 
             padding: 4px 8px; 
@@ -547,7 +566,7 @@
         }
 
         .step-card { 
-            background: rgba(255,255,255,0.03); 
+            background: var(--brand-blue); 
             padding: 30px; 
             border-radius: 25px; 
             border: 1px solid var(--border); 
@@ -577,7 +596,7 @@
         }
 
         .testimonial-card { 
-            background: rgba(255,255,255,0.02); 
+            background: var(--brand-blue); 
             padding: 30px; 
             border-radius: 25px; 
             border: 1px solid var(--border); 
@@ -634,7 +653,7 @@
         
         .about-section { 
             padding: 80px 0; 
-            background: linear-gradient(135deg, #050B14 0%, #0A1931 100%); 
+            background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-blue) 100%); 
             border-radius: 60px; 
             margin: 60px 0; 
             border: 1px solid var(--brand-yellow); 
@@ -659,7 +678,7 @@
         footer { 
             padding: 60px 0 30px; 
             border-top: 1px solid var(--border); 
-            background: #03070C; 
+            background: var(--brand-dark); 
             text-align: center; 
         }
 
@@ -701,15 +720,22 @@
             overflow-y: auto; 
         }
 
-        input, textarea { 
+        input, textarea, select { 
             width: 100%; 
             padding: 16px; 
             border-radius: 15px; 
-            background: rgba(255,255,255,0.05); 
+            background: var(--brand-dark); 
             border: 1px solid var(--border); 
             color: white; 
             margin-top: 10px; 
             outline: none; 
+            font-family: inherit;
+        }
+
+        input[type="file"] {
+            padding: 12px;
+            cursor: pointer;
+            color: var(--brand-yellow);
         }
 
         textarea { 
@@ -784,7 +810,8 @@
             flex-direction: column; 
             text-align: center; 
         }
-        
+
+        /* ÁREA DE UPSELL (PAGAMENTOS SUPABASE/MERCADO PAGO) */
         .upsell-box { 
             background: rgba(0,0,0,0.2); 
             border: 1px solid var(--text-muted); 
@@ -831,7 +858,7 @@
 <div id="radarAlert" class="radar-alert">
     <div style="font-size: 30px;">🚨</div>
     <div>
-        <b style="display: block;">NOVO PEDIDO VIP NA SUA ÁREA!</b>
+        <b style="display: block;">NOVO PEDIDO PREMIUM NA SUA ÁREA!</b>
         <span id="radarText">Alguém precisa da sua ajuda.</span>
     </div>
     <button onclick="document.getElementById('feed').scrollIntoView(); document.getElementById('radarAlert').style.display='none';" class="btn-yellow" style="padding: 10px; border-radius: 10px; border: none; font-weight: 800; cursor: pointer;">VER AGORA</button>
@@ -862,7 +889,7 @@
         </a>
         
         <div class="nav-actions" id="navActions">
-            <span id="userBadge" class="user-badge">PRESTADOR LOGADO</span>
+            <span id="userBadge" class="user-badge">PRESTADOR</span>
             <a href="#" class="nav-link-top" onclick="closeMenu()">Home</a>
             <a href="#como-funciona" class="nav-link-top" onclick="closeMenu()">Como Funciona</a>
             <a href="#quem-somos" class="nav-link-top" onclick="closeMenu()">Quem Somos</a>
@@ -1043,12 +1070,12 @@
                 <div class="upsell-box">
                     <h4 style="margin: 0 0 5px; color: #C0C0C0;">⭐ Adquirir Plano Platinum</h4>
                     <span style="font-size: 12px; color: var(--text-muted);">Pino Prateado visível 24h para clientes e prioridade no Mural. (R$ 24,90/mês)</span>
-                    <button class="upsell-btn platinum" onclick="alert('Integração de pagamento Mercado Pago em breve!')">UPGRADE PLATINUM</button>
+                    <button class="upsell-btn platinum" onclick="alert('Integração de pagamento em breve!')">UPGRADE PLATINUM</button>
                 </div>
                 <div class="upsell-box" style="border-color: #FFD700;">
                     <h4 style="margin: 0 0 5px; color: #FFD700;">👑 Adquirir Plano Premium</h4>
-                    <span style="font-size: 12px; color: var(--text-muted);">Pino Dourado, Radar Inteligente de WhatsApp e Visibilidade Máxima. (R$ 49,90/mês)</span>
-                    <button class="upsell-btn premium" onclick="alert('Integração de pagamento Mercado Pago em breve!')">UPGRADE PREMIUM</button>
+                    <span style="font-size: 12px; color: var(--text-muted);">Pino Dourado, Radar Inteligente e Visibilidade Máxima. (R$ 49,90/mês)</span>
+                    <button class="upsell-btn premium" onclick="alert('Integração de pagamento em breve!')">UPGRADE PREMIUM</button>
                 </div>
             </div>
         </div>
@@ -1091,12 +1118,6 @@
         <h2 style="color: var(--brand-yellow);">Política de <span>Privacidade</span></h2>
         <div class="legal-text">
             <p>A sua privacidade é fundamental. Esta política descreve como o <b>Ajuda Aí</b> protege os seus dados de forma integral e segura.</p>
-            <h4>1. Coleta de Dados</h4>
-            <p>Coletamos nome, WhatsApp e localização apenas para viabilizar conexões profissionais locais.</p>
-            <h4>2. Uso da Localização</h4>
-            <p>Utilizamos GPS para mostrar serviços e profissionais hiperlocais, garantindo rapidez no atendimento.</p>
-            <h4>3. Compartilhamento</h4>
-            <p>O contato é direto via WhatsApp entre as partes interessadas.</p>
         </div>
         <button onclick="closeModal('modalPrivacidade')" class="btn-yellow" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; border:none; font-weight:800; cursor:pointer;">LI E CONCORDO</button>
     </div>
@@ -1107,12 +1128,6 @@
         <h2 style="color: var(--brand-yellow);">Termos de <span>Uso</span></h2>
         <div class="legal-text">
             <p>Ao utilizar o <b>Ajuda Aí</b>, você concorda com os nossos pilares de segurança e confiança local comunitária.</p>
-            <h4>1. Natureza do Serviço</h4>
-            <p>O Ajuda Aí é um marketplace de conexão direta. Promovemos a autonomia do trabalhador.</p>
-            <h4>2. Isenção de Responsabilidade</h4>
-            <p>A plataforma facilita o encontro. Negociações são diretas entre cliente e profissional.</p>
-            <h4>3. Segurança</h4>
-            <p>Incentivamos o uso do sistema de avaliações para manter a confiança da rede regional.</p>
         </div>
         <button onclick="closeModal('modalTermos')" class="btn-yellow" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; border:none; font-weight:800; cursor:pointer;">ACEITAR TERMOS</button>
     </div>
@@ -1138,7 +1153,13 @@
             <input type="tel" class="mask-whatsapp" id="whatsappInput" placeholder="WhatsApp (DDD)" maxlength="16" required>
             <input type="text" id="pres_servico" placeholder="Sua Profissão (Ex: Eletricista, Encanador...)" required>
             <input type="text" id="pres_cidade" placeholder="Sua Cidade" required>
-            <textarea id="pres_bio" placeholder="Fale brevemente sobre sua experiência (Destaque o seu valor)"></textarea>
+            
+            <label style="display: block; font-size: 12px; color: var(--text-muted); margin: 15px 0 5px 5px; text-align: left;">Foto de Perfil (Opcional - Ajuda na Confiança)</label>
+            <input type="file" id="pres_foto" accept="image/*">
+
+            <label style="display: block; font-size: 12px; color: var(--text-muted); margin: 15px 0 5px 5px; text-align: left;">Sua Experiência (Máximo 120 caracteres)</label>
+            <textarea id="pres_bio" placeholder="Fale brevemente sobre sua experiência (Destaque o seu valor)" maxlength="120"></textarea>
+            
             <button type="submit" id="btnSalvarPrestador" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">FINALIZAR CADASTRO</button>
             <button type="button" onclick="closeModal('modalPrestador')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Voltar</button>
         </form>
@@ -1154,7 +1175,10 @@
             <input type="tel" class="mask-whatsapp" id="ped_whatsapp" placeholder="Seu WhatsApp (com DDD)" maxlength="16" required>
             <input type="text" id="ped_titulo" placeholder="O que você precisa? (Ex: Preciso de eletricista)" required>
             <input type="text" id="ped_cidade" placeholder="Sua Cidade" required>
-            <textarea id="ped_descricao" placeholder="Descreva os detalhes do serviço..."></textarea>
+            
+            <label style="display: block; font-size: 12px; color: var(--text-muted); margin: 15px 0 5px 5px; text-align: left;">Seja objetivo no pedido (Max: 150 caracteres)</label>
+            <textarea id="ped_descricao" placeholder="Descreva os detalhes do serviço..." maxlength="150" required></textarea>
+            
             <button type="submit" id="btnPostarPedido" class="btn-yellow" style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">POSTAR NO MURAL</button>
             <button type="button" onclick="closeModal('modalPedido')" style="background:none; color:white; border:none; margin-top:10px; cursor:pointer; width: 100%;">Cancelar</button>
         </form>
@@ -1337,22 +1361,31 @@
                     const { data: avs } = await _supabase.from('avaliacoes').select('nota').eq('prestador_id', p.id);
                     const media = avs && avs.length > 0 ? (avs.reduce((a, b) => a + b.nota, 0) / avs.length).toFixed(1) : "Novo";
                     const estrelas = media !== "Novo" ? "★".repeat(Math.round(media)) + "☆".repeat(5 - Math.round(media)) : "☆☆☆☆☆";
-                    const corBorda = p.plano === 'ouro' ? 'border-color: #FFD700;' : 'border-color: #C0C0C0;';
-                    const corBadge = p.plano === 'ouro' ? '<div class="badge-premium" style="background:#FFD700; color:#000;">PREMIUM</div>' : '<div class="badge-premium" style="background:#C0C0C0; color:#000;">PLATINUM</div>';
+                    
+                    const corBadge = isPremium ? '<div class="badge-premium" style="background:#FFD700; color:#000;">PREMIUM</div>' : '<div class="badge-premium" style="background:#C0C0C0; color:#000;">PLATINUM</div>';
+                    const avatarClass = isPremium ? 'premium' : (isPlatinum ? 'platinum' : '');
+                    
+                    // Renderiza a Imagem se o prestador fez upload, caso contrário renderiza a inicial do nome
+                    const fotoHtml = p.foto_url ? `<img src="${p.foto_url}" alt="Foto de Perfil">` : p.nome.charAt(0);
+                    
+                    // Renderiza Selo Verificado se is_verificado for true
+                    const seloHtml = p.is_verificado ? `<span class="selo-verificado" title="Identidade Verificada">✔️</span>` : '';
 
                     html += `
-                        <div class="prestador-card fb-card" style="${corBorda}">
+                        <div class="prestador-card fb-card">
                             ${corBadge}
                             <div class="fb-header">
-                                <div class="fb-avatar" style="${p.plano === 'ouro' ? 'background:#FFD700; color:#000;' : (p.plano === 'prata' ? 'background:#C0C0C0; color:#000;' : '')}">${p.nome.charAt(0)}</div>
+                                <div class="fb-avatar ${avatarClass}">
+                                    ${fotoHtml}
+                                </div>
                                 <div class="fb-meta">
-                                    <h4>${p.nome}</h4>
+                                    <h4>${p.nome} ${seloHtml}</h4>
                                     <div class="stars-container">${estrelas} <span style="font-size:10px; color:var(--text-muted); margin-left:5px;">(${media})</span></div>
                                 </div>
                             </div>
                             <div class="fb-body">
                                 <strong style="color:var(--brand-yellow); font-size:14px;">💼 ${p.servico}</strong>
-                                <p style="font-size:13px; color:var(--text-main); margin:10px 0;">"${p.bio || 'Profissional local disponível para ajudar.'}"</p>
+                                <p class="text-limit">"${p.bio || 'Profissional local disponível para ajudar.'}"</p>
                             </div>
                             <div class="fb-footer">
                                 <span style="font-size:11px; color:var(--text-muted);">📍 ${p.cidade}</span>
@@ -1381,7 +1414,7 @@
                 return `
                 <div class="fb-card">
                     <div class="fb-header">
-                        <div class="fb-avatar" style="background:#3a3b3c">${pedido.cliente_nome.charAt(0)}</div>
+                        <div class="fb-avatar" style="background:var(--brand-dark); border: 1px solid var(--border);">${pedido.cliente_nome.charAt(0)}</div>
                         <div class="fb-meta">
                             <h4>${pedido.cliente_nome}</h4>
                             <span>📍 ${pedido.cidade} • Pedido de Ajuda</span>
@@ -1389,7 +1422,7 @@
                     </div>
                     <div class="fb-body">
                         <strong style="color:var(--brand-yellow); display:block; margin-bottom:5px;">${pedido.titulo_ajuda}</strong>
-                        <p>${pedido.descricao}</p>
+                        <p class="text-limit">${pedido.descricao}</p>
                     </div>
                     <div class="fb-footer">
                         <span style="font-size:12px; color:#b0b3b8;">Aguardando profissional...</span>
@@ -1489,6 +1522,23 @@
         btn.innerText = "PROCESSANDO..."; 
         btn.disabled = true;
 
+        let fotoUrl = null;
+        const fileInput = document.getElementById('pres_foto');
+        
+        // LÓGICA DE UPLOAD PARA O SUPABASE STORAGE (Se o prestador escolher enviar foto)
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}.${fileExt}`;
+            
+            const { data: uploadData, error: uploadError } = await _supabase.storage.from('avatars').upload(fileName, file);
+            
+            if (!uploadError) {
+                const { data: publicUrlData } = _supabase.storage.from('avatars').getPublicUrl(fileName);
+                fotoUrl = publicUrlData.publicUrl;
+            }
+        }
+
         const { error } = await _supabase.from('prestadores').insert([{ 
             nome: document.getElementById('pres_nome').value, 
             email: document.getElementById('pres_email').value, 
@@ -1497,6 +1547,8 @@
             servico: document.getElementById('pres_servico').value, 
             cidade: document.getElementById('pres_cidade').value, 
             bio: document.getElementById('pres_bio').value, 
+            foto_url: fotoUrl, // Insere a URL da foto se existir
+            is_verificado: false, // Inicia sem o selo
             lat: userLat || null, 
             lng: userLng || null 
         }]);
