@@ -853,22 +853,28 @@
             } 
         }
 /* --- INÍCIO DA INSERÇÃO PREMIUM --- */
-.fomo-banner { background: #e50914; color: white; text-align: center; padding: 12px; font-size: 14px; font-weight: 800; animation: piscar 2s infinite; position: sticky; top: 0; z-index: 10000; }
+/* --- INÍCIO BANNER ARRUMADO --- */
+.fomo-banner { 
+    background: #e50914; 
+    color: white; 
+    text-align: center; 
+    padding: 12px; 
+    font-size: 14px; 
+    font-weight: 800; 
+    animation: piscar 2s infinite; 
+    position: relative; /* Mudamos de sticky para relative para não cobrir o menu */
+    display: block;
+    width: 100%;
+    z-index: 10000; 
+}
 @keyframes piscar { 0% { background: #e50914; } 50% { background: #b0070f; } 100% { background: #e50914; } }
-.card-borrado { position: relative; overflow: hidden; background: #242526; border-radius: 12px; padding: 16px; border: 1px solid #3e4042; }
-.blur-effect { position: absolute; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 10; }
-.cadeado-aviso { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20; text-align: center; width: 90%; }
-.cadeado-aviso h4 { color: #FFD700; margin: 0 0 10px; font-size: 18px; text-transform: uppercase; }
-.btn-upgrade { background: #FFB400; color: #000; border: none; padding: 10px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px;}
-.caixa-sos { background: rgba(255, 69, 0, 0.1); border-left: 4px solid #FF4500; padding: 15px; margin-top: 15px; border-radius: 4px; }
-.sos-piscar { border: 2px solid #FF4500 !important; animation: borderPulse 1s infinite; }
-@keyframes borderPulse { 0% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 69, 0, 0); } }
+/* --- FIM BANNER ARRUMADO --- */borderPulse { 0% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 69, 0, 0); } }
 /* --- FIM DA INSERÇÃO PREMIUM --- */
     </style>
 </head>
 <body>
-    <div class="fomo-banner">
-    🔥 ALERTA: Restam apenas <span id="vagas-premium">12</span> Vagas Premium e <span id="vagas-platinum">45</span> Vagas Platinum gratuitas para a região de Campinas!
+<div class="fomo-banner">
+    🔥 ALERTA: Restam apenas <span id="vagas-premium">12</span> Vagas Premium VIP e <span id="vagas-platinum">45</span> Vagas Platinum gratuitas para <span id="cidade-dinamica" style="color: #FFD700; text-transform: uppercase;">nesta região</span>!
 </div>
 
 <div id="radarAlert" class="radar-alert">
