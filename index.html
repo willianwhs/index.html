@@ -1113,7 +1113,81 @@ Pode colar e me dizer se os outros passos (o banner e o modal) você conseguiu e
         </div>
         
         <input type="text" id="nome-cliente" placeholder="Seu Nome ou Nome da Empresa" style="width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+       <label style="margin-bottom: 5px; display: block; margin-top: 15px;">Qual serviço você precisa?</label>
+        <select id="categoria-servico" style="width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+            <option value="" disabled selected>Selecione uma categoria...</option>
+            <option value="eletricista">⚡ Eletricista</option>
+            <option value="encanador">💧 Encanador</option>
+            <option value="pedreiro">🧱 Pedreiro / Construtor</option>
+            <option value="pintor">🎨 Pintor</option>
+            <option value="diarista">🧹 Diarista / Limpeza</option>
+            <option value="montador">🪛 Montador de Móveis</option>
+            <option value="frete">🚚 Fretes e Mudanças</option>
+            <option value="assistencia">🔧 Assistência Técnica (Celular/PC)</option>
+            <option value="climatizacao">❄️ Ar Condicionado</option>
+            <option value="outros">Outros Serviços</option>
+        </select>
+        ```
+
+---
+
+### PASSO 6: O Perfil Premium (Vitrine) e Modais Jurídicos
+Este é o passo mais importante para a segurança jurídica e para vender o plano Premium. Vamos colocar os três pop-ups ocultos no final do site.
+
+1. **Onde ir:** Aperte **Ctrl + F** e busque por: `</footer>` (Fica bem perto do fim do seu arquivo).
+2. **Onde colocar o cursor:** Logo **DEPOIS** do `>` de `</footer>`.
+3. Aperte **ENTER** uma vez.
+4. **O que colar:** Cole este bloco inteiro, que contém o perfil do profissional e as leis do site:
+
+```html
+<div id="modalPerfilPrestador" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
+    <div class="modal-content" style="background: var(--brand-blue); padding: 30px; border-radius: 15px; width: 90%; max-width: 500px; color: white;">
+        <div style="text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 10px;">👨‍🔧</div>
+            <div class="selo-premium-perfil">👑 Profissional Premium Verificado</div>
+            <h2 style="color: white; margin: 5px 0;">João Eletricista</h2>
+            <p style="color: #00E676; font-weight: bold; margin-top: 0;">Online Agora</p>
+        </div>
         
+        <div style="margin-top: 20px;">
+            <h4 style="color: var(--brand-yellow); margin-bottom: 10px;">Portfólio de Serviços (Antes e Depois)</h4>
+            <div class="portfolio-grid">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" class="portfolio-img" alt="Serviço 1">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" class="portfolio-img" alt="Serviço 2">
+                <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" class="portfolio-img" alt="Serviço 3">
+            </div>
+            <p style="font-size: 12px; color: #ccc; margin-top: 10px;">*Apenas profissionais Premium podem exibir galeria de fotos.</p>
+        </div>
+
+        <button style="background: #25D366; color: white; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; margin-top: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <span style="font-size: 18px;">📱</span> Chamar no WhatsApp
+        </button>
+        <button onclick="document.getElementById('modalPerfilPrestador').style.display='none'" style="background:none; border:none; color:#999; width:100%; margin-top:15px; cursor:pointer;">Fechar Perfil</button>
+    </div>
+</div>
+<div id="modalTermos" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
+    <div class="modal-content" style="background: var(--brand-blue); padding: 30px; border-radius: 15px; width: 90%; max-width: 600px; color: white; max-height: 80vh; overflow-y: auto;">
+        <h2 style="color: var(--brand-yellow); text-align: center; margin-top: 0;">Termos de Uso</h2>
+        <div style="font-size: 14px; line-height: 1.6; color: #ccc;">
+            <p><strong>1. Aceitação:</strong> Ao usar nossa plataforma, você concorda com nossos termos operacionais.</p>
+            <p><strong>2. Isenção de Responsabilidade:</strong> Atuamos apenas como plataforma de conexão. Não nos responsabilizamos por serviços executados ou acordos financeiros feitos fora do sistema.</p>
+            <p><strong>3. Regras de Conduta:</strong> Profissionais que receberem reclamações graves perderão o Selo de Verificação e poderão ser banidos.</p>
+        </div>
+        <button onclick="document.getElementById('modalTermos').style.display='none'" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; margin-top: 20px; cursor: pointer;">Entendi e Concordo</button>
+    </div>
+</div>
+
+<div id="modalPrivacidade" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
+    <div class="modal-content" style="background: var(--brand-blue); padding: 30px; border-radius: 15px; width: 90%; max-width: 600px; color: white; max-height: 80vh; overflow-y: auto;">
+        <h2 style="color: var(--brand-yellow); text-align: center; margin-top: 0;">Política de Privacidade</h2>
+        <div style="font-size: 14px; line-height: 1.6; color: #ccc;">
+            <p><strong>1. Seus Dados:</strong> Protegemos seus dados (incluindo documentação de empresas) com criptografia. Eles não são vendidos a terceiros.</p>
+            <p><strong>2. Uso do WhatsApp:</strong> Ao aceitar o plano Premium, você autoriza o envio de notificações transacionais via API.</p>
+            <p><strong>3. Exclusão de Conta:</strong> Você pode solicitar a exclusão de todos os seus dados a qualquer momento pelo email oficial de suporte (contato@ajudaai.site).</p>
+        </div>
+        <button onclick="document.getElementById('modalPrivacidade').style.display='none'" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; margin-top: 20px; cursor: pointer;">Fechar Privacidade</button>
+    </div>
+</div> 
         <select id="tamanho-servico" style="width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
             <option value="pequeno">Conserto Rápido / Serviço Menor</option>
             <option value="medio">Serviço Médio / Leva um dia todo</option>
