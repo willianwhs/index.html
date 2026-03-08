@@ -1879,17 +1879,15 @@
 function atualizarTipoCliente() {
     const isEmpresa = document.querySelector('input[name="tipoCliente"]:checked').value === 'empresa';
     
-    // Mostra/esconde o campo de CNPJ
+    // Mostra/esconde o campo de CNPJ e o aviso de boleto
     document.getElementById('campo-cnpj').style.display = isEmpresa ? 'block' : 'none';
-    
-    // Mostra/esconde o aviso do boleto
     document.getElementById('aviso-boleto').style.display = isEmpresa ? 'block' : 'none';
     
-    // MUDA O VALOR DA PRIORIDADE AUTOMATICAMENTE
+    // MUDA O PREÇO AUTOMATICAMENTE NA TELA
     if(isEmpresa) {
-        document.getElementById('texto-sos-preco').innerHTML = '<span style="color: #FF4500;">Sim, prioridade corporativa (+ R$ 19,90 via Boleto/Pix)</span>';
+        document.getElementById('texto-sos-preco').innerHTML = 'Sim, prioridade corporativa (+ R$ 19,90)';
     } else {
-        document.getElementById('texto-sos-preco').innerHTML = '<span style="color: #FF4500;">Sim, quero prioridade (+ R$ 4,90 via Pix)</span>';
+        document.getElementById('texto-sos-preco').innerHTML = 'Sim, quero prioridade (+ R$ 4,90 via Pix)';
     }
 }
 
