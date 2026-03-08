@@ -1342,13 +1342,59 @@ select:focus {
 </div>
 
 <div id="modalPrestador" class="modal">
-    <div class="modal-content" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px;">
-        <h2 style="color: var(--brand-yellow); text-align: center; margin-top: 0;">Cadastrar como Profissional</h2>
+    <div class="modal-content" style="display: flex; flex-direction: column; gap: 12px; max-width: 550px; padding: 25px;">
+        <h2 style="color: var(--brand-yellow); text-align: center; margin-top: 0;">Cadastro de Profissional</h2>
         
-        <div id="aviso-vagas" style="background: rgba(37, 211, 102, 0.1); border: 1px solid #25D366; color: #25D366; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold;">
-            <i class="fa-solid fa-gift"></i> Verificando vagas gratuitas...
+        <div id="aviso-vagas" style="background: rgba(37, 211, 102, 0.1); border: 1px solid #25D366; color: #25D366; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 14px;">
+            <i class="fa-solid fa-gift"></i> Verificando benefícios de boas-vindas...
         </div>
 
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <input type="email" id="email-prestador" placeholder="Seu melhor E-mail" required style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+            <input type="password" id="senha-prestador" placeholder="Crie uma Senha" required style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+        </div>
+
+        <input type="text" id="nome-prestador" placeholder="Nome Completo ou Nome da Empresa" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+        <input type="tel" id="whatsapp-prestador" class="mask-whatsapp" placeholder="WhatsApp (com DDD)" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+
+        <label style="font-weight: bold; font-size: 14px;">Sua Categoria Principal:</label>
+        <select id="categoria-prestador" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+            <option value="" disabled selected>Selecione sua profissão...</option>
+            <option value="eletricista">Eletricista</option>
+            <option value="encanador">Encanador</option>
+            <option value="pedreiro">Pedreiro / Construtor</option>
+            <option value="pintor">Pintor</option>
+            <option value="diarista">Diarista / Limpeza</option>
+            <option value="montador">Montador de Móveis</option>
+            <option value="frete">Fretes e Mudanças</option>
+            <option value="assistencia">Assistência Técnica</option>
+            <option value="climatizacao">Climatização</option>
+            <option value="marceneiro">Marceneiro</option>
+            <option value="jardineiro">Jardineiro</option>
+            <option value="mecanico">Mecânico</option>
+            <option value="outros">Outros Serviços</option>
+        </select>
+
+        <label style="font-weight: bold; font-size: 14px;">Destaque Desejado:</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <label id="label-premium" style="cursor: pointer; border: 1px solid var(--brand-blue-light); padding: 10px; border-radius: 10px; text-align: center;">
+                <input type="radio" name="planoEscolha" value="premium" checked> 
+                <div style="font-weight: bold; font-size: 13px;">PREMIUM</div>
+                <div style="font-size: 10px; color: var(--text-muted);">Destaque Prata</div>
+            </label>
+            <label id="label-platinum" style="cursor: pointer; border: 1px solid var(--brand-yellow); padding: 10px; border-radius: 10px; text-align: center;">
+                <input type="radio" name="planoEscolha" value="platinum"> 
+                <div style="font-weight: bold; font-size: 13px; color: var(--brand-yellow);">PLATINUM</div>
+                <div style="font-size: 10px; color: var(--text-muted);">Destaque Ouro</div>
+            </label>
+        </div>
+
+        <textarea id="bio-prestador" rows="2" placeholder="Resumo dos seus serviços..." style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border); resize: none;"></textarea>
+
+        <button id="btn-concluir-cadastro" onclick="finalizarCadastroPrestador()" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 10px; border: none; cursor: pointer; font-size: 16px;">GARANTIR MINHA VAGA</button>
+        <button onclick="document.getElementById('modalPrestador').style.display='none'" style="background: none; border: none; color: #999; cursor: pointer; font-size: 13px;">Cancelar</button>
+    </div>
+</div>
         <p style="text-align: center; font-size: 14px; color: var(--text-muted);">
             Ao garantir sua vaga hoje, você terá acesso ao plano escolhido por **1 ano inteiramente grátis**.
         </p>
