@@ -1107,18 +1107,21 @@
 
         <textarea id="descricao-pedido" rows="4" placeholder="Descreva o problema com detalhes..." style="width: 100%; padding: 12px; border-radius: 8px;"></textarea>
 
-        <div class="caixa-sos">
-            <h4 style="color: #FF4500; margin-top: 0;">🚨 Urgência Máxima (SOS)?</h4>
-            <p style="font-size: 12px; color: #ccc;">Fure a fila e apite no radar dos Profissionais Premium VIP na hora.</p>
-            <label style="font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px;">
-                <input type="checkbox" id="checkSOS" style="width: 20px; height: 20px;"> 
-                <span id="texto-sos-preco">Sim, quero prioridade (+ R$ 4,90 via Pix)</span>
-            </label>
-            <p id="aviso-boleto" style="display:none; color: #FFD700; font-size: 11px; margin-top: 10px; font-weight: bold;">
-                *Para empresas, emitiremos um Boleto Híbrido Asaas (Pix/Código de Barras) ao confirmar.
-            </p>
-        </div>
+      <div class="hero-cards-container">
+    <div class="premium-card">
+        <i class="fa-solid fa-building premium-card-icon"></i>
+        <div class="premium-card-title">Para Empresas</div>
+        <p>Manutenção corporativa e urgências. Fure a fila com o nosso sistema de roteamento inteligente VIP. Pagamento facilitado via Pix ou Boleto.</p>
+        <button onclick="abrirModal('modalPedido')" style="background: transparent; color: var(--brand-yellow); border: 1px solid var(--brand-yellow); padding: 14px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s;">Solicitar Prioridade</button>
+    </div>
 
+    <div class="premium-card">
+        <i class="fa-solid fa-award premium-card-icon"></i>
+        <div class="premium-card-title">Seja um Profissional Premium</div>
+        <p>Receba pedidos de alto valor direto no WhatsApp, exiba seu portfólio e conquiste o Selo de Verificação. Vagas fundadoras limitadas.</p>
+        <button onclick="abrirModal('modalLogin')" style="background: var(--brand-yellow); color: #000; border: none; padding: 14px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s;">Garantir Minha Vaga</button>
+    </div>
+</div>
         <button onclick="enviarPedidoSOS()" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; margin-top: 20px; cursor: pointer;">ENVIAR PEDIDO AGORA</button>
         <button onclick="document.getElementById('modalPedido').style.display='none'" style="background:none; border:none; color:#999; width:100%; margin-top:15px; cursor:pointer;">Cancelar</button>
     </div>
