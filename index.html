@@ -2036,65 +2036,61 @@ function atualizarTipoCliente() {
 // --- SISTEMA INTELIGENTE DE VAGAS GRATUITAS ---
 // --- SISTEMA INTELIGENTE DE VAGAS: PREMIUM -> PLATINUM -> PAGO ---
 async function verificarVagasGratuitas() {
-    const LIMITE_PREMIUM_GRATIS = 20;  // Os 20 primeiros ganham Premium
-    const LIMITE_PLATINUM_GRATIS = 40; // Do 21º ao 40º ganham Platinum (Total de 40 vagas grátis)
+    const TOTAL_VAGAS_PROMO = 500;
+    const METADE_PROMO = 250; // Ponto de virada de Premium para Platinum
     
-    const caixaAviso = document.getElementById('aviso-vagas');
+    const statusDiv = document.getElementById('plano-status');
+    const planoInput = document.getElementById('plano-final');
     const btn = document.getElementById('btn-concluir-cadastro');
-    
-    if(!caixaAviso) return;
+    const cidade = document.getElementById('cidade-detalhe')?.innerText || "sua região";
 
     try {
-        // Consulta o Supabase para contar quantos prestadores já existem
+        // Conta TODOS os prestadores cadastrados na região de Campinas
         const { count, error } = await supabase
             .from('prestadores') 
             .select('*', { count: 'exact', head: true });
 
         if (error) throw error;
 
-        // FASE 1: AINDA HÁ VAGAS PARA PREMIUM GRÁTIS
-        if (count < LIMITE_PREMIUM_GRATIS) {
-            const restam = LIMITE_PREMIUM_GRATIS - count;
-            caixaAviso.style.background = "rgba(37, 211, 102, 0.1)";
-            caixaAviso.style.borderColor = "#25D366";
-            caixaAviso.style.color = "#25D366";
-            caixaAviso.innerHTML = `<i class="fa-solid fa-gift"></i> FASE 1: Restam ${restam} vagas para <b>Plano Premium GRÁTIS</b> (1 ano)!`;
-            
-            // Marca automaticamente o plano Premium no seletor
-            const radioPremium = document.querySelector('input[name="planoEscolha"][value="premium"]');
-            if(radioPremium) radioPremium.checked = true;
-            
-            if(btn) btn.innerText = "GARANTIR VAGA PREMIUM GRÁTIS";
+        // LÓGICA DE DISTRIBUIÇÃO AUTOMATIZADA
+        if (count < METADE_PROMO) {
+            // FASE 1: LIBERANDO PREMIUM GRÁTIS
+            const restam = METADE_PROMO - count;
+            statusDiv.innerHTML = `
+                <div style="border: 2px solid #25D366; padding: 12px; border-radius: 10px; background: rgba(37, 211, 102, 0.1);">
+                    <div style="font-weight: bold; color: #25D366;">🎁 BEM-VINDO PROFISSIONAL DE ${cidade.toUpperCase()}</div>
+                    <p style="font-size: 13px; color: white; margin: 5px 0;">Restam <b>${restam} vagas</b> para 1 ano de <b>Plano Premium GRÁTIS</b>!</p>
+                </div>`;
+            planoInput.value = "premium";
+            btn.innerText = "GARANTIR MINHA VAGA PREMIUM";
         } 
-        
-        // FASE 2: PREMIUM ACABOU, MAS HÁ PLATINUM GRÁTIS
-        else if (count < LIMITE_PLATINUM_GRATIS) {
-            const restam = LIMITE_PLATINUM_GRATIS - count;
-            caixaAviso.style.background = "rgba(255, 180, 0, 0.1)";
-            caixaAviso.style.borderColor = "#FFB400";
-            caixaAviso.style.color = "#FFB400";
-            caixaAviso.innerHTML = `<i class="fa-solid fa-star"></i> FASE 2: Premium esgotado! Restam ${restam} vagas <b>Platinum GRÁTIS</b>!`;
-            
-            // Marca automaticamente o plano Platinum no seletor
-            const radioPlatinum = document.querySelector('input[name="planoEscolha"][value="platinum"]');
-            if(radioPlatinum) radioPlatinum.checked = true;
-
-            if(btn) btn.innerText = "GARANTIR VAGA PLATINUM GRÁTIS";
+        else if (count < TOTAL_VAGAS_PROMO) {
+            // FASE 2: PREMIUM ACABOU, LIBERANDO PLATINUM GRÁTIS
+            const restam = TOTAL_VAGAS_PROMO - count;
+            statusDiv.innerHTML = `
+                <div style="border: 2px solid var(--brand-yellow); padding: 12px; border-radius: 10px; background: rgba(255, 180, 0, 0.1);">
+                    <div style="font-weight: bold; color: var(--brand-yellow);">🌟 OPORTUNIDADE EM ${cidade.toUpperCase()}</div>
+                    <p style="font-size: 13px; color: white; margin: 5px 0;">Vagas Premium esgotadas! Restam <b>${restam} vagas Platinum</b> grátis!</p>
+                </div>`;
+            planoInput.value = "platinum";
+            btn.innerText = "GARANTIR MINHA VAGA PLATINUM";
         } 
-        
-        // FASE 3: ACABARAM TODAS AS VAGAS GRÁTIS (SISTEMA PAGO)
         else {
-            caixaAviso.style.background = "rgba(255, 69, 0, 0.1)";
-            caixaAviso.style.borderColor = "#FF4500";
-            caixaAviso.style.color = "#FF4500";
-            caixaAviso.innerHTML = `<i class="fa-solid fa-lock"></i> Vagas gratuitas encerradas. Escolha seu plano de assinatura:`;
-            
-            if(btn) btn.innerText = "ASSINAR E CONCLUIR CADASTRO";
+            // FASE 3: TUDO ESGOTADO -> COBRANÇA LIBERADA
+            statusDiv.innerHTML = `
+                <div style="border: 1px solid #FF4500; padding: 12px; border-radius: 10px; background: rgba(255, 69, 0, 0.1);">
+                    <div style="font-weight: bold; color: #FF4500;">VAGAS PROMOCIONAIS ESGOTADAS</div>
+                    <p style="font-size: 11px; color: white;">Selecione o plano que deseja adquirir:</p>
+                    <select onchange="document.getElementById('plano-final').value = this.value" style="width:100%; background:#000; color:#fff; padding:8px; border-radius:5px; border:1px solid #444;">
+                        <option value="premium">Plano Premium (R$ 19,90/mês)</option>
+                        <option value="platinum">Plano Platinum (R$ 39,90/mês)</option>
+                    </select>
+                </div>`;
+            btn.innerText = "ASSINAR E CONCLUIR CADASTRO";
         }
 
-    } catch (erro) {
-        console.error("Erro ao validar vagas:", erro);
-        caixaAviso.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Vagas limitadas. Cadastre-se para garantir seu destaque.`;
+    } catch (e) {
+        console.error("Erro no contador de vagas:", e);
     }
 }
  
