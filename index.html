@@ -1943,6 +1943,12 @@ function abrirModal(id) {
     document.getElementById(id).style.display = 'flex';
 }
 /* --- FIM GEOLOCALIZAÇÃO DO BANNER --- */
+/* --- FECHAR MODAL AO CLICAR FORA --- */
+window.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+    }
+});
 </script>
 </body>
 </html>
