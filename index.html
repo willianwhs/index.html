@@ -854,59 +854,23 @@
         }
 /* --- INÍCIO DA INSERÇÃO PREMIUM --- */
 /* --- INÍCIO BANNER ARRUMADO --- */
-/* --- INÍCIO SUPER BANNER FOMO --- */
 .fomo-banner { 
-    background: linear-gradient(90deg, #e50914, #b0070f, #e50914);
-    background-size: 200% auto;
+    background: #e50914; 
     color: white; 
     text-align: center; 
-    padding: 18px 10px; /* Deixou a faixa mais grossa */
-    font-size: 16px; /* Aumentou a letra */
-    font-weight: 900; 
-    animation: piscarForte 2s linear infinite; 
-    position: relative; 
+    padding: 12px; 
+    font-size: 14px; 
+    font-weight: 800; 
+    animation: piscar 2s infinite; 
+    position: relative; /* Mudamos de sticky para relative para não cobrir o menu */
     display: block;
     width: 100%;
-    z-index: 10000;
-    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.5); /* Sombra brilhante */
-    border-bottom: 2px solid #FFD700; /* Borda dourada de luxo */
-    letter-spacing: 0.5px;
+    z-index: 10000; 
 }
-@keyframes piscarForte { 
-    0% { background-position: 0% center; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.5); } 
-    50% { background-position: 100% center; box-shadow: 0 4px 25px rgba(229, 9, 20, 0.8); text-shadow: 0 0 8px rgba(255,255,255,0.5); } 
-    100% { background-position: 0% center; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.5); } 
-}
-/* --- FIM SUPER BANNER FOMO --- */
-/* --- INÍCIO CSS VITRINE PREMIUM --- */
-.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 15px; }
-.portfolio-img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; border: 2px solid var(--border); transition: transform 0.3s; cursor: pointer; }
-.portfolio-img:hover { transform: scale(1.05); border-color: var(--brand-yellow); }
-.selo-premium-perfil { background: #FFD700; color: #000; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
-/* --- FIM CSS VITRINE PREMIUM --- */    
-  .hero-cards-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
-.premium-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 30px; max-width: 380px; width: 100%; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.2); backdrop-filter: blur(10px); transition: transform 0.3s ease; }
-.premium-card:hover { transform: translateY(-5px); border-color: rgba(255, 215, 0, 0.3); }
-.premium-card-icon { font-size: 30px; margin-bottom: 15px; color: var(--brand-yellow); }
-.premium-card-title { font-size: 16px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; color: #fff; text-transform: uppercase; }
-.premium-card p { font-size: 14px; color: #94A3B8; line-height: 1.6; margin-bottom: 25px; }
-
-.filtro-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
-.filtro-pill:hover, .filtro-pill.active { background: var(--brand-yellow); color: #000; border-color: var(--brand-yellow); }
-.filtros-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none; margin-top: 20px; }
-
-@media (max-width: 768px) {
-    .hero-cards-container { flex-direction: column; padding: 0 15px; }
-    .premium-card { max-width: 100%; }
-    .nav { flex-direction: column; gap: 15px; }
-    .hero h1 { font-size: 24px; }
-    .fomo-banner { font-size: 12px; padding: 10px; }
-    .modal-content { padding: 20px; width: 95%; }
-}
-        
+@keyframes piscar { 0% { background: #e50914; } 50% { background: #b0070f; } 100% { background: #e50914; } }
+/* --- FIM BANNER ARRUMADO --- */borderPulse { 0% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 69, 0, 0); } }
+/* --- FIM DA INSERÇÃO PREMIUM --- */
     </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 <body>
 <div class="fomo-banner">
@@ -975,24 +939,6 @@
             <button class="btn-mega btn-yellow" onclick="openModal('modalPedido')">🎯 PEDIR UMA AJUDA AGORA</button>
             <button class="btn-mega btn-work" onclick="openModal('modalPrestador')">🚀 QUERO TRABALHAR NO AJUDA AI</button>
         </div>
-
-        <div style="margin-top: 50px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-            
-            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 69, 0, 0.3); border-radius: 15px; padding: 25px; max-width: 350px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-                <div style="font-size: 28px; margin-bottom: 10px;">🏢 <span style="color: #FF4500; font-weight: 900; font-size: 16px; letter-spacing: 1px;">PARA EMPRESAS</span></div>
-                <p style="font-size: 14px; color: #ccc; margin-bottom: 20px; line-height: 1.5;">Manutenção de urgência para o seu negócio? Fure a fila com o nosso <b style="color:white;">Alerta SOS VIP</b>. Pague via Pix ou Boleto Híbrido.</p>
-                <button onclick="abrirModal('modalPedido')" style="background: rgba(255, 69, 0, 0.1); color: #FF4500; border: 1px solid #FF4500; padding: 12px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s;">Pedir Serviço Urgente</button>
-            </div>
-
-            <div style="background: rgba(255, 215, 0, 0.05); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 15px; padding: 25px; max-width: 350px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-                <div style="font-size: 28px; margin-bottom: 10px;">👑 <span style="color: #FFD700; font-weight: 900; font-size: 16px; letter-spacing: 1px;">PROFISSIONAL PREMIUM</span></div>
-                <p style="font-size: 14px; color: #ccc; margin-bottom: 20px; line-height: 1.5;">Receba pedidos VIP no seu WhatsApp e domine sua região. <b style="color:white;">As vagas fundadoras estão a esgotar!</b></p>
-                <button onclick="abrirModal('modalLogin')" style="background: #FFD700; color: #000; border: none; padding: 12px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);">Garantir Minha Vaga</button>
-            </div>
-
-        </div>
-        ```
-
         <div style="margin-top: 25px; font-size: 14px; font-weight: 600; color: var(--brand-yellow);">
             SEJA SEU PRÓPRIO CHEFE • ESCOLHA SEUS CLIENTES • AUMENTE SUA RENDA
         </div>
@@ -1132,73 +1078,7 @@
         </div>
         
         <input type="text" id="nome-cliente" placeholder="Seu Nome ou Nome da Empresa" style="width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
-       <label style="margin-bottom: 5px; display: block; margin-top: 15px;">Qual serviço você precisa?</label>
-        <select id="categoria-servico" style="width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
-            <option value="" disabled selected>Selecione uma categoria...</option>
-            <option value="eletricista">⚡ Eletricista</option>
-            <option value="encanador">💧 Encanador</option>
-            <option value="pedreiro">🧱 Pedreiro / Construtor</option>
-            <option value="pintor">🎨 Pintor</option>
-            <option value="diarista">🧹 Diarista / Limpeza</option>
-            <option value="montador">🪛 Montador de Móveis</option>
-            <option value="frete">🚚 Fretes e Mudanças</option>
-            <option value="assistencia">🔧 Assistência Técnica (Celular/PC)</option>
-            <option value="climatizacao">❄️ Ar Condicionado</option>
-            <option value="outros">Outros Serviços</option>
-        </select>
-        ```
-
----
-
-```html
-<div id="modalPerfilPrestador" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
-    <div class="modal-content" style="background: var(--brand-blue); padding: 30px; border-radius: 15px; width: 90%; max-width: 500px; color: white;">
-        <div style="text-align: center;">
-            <div style="font-size: 50px; margin-bottom: 10px;">👨‍🔧</div>
-            <div class="selo-premium-perfil">👑 Profissional Premium Verificado</div>
-            <h2 style="color: white; margin: 5px 0;">João Eletricista</h2>
-            <p style="color: #00E676; font-weight: bold; margin-top: 0;">Online Agora</p>
-        </div>
         
-        <div style="margin-top: 20px;">
-            <h4 style="color: var(--brand-yellow); margin-bottom: 10px;">Portfólio de Serviços (Antes e Depois)</h4>
-            <div class="portfolio-grid">
-                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" class="portfolio-img" alt="Serviço 1">
-                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" class="portfolio-img" alt="Serviço 2">
-                <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" class="portfolio-img" alt="Serviço 3">
-            </div>
-            <p style="font-size: 12px; color: #ccc; margin-top: 10px;">*Apenas profissionais Premium podem exibir galeria de fotos.</p>
-        </div>
-
-        <button style="background: #25D366; color: white; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; margin-top: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
-            <span style="font-size: 18px;">📱</span> Chamar no WhatsApp
-        </button>
-        <button onclick="document.getElementById('modalPerfilPrestador').style.display='none'" style="background:none; border:none; color:#999; width:100%; margin-top:15px; cursor:pointer;">Fechar Perfil</button>
-    </div>
-</div>
-<div id="modalTermos" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
-    <div class="modal-content" style="background: var(--brand-blue); padding: 30px; border-radius: 15px; width: 90%; max-width: 600px; color: white; max-height: 80vh; overflow-y: auto;">
-        <h2 style="color: var(--brand-yellow); text-align: center; margin-top: 0;">Termos de Uso</h2>
-        <div style="font-size: 14px; line-height: 1.6; color: #ccc;">
-            <p><strong>1. Aceitação:</strong> Ao usar nossa plataforma, você concorda com nossos termos operacionais.</p>
-            <p><strong>2. Isenção de Responsabilidade:</strong> Atuamos apenas como plataforma de conexão. Não nos responsabilizamos por serviços executados ou acordos financeiros feitos fora do sistema.</p>
-            <p><strong>3. Regras de Conduta:</strong> Profissionais que receberem reclamações graves perderão o Selo de Verificação e poderão ser banidos.</p>
-        </div>
-        <button onclick="document.getElementById('modalTermos').style.display='none'" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; margin-top: 20px; cursor: pointer;">Entendi e Concordo</button>
-    </div>
-</div>
-
-<div id="modalPrivacidade" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
-    <div class="modal-content" style="background: var(--brand-blue); padding: 30px; border-radius: 15px; width: 90%; max-width: 600px; color: white; max-height: 80vh; overflow-y: auto;">
-        <h2 style="color: var(--brand-yellow); text-align: center; margin-top: 0;">Política de Privacidade</h2>
-        <div style="font-size: 14px; line-height: 1.6; color: #ccc;">
-            <p><strong>1. Seus Dados:</strong> Protegemos seus dados (incluindo documentação de empresas) com criptografia. Eles não são vendidos a terceiros.</p>
-            <p><strong>2. Uso do WhatsApp:</strong> Ao aceitar o plano Premium, você autoriza o envio de notificações transacionais via API.</p>
-            <p><strong>3. Exclusão de Conta:</strong> Você pode solicitar a exclusão de todos os seus dados a qualquer momento pelo email oficial de suporte (contato@ajudaai.site).</p>
-        </div>
-        <button onclick="document.getElementById('modalPrivacidade').style.display='none'" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; margin-top: 20px; cursor: pointer;">Fechar Privacidade</button>
-    </div>
-</div> 
         <select id="tamanho-servico" style="width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
             <option value="pequeno">Conserto Rápido / Serviço Menor</option>
             <option value="medio">Serviço Médio / Leva um dia todo</option>
