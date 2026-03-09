@@ -1159,21 +1159,19 @@ function ajustarPedido(tipo) {
     }
 }
 </script>
-        <textarea id="descricao-pedido" rows="4" placeholder="Descreva o problema com detalhes..." style="width: 100%; padding: 12px; border-radius: 8px;"></textarea>
-
-   <div class="hero-cards-container">
+<div class="hero-cards-container">
     <div class="premium-card">
         <i class="fa-solid fa-bolt premium-card-icon" style="color: #FF4500;"></i>
         <div class="premium-card-title">Precisa de Urgência (SOS)?</div>
-        <p>Fure a fila! Seu pedido apita no radar dos profissionais VIP na hora. Disponível para <b>Residências</b> (taxa popular) e <b>Empresas</b>.</p>
-        <button onclick="openModal('modalPedido')" style="background: transparent; color: #FF4500; border: 1px solid #FF4500; padding: 14px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s;">Pedir com Prioridade</button>
+        <p>Fure a fila! Seu pedido apita no radar dos profissionais VIP na hora. Disponível para <b>Residências</b> e <b>Empresas</b>.</p>
+        <button onclick="abrirModal('modalServico')" style="background: transparent; color: #FF4500; border: 1px solid #FF4500; padding: 14px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s;">Pedir com Prioridade</button>
     </div>
 
     <div class="premium-card">
         <i class="fa-solid fa-award premium-card-icon"></i>
         <div class="premium-card-title">Seja um Profissional Premium</div>
         <p>Receba pedidos de alto valor direto no WhatsApp, exiba seu portfólio e conquiste o Selo de Verificação. Vagas limitadas.</p>
-        <button onclick="openModal('modalPrestador')" style="background: var(--brand-yellow); color: #000; border: none; padding: 14px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s;">Cadastre-se Agora</button>
+        <button onclick="abrirModal('modalPrestador')" style="background: var(--brand-yellow); color: #000; border: none; padding: 14px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s;">Cadastre-se Agora</button>
     </div>
 </div>
 
