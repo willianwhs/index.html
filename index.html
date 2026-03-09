@@ -1100,66 +1100,65 @@ select:focus {
                 <b>No Ajuda Aí, a economia local se fortalece e todo mundo ganha.</b>
             </p>
         </div>
-    </section>
-    
-            </div>
+
 <div id="modalServico" class="modal">
-    <div class="modal-content" style="display: flex; flex-direction: column; gap: 15px; max-width: 500px; padding: 25px;">
+    <div class="modal-content" style="display: flex; flex-direction: column; gap: 15px; max-width: 550px; padding: 25px;">
         <h2 style="color: var(--brand-yellow); text-align: center; margin-top: 0;">O que você precisa hoje?</h2>
         
-        <p style="text-align: center; font-size: 14px; color: var(--text-muted);">
-            Explique o serviço que deseja e encontre os melhores profissionais em <span id="cidade-cliente" style="color: var(--brand-yellow); font-weight: bold;">sua região</span>.
-        </p>
+        <div style="display: flex; gap: 10px; margin-bottom: 5px;">
+            <label style="flex: 1; cursor: pointer; border: 1px solid var(--border); padding: 10px; border-radius: 8px; text-align: center;">
+                <input type="radio" name="tipoSolicitante" value="pessoa" checked onclick="ajustarPedido('pessoa')"> Pessoa Física
+            </label>
+            <label style="flex: 1; cursor: pointer; border: 1px solid var(--border); padding: 10px; border-radius: 8px; text-align: center;">
+                <input type="radio" name="tipoSolicitante" value="empresa" onclick="ajustarPedido('empresa')"> Empresa/PJ
+            </label>
+        </div>
 
-        <input type="text" id="nome-cliente" placeholder="Seu Nome Completo" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
-        
-        <input type="tel" id="whatsapp-cliente" placeholder="Seu WhatsApp (com DDD)" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+        <div id="campo-cnpj-pedido" style="display: none;">
+            <input type="text" id="cnpj-pedido" placeholder="CNPJ da Empresa" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+        </div>
 
-        <label style="font-weight: bold; font-size: 14px;">Qual profissional você procura?</label>
-        <select id="categoria-cliente-procura" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
-            <option value="" disabled selected>Selecione a categoria...</option>
-            <option value="eletricista">Eletricista</option>
-            <option value="encanador">Encanador</option>
-            <option value="pedreiro">Pedreiro</option>
-            <option value="pintor">Pintor</option>
-            <option value="diarista">Diarista / Limpeza</option>
-            <option value="montador">Montador de Móveis</option>
-            <option value="outros">Outros</option>
+        <input type="text" id="nome-pedido" placeholder="Seu Nome ou Nome da Empresa" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+        <input type="tel" id="whatsapp-pedido" placeholder="WhatsApp (com DDD)" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+
+        <select id="tamanho-servico" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+            <option value="pequeno">Conserto Rápido / Serviço Menor</option>
+            <option value="medio">Serviço Médio / Leva um dia todo</option>
+            <option value="grande">Grande Obra / Reforma Completa</option>
         </select>
 
-        <textarea id="descricao-pedido" rows="3" placeholder="Descreva o problema ou o serviço que você precisa (ex: Trocar fiação do chuveiro)..." style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border); resize: none;"></textarea>
+        <textarea id="descricao-pedido" rows="3" placeholder="Descreva os detalhes do serviço..." style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border); resize: none;"></textarea>
 
-        <div style="background: rgba(24, 90, 219, 0.1); border: 1px solid var(--brand-blue-light); padding: 15px; border-radius: 10px;">
+        <div id="box-sos" style="background: rgba(24, 90, 219, 0.1); border: 1px solid var(--brand-blue-light); padding: 15px; border-radius: 10px;">
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: white; font-weight: bold;">
-                <input type="checkbox" id="pedido-prioridade" style="width: 18px; height: 18px;"> 
-                🚀 ATENDIMENTO PRIORITÁRIO (SOS)
+                <input type="checkbox" id="check-sos-pedido" style="width: 18px; height: 18px;"> 
+                🚀 PEDIR PRIORIDADE (SOS)
             </label>
-            <p style="font-size: 11px; color: #adccff; margin: 5px 0 0 28px;">
-                Seu pedido aparecerá no topo para os profissionais (+ R$ 4,90 via Pix).
+            <p id="texto-preco-sos" style="font-size: 11px; color: #adccff; margin: 5px 0 0 28px;">
+                Seu pedido no topo da lista (+ R$ 4,90 via Pix).
             </p>
         </div>
 
-        <button onclick="enviarPedidoServico()" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px;">ENVIAR PEDIDO AGORA</button>
+        <button onclick="processarPedido()" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px;">ENVIAR PEDIDO AGORA</button>
         <button onclick="document.getElementById('modalServico').style.display='none'" style="background: none; border: none; color: #999; cursor: pointer; font-size: 13px;">Voltar</button>
     </div>
 </div>
 
-        <button onclick="enviarPedidoServico()" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px;">ENVIAR PEDIDO AGORA</button>
-        <button onclick="document.getElementById('modalServico').style.display='none'" style="background: none; border: none; color: #999; cursor: pointer; font-size: 13px;">Voltar</button>
-    </div>
-</div>
-        <div id="campo-cnpj" style="display: none; margin-bottom: 15px;">
-            <input type="text" id="cnpj-input" placeholder="Digite o CNPJ da Empresa (Ficará Oculto)" style="width: 100%; padding: 12px; border-radius: 8px;">
-        </div>
-        
-        <input type="text" id="nome-cliente" placeholder="Seu Nome ou Nome da Empresa" style="width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
-        
-        <select id="tamanho-servico" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); cursor: pointer;">
-    <option value="pequeno" style="background: #050B14; color: white;">Conserto Rápido / Serviço Menor</option>
-    <option value="medio" style="background: #050B14; color: white;">Serviço Médio / Leva um dia todo</option>
-    <option value="grande" style="background: #050B14; color: white;">Grande Obra / Reforma Completa</option>
-</select>
-
+<script>
+// FUNÇÃO PARA TROCAR VALORES E CAMPOS DINAMICAMENTE
+function ajustarPedido(tipo) {
+    const campoCnpj = document.getElementById('campo-cnpj-pedido');
+    const textoPreco = document.getElementById('texto-preco-sos');
+    
+    if (tipo === 'empresa') {
+        campoCnpj.style.display = 'block';
+        textoPreco.innerHTML = 'Prioridade máxima corporativa (+ R$ 19,90 via Pix).';
+    } else {
+        campoCnpj.style.display = 'none';
+        textoPreco.innerHTML = 'Seu pedido no topo da lista (+ R$ 4,90 via Pix).';
+    }
+}
+</script>
         <textarea id="descricao-pedido" rows="4" placeholder="Descreva o problema com detalhes..." style="width: 100%; padding: 12px; border-radius: 8px;"></textarea>
 
    <div class="hero-cards-container">
