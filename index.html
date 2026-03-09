@@ -1112,55 +1112,6 @@ select:focus {
             <label style="cursor: pointer;"><input type="radio" name="tipoCliente" value="fisica" checked onclick="atualizarTipoCliente()"> <i class="fa-solid fa-user"></i> Cliente (Casa)</label>
             <label style="cursor: pointer;"><input type="radio" name="tipoCliente" value="empresa" onclick="atualizarTipoCliente()"> <i class="fa-solid fa-building"></i> Empresa (CNPJ)</label>
         </div>
-
-        <div id="campo-cnpj" style="display: none;">
-            <input type="text" id="cnpj-input" placeholder="Digite o CNPJ da Empresa" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1);">
-        </div>
-        
-        <input type="text" id="nome-cliente" placeholder="Seu Nome ou Nome da Empresa" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1);">
-        
-        <label style="font-weight: bold;">Categoria do Serviço:</label>
-      <select id="categoria-servico" style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); cursor: pointer;">
-    <option value="" disabled selected style="background: #050B14; color: white;">Selecione uma categoria...</option>
-    <option value="eletricista" style="background: #050B14; color: white;">Eletricista</option>
-    <option value="encanador" style="background: #050B14; color: white;">Encanador</option>
-    <option value="pedreiro" style="background: #050B14; color: white;">Pedreiro / Construtor</option>
-    <option value="pintor" style="background: #050B14; color: white;">Pintor</option>
-    <option value="diarista" style="background: #050B14; color: white;">Diarista / Limpeza</option>
-    <option value="montador" style="background: #050B14; color: white;">Montador de Móveis</option>
-    <option value="frete" style="background: #050B14; color: white;">Fretes e Mudanças</option>
-    <option value="assistencia" style="background: #050B14; color: white;">Assistência Técnica</option>
-    <option value="climatizacao" style="background: #050B14; color: white;">Climatização</option>
-    <option value="outros" style="background: #050B14; color: white;">Outros Serviços</option>
-</select>
-
-        <label style="font-weight: bold;">Tamanho do Serviço:</label>
-        <textarea id="descricao-pedido" rows="3" placeholder="Descreva o problema com detalhes..." style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); resize: none;"></textarea>
-
-        <select id="tamanho-servico" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; appearance: none;">
-    <option value="" disabled selected>Selecione o tamanho...</option>
-    <option value="pequeno">Conserto Rápido / Serviço Menor</option>
-    <option value="medio">Serviço Médio / Leva um dia todo</option>
-    <option value="grande">Grande Obra / Reforma Completa</option>
-</select>
-        
-        <div class="caixa-sos" style="background: rgba(255, 69, 0, 0.1); border-left: 4px solid #FF4500; padding: 15px; border-radius: 8px;">
-            <h4 style="color: #FF4500; margin-top: 0; margin-bottom: 5px;"><i class="fa-solid fa-bolt"></i> Urgência Máxima (SOS)?</h4>
-            <p style="font-size: 12px; color: #ccc; margin-bottom: 10px;">Fure a fila e apite no radar dos Profissionais VIP na hora.</p>
-            <label style="font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px;">
-                <input type="checkbox" id="checkSOS" style="width: 20px; height: 20px;"> 
-                <span id="texto-sos-preco" style="color: #FF4500;">Sim, quero prioridade (+ R$ 4,90 via Pix)</span>
-            </label>
-            <p id="aviso-boleto" style="display:none; color: #FFD700; font-size: 11px; margin-top: 10px; font-weight: bold;">
-                *Para empresas, a prioridade corporativa tem o valor de R$ 19,90 (Boleto/Pix).
-            </p>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-            <button onclick="enviarPedidoSOS()" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 8px; border: none; cursor: pointer; transition: 0.3s; font-size: 16px;">ENVIAR PEDIDO AGORA</button>
-            <button onclick="document.getElementById('modalPedido').style.display='none'" style="background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 100%; padding: 12px; border-radius: 8px; cursor: pointer; transition: 0.3s;">Cancelar</button>
-        </div>
-    </div>
 </div>
         <div id="campo-cnpj" style="display: none; margin-bottom: 15px;">
             <input type="text" id="cnpj-input" placeholder="Digite o CNPJ da Empresa (Ficará Oculto)" style="width: 100%; padding: 12px; border-radius: 8px;">
