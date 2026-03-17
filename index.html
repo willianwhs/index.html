@@ -1720,34 +1720,39 @@ select:focus {
         btn.disabled = false;
     }
 
-    document.getElementById('formPedido').onsubmit = async (e) => {
-        if(e) e.preventDefault();
-        const btn = document.getElementById('btnPostarPedido'); 
-        btn.innerText = "POSTANDO..."; 
-        btn.disabled = true;
+document.getElementById('formPedido').onsubmit = async (e) => {
+    if(e) e.preventDefault();
 
-        const { data, error } = await _supabase.from('pedidos_ajuda').insert([{ 
-            cliente_nome: document.getElementById('ped_nome').value, 
-            cliente_whats: document.getElementById('ped_whatsapp').value, 
-            titulo_ajuda: document.getElementById('ped_titulo').value, 
-            cidade: document.getElementById('ped_cidade').value, 
-            descricao: document.getElementById('ped_descricao').value, 
-            status: 'aberto' 
-        }]).select();
-        
-        if (error) { 
-            alert("Erro ao postar: " + error.message); 
-        } else { 
-            if(data && data[0]) localStorage.setItem('meu_ajudaai_id', data[0].id); 
-            alert("Pedido postado! Em breve um profissional local entrará em contato."); 
-            closeModal('modalPedido'); 
-            carregarMural(currentCity); 
-        }
-        
-        btn.innerText = "POSTAR NO MURAL"; 
-        btn.disabled = false;
-    };
+    const btn = document.getElementById('btnPostarPedido');
+    btn.innerText = "POSTANDO...";
+    btn.disabled = true;
 
+    const { data, error } = await _supabase.from('pedidos_ajuda').insert([{
+        cliente_nome: document.getElementById('ped_nome').value,
+        cliente_whats: document.getElementById('ped_whatsapp').value,
+        titulo_ajuda: document.getElementById('ped_titulo').value,
+        cidade: document.getElementById('ped_cidade').value,
+        descricao: document.getElementById('ped_descricao').value,
+        status: 'aberto'
+    }]).select();
+
+    if (error) {
+        alert("Erro ao postar: " + error.message);
+    } else {
+
+        if(data && data[0])
+        localStorage.setItem('meu_ajudaai_id', data[0].id);
+
+        alert("Pedido postado! Em breve um profissional local entrará em contato.");
+
+        closeModal('modalPedido');
+
+        carregarMural(currentCity);
+    }
+
+    btn.innerText = "POSTAR NO MURAL";
+    btn.disabled = false;
+};
     async function verificarFeedbackCliente() {
         const params = new URLSearchParams(window.location.search); 
         const avaliarId = params.get('avaliar');
