@@ -2080,28 +2080,24 @@ function abrirModal(id) {
     }
 }
 /* --- FIM GEOLOCALIZAÇÃO DO BANNER --- */
-/* --- FECHAR MODAL AO CLICAR FORA (CORRIGIDO) --- */
-document.addEventListener('DOMContentLoaded', () => {
-    // Seleciona todos os elementos com a classe .modal
-    const modais = document.querySelectorAll('.modal');
     
+/* --- FECHAR MODAL AO CLICAR FORA --- */
+document.addEventListener('DOMContentLoaded', () => {
+    const modais = document.querySelectorAll('.modal');
     modais.forEach(modal => {
-        // Evento para computadores (mouse)
         modal.addEventListener('mousedown', function(event) {
-            // Só fecha se o clique for exatamente no fundo (this), e não no conteúdo interno
             if (event.target === this) {
                 this.style.display = 'none';
             }
         });
-
-        // Evento para dispositivos móveis (toque)
         modal.addEventListener('touchstart', function(event) {
             if (event.target === this) {
                 this.style.display = 'none';
             }
-        }, { passive: true }); // passive: true melhora a performance de scroll em mobile
+        }, { passive: true });
     });
 });
+    
 </script>
 </body>
 </html>
