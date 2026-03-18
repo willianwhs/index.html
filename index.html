@@ -1230,7 +1230,7 @@ select:focus {
 </div>
 <div class="modal" id="modalPedido">
     <div class="modal-content">
-        
+
         <h2 style="text-align:center;">
             <i class="fa-solid fa-bullseye" style="color: var(--brand-yellow);"></i> 
             Pedir <span>Ajuda</span>
@@ -1242,16 +1242,20 @@ select:focus {
 
         <form id="formPedido">
 
-            <input type="text" id="ped_nome" placeholder="Seu nome completo" required>
+            <input type="text" id="ped_nome" placeholder="👤 Seu nome completo" required>
 
-            <!-- WHATSAPP (ADICIONADO/MANTIDO) -->
-            <input type="tel" class="mask-whatsapp" id="ped_whatsapp" placeholder="Seu WhatsApp (DDD)" maxlength="16" required>
+            <!-- WHATSAPP (IMPLEMENTADO E PADRONIZADO) -->
+            <input type="tel" class="mask-whatsapp" id="ped_whatsapp" placeholder="📱 Seu WhatsApp (com DDD)" maxlength="16" required>
 
-            <input type="text" id="ped_titulo" placeholder="Qual serviço você precisa? (Ex: Eletricista)" required>
+            <input type="text" id="ped_titulo" placeholder="🛠️ O que você precisa? (Ex: Eletricista)" required>
 
-            <input type="text" id="ped_cidade" placeholder="Sua cidade" required>
+            <input type="text" id="ped_cidade" placeholder="📍 Sua cidade" required>
 
-            <textarea id="ped_descricao" placeholder="Descreva o problema com detalhes..." maxlength="150" required></textarea>
+            <label style="display: block; font-size: 12px; color: var(--text-muted); margin: 15px 0 5px 5px; text-align: left;">
+                Seja objetivo no pedido (máx: 150 caracteres)
+            </label>
+
+            <textarea id="ped_descricao" placeholder="✍️ Descreva os detalhes do serviço..." maxlength="150" required></textarea>
 
             <button type="submit" id="btnPostarPedido" class="btn-yellow"
                 style="width:100%; padding:18px; border:none; border-radius:15px; font-weight:800; margin-top:15px; cursor:pointer;">
@@ -1265,6 +1269,7 @@ select:focus {
 
         </form>
     </div>
+</div>
 </div>
     
 </div>
