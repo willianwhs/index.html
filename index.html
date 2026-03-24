@@ -1408,6 +1408,29 @@ O Ajuda Ai atua apenas como intermediador.</p>
         <!-- BOTÕES -->
         <button onclick="enviarPedidoSOS()" 
             style="width: 100%; padding: 18px; border: none; border-radius: 8px; font-weight: 800; font-size: 16px; margin-top: 20px; cursor: pointer; background: var(--brand-yellow); color: var(--brand-blue); transition: 0.3s;">
+<div id="areaPagamentoSOS" style="display:none; margin-top:20px; border:1px solid var(--brand-yellow); border-radius:12px; padding:15px; background:rgba(255,255,255,0.04);">
+    <div id="areaPixSOS" style="display:none; text-align:center;">
+        <h3 style="color: var(--brand-yellow); margin-top:0;">Pagamento via Pix</h3>
+        <p style="font-size:13px; color:var(--text-muted);">Escaneie o QR Code ou copie o código Pix abaixo.</p>
+
+        <img id="pixQrCodeImg" src="" alt="QR Code Pix" style="max-width:220px; width:100%; margin:15px auto; display:block; background:#fff; padding:10px; border-radius:12px;">
+
+        <textarea id="pixCopiaCola" readonly style="height:90px; margin-top:10px;"></textarea>
+
+        <button type="button" onclick="copiarPixSOS()" class="btn-yellow" style="width:100%; padding:14px; margin-top:10px; border:none; border-radius:10px; font-weight:800; cursor:pointer;">
+            COPIAR PIX
+        </button>
+    </div>
+
+    <div id="areaBoletoSOS" style="display:none; text-align:center;">
+        <h3 style="color: var(--brand-yellow); margin-top:0;">Pagamento Empresarial</h3>
+        <p style="font-size:13px; color:var(--text-muted);">Abra o boleto híbrido / opção Pix para concluir o pagamento.</p>
+
+        <a id="boletoLinkSOS" href="#" target="_blank" class="btn-yellow" style="display:block; text-decoration:none; width:100%; padding:14px; margin-top:10px; border-radius:10px; font-weight:800;">
+            ABRIR BOLETO / PIX
+        </a>
+    </div>
+</div>
             ENVIAR PEDIDO AGORA
         </button>
 
