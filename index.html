@@ -453,200 +453,6 @@ p, span {
             width: 20px; 
             height: 20px; 
         }
-
-        .map-section { 
-            padding: 40px 0; 
-        }
-
-        .map-wrapper { 
-            position: relative; 
-            max-width: 1000px; 
-            margin: 0 auto; 
-            border-radius: 40px; 
-            overflow: hidden; 
-            border: 4px solid var(--brand-blue); 
-        }
-
-        #map { 
-            height: 400px; 
-            width: 100%; 
-        }
-
-        .btn-near { 
-            position: absolute; 
-            bottom: 20px; 
-            right: 20px; 
-            z-index: 500; 
-            background: var(--brand-yellow); 
-            border: none; 
-            padding: 12px 20px; 
-            border-radius: 50px; 
-            font-weight: 800; 
-            cursor: pointer; 
-        }
-
-        .filter-wrapper { 
-            display: flex; 
-            gap: 10px; 
-            overflow-x: auto; 
-            padding: 20px 0; 
-            justify-content: center; 
-        }
-
-        .filter-tag { 
-            background: rgba(255,255,255,0.05); 
-            border: 1px solid var(--border); 
-            padding: 10px 20px; 
-            border-radius: 50px; 
-            color: white; 
-            font-size: 13px; 
-            font-weight: 600; 
-            cursor: pointer; 
-            white-space: nowrap; 
-        }
-
-        .filter-tag.active { 
-            border-color: var(--brand-yellow); 
-            color: var(--brand-yellow); 
-            background: rgba(255, 180, 0, 0.1); 
-        }
-
-        .mural-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); 
-            gap: 20px; 
-            margin-top: 30px; 
-        }
-        
-        /* CORREÇÃO DO TEXTO QUEBRANDO A TELA */
-        .fb-card { 
-            background: var(--fb-card); 
-            border-radius: 12px; 
-            padding: 16px; 
-            border: 1px solid #3e4042; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
-            position: relative; 
-            word-wrap: break-word; 
-            overflow-wrap: break-word; 
-        }
-
-        .fb-header { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-        }
-
-        .fb-avatar { 
-            width: 48px; 
-            min-width: 48px; 
-            height: 48px; 
-            border-radius: 50%; 
-            background: var(--brand-blue-light); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-weight: 800; 
-            color: white; 
-            border: 2px solid var(--brand-yellow); 
-            font-size: 20px; 
-            text-transform: uppercase; 
-            overflow: hidden; /* IMPLEMENTAÇÃO DA FOTO: Não deixa a foto vazar o círculo */
-        }
-        
-        /* IMPLEMENTAÇÃO DA FOTO: Estilo para a imagem cobrir perfeitamente o avatar */
-        .fb-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .fb-meta { 
-            overflow: hidden; 
-        }
-
-        .fb-meta h4 { 
-            margin: 0; 
-            font-size: 15px; 
-            color: #e4e6eb; 
-            white-space: nowrap; 
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* IMPLEMENTAÇÃO DOS ANTECEDENTES: Selo Verificado */
-        .selo-verificado {
-            color: #00C851;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .fb-meta span { 
-            font-size: 12px; 
-            color: #b0b3b8; 
-        }
-
-        /* IMPLEMENTAÇÃO DE LIMITE VISUAL: Nunca passa de 3 linhas */
-        .text-limit {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .fb-body { 
-            color: #e4e6eb; 
-            font-size: 14px; 
-            line-height: 1.5; 
-            padding: 5px 0; 
-            word-wrap: break-word; 
-            overflow-wrap: break-word; 
-            white-space: pre-wrap; 
-        }
-
-        .fb-footer { 
-            border-top: 1px solid #3e4042; 
-            padding-top: 12px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-
-        .prestador-card { 
-            background: linear-gradient(145deg, #1c1e21, #050B14); 
-            border-radius: 20px; 
-            padding: 20px; 
-            border: 1px solid var(--border); 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; 
-            position: relative; 
-            word-wrap: break-word; 
-            overflow-wrap: break-word; 
-        }
-
-        .prestador-card p { 
-            word-wrap: break-word; 
-            overflow-wrap: break-word; 
-            white-space: pre-wrap; 
-            margin: 0; 
-        }
-
-        .stars-container { 
-            color: var(--brand-yellow); 
-            display: flex; 
-            gap: 2px; 
-            font-size: 12px; 
-            margin-top: 4px; 
-        }
-
         .rating-selection { 
             display: flex; 
             gap: 10px; 
@@ -1001,44 +807,6 @@ select:focus {
     background-color: #050B14 !important;
     color: #ffffff !important;
 } 
-  .card-sos-cliente {
-    border: 2px solid #FFB400 !important;
-    background: linear-gradient(135deg, rgba(255,180,0,0.18), rgba(255,120,0,0.10)) !important;
-    box-shadow: 0 0 18px rgba(255,180,0,0.20);
-}
-
-.card-sos-empresa {
-    border: 2px solid #ff4d4f !important;
-    background: linear-gradient(135deg, rgba(255,77,79,0.20), rgba(255,0,0,0.12)) !important;
-    box-shadow: 0 0 18px rgba(255,77,79,0.30);
-    animation: piscaEmpresa 1s infinite;
-}
-
-.badge-sos {
-    display: inline-block;
-    margin-bottom: 10px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 800;
-    text-transform: uppercase;
-}
-
-.badge-sos-cliente {
-    background: #FFB400;
-    color: #050B14;
-}
-
-.badge-sos-empresa {
-    background: #ff4d4f;
-    color: #fff;
-}
-
-@keyframes piscaEmpresa {
-    0% { transform: scale(1); box-shadow: 0 0 0 rgba(255,77,79,0.18); }
-    50% { transform: scale(1.01); box-shadow: 0 0 22px rgba(255,77,79,0.38); }
-    100% { transform: scale(1); box-shadow: 0 0 0 rgba(255,77,79,0.18); }
-}
     </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -1063,7 +831,6 @@ select:focus {
         <button onclick="confirmarAtendimento('aberto')" style="background: #eee; color: #050B14; border: 1px solid #ccc; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 800;">NÃO / LIBERAR</button>
     </div>
 </div>
-
 <div class="cookie-consent" id="cookieBanner">
     <div class="cookie-text">
         Este site usa cookies para garantir que você obtenha a melhor experiência e anúncios relevantes via <b>Google AdSense</b>.
@@ -1259,7 +1026,6 @@ select:focus {
                 <li><a href="mailto:contato@ajudaai.site?subject=Suporte Ajuda Aí" style="color: #94A3B8; text-decoration: none;">Central de Suporte</a></li>
             </ul>
         </div>
-        
         <div>
             <h4 style="color: #fff; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; margin-bottom: 15px;">Transparência e Legal</h4>
             <ul style="list-style: none; padding: 0; line-height: 2.5; margin: 0;">
@@ -1398,7 +1164,7 @@ O Ajuda Ai atua apenas como intermediador.</p>
         <h2 style="color: var(--brand-yellow); text-align: center; margin-top: 0; margin-bottom: 25px;">O que você precisa hoje?</h2>
         
         <label style="font-weight: bold; margin-bottom: 10px; display: block; font-size: 14px; color: var(--text-muted);">Tipo de Solicitação:</label>
-        
+
         <div style="display: flex; gap: 10px; margin-bottom: 15px;">
             <label style="flex: 1; cursor: pointer; border: 1px solid var(--border); padding: 12px; border-radius: 8px; text-align: center; background: rgba(255,255,255,0.05); transition: 0.3s;">
                 <input type="radio" name="tipoCliente" value="fisica" checked onclick="atualizarTipoCliente()"> Pessoa Física
@@ -1444,45 +1210,8 @@ O Ajuda Ai atua apenas como intermediador.</p>
         </div>
 
         <!-- BOTÕES -->
-        <div id="areaPagamentoSOS" style="display:none; margin-top:20px; border:1px solid var(--brand-yellow); border-radius:12px; padding:15px; background:rgba(255,255,255,0.04);">
-    <div id="areaPixSOS" style="display:none; text-align:center;">
-        <h3 style="color: var(--brand-yellow); margin-top:0;">Pagamento via Pix</h3>
-        <p style="font-size:13px; color:var(--text-muted);">Escaneie o QR Code ou copie o código Pix abaixo.</p>
-
-        <img id="pixQrCodeImg" src="" alt="QR Code Pix" style="max-width:220px; width:100%; margin:15px auto; display:block; background:#fff; padding:10px; border-radius:12px;">
-
-        <textarea id="pixCopiaCola" readonly style="height:90px; margin-top:10px;"></textarea>
-
-        <button type="button" onclick="copiarPixSOS()" class="btn-yellow" style="width:100%; padding:14px; margin-top:10px; border:none; border-radius:10px; font-weight:800; cursor:pointer;">
-            COPIAR PIX
-        </button>
-    </div>
-
-    <div id="areaBoletoSOS" style="display:none; text-align:center;">
-        <h3 style="color: var(--brand-yellow); margin-top:0;">Pagamento Empresarial</h3>
-        <p style="font-size:13px; color:var(--text-muted);">Abra o boleto híbrido / opção Pix para concluir o pagamento.</p>
-
-        <a id="boletoLinkSOS" href="#" target="_blank" class="btn-yellow" style="display:block; text-decoration:none; width:100%; padding:14px; margin-top:10px; border-radius:10px; font-weight:800;">
-            ABRIR BOLETO / PIX
-        </a>
-    </div>
-</div>
-
-<button onclick="enviarPedidoSOS()" 
-    style="width: 100%; padding: 18px; border: none; border-radius: 8px; font-weight: 800; font-size: 16px; margin-top: 20px; cursor: pointer; background: var(--brand-yellow); color: var(--brand-blue); transition: 0.3s;">
-    ENVIAR PEDIDO AGORA
-</button>
-    </div>
-
-    <div id="areaBoletoSOS" style="display:none; text-align:center;">
-        <h3 style="color: var(--brand-yellow); margin-top:0;">Pagamento Empresarial</h3>
-        <p style="font-size:13px; color:var(--text-muted);">Abra o boleto híbrido / opção Pix para concluir o pagamento.</p>
-
-        <a id="boletoLinkSOS" href="#" target="_blank" class="btn-yellow" style="display:block; text-decoration:none; width:100%; padding:14px; margin-top:10px; border-radius:10px; font-weight:800;">
-            ABRIR BOLETO / PIX
-        </a>
-    </div>
-</div>
+        <button onclick="enviarPedidoSOS()" 
+            style="width: 100%; padding: 18px; border: none; border-radius: 8px; font-weight: 800; font-size: 16px; margin-top: 20px; cursor: pointer; background: var(--brand-yellow); color: var(--brand-blue); transition: 0.3s;">
             ENVIAR PEDIDO AGORA
         </button>
 
@@ -1527,815 +1256,828 @@ O Ajuda Ai atua apenas como intermediador.</p>
     <input type="text" id="data-nascimento" placeholder="Data de Nascimento" onfocus="(this.type='date')" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
 </div>
 <p style="font-size: 10px; color: var(--text-muted); margin-top: -5px; margin-left: 5px; margin-bottom: 5px;">
-    <i class="fa-solid fa-shield-halved"></i> Seus dados estão protegidos pela LGPD e não serão exibidos publicamente.
+    Seus dados são usados apenas para verificação de identidade e proteção da comunidade.
 </p>
-        <input type="tel" id="whatsapp-prestador" class="mask-whatsapp" placeholder="WhatsApp (com DDD)" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
 
-        <label style="font-weight: bold; font-size: 14px;">Sua Categoria Principal:</label>
-        <select id="categoria-prestador" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
-            <option value="" disabled selected>Selecione sua profissão...</option>
-            <option value="eletricista">Eletricista</option>
-            <option value="encanador">Encanador</option>
-            <option value="pedreiro">Pedreiro / Construtor</option>
-            <option value="pintor">Pintor</option>
-            <option value="diarista">Diarista / Limpeza</option>
-            <option value="montador">Montador de Móveis</option>
-            <option value="frete">Fretes e Mudanças</option>
-            <option value="assistencia">Assistência Técnica</option>
-            <option value="climatizacao">Climatização</option>
-            <option value="marceneiro">Marceneiro</option>
-            <option value="jardineiro">Jardineiro</option>
-            <option value="mecanico">Mecânico</option>
-            <option value="outros">Outros Serviços</option>
-        </select>
-
-        <label style="font-weight: bold; font-size: 14px;">Destaque Desejado:</label>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <label id="label-premium" style="cursor: pointer; border: 1px solid var(--brand-blue-light); padding: 10px; border-radius: 10px; text-align: center;">
-                <input type="radio" name="planoEscolha" value="premium" checked> 
-                <div style="font-weight: bold; font-size: 13px;">PREMIUM</div>
-                <div style="font-size: 10px; color: var(--text-muted);">Destaque Prata</div>
+            <select id="tipo-prestador" style="width: 100%; padding: 12px; border-radius: 8px; background: #050B14; color: white; border: 1px solid var(--border);">
+                <option value="autonomo">Sou Autônomo</option>
+                <option value="empresa">Sou Empresa</option>
+            </select>
+            <select id="servico-prestador" style="width: 100%; padding: 12px; border-radius: 8px; background: #050B14; color: white; border: 1px solid var(--border);">
+                <option value="">Selecione seu principal serviço</option>
+                <option>Eletricista</option>
+                <option>Encanador</option>
+                <option>Pedreiro</option>
+                <option>Pintor</option>
+                <option>Diarista</option>
+                <option>Montador</option>
+                <option>Fretes</option>
+                <option>Assistência Técnica</option>
+                <option>Climatização</option>
+                <option>Marido de Aluguel</option>
+                <option>Jardinagem</option>
+                <option>Serralheiro</option>
+                <option>Chaveiro</option>
+                <option>Segurança Eletrônica</option>
+                <option>Gesseiro</option>
+                <option>Vidraceiro</option>
+                <option>Marceneiro</option>
+                <option>Outro</option>
+            </select>
+        </div>
+
+        <input type="text" id="cidade-prestador" placeholder="Sua Cidade" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+        <input type="tel" class="mask-whatsapp" id="whatsapp-prestador" placeholder="Seu WhatsApp com DDD" maxlength="16" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
+        
+        <textarea id="bio-prestador" placeholder="Descreva sua experiência em poucas palavras..." style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border); min-height: 90px;"></textarea>
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px;">
+            <label style="font-weight: bold; color: var(--brand-yellow); display: block; margin-bottom: 10px;">
+                <i class="fa-solid fa-location-dot"></i> Localização Automática
             </label>
-            <label id="label-platinum" style="cursor: pointer; border: 1px solid var(--brand-yellow); padding: 10px; border-radius: 10px; text-align: center;">
-                <input type="radio" name="planoEscolha" value="platinum"> 
-                <div style="font-weight: bold; font-size: 13px; color: var(--brand-yellow);">PLATINUM</div>
-                <div style="font-size: 10px; color: var(--text-muted);">Destaque Ouro</div>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="lat-prestador" placeholder="Latitude" readonly style="flex: 1; background: rgba(255,255,255,0.03);">
+                <input type="text" id="lng-prestador" placeholder="Longitude" readonly style="flex: 1; background: rgba(255,255,255,0.03);">
+            </div>
+            <button type="button" onclick="capturarLocalizacaoPrestador()" class="btn-yellow" style="width: 100%; padding: 12px; border-radius: 10px; border: none; font-weight: 800; cursor: pointer; margin-top: 10px;">
+                CAPTURAR MINHA LOCALIZAÇÃO
+            </button>
+        </div>
+
+        <div style="background: rgba(255, 180, 0, 0.08); border: 1px solid var(--brand-yellow); border-radius: 12px; padding: 14px;">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: bold;">
+                <input type="checkbox" id="aceite-termos-prestador" style="width: 18px; height: 18px;">
+                Li e aceito os <span style="color: var(--brand-yellow); cursor: pointer;" onclick="openModal('modalTermos')">Termos</span> e a <span style="color: var(--brand-yellow); cursor: pointer;" onclick="openModal('modalPrivacidade')">Privacidade</span>
             </label>
         </div>
 
-        <textarea id="bio-prestador" rows="2" placeholder="Resumo dos seus serviços..." style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border); resize: none;"></textarea>
+        <button onclick="cadastrarPrestador()" class="btn-yellow" style="width: 100%; padding: 18px; border: none; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer;">
+            CRIAR MINHA CONTA AGORA
+        </button>
 
-        <button id="btn-concluir-cadastro" onclick="finalizarCadastroPrestador()" style="background: var(--brand-yellow); color: black; font-weight: bold; width: 100%; padding: 15px; border-radius: 10px; border: none; cursor: pointer; font-size: 16px;">GARANTIR MINHA VAGA</button>
-        <button onclick="document.getElementById('modalPrestador').style.display='none'" style="background: none; border: none; color: #999; cursor: pointer; font-size: 13px;">Cancelar</button>
+        <button type="button" onclick="closeModal('modalPrestador')" style="background: none; color: var(--text-muted); border: none; cursor: pointer; width: 100%; font-size: 13px; font-weight: bold;">
+            Cancelar
+        </button>
     </div>
 </div>
-    
-        <div id="campo-cnpj" style="display: none; margin-bottom: 15px;">
-            <input type="text" id="cnpj-input" placeholder="Digite o CNPJ da Empresa" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1);">
-        </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const SUPABASE_URL = 'https://vhoiwkndxmmajwoskxdl.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZob2l3a25keG1tYWp3b3NreGRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1ODA5NTcsImV4cCI6MjA4NzE1Njk1N30.ieQQz4158eWEaHkC5yMjMIIFg-FBabbwUz-vpXyo1c8';
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+/* ================================
+   CONFIGURAÇÃO SUPABASE
+================================ */
+const SUPABASE_URL = "https://dhxekskqnlicghxcesux.supabase.co";
+const SUPABASE_ANON_KEY = "COLE_SUA_CHAVE_PUBLICA_AQUI";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    let userLat = null; 
-    let userLng = null; 
-    let currentCity = "";
-    let selectedStar = 0;
-    let logado = JSON.parse(localStorage.getItem('user_ajudaai')) || null;
+/* ================================
+   ESTADO GLOBAL
+================================ */
+let mapa;
+let markersLayer;
+let currentUser = null;
+let selectedStars = 0;
+let prestadorEmAvaliacao = null;
+let pedidoAtualId = null;
+let prestadoresCache = [];
+let cidadeAtual = "";
+let categoriaAtual = "Todas";
 
-    const map = L.map('map', { zoomControl: false }).setView([-23.88, -47.26], 13); 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png').addTo(map);
+/* ================================
+   UTILITÁRIOS
+================================ */
+function showToast(msg) {
+    alert(msg);
+}
 
-    const goldIcon = L.icon({ 
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png', 
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', 
-        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] 
+function formatarWhatsapp(valor) {
+    valor = valor.replace(/\D/g, "");
+    valor = valor.slice(0, 11);
+
+    if (valor.length > 10) {
+        return valor.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
+    } else if (valor.length > 6) {
+        return valor.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+    } else if (valor.length > 2) {
+        return valor.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+    } else if (valor.length > 0) {
+        return valor.replace(/^(\d*)/, "($1");
+    }
+    return valor;
+}
+
+function formatarCPF(valor) {
+    valor = valor.replace(/\D/g, "").slice(0, 11);
+    return valor
+        .replace(/^(\d{3})(\d)/, "$1.$2")
+        .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+        .replace(/\.(\d{3})(\d)/, ".$1-$2");
+}
+
+function abrirWhatsApp(numero, mensagem) {
+    const num = (numero || "").replace(/\D/g, "");
+    const texto = encodeURIComponent(mensagem || "");
+    window.open(`https://wa.me/55${num}?text=${texto}`, "_blank");
+}
+
+function closeMenu() {
+    document.getElementById("navActions").classList.remove("active");
+}
+
+function toggleMenu() {
+    document.getElementById("navActions").classList.toggle("active");
+}
+
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.style.display = "flex";
+}
+
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    document.querySelectorAll(".modal").forEach(modal => {
+        if (event.target === modal) modal.style.display = "none";
     });
-    
-    const silverIcon = L.icon({ 
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png', 
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', 
-        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] 
-    });
-    
-    const blueIcon = L.icon({ 
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png', 
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', 
-        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] 
-    });
+};
 
-    function atualizarInterface() {
-        if (logado) {
-            document.getElementById('btnLogin').style.display = 'none';
-            document.getElementById('btnSair').style.display = 'block';
-            document.getElementById('btnPerfil').style.display = 'block';
-            document.getElementById('userBadge').style.display = 'block';
-            document.getElementById('userBadge').innerText = `OLÁ, ${logado.nome.split(' ')[0].toUpperCase()}`;
-            ativarRadar();
-        } else {
-            document.getElementById('btnLogin').style.display = 'block';
-            document.getElementById('btnSair').style.display = 'none';
-            document.getElementById('btnPerfil').style.display = 'none';
-            document.getElementById('userBadge').style.display = 'none';
-        }
-    }
+/* ================================
+   COOKIES
+================================ */
+function acceptCookies() {
+    localStorage.setItem("cookies_accepted", "1");
+    document.getElementById("cookieBanner").classList.remove("active");
+}
 
-    function abrirPerfil() {
-        if (!logado) return;
-        document.getElementById('perfilNome').innerText = logado.nome;
-        
-        let nomePlano = "Plano Gratuito"; 
-        let valorPlano = "R$ 0,00";
-        let beneficios = "<li><b>Pino Azul</b> básico no mapa (Visibilidade Limitada para Clientes)</li><li>Acesso com delay ao mural de pedidos</li>";
-        let corDestaque = "#185ADB";
-        let isFree = true;
-
-        if (logado.plano === 'ouro') {
-            nomePlano = "Plano Premium";
-            valorPlano = logado.radar_ativo ? "Gratuito (Fundador)" : "R$ 49,90/mês";
-            beneficios = `<li><b>Pino Dourado</b> com destaque máximo no mapa 24h</li><li><b>Prioridade Absoluta</b> no topo das buscas</li><li><b>Radar Inteligente:</b> Alerta sonoro de novos pedidos para a área de <b>${logado.servico}</b>.</li>`;
-            corDestaque = "#FFD700"; 
-            isFree = false;
-        } else if (logado.plano === 'prata') {
-            nomePlano = "Plano Platinum"; 
-            valorPlano = "R$ 24,90/mês";
-            beneficios = "<li><b>Pino Prateado</b> de destaque no mapa 24h</li><li>Acesso Imediato ao Mural de Pedidos</li>";
-            corDestaque = "#C0C0C0"; 
-            isFree = false;
-        }
-
-        document.getElementById('perfilPlanoNome').innerText = nomePlano;
-        document.getElementById('perfilPlanoNome').style.color = corDestaque;
-        document.getElementById('perfilPlanoCard').style.borderColor = corDestaque;
-        document.getElementById('perfilPlanoValor').innerText = valorPlano;
-        document.getElementById('perfilPlanoBeneficios').innerHTML = beneficios;
-        
-        // Exibe área de Upsell/Pagamento se for gratuito
-        document.getElementById('areaUpgrade').style.display = isFree ? 'block' : 'none';
-
-        openModal('modalPerfil'); 
-        closeMenu();
-    }
-
-    async function login(e) {
-        e.preventDefault();
-        const email = document.getElementById('login_email').value;
-        const senha = document.getElementById('login_senha').value;
-        const { data, error } = await _supabase.from('prestadores')
-            .select('*')
-            .eq('email', email)
-            .eq('senha', senha)
-            .single();
-
-        if (data) { 
-            logado = data; 
-            localStorage.setItem('user_ajudaai', JSON.stringify(data)); 
-            closeModal('modalLogin'); 
-            atualizarInterface(); 
-            alert(`Bem-vindo de volta, ${data.nome}!`); 
-        } else { 
-            alert("E-mail ou senha incorretos."); 
-        }
-    }
-
-    function logout() { 
-        localStorage.removeItem('user_ajudaai'); 
-        location.reload(); 
-    }
-
-    async function getCityName(lat, lng) {
-        try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
-            const data = await response.json();
-            const city = data.address.city || data.address.town || data.address.village;
-            if (city) {
-                currentCity = city; 
-                document.getElementById('regionBadge').style.display = 'block'; 
-                document.getElementById('cityNameDisplay').innerText = city;
-                document.getElementById('pres_cidade').value = city; 
-                document.getElementById('ped_cidade').value = city;
-                carregarMural(city); 
-                carregarVitrine(city);
-            }
-        } catch (e) { 
-            console.error("Erro GPS", e); 
-        }
-    }
-
-    async function carregarVitrine(filtroCidade = "") {
-        let query = _supabase.from('prestadores').select('*');
-        if (filtroCidade) {
-            query = query.ilike('cidade', `%${filtroCidade}%`);
-        }
-        
-        const { data: prestadores } = await query.order('created_at', { ascending: false });
-        const grid = document.getElementById('vitrineGrid');
-        
-        if (prestadores) {
-            const total = prestadores.length;
-            const preenchido = Math.min((total / 500) * 100, 100);
-            document.getElementById('progressFill').style.width = `${preenchido}%`;
-            document.getElementById('seatsText').innerText = total < 500 ? `Restam ${500 - total} vagas PREMIUM gratuitas!` : "Vagas Fundador esgotadas. Cobrança ativa para novos membros.";
-
-            map.eachLayer((layer) => { 
-                if (layer instanceof L.Marker && layer.getPopup()?.getContent() !== 'Você está aqui!') {
-                    map.removeLayer(layer); 
-                }
-            });
-
-            let html = "";
-            for (let p of prestadores) {
-                
-                // Lógica de Visibilidade: Clientes só veem pinos Premium e Platinum na vitrine. Grátis fica oculto ou no fim.
-                const isPremium = p.plano === 'ouro';
-                const isPlatinum = p.plano === 'prata';
-                const isOwner = logado && logado.id === p.id;
-                
-                let currentIcon = blueIcon;
-                if (isPremium) currentIcon = goldIcon;
-                if (isPlatinum) currentIcon = silverIcon;
-
-                // Mostra no mapa se for pagante (ou se for o proprio dono logado)
-                if (p.lat && p.lng && (isPremium || isPlatinum || isOwner)) {
-                    L.marker([p.lat, p.lng], {icon: currentIcon})
-                     .addTo(map)
-                     .bindPopup(`<b>${p.nome}</b><br>${p.servico}`);
-                }
-
-                // Renderiza na vitrine se for Premium/Platinum
-                if (isPremium || isPlatinum) {
-                    const { data: avs } = await _supabase.from('avaliacoes').select('nota').eq('prestador_id', p.id);
-                    const media = avs && avs.length > 0 ? (avs.reduce((a, b) => a + b.nota, 0) / avs.length).toFixed(1) : "Novo";
-                    const estrelas = media !== "Novo" ? "★".repeat(Math.round(media)) + "☆".repeat(5 - Math.round(media)) : "☆☆☆☆☆";
-                    
-                    const corBadge = isPremium ? '<div class="badge-premium" style="background:#FFD700; color:#000;">PREMIUM</div>' : '<div class="badge-premium" style="background:#C0C0C0; color:#000;">PLATINUM</div>';
-                    const avatarClass = isPremium ? 'premium' : (isPlatinum ? 'platinum' : '');
-                    
-                    // IMPLEMENTAÇÃO: Renderiza a Imagem se o prestador fez upload, caso contrário renderiza a inicial do nome
-                    const fotoHtml = p.foto_url ? `<img src="${p.foto_url}" alt="Foto de Perfil">` : p.nome.charAt(0);
-                    
-                    // IMPLEMENTAÇÃO: Renderiza Selo Verificado se is_verificado for true
-                    const seloHtml = p.is_verificado ? `<span class="selo-verificado" title="Identidade Verificada">✔️</span>` : '';
-
-                    html += `
-                        <div class="prestador-card fb-card">
-                            ${corBadge}
-                            <div class="fb-header">
-                                <div class="fb-avatar ${avatarClass}">
-                                    ${fotoHtml}
-                                </div>
-                                <div class="fb-meta">
-                                    <h4 style="display:flex; align-items:center; gap:5px;">${p.nome} ${seloHtml}</h4>
-                                    <div class="stars-container">${estrelas} <span style="font-size:10px; color:var(--text-muted); margin-left:5px;">(${media})</span></div>
-                                </div>
-                            </div>
-                            <div class="fb-body">
-                                <strong style="color:var(--brand-yellow); font-size:14px;">💼 ${p.servico}</strong>
-                                <p class="text-limit">"${p.bio || 'Profissional local disponível para ajudar.'}"</p>
-                            </div>
-                            <div class="fb-footer">
-                                <span style="font-size:11px; color:var(--text-muted);">📍 ${p.cidade}</span>
-                                <button onclick="window.open('https://wa.me/55${p.whatsapp.replace(/\D/g,'')}', '_blank')" class="btn-yellow" style="padding:8px 15px; border-radius:8px; border:none; cursor:pointer; font-weight:800;">CONTATO</button>
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-            grid.innerHTML = html || `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted);">Aguardando profissionais Premium nesta região.</p>`;
-        }
-    }
-
-    async function carregarMural(filtroCidade = "") {
-        let query = _supabase.from('pedidos_ajuda').select('*').eq('status', 'aberto');
-        if (filtroCidade) {
-            query = query.ilike('cidade', `%${filtroCidade}%`);
-        }
-        
-        const { data } = await query.order('created_at', { ascending: false });
-        const grid = document.getElementById('muralGrid');
-        
-        if (data) {
-            grid.innerHTML = data.map(pedido => {
-                const safeTitulo = pedido.titulo_ajuda.replace(/'/g, "\\'");
-                return `
-                <div class="fb-card">
-                    <div class="fb-header">
-                        <div class="fb-avatar" style="background:var(--brand-dark); border: 1px solid var(--border);">${pedido.cliente_nome.charAt(0)}</div>
-                        <div class="fb-meta">
-                            <h4>${pedido.cliente_nome}</h4>
-                            <span>📍 ${pedido.cidade} • Pedido de Ajuda</span>
-                        </div>
-                    </div>
-                    <div class="fb-body">
-                        <strong style="color:var(--brand-yellow); display:block; margin-bottom:5px;">${pedido.titulo_ajuda}</strong>
-                        <p class="text-limit">${pedido.descricao}</p>
-                    </div>
-                    <div class="fb-footer">
-                        <span style="font-size:12px; color:#b0b3b8;">Aguardando profissional...</span>
-                        <button class="btn-yellow" onclick="atenderPedido('${pedido.id}', '${pedido.cliente_whats}', '${safeTitulo}', this)" style="padding: 10px 20px; border-radius: 8px; cursor:pointer; font-weight:800;">AJUDAR AGORA</button>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-    }
-
-    async function atenderPedido(id, whatsapp, titulo, btnElement) {
-        if (!logado) { 
-            alert("Apenas prestadores registados e com sessão iniciada podem atender pedidos."); 
-            openModal('modalLogin'); 
-            return; 
-        }
-        
-        if (btnElement) { 
-            btnElement.innerText = "PROCESSANDO..."; 
-            btnElement.disabled = true; 
-        }
-
-        const { error } = await _supabase.from('pedidos_ajuda')
-            .update({ status: 'em_atendimento', atendido_por_id: logado.id, atendido_por_nome: logado.nome })
-            .eq('id', id);
-
-        if (!error) {
-            const linkAvaliacao = `${window.location.origin}?avaliar=${id}`;
-            const mensagem = `Olá! Vi o seu pedido de "${titulo}" no Ajuda Aí. O meu nome é ${logado.nome}, profissional registado, e posso ajudar. Quando terminarmos, por favor, confirme e avalie o meu serviço através deste link seguro: ${linkAvaliacao}`;
-            carregarMural(currentCity);
-            window.location.href = `https://wa.me/55${whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(mensagem)}`;
-        } else {
-            if (btnElement) { 
-                btnElement.innerText = "AJUDAR AGORA"; 
-                btnElement.disabled = false; 
-            }
-            alert("Erro ao atender pedido: " + error.message);
-        }
-    }
-
-    function ativarRadar() {
-        if (!logado || !logado.radar_ativo) return;
-        
-        _supabase.channel('radar-pedidos').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pedidos_ajuda' }, payload => {
-            const isSameCity = payload.new.cidade.toLowerCase() === logado.cidade.toLowerCase();
-            const servicoPrestador = logado.servico.toLowerCase();
-            const tituloPedido = payload.new.titulo_ajuda.toLowerCase();
-            const descricaoPedido = (payload.new.descricao || '').toLowerCase();
-            const isMatchingService = tituloPedido.includes(servicoPrestador) || descricaoPedido.includes(servicoPrestador);
-
-            if (isSameCity && isMatchingService) {
-                document.getElementById('radarAlert').style.display = 'flex';
-                document.getElementById('radarText').innerText = `Alguém precisa de um(a) ${logado.servico} perto de si!`;
-                try { 
-                    new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3').play(); 
-                } catch(e) {}
-                carregarMural(currentCity);
-            }
-        }).subscribe();
-    }
-
-    function setStar(n) { 
-        selectedStar = n; 
-        document.querySelectorAll('.star-clickable').forEach((s, i) => s.classList.toggle('active', i < n)); 
-    }
-    
-    function abrirModalAvaliacao() { 
-        document.getElementById('modalAvaliacao').style.display = 'flex'; 
-        document.getElementById('feedbackBanner').style.display = 'none'; 
-    }
-
-    async function enviarAvaliacaoFinal() {
-        if (selectedStar === 0) return alert("Por favor, selecione as estrelas.");
-        
-        const meuId = localStorage.getItem('meu_ajudaai_id');
-        const { data: pedido } = await _supabase.from('pedidos_ajuda').select('atendido_por_id').eq('id', meuId).single();
-        
-        if (pedido && pedido.atendido_por_id) {
-            await _supabase.from('avaliacoes').insert([{ 
-                pedido_id: meuId, 
-                prestador_id: pedido.atendido_por_id, 
-                nota: selectedStar, 
-                comentario: document.getElementById('evalComentario').value 
-            }]);
-        }
-        
-        await _supabase.from('pedidos_ajuda').update({ status: 'finalizado' }).eq('id', meuId);
-        localStorage.removeItem('meu_ajudaai_id'); 
-        closeModal('modalAvaliacao'); 
-        alert("Obrigado por ajudar a tornar a comunidade mais segura!"); 
-        window.location.href = window.location.origin;
-    }
-
-    async function registrarPrestador(e) {
-        if(e) e.preventDefault();
-        const btn = document.getElementById('btnSalvarPrestador'); 
-        btn.innerText = "PROCESSANDO..."; 
-        btn.disabled = true;
-
-        let fotoUrl = null;
-        const fileInput = document.getElementById('pres_foto');
-        
-        // IMPLEMENTAÇÃO: LÓGICA DE UPLOAD PARA O SUPABASE STORAGE
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${Date.now()}.${fileExt}`;
-            
-            const { data: uploadData, error: uploadError } = await _supabase.storage.from('avatars').upload(fileName, file);
-            
-            if (!uploadError) {
-                const { data: publicUrlData } = _supabase.storage.from('avatars').getPublicUrl(fileName);
-                fotoUrl = publicUrlData.publicUrl;
-            }
-        }
-
-        const { error } = await _supabase.from('prestadores').insert([{ 
-            nome: document.getElementById('pres_nome').value, 
-            email: document.getElementById('pres_email').value, 
-            senha: document.getElementById('pres_senha').value, 
-            whatsapp: document.getElementById('whatsappInput').value, 
-            servico: document.getElementById('pres_servico').value, 
-            cidade: document.getElementById('pres_cidade').value, 
-            bio: document.getElementById('pres_bio').value, 
-            foto_url: fotoUrl, // Inserção da URL da foto
-            is_verificado: false, // Inicia sem o selo
-            lat: userLat || null, 
-            lng: userLng || null 
-        }]);
-        
-        if (error) { 
-            alert("Erro ao cadastrar: " + error.message); 
-        } else { 
-            alert("Bem-vindo ao Ajuda Aí! Faça o Login no topo da página para ativar o seu Radar VIP."); 
-            closeModal('modalPrestador'); 
-            carregarVitrine(currentCity); 
-        }
-        
-        btn.innerText = "FINALIZAR CADASTRO"; 
-        btn.disabled = false;
-    }
-
-    async function verificarFeedbackCliente() {
-        const params = new URLSearchParams(window.location.search); 
-        const avaliarId = params.get('avaliar');
-        
-        if (avaliarId) { 
-            localStorage.setItem('meu_ajudaai_id', avaliarId); 
-            window.history.replaceState({}, document.title, "/"); 
-        }
-        
-        const meuId = localStorage.getItem('meu_ajudaai_id'); 
-        if (!meuId) return;
-        
-        const { data } = await _supabase.from('pedidos_ajuda').select('status, atendido_por_nome').eq('id', meuId).single();
-        
-        if (data && data.status === 'em_atendimento') { 
-            document.getElementById('feedbackMessage').innerText = `O profissional ${data.atendido_por_nome || ''} realizou o serviço?`; 
-            document.getElementById('evalNome').innerText = data.atendido_por_nome || 'profissional'; 
-            document.getElementById('feedbackBanner').style.display = 'flex'; 
-        }
-    }
-
-    async function confirmarAtendimento(novoStatus) {
-        const meuId = localStorage.getItem('meu_ajudaai_id');
-        await _supabase.from('pedidos_ajuda').update({ status: novoStatus, atendido_por_id: null, atendido_por_nome: null }).eq('id', meuId);
-        document.getElementById('feedbackBanner').style.display = 'none';
-        
-        if (novoStatus === 'aberto') alert("O seu pedido foi devolvido ao mural para outros profissionais.");
-        carregarMural(currentCity);
-    }
-
-    function acceptCookies() { 
-        localStorage.setItem('ajudaAi_cookies', 'true'); 
-        document.getElementById('cookieBanner').classList.remove('active'); 
-    }
-
-    window.addEventListener('load', () => {
-        atualizarInterface(); 
-        carregarMural(); 
-        carregarVitrine(); 
-        verificarFeedbackCliente();
-        
-        if (!localStorage.getItem('ajudaAi_cookies')) {
-            setTimeout(() => document.getElementById('cookieBanner').classList.add('active'), 2000);
-        }
-        
-        if (navigator.geolocation) { 
-            navigator.geolocation.getCurrentPosition(p => { 
-                userLat = p.coords.latitude; 
-                userLng = p.coords.longitude; 
-                map.flyTo([userLat, userLng], 14); 
-                L.marker([userLat, userLng]).addTo(map).bindPopup('Você está aqui!').openPopup(); 
-                getCityName(userLat, userLng); 
-            }); 
-        }
-    });
-
-    document.querySelectorAll('.mask-whatsapp').forEach(input => {
-        input.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, ""); 
-            if (value.length > 11) value = value.slice(0, 11);
-            
-            if (value.length > 2) { 
-                if (value.length > 7) { 
-                    value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`; 
-                } else { 
-                    value = `(${value.slice(0, 2)}) ${value.slice(2)}`; 
-                } 
-            } else if (value.length > 0) { 
-                value = `(${value}`; 
-            }
-            e.target.value = value;
-        });
-    });
-
-    document.getElementById('muralSearch').addEventListener('input', function(e) {
-        const term = e.target.value.toLowerCase();
-        document.querySelectorAll('.fb-card').forEach(card => { 
-            card.style.display = card.innerText.toLowerCase().includes(term) ? 'flex' : 'none'; 
-        });
-    });
-
-    function toggleMenu() { document.getElementById('navActions').classList.toggle('active'); }
-    function closeMenu() { document.getElementById('navActions').classList.remove('active'); }
-    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-    
-    function getGPS() { 
-        navigator.geolocation.getCurrentPosition(p => { 
-            map.setView([p.coords.latitude, p.coords.longitude], 15); 
-            getCityName(p.coords.latitude, p.coords.longitude); 
-        }); 
-    }
-/* --- INÍCIO DA LÓGICA VIP --- */
-function atualizarTipoCliente() {
-    const isEmpresa = document.querySelector('input[name="tipoCliente"]:checked').value === 'empresa';
-    
-    // Mostra/esconde o campo de CNPJ e o aviso de boleto
-    document.getElementById('campo-cnpj').style.display = isEmpresa ? 'block' : 'none';
-    document.getElementById('aviso-boleto').style.display = isEmpresa ? 'block' : 'none';
-    
-    // MUDA O PREÇO AUTOMATICAMENTE NA TELA
-    if(isEmpresa) {
-        document.getElementById('texto-sos-preco').innerHTML = 'Sim, prioridade corporativa (+ R$ 19,90)';
-    } else {
-        document.getElementById('texto-sos-preco').innerHTML = 'Sim, quero prioridade (+ R$ 4,90 via Pix)';
+function checkCookies() {
+    if (!localStorage.getItem("cookies_accepted")) {
+        setTimeout(() => {
+            document.getElementById("cookieBanner").classList.add("active");
+        }, 1200);
     }
 }
 
-// --- SISTEMA INTELIGENTE DE VAGAS GRATUITAS ---
-// --- SISTEMA INTELIGENTE DE VAGAS: PREMIUM -> PLATINUM -> PAGO ---
-async function verificarVagasGratuitas() {
-    const TOTAL_VAGAS_PROMO = 500;
-    const METADE_PROMO = 250; // Ponto de virada de Premium para Platinum
-    
-    const statusDiv = document.getElementById('plano-status');
-    const planoInput = document.getElementById('plano-final');
-    const btn = document.getElementById('btn-concluir-cadastro');
-    const cidade = document.getElementById('cidade-detalhe')?.innerText || "sua região";
+/* ================================
+   MAPA
+================================ */
+function initMap() {
+    mapa = L.map("map").setView([-23.5505, -46.6333], 11);
 
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(mapa);
+
+    markersLayer = L.layerGroup().addTo(mapa);
+}
+
+function limparMarkers() {
+    if (markersLayer) markersLayer.clearLayers();
+}
+
+function adicionarMarcador(lat, lng, popupHtml) {
+    if (!lat || !lng) return;
+    L.marker([lat, lng]).addTo(markersLayer).bindPopup(popupHtml);
+}
+
+function getGPS() {
+    if (!navigator.geolocation) {
+        showToast("Seu navegador não suporta geolocalização.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        mapa.setView([lat, lng], 13);
+
+        await detectarCidadePorCoordenada(lat, lng);
+        renderizarPrestadores();
+    }, () => {
+        showToast("Não foi possível obter sua localização.");
+    });
+}
+
+async function detectarCidadePorCoordenada(lat, lng) {
     try {
-        // Conta TODOS os prestadores cadastrados na região de Campinas
-        const { count, error } = await supabase
-            .from('prestadores') 
-            .select('*', { count: 'exact', head: true });
-
-        if (error) throw error;
-
-        // LÓGICA DE DISTRIBUIÇÃO AUTOMATIZADA
-        if (count < METADE_PROMO) {
-            // FASE 1: LIBERANDO PREMIUM GRÁTIS
-            const restam = METADE_PROMO - count;
-            statusDiv.innerHTML = `
-                <div style="border: 2px solid #25D366; padding: 12px; border-radius: 10px; background: rgba(37, 211, 102, 0.1);">
-                    <div style="font-weight: bold; color: #25D366;">🎁 BEM-VINDO PROFISSIONAL DE ${cidade.toUpperCase()}</div>
-                    <p style="font-size: 13px; color: white; margin: 5px 0;">Restam <b>${restam} vagas</b> para 1 ano de <b>Plano Premium GRÁTIS</b>!</p>
-                </div>`;
-            planoInput.value = "premium";
-            btn.innerText = "GARANTIR MINHA VAGA PREMIUM";
-        } 
-        else if (count < TOTAL_VAGAS_PROMO) {
-            // FASE 2: PREMIUM ACABOU, LIBERANDO PLATINUM GRÁTIS
-            const restam = TOTAL_VAGAS_PROMO - count;
-            statusDiv.innerHTML = `
-                <div style="border: 2px solid var(--brand-yellow); padding: 12px; border-radius: 10px; background: rgba(255, 180, 0, 0.1);">
-                    <div style="font-weight: bold; color: var(--brand-yellow);">🌟 OPORTUNIDADE EM ${cidade.toUpperCase()}</div>
-                    <p style="font-size: 13px; color: white; margin: 5px 0;">Vagas Premium esgotadas! Restam <b>${restam} vagas Platinum</b> grátis!</p>
-                </div>`;
-            planoInput.value = "platinum";
-            btn.innerText = "GARANTIR MINHA VAGA PLATINUM";
-        } 
-        else {
-            // FASE 3: TUDO ESGOTADO -> COBRANÇA LIBERADA
-            statusDiv.innerHTML = `
-                <div style="border: 1px solid #FF4500; padding: 12px; border-radius: 10px; background: rgba(255, 69, 0, 0.1);">
-                    <div style="font-weight: bold; color: #FF4500;">VAGAS PROMOCIONAIS ESGOTADAS</div>
-                    <p style="font-size: 11px; color: white;">Selecione o plano que deseja adquirir:</p>
-                    <select onchange="document.getElementById('plano-final').value = this.value" style="width:100%; background:#000; color:#fff; padding:8px; border-radius:5px; border:1px solid #444;">
-                        <option value="premium">Plano Premium (R$ 19,90/mês)</option>
-                        <option value="platinum">Plano Platinum (R$ 39,90/mês)</option>
-                    </select>
-                </div>`;
-            btn.innerText = "ASSINAR E CONCLUIR CADASTRO";
-        }
-
+        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+        const data = await res.json();
+        cidadeAtual = data.address.city || data.address.town || data.address.village || "";
+        document.getElementById("cityNameDisplay").textContent = cidadeAtual || "Sua região";
+        document.getElementById("cidade-dinamica").textContent = cidadeAtual || "nesta região";
+        document.getElementById("regionBadge").style.display = "block";
     } catch (e) {
-        console.error("Erro no contador de vagas:", e);
+        console.error(e);
     }
 }
 
+/* ================================
+   PRESTADORES
+================================ */
+async function carregarPrestadores() {
+    const { data, error } = await supabase
+        .from("prestadores")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-    // --- FUNÇÃO DE SALVAMENTO NO SUPABASE (CADASTRO DE PRESTADOR) ---
-async function finalizarCadastroPrestador() {
-    const btn = document.getElementById('btn-concluir-cadastro');
-    
-    // Evita cliques duplos enquanto processa
-    btn.disabled = true;
-    btn.innerText = "Processando Cadastro...";
+    if (error) {
+        console.error(error);
+        return;
+    }
 
-    // Captura os dados exatos dos campos do Modal
-    const dados = {
-        nome: document.getElementById('nome-prestador').value,
-        email: document.getElementById('email-prestador').value,
-        senha: document.getElementById('senha-prestador').value,
-        cpf: document.getElementById('cpf-prestador').value,
-        whatsapp: document.getElementById('whatsapp-prestador').value,
-        categoria: document.getElementById('categoria-prestador').value,
-        bio: document.getElementById('bio-prestador').value,
-        plano: document.getElementById('plano-final').value,
-        // Pega a cidade que o banner de geolocalização detectou
-        cidade: document.getElementById('cidade-detalhe')?.innerText || "Não detectada",
-        data_cadastro: new Date().toISOString()
+    prestadoresCache = data || [];
+    renderizarPrestadores();
+    atualizarMapaPrestadores();
+}
+
+function gerarEstrelas(media = 0) {
+    const cheio = Math.round(Number(media) || 0);
+    let html = "";
+    for (let i = 1; i <= 5; i++) {
+        html += `<span>${i <= cheio ? "★" : "☆"}</span>`;
+    }
+    return html;
+}
+
+function filtrarPrestadores() {
+    const busca = (document.getElementById("muralSearch").value || "").toLowerCase().trim();
+
+    return prestadoresCache.filter(p => {
+        const nome = (p.nome || "").toLowerCase();
+        const servico = (p.servico || "").toLowerCase();
+        const cidade = (p.cidade || "").toLowerCase();
+        const bio = (p.bio || "").toLowerCase();
+
+        const bateBusca = !busca || nome.includes(busca) || servico.includes(busca) || cidade.includes(busca) || bio.includes(busca);
+        const bateCidade = !cidadeAtual || cidade.includes(cidadeAtual.toLowerCase());
+        const bateCategoria = categoriaAtual === "Todas" || servico.includes(categoriaAtual.toLowerCase());
+
+        return bateBusca && bateCidade && bateCategoria;
+    });
+}
+
+function renderizarPrestadores() {
+    const vitrine = document.getElementById("vitrineGrid");
+    const lista = filtrarPrestadores();
+
+    vitrine.innerHTML = "";
+
+    if (!lista.length) {
+        vitrine.innerHTML = `<div class="prestador-card"><p>Nenhum profissional encontrado no momento.</p></div>`;
+        return;
+    }
+
+    lista.forEach(p => {
+        const iniciais = (p.nome || "?").split(" ").map(n => n[0]).slice(0,2).join("").toUpperCase();
+        const verificado = p.verificado ? `<span class="selo-verificado"><i class="fa-solid fa-circle-check"></i></span>` : "";
+        const badgePlano = p.plano === "premium"
+            ? `<div class="badge-premium">PREMIUM</div>`
+            : p.plano === "platinum"
+                ? `<div class="badge-premium" style="background:#C0C0C0;">PLATINUM</div>`
+                : "";
+
+        vitrine.innerHTML += `
+            <div class="prestador-card">
+                ${badgePlano}
+                <div class="fb-header">
+                    <div class="fb-avatar">
+                        ${p.foto_url ? `<img src="${p.foto_url}" alt="${p.nome}">` : iniciais}
+                    </div>
+                    <div class="fb-meta">
+                        <h4>${p.nome || "Profissional"} ${verificado}</h4>
+                        <span>${p.servico || "Serviço"} • ${p.cidade || "Cidade"}</span>
+                        <div class="stars-container">${gerarEstrelas(p.media)}</div>
+                    </div>
+                </div>
+                <p class="text-limit">${p.bio || "Profissional disponível para atendimento."}</p>
+                <button class="btn-yellow" style="width:100%; padding:14px; border:none; border-radius:12px; font-weight:800; cursor:pointer;"
+                    onclick="abrirWhatsApp('${(p.whatsapp || "").replace(/\D/g, "")}', 'Olá, encontrei seu perfil no Ajuda Aí e gostaria de solicitar um orçamento.')">
+                    CHAMAR NO WHATSAPP
+                </button>
+            </div>
+        `;
+    });
+}
+
+function atualizarMapaPrestadores() {
+    limparMarkers();
+
+    filtrarPrestadores().forEach(p => {
+        if (!p.lat || !p.lng) return;
+        adicionarMarcador(
+            p.lat,
+            p.lng,
+            `<b>${p.nome || "Profissional"}</b><br>${p.servico || ""}<br>${p.cidade || ""}`
+        );
+    });
+}
+  /* ================================
+   PEDIDOS
+================================ */
+async function carregarPedidos() {
+    const { data, error } = await supabase
+        .from("pedidos")
+        .select("*")
+        .eq("status", "aberto")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    renderizarPedidos(data || []);
+}
+
+function renderizarPedidos(lista) {
+    const mural = document.getElementById("muralGrid");
+    mural.innerHTML = "";
+
+    if (!lista.length) {
+        mural.innerHTML = `<div class="fb-card"><p>Nenhuma oportunidade publicada agora.</p></div>`;
+        return;
+    }
+
+    lista.forEach(p => {
+        const iniciais = (p.nome || "C").split(" ").map(n => n[0]).slice(0,2).join("").toUpperCase();
+        const urgencia = p.sos ? `<span style="background:#e50914; color:#fff; padding:4px 8px; border-radius:8px; font-size:10px; font-weight:800;">SOS</span>` : "";
+        mural.innerHTML += `
+            <div class="fb-card">
+                <div class="fb-header">
+                    <div class="fb-avatar">${iniciais}</div>
+                    <div class="fb-meta">
+                        <h4>${p.nome || "Cliente"} ${urgencia}</h4>
+                        <span>${p.cidade || "Cidade"} • ${p.tamanho || "Serviço"}</span>
+                    </div>
+                </div>
+                <div class="fb-body">${p.descricao || "Sem detalhes."}</div>
+                <div class="fb-footer">
+                    <span style="font-size:12px; color:#b0b3b8;">Contato direto disponível</span>
+                    <button class="btn-yellow" style="padding:10px 14px; border:none; border-radius:10px; font-weight:800; cursor:pointer;"
+                        onclick="abrirWhatsApp('${(p.whatsapp || "").replace(/\D/g, "")}', 'Olá, vi seu pedido no Ajuda Aí e posso te atender.')">
+                        CHAMAR
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function atualizarTipoCliente() {
+    const tipo = document.querySelector('input[name="tipoCliente"]:checked')?.value;
+    const campoCnpj = document.getElementById("campo-cnpj");
+    const aviso = document.getElementById("aviso-boleto");
+    const texto = document.getElementById("texto-sos-preco");
+
+    if (tipo === "empresa") {
+        campoCnpj.style.display = "block";
+        aviso.style.display = "block";
+        texto.textContent = "Atendimento Corporativo Prioritário (+ R$ 9,90 via Pix)";
+    } else {
+        campoCnpj.style.display = "none";
+        aviso.style.display = "none";
+        texto.textContent = "Atendimento Prioritário (+ R$ 4,90 via Pix)";
+    }
+}
+
+async function enviarPedidoSOS() {
+    const tipoCliente = document.querySelector('input[name="tipoCliente"]:checked')?.value || "fisica";
+    const nome = document.getElementById("nome-cliente").value.trim();
+    const whatsapp = document.getElementById("whatsapp-cliente").value.trim();
+    const descricao = document.getElementById("descricao-pedido").value.trim();
+    const tamanho = document.getElementById("tamanho-servico").value;
+    const cnpj = document.getElementById("cnpj-input").value.trim();
+    const sos = document.getElementById("urgencia-sos").checked;
+
+    if (!nome || !whatsapp || !descricao) {
+        showToast("Preencha nome, WhatsApp e descrição.");
+        return;
+    }
+
+    const payload = {
+        tipo_cliente: tipoCliente,
+        nome,
+        whatsapp,
+        descricao,
+        tamanho,
+        cnpj: tipoCliente === "empresa" ? cnpj : null,
+        sos,
+        cidade: cidadeAtual || null,
+        status: "aberto"
     };
 
-    // Validação de Segurança Básica
-    if (!dados.email || !dados.senha || !dados.cpf || !dados.nome) {
-        alert("⚠️ Por favor, preencha Nome, E-mail, Senha e CPF para garantir sua vaga.");
-        btn.disabled = false;
-        btn.innerText = "GARANTIR MINHA VAGA";
+    const { data, error } = await supabase
+        .from("pedidos")
+        .insert([payload])
+        .select()
+        .single();
+
+    if (error) {
+        console.error(error);
+        showToast("Erro ao enviar pedido.");
         return;
     }
 
-    try {
-        // Envia para a sua tabela 'prestadores' no Supabase
-        const { error } = await supabase.from('prestadores').insert([dados]);
-        
-        if (error) throw error;
+    pedidoAtualId = data.id;
+    closeModal("modalPedido");
+    showToast("Pedido enviado com sucesso!");
+    carregarPedidos();
 
-        alert("✅ Parabéns! Seu cadastro foi realizado com sucesso e sua vaga de 1 ano está garantida.");
-        
-        // Fecha o modal e recarrega para aplicar as mudanças
-        document.getElementById('modalPrestador').style.display = 'none';
-        window.location.reload(); 
-
-    } catch (e) {
-        console.error("Erro ao salvar:", e);
-        alert("❌ Erro ao salvar cadastro: " + e.message);
-        btn.disabled = false;
-        btn.innerText = "TENTAR NOVAMENTE";
+    if (sos) {
+        document.getElementById("radarText").textContent = `${nome} publicou um pedido prioritário.`;
+        document.getElementById("radarAlert").style.display = "flex";
     }
+
+    setTimeout(() => {
+        document.getElementById("feedbackBanner").style.display = "flex";
+        localStorage.setItem("ultimo_pedido_id", pedidoAtualId);
+    }, 25000);
 }
-function renderizarCardMural(pedido, planoPrestador) {
-    let isOuro = pedido.alto_valor || pedido.tipo_cliente === 'empresa' || pedido.tamanho_servico === 'grande';
-    let isSOS = pedido.urgencia_sos;
 
-    // Aversão à perda para Grátis e Platinum
-    if (planoPrestador !== 'premium' && (isOuro || isSOS)) {
-        return `
-        <div class="card-borrado" style="margin-bottom: 15px;">
-            <div class="blur-effect"></div>
-            <div class="cadeado-aviso">
-                <h4>🔒 EXCLUSIVO PREMIUM</h4>
-                <span style="color: #fff; font-size: 12px; font-weight: bold;">
-                    ${isSOS ? '🚨 Empresa a pedir Urgência Máxima!' : '🚧 Projeto de Alto Valor Financeiro'}
-                </span><br>
-                <button class="btn-upgrade" onclick="alert('Redirecionando para Assinatura...')">Liberar Acesso - R$ 49,90/mês</button>
-            </div>
-            <div style="padding: 10px; color: #666;">Cliente Oculto - Orçamento de alto valor bloqueado.</div>
-        </div>`;
-    }
-
-    // Card normal se for Premium ou pedido simples
-    return `
-    <div class="fb-card ${isSOS ? 'sos-piscar' : ''}" style="margin-bottom: 15px; padding: 15px; background: #242526; border-radius: 12px; border: 1px solid #3e4042;">
-        ${isSOS ? '<div style="color: #FF4500; font-weight: bold; font-size: 12px; margin-bottom: 10px;">🚨 URGÊNCIA SOS PAGA ATIVA</div>' : ''}
-        <h4 style="margin: 0; color: white;">${pedido.tipo_cliente === 'empresa' ? '🏢 Empresa Confidencial' : '👤 ' + pedido.nome_cliente}</h4>
-        <div style="color: #ddd; font-size: 14px; margin: 15px 0;">${pedido.descricao}</div>
-        <button style="background: #FFB400; color: black; font-weight: bold; border: none; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer;">Aceitar e Abrir WhatsApp</button>
-    </div>`;
-async function enviarPedidoSOS() {
-    const isEmpresa = document.querySelector('input[name="tipoCliente"]:checked').value === 'empresa';
-    const isSOS = document.getElementById('urgencia-sos').checked;
-
-    const nome = document.getElementById('nome-cliente').value.trim();
-    const telefone = document.getElementById('whatsapp-cliente').value.trim();
-    const descricao = document.getElementById('descricao-pedido').value.trim();
-    const tamanho = document.getElementById('tamanho-servico').value;
-    const cnpj = document.getElementById('cnpj-input') ? document.getElementById('cnpj-input').value.trim() : '';
-
-    if (!nome || !telefone || !descricao) {
-        alert('Preencha nome, WhatsApp e descrição do pedido.');
+/* ================================
+   CADASTRO PRESTADOR
+================================ */
+async function capturarLocalizacaoPrestador() {
+    if (!navigator.geolocation) {
+        showToast("Seu navegador não suporta geolocalização.");
         return;
     }
 
-    try {
-        // 1) cria pedido no Supabase
-        const payloadPedido = {
-            cliente_nome: nome,
-            cliente_whats: telefone.replace(/\D/g, ''),
-            titulo_ajuda: isEmpresa ? 'Pedido Empresarial' : 'Pedido de Ajuda',
-            cidade: typeof currentCity !== 'undefined' && currentCity ? currentCity : 'Sua Região',
-            descricao: descricao,
-            status: isSOS ? 'aguardando_pagamento' : 'aberto',
-            tipo_cliente: isEmpresa ? 'empresa' : 'fisica',
-            tamanho_servico: tamanho,
-            urgencia_sos: isSOS,
-            cnpj_empresa: isEmpresa ? cnpj : null
-        };
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
 
-        const { data: pedidoCriado, error: erroPedido } = await _supabase
-            .from('pedidos_ajuda')
-            .insert([payloadPedido])
-            .select()
-            .single();
+        document.getElementById("lat-prestador").value = lat;
+        document.getElementById("lng-prestador").value = lng;
 
-        if (erroPedido) {
-            alert('Erro ao criar pedido: ' + erroPedido.message);
-            return;
+        try {
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+            const data = await res.json();
+            const cidade = data.address.city || data.address.town || data.address.village || "";
+            document.getElementById("cidade-prestador").value = cidade;
+        } catch (e) {
+            console.error(e);
         }
+    }, () => {
+        showToast("Não foi possível capturar sua localização.");
+    });
+}
 
-        // 2) se não for SOS, publica direto
-        if (!isSOS) {
-            alert('Pedido publicado com sucesso!');
-            document.getElementById('modalPedido').style.display = 'none';
-            if (typeof carregarMural === 'function') carregarMural(currentCity);
-            return;
-        }
+async function cadastrarPrestador() {
+    const email = document.getElementById("email-prestador").value.trim();
+    const senha = document.getElementById("senha-prestador").value.trim();
+    const nome = document.getElementById("nome-prestador").value.trim();
+    const cpf = document.getElementById("cpf-prestador").value.trim();
+    const dataNascimento = document.getElementById("data-nascimento").value;
+    const tipo = document.getElementById("tipo-prestador").value;
+    const servico = document.getElementById("servico-prestador").value;
+    const cidade = document.getElementById("cidade-prestador").value.trim();
+    const whatsapp = document.getElementById("whatsapp-prestador").value.trim();
+    const bio = document.getElementById("bio-prestador").value.trim();
+    const lat = document.getElementById("lat-prestador").value.trim();
+    const lng = document.getElementById("lng-prestador").value.trim();
+    const aceite = document.getElementById("aceite-termos-prestador").checked;
 
-        // 3) se for SOS, chama a Edge Function
-        const valor = isEmpresa ? 19.90 : 4.90;
-        const tipo = isEmpresa ? 'BOLETO' : 'PIX';
+    if (!email || !senha || !nome || !servico || !cidade || !whatsapp) {
+        showToast("Preencha os campos obrigatórios.");
+        return;
+    }
 
-        const respostaPagamento = await fetch('https://vhoiwkndxmmajwoskxdl.functions.supabase.co/criar_pagamento', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                nome,
-                telefone: telefone.replace(/\D/g, ''),
-                valor,
-                tipo,
-                descricao: isEmpresa ? 'SOS Empresa Ajuda Aí' : 'SOS Cliente Ajuda Aí'
-            })
-        });
+    if (!aceite) {
+        showToast("Você precisa aceitar os termos.");
+        return;
+    }
 
-        const pagamento = await respostaPagamento.json();
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+        email,
+        password: senha
+    });
 
-        if (!pagamento || (!pagamento.pagamento_id && !pagamento.pixQrCode && !pagamento.boletoUrl)) {
-            alert('Erro ao gerar pagamento.');
-            return;
-        }
+    if (authError) {
+        console.error(authError);
+        showToast(authError.message || "Erro ao criar conta.");
+        return;
+    }
 
-        // 4) salva payment_id no pedido
-        await _supabase
-            .from('pedidos_ajuda')
-            .update({
-                payment_id: pagamento.pagamento_id
-            })
-            .eq('id', pedidoCriado.id);
+    const userId = authData.user?.id;
+    if (!userId) {
+        showToast("Conta criada. Verifique seu e-mail para continuar.");
+        return;
+    }
 
-        // 5) mostra o PIX ou boleto no mesmo modal
-        document.getElementById('areaPagamentoSOS').style.display = 'block';
-        document.getElementById('areaPixSOS').style.display = 'none';
-        document.getElementById('areaBoletoSOS').style.display = 'none';
+    const planoInicial = "gratuito";
 
-        if (tipo === 'PIX') {
-            document.getElementById('areaPixSOS').style.display = 'block';
-            document.getElementById('pixQrCodeImg').src = pagamento.pixQrCode || '';
-            document.getElementById('pixCopiaCola').value = pagamento.pixCopiaCola || '';
-        } else {
-            document.getElementById('areaBoletoSOS').style.display = 'block';
-            document.getElementById('boletoLinkSOS').href = pagamento.boletoUrl || '#';
-        }
+    const { error } = await supabase.from("prestadores").insert([{
+        user_id: userId,
+        email,
+        nome,
+        cpf,
+        data_nascimento: dataNascimento || null,
+        tipo,
+        servico,
+        cidade,
+        whatsapp,
+        bio,
+        lat: lat || null,
+        lng: lng || null,
+        plano: planoInicial,
+        verificado: false,
+        media: 0
+    }]);
 
-    } catch (error) {
-        alert('Erro ao iniciar pagamento: ' + error.message);
+    if (error) {
+        console.error(error);
+        showToast("Conta criada, mas houve erro ao salvar perfil.");
+        return;
+    }
+
+    closeModal("modalPrestador");
+    showToast("Cadastro realizado com sucesso! Verifique seu e-mail para confirmar a conta.");
+    carregarPrestadores();
+}
+
+/* ================================
+   LOGIN / PERFIL
+================================ */
+async function login(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("login_email").value.trim();
+    const senha = document.getElementById("login_senha").value.trim();
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password: senha
+    });
+
+    if (error) {
+        console.error(error);
+        showToast("E-mail ou senha inválidos.");
+        return;
+    }
+
+    currentUser = data.user;
+    closeModal("modalLogin");
+    await atualizarUIUsuario();
+    showToast("Login realizado com sucesso!");
+}
+
+async function logout() {
+    await supabase.auth.signOut();
+    currentUser = null;
+    atualizarBotoesAuth();
+    closeModal("modalPerfil");
+    showToast("Você saiu da conta.");
+}
+
+async function atualizarUIUsuario() {
+    const { data: { user } } = await supabase.auth.getUser();
+    currentUser = user || null;
+    atualizarBotoesAuth();
+}
+
+function atualizarBotoesAuth() {
+    const btnLogin = document.getElementById("btnLogin");
+    const btnPerfil = document.getElementById("btnPerfil");
+    const btnSair = document.getElementById("btnSair");
+    const badge = document.getElementById("userBadge");
+
+    if (currentUser) {
+        btnLogin.style.display = "none";
+        btnPerfil.style.display = "inline-block";
+        btnSair.style.display = "inline-block";
+        badge.style.display = "inline-block";
+    } else {
+        btnLogin.style.display = "inline-block";
+        btnPerfil.style.display = "none";
+        btnSair.style.display = "none";
+        badge.style.display = "none";
     }
 }
-/* --- FIM DA LÓGICA VIP --- */
-/* --- INÍCIO GEOLOCALIZAÇÃO DO BANNER --- */
-document.addEventListener("DOMContentLoaded", function() {
-    // API Gratuita que descobre a cidade do usuário pelo IP da internet dele
-    fetch('https://ipinfo.io/json')
-        .then(response => response.json())
-        .then(data => {
-            const cidadeUsuario = data.city; // Ex: Sumare, Campinas, etc
-            const cidadesAlvo = ["Sumaré", "Sumare", "Campinas", "Hortolândia", "Hortolandia", "Americana", "Nova Odessa", "Santa Bárbara d'Oeste"];
-            
-            // Se a cidade dele estiver na nossa lista, mostramos a cidade. Se não, mostramos "Sua Região".
-            if(cidadeUsuario && cidadesAlvo.includes(cidadeUsuario)) {
-                document.getElementById('cidade-dinamica').innerText = cidadeUsuario;
-            } else {
-                document.getElementById('cidade-dinamica').innerText = "sua região";
-            }
-        })
-        .catch(error => {
-            console.log("Geolocalização bloqueada. Usando texto padrão.");
-            document.getElementById('cidade-dinamica').innerText = "sua região";
-        });
+
+async function abrirPerfil() {
+    if (!currentUser) return;
+
+    const { data, error } = await supabase
+        .from("prestadores")
+        .select("*")
+        .eq("user_id", currentUser.id)
+        .single();
+
+    if (error || !data) {
+        showToast("Perfil não encontrado.");
+        return;
+    }
+
+    document.getElementById("perfilNome").textContent = data.nome || "";
+    preencherPlanoPerfil(data.plano || "gratuito");
+    openModal("modalPerfil");
+}
+
+function preencherPlanoPerfil(plano) {
+    const nome = document.getElementById("perfilPlanoNome");
+    const valor = document.getElementById("perfilPlanoValor");
+    const beneficios = document.getElementById("perfilPlanoBeneficios");
+    const areaUpgrade = document.getElementById("areaUpgrade");
+
+    if (plano === "premium") {
+        nome.textContent = "Plano Premium";
+        valor.textContent = "R$ 49,90/mês";
+        beneficios.innerHTML = `
+            <li>Pino dourado com maior destaque</li>
+            <li>Radar inteligente para pedidos</li>
+            <li>Visibilidade máxima na vitrine</li>
+            <li>Prioridade no mural local</li>
+        `;
+        areaUpgrade.style.display = "none";
+    } else if (plano === "platinum") {
+        nome.textContent = "Plano Platinum";
+        valor.textContent = "R$ 24,90/mês";
+        beneficios.innerHTML = `
+            <li>Pino prateado em destaque</li>
+            <li>Prioridade intermediária no mural</li>
+            <li>Mais visibilidade regional</li>
+        `;
+        areaUpgrade.style.display = "block";
+    } else {
+        nome.textContent = "Plano Gratuito";
+        valor.textContent = "R$ 0,00";
+        beneficios.innerHTML = `
+            <li>Perfil publicado na plataforma</li>
+            <li>Recebimento de contatos locais</li>
+            <li>Participação na vitrine comunitária</li>
+        `;
+        areaUpgrade.style.display = "block";
+    }
+}
+
+/* ================================
+   AVALIAÇÃO
+================================ */
+function abrirModalAvaliacao() {
+    prestadorEmAvaliacao = null;
+    selectedStars = 0;
+    document.querySelectorAll(".star-clickable").forEach(st => st.classList.remove("active"));
+    document.getElementById("evalComentario").value = "";
+    document.getElementById("evalNome").textContent = "o profissional";
+    document.getElementById("evalAvatar").textContent = "?";
+    openModal("modalAvaliacao");
+}
+
+function setStar(n) {
+    selectedStars = n;
+    document.querySelectorAll(".star-clickable").forEach((st, i) => {
+        st.classList.toggle("active", i < n);
+    });
+}
+
+async function enviarAvaliacaoFinal() {
+    const comentario = document.getElementById("evalComentario").value.trim();
+    const pedidoId = localStorage.getItem("ultimo_pedido_id");
+
+    if (!selectedStars) {
+        showToast("Escolha de 1 a 5 estrelas.");
+        return;
+    }
+
+    const { error } = await supabase.from("avaliacoes").insert([{
+        pedido_id: pedidoId || null,
+        nota: selectedStars,
+        comentario
+    }]);
+
+    if (error) {
+        console.error(error);
+        showToast("Erro ao enviar avaliação.");
+        return;
+    }
+
+    closeModal("modalAvaliacao");
+    document.getElementById("feedbackBanner").style.display = "none";
+    showToast("Avaliação enviada com sucesso!");
+}
+
+async function confirmarAtendimento(status) {
+    const ultimoPedidoId = localStorage.getItem("ultimo_pedido_id");
+    if (!ultimoPedidoId) {
+        document.getElementById("feedbackBanner").style.display = "none";
+        return;
+    }
+
+    const { error } = await supabase
+        .from("pedidos")
+        .update({ status })
+        .eq("id", ultimoPedidoId);
+
+    if (error) {
+        console.error(error);
+    }
+
+    document.getElementById("feedbackBanner").style.display = "none";
+    localStorage.removeItem("ultimo_pedido_id");
+    carregarPedidos();
+}
+
+/* ================================
+   MÁSCARAS
+================================ */
+document.addEventListener("input", (e) => {
+    if (e.target.classList.contains("mask-whatsapp")) {
+        e.target.value = formatarWhatsapp(e.target.value);
+    }
+    if (e.target.id === "cpf-prestador") {
+        e.target.value = formatarCPF(e.target.value);
+    }
 });
 
-// Funções para garantir que os links do rodapé abram os modais corretamente
-function abrirModal(id) {
-    document.getElementById(id).style.display = 'flex';
-    
-    // Se for o modal de prestador, calcula as vagas na hora!
-    if(id === 'modalPrestador') {
-        verificarVagasGratuitas();
+document.getElementById("muralSearch").addEventListener("input", () => {
+    renderizarPrestadores();
+});
+
+document.querySelectorAll(".filtro-pill").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".filtro-pill").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        categoriaAtual = btn.textContent.trim();
+        if (categoriaAtual === "Todas") categoriaAtual = "Todas";
+        renderizarPrestadores();
+    });
+});
+
+/* ================================
+   BANNER / VAGAS
+================================ */
+function atualizarVagasGratuitas() {
+    const premiumEl = document.getElementById("vagas-premium");
+    const platinumEl = document.getElementById("vagas-platinum");
+
+    let vagasPremium = Number(localStorage.getItem("vagasPremium")) || 12;
+    let vagasPlatinum = Number(localStorage.getItem("vagasPlatinum")) || 45;
+
+    premiumEl.textContent = vagasPremium;
+    platinumEl.textContent = vagasPlatinum;
+}
+
+function verificarBoasVindas() {
+    const aviso = document.getElementById("aviso-vagas");
+    let vagasPremium = Number(localStorage.getItem("vagasPremium")) || 12;
+    let vagasPlatinum = Number(localStorage.getItem("vagasPlatinum")) || 45;
+
+    if (vagasPremium > 0) {
+        aviso.innerHTML = `<i class="fa-solid fa-crown"></i> Ainda restam <b>${vagasPremium}</b> vagas Premium VIP promocionais na sua região.`;
+    } else if (vagasPlatinum > 0) {
+        aviso.innerHTML = `<i class="fa-solid fa-medal"></i> Vagas Premium encerradas. Ainda há <b>${vagasPlatinum}</b> vagas Platinum gratuitas.`;
+    } else {
+        aviso.innerHTML = `<i class="fa-solid fa-circle-info"></i> Cadastro disponível no plano gratuito.`;
     }
 }
+
+/* ================================
+   INIT
+================================ */
+async function init() {
+    initMap();
+    checkCookies();
+    atualizarVagasGratuitas();
+    verificarBoasVindas();
+    atualizarTipoCliente();
+    await atualizarUIUsuario();
+    await carregarPrestadores();
+    await carregarPedidos();
+}
+
+document.addEventListener("DOMContentLoaded", init);
+
+/* ================================
+   SESSÃO
+================================ */
+supabase.auth.onAuthStateChange(async (_event, session) => {
+    currentUser = session?.user || null;
+    atualizarBotoesAuth();
+});
+
+/* --- GEOLOCALIZAÇÃO DO BANNER --- */
+async function detectarCidadeInicial() {
+    if (!navigator.geolocation) return;
+
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        await detectarCidadePorCoordenada(lat, lng);
+        atualizarVagasGratuitas();
+    }, () => {
+        atualizarVagasGratuitas();
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    detectarCidadeInicial();
+});
 /* --- FIM GEOLOCALIZAÇÃO DO BANNER --- */
 
 </script>
 </body>
-</html>
+</html>  
+    
