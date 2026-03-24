@@ -453,6 +453,200 @@ p, span {
             width: 20px; 
             height: 20px; 
         }
+
+        .map-section { 
+            padding: 40px 0; 
+        }
+
+        .map-wrapper { 
+            position: relative; 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            border-radius: 40px; 
+            overflow: hidden; 
+            border: 4px solid var(--brand-blue); 
+        }
+
+        #map { 
+            height: 400px; 
+            width: 100%; 
+        }
+
+        .btn-near { 
+            position: absolute; 
+            bottom: 20px; 
+            right: 20px; 
+            z-index: 500; 
+            background: var(--brand-yellow); 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 50px; 
+            font-weight: 800; 
+            cursor: pointer; 
+        }
+
+        .filter-wrapper { 
+            display: flex; 
+            gap: 10px; 
+            overflow-x: auto; 
+            padding: 20px 0; 
+            justify-content: center; 
+        }
+
+        .filter-tag { 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid var(--border); 
+            padding: 10px 20px; 
+            border-radius: 50px; 
+            color: white; 
+            font-size: 13px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            white-space: nowrap; 
+        }
+
+        .filter-tag.active { 
+            border-color: var(--brand-yellow); 
+            color: var(--brand-yellow); 
+            background: rgba(255, 180, 0, 0.1); 
+        }
+
+        .mural-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); 
+            gap: 20px; 
+            margin-top: 30px; 
+        }
+        
+        /* CORREÇÃO DO TEXTO QUEBRANDO A TELA */
+        .fb-card { 
+            background: var(--fb-card); 
+            border-radius: 12px; 
+            padding: 16px; 
+            border: 1px solid #3e4042; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            position: relative; 
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+        }
+
+        .fb-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+
+        .fb-avatar { 
+            width: 48px; 
+            min-width: 48px; 
+            height: 48px; 
+            border-radius: 50%; 
+            background: var(--brand-blue-light); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 800; 
+            color: white; 
+            border: 2px solid var(--brand-yellow); 
+            font-size: 20px; 
+            text-transform: uppercase; 
+            overflow: hidden; /* IMPLEMENTAÇÃO DA FOTO: Não deixa a foto vazar o círculo */
+        }
+        
+        /* IMPLEMENTAÇÃO DA FOTO: Estilo para a imagem cobrir perfeitamente o avatar */
+        .fb-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .fb-meta { 
+            overflow: hidden; 
+        }
+
+        .fb-meta h4 { 
+            margin: 0; 
+            font-size: 15px; 
+            color: #e4e6eb; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* IMPLEMENTAÇÃO DOS ANTECEDENTES: Selo Verificado */
+        .selo-verificado {
+            color: #00C851;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .fb-meta span { 
+            font-size: 12px; 
+            color: #b0b3b8; 
+        }
+
+        /* IMPLEMENTAÇÃO DE LIMITE VISUAL: Nunca passa de 3 linhas */
+        .text-limit {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .fb-body { 
+            color: #e4e6eb; 
+            font-size: 14px; 
+            line-height: 1.5; 
+            padding: 5px 0; 
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+            white-space: pre-wrap; 
+        }
+
+        .fb-footer { 
+            border-top: 1px solid #3e4042; 
+            padding-top: 12px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        .prestador-card { 
+            background: linear-gradient(145deg, #1c1e21, #050B14); 
+            border-radius: 20px; 
+            padding: 20px; 
+            border: 1px solid var(--border); 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+            position: relative; 
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+        }
+
+        .prestador-card p { 
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+            white-space: pre-wrap; 
+            margin: 0; 
+        }
+
+        .stars-container { 
+            color: var(--brand-yellow); 
+            display: flex; 
+            gap: 2px; 
+            font-size: 12px; 
+            margin-top: 4px; 
+        }
+
         .rating-selection { 
             display: flex; 
             gap: 10px; 
@@ -831,6 +1025,7 @@ select:focus {
         <button onclick="confirmarAtendimento('aberto')" style="background: #eee; color: #050B14; border: 1px solid #ccc; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 800;">NÃO / LIBERAR</button>
     </div>
 </div>
+
 <div class="cookie-consent" id="cookieBanner">
     <div class="cookie-text">
         Este site usa cookies para garantir que você obtenha a melhor experiência e anúncios relevantes via <b>Google AdSense</b>.
@@ -1026,6 +1221,7 @@ select:focus {
                 <li><a href="mailto:contato@ajudaai.site?subject=Suporte Ajuda Aí" style="color: #94A3B8; text-decoration: none;">Central de Suporte</a></li>
             </ul>
         </div>
+        
         <div>
             <h4 style="color: #fff; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; margin-bottom: 15px;">Transparência e Legal</h4>
             <ul style="list-style: none; padding: 0; line-height: 2.5; margin: 0;">
@@ -1164,7 +1360,7 @@ O Ajuda Ai atua apenas como intermediador.</p>
         <h2 style="color: var(--brand-yellow); text-align: center; margin-top: 0; margin-bottom: 25px;">O que você precisa hoje?</h2>
         
         <label style="font-weight: bold; margin-bottom: 10px; display: block; font-size: 14px; color: var(--text-muted);">Tipo de Solicitação:</label>
-
+        
         <div style="display: flex; gap: 10px; margin-bottom: 15px;">
             <label style="flex: 1; cursor: pointer; border: 1px solid var(--border); padding: 12px; border-radius: 8px; text-align: center; background: rgba(255,255,255,0.05); transition: 0.3s;">
                 <input type="radio" name="tipoCliente" value="fisica" checked onclick="atualizarTipoCliente()"> Pessoa Física
@@ -1291,6 +1487,7 @@ O Ajuda Ai atua apenas como intermediador.</p>
         <input type="tel" class="mask-whatsapp" id="whatsapp-prestador" placeholder="Seu WhatsApp com DDD" maxlength="16" style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border);">
         
         <textarea id="bio-prestador" placeholder="Descreva sua experiência em poucas palavras..." style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border); min-height: 90px;"></textarea>
+
         <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px;">
             <label style="font-weight: bold; color: var(--brand-yellow); display: block; margin-bottom: 10px;">
                 <i class="fa-solid fa-location-dot"></i> Localização Automática
@@ -1573,7 +1770,8 @@ function atualizarMapaPrestadores() {
         );
     });
 }
-  /* ================================
+
+/* ================================
    PEDIDOS
 ================================ */
 async function carregarPedidos() {
@@ -2079,5 +2277,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </script>
 </body>
-</html>  
-    
+</html>
